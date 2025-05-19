@@ -165,7 +165,7 @@
             font-size: 0.9rem; 
             font-weight: normal; 
             min-height: 60px; 
-            max-height: 28vh; 
+            max-height: 30vh; /* 稍微增加最大高度，以容納新文字 */
             overflow-y: auto;  
             text-align: left; 
             width: 100%;
@@ -773,6 +773,9 @@
             if (!isGloballyMuted) { 
                 toggleBGM(true);
             }
+            if (isTouchDevice()) { // 確保遊戲開始時，如果之前隱藏了，就顯示回來
+                touchControls.style.display = 'flex';
+            }
 
             cancelAnimationFrame(animationFrameId); 
             gameLoop();
@@ -795,6 +798,9 @@
             statusMessage.className = 'status-lose'; 
             statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${elapsedSeconds.toFixed(2)}s</p>`;
             startButton.textContent = "再試一次";
+            if (isTouchDevice()) { // 遊戲結束時，如果之前隱藏了，就顯示回來
+                touchControls.style.display = 'flex';
+            }
         }
 
         async function gameWin() { 
@@ -802,7 +808,8 @@
             statusMessage.className = 'status-win'; 
             const winPopupMessage = `
                 <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
-                <p class="text-center mb-3">您的成績：<strong>${elapsedSeconds.toFixed(2)} 秒</strong></p>
+                <p class="text-center mb-2">您的成績：<strong>${elapsedSeconds.toFixed(2)} 秒</strong></p>
+                <p class="text-center text-sm text-blue-600 mb-3">想挑戰排行榜並參加抽獎嗎？請於下方登錄您的輝煌戰績！</p>
                 <p class="text-center text-xs text-gray-600 mb-2">(建議截圖此畫面以便兌獎 📸)</p>
 
                 <h4>🎁 挑戰成功好康 & 活動辦法 🎁</h4>
@@ -824,6 +831,9 @@
             `;
             statusMessage.innerHTML = winPopupMessage;
             startButton.textContent = "再玩一局";
+            if (isTouchDevice()) { // 獲勝後隱藏觸控按鈕
+                touchControls.style.display = 'none';
+            }
             showScoreForm(); 
             await fetchLeaderboardData(); 
         }
@@ -950,7 +960,7 @@
         }
 
         if (isTouchDevice()) {
-            touchControls.style.display = 'flex';
+            touchControls.style.display = 'flex'; // 初始時就顯示觸控按鈕
             leftButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = -player.speed; }); 
             leftButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
             rightButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = player.speed; }); 
@@ -1070,7 +1080,7 @@
                 if (canvas.width > 0 && canvas.height > 0) { 
                     drawPlayer(); 
                 }
-                // statusMessage.innerHTML = ""; // 移除此行，確保勝利/失敗訊息在resize後保留
+                // statusMessage.innerHTML = ""; // 不在此處清除 statusMessage，確保勝利/失敗訊息在resize後保留
                 startButton.disabled = false; 
             }
         }
