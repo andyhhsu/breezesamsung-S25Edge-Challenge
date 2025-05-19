@@ -6,6 +6,7 @@
     <title>Galaxy S25 Edge 163克神捕手!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
@@ -28,6 +29,27 @@
             width: 100%;
             max-width: 900px; 
         }
+        .header-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 500px; /* 與遊戲容器寬度一致 */
+            margin-bottom: 0.5rem;
+        }
+        #muteButton {
+            background-color: #bfdbfe;
+            color: #1e3a8a;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.375rem;
+            font-size: 0.8rem;
+            border: 1px solid #93c5fd;
+            cursor: pointer;
+        }
+        #muteButton:hover {
+            background-color: #93c5fd;
+        }
+
         .product-image-container {
             width: 100%;
             max-width: 500px;
@@ -376,7 +398,10 @@
 </head>
 <body>
     <div id="pageContainer">
-        <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-3 text-center">Galaxy S25 Edge 163克神捕手!</h1> 
+        <div class="header-controls">
+            <h1 class="text-xl sm:text-2xl font-bold text-sky-800 text-center flex-grow">Galaxy S25 Edge 163克神捕手!</h1> 
+            <button id="muteButton">🔇 靜音</button>
+        </div>
         <p class="text-sm text-sky-700 mb-1 text-center">接住物品，精準累積163公克！小心炸彈和超重！</p> 
 
         <div class="product-image-container">
@@ -445,6 +470,7 @@
         const leaderboardStatus = document.getElementById('leaderboardStatus');
         const itemWeightsList = document.getElementById('itemWeightsList');
         const instructionTitle = document.getElementById('instructionTitle');
+        const muteButton = document.getElementById('muteButton');
 
 
         // --- Google Apps Script Web App URL ---
@@ -458,6 +484,11 @@
         let elapsedSeconds = 0; 
         let animationFrameId = null; 
         let displayUpdateIntervalId = null; 
+        let audioInitialized = false; // 追蹤音訊是否已初始化
+
+        // 音效相關變數
+        let bgmSynth, bgmLoop, scoreSynth, bombSynth;
+        let isGloballyMuted = false;
 
 
         const aspectRatio = 9 / 16; 
@@ -484,6 +515,76 @@
         let fallingObjects = [];
         let spawnTimer = 0;
         const SPAWN_INTERVAL = 72; 
+
+        function setupAudio() {
+            if (audioInitialized) return;
+
+            bgmSynth = new Tone.Synth({
+                oscillator: { type: "fatsawtooth" }, // 嘗試不同的波形
+                envelope: { attack: 0.2, decay: 0.1, sustain: 0.3, release: 0.8 },
+                volume: -28 // BGM 音量再小一點
+            }).toDestination();
+
+            const bgmNotes = ["C3", "G3", "E3", "A3"];
+            let bgmNoteIndex = 0;
+            bgmLoop = new Tone.Loop(time => {
+                bgmSynth.triggerAttackRelease(bgmNotes[bgmNoteIndex % bgmNotes.length], "1n", time);
+                bgmNoteIndex++;
+            }, "1n").start(0); // 先準備好，但不立即播放 Transport
+
+            scoreSynth = new Tone.Synth({
+                oscillator: { type: "triangle8" }, // 嘗試不同的波形
+                envelope: { attack: 0.005, decay: 0.1, sustain: 0.01, release: 0.1 },
+                volume: -15
+            }).toDestination();
+
+            bombSynth = new Tone.NoiseSynth({
+                noise: { type: "brown" }, // 嘗試不同的噪音類型
+                envelope: { attack: 0.005, decay: 0.3, sustain: 0, release: 0.2 },
+                volume: -10
+            }).toDestination();
+            
+            audioInitialized = true;
+            console.log("Audio setup complete.");
+        }
+
+        function toggleBGM(play) {
+            if (!audioInitialized) setupAudio(); // 如果音訊未初始化，先設定
+
+            if (play && bgmLoop && Tone.Transport.state !== 'started') {
+                Tone.Transport.start();
+                console.log("BGM started.");
+            } else if (!play && bgmLoop && Tone.Transport.state === 'started') {
+                Tone.Transport.stop();
+                Tone.Transport.seconds = 0; // 重置播放頭
+                console.log("BGM stopped.");
+            }
+        }
+
+        muteButton.addEventListener('click', async () => {
+            if (!audioInitialized) { // 如果音訊未初始化，點擊靜音按鈕時也嘗試初始化
+                try {
+                    await Tone.start();
+                    console.log("AudioContext started by mute button.");
+                    setupAudio();
+                } catch (e) {
+                    console.error("Error starting AudioContext via mute button:", e);
+                    // 可以提示用戶需要再次互動
+                }
+            }
+            isGloballyMuted = !isGloballyMuted;
+            Tone.Destination.mute = isGloballyMuted;
+            muteButton.textContent = isGloballyMuted ? "🔊 開啟聲音" : "🔇 靜音";
+            console.log("Global mute toggled:", isGloballyMuted);
+
+            // 如果是取消靜音且遊戲正在運行，則嘗試播放BGM
+            if (!isGloballyMuted && isGameRunning) {
+                toggleBGM(true);
+            } else if (isGloballyMuted) { // 如果是靜音，則停止BGM
+                toggleBGM(false);
+            }
+        });
+
 
         function displayGameInstructions() {
             instructionTitle.textContent = '神捕手速成秘笈！🎯'; 
@@ -558,8 +659,10 @@
                      obj.y + obj.height > player.y ) { 
                     
                     if (obj.type === 'bomb') {
+                        if (bombSynth && !isGloballyMuted) bombSynth.triggerAttackRelease("0.2s", Tone.now());
                         gameOver("哎呀！接到炸彈了！");
                     } else {
+                        if (scoreSynth && !isGloballyMuted) scoreSynth.triggerAttackRelease("A5", "16n", Tone.now());
                         triggerPlayerFeedback(); 
                         accumulatedWeight += obj.weight;
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
@@ -636,8 +739,19 @@
             animationFrameId = requestAnimationFrame(gameLoop);
         }
 
-        function startGame() {
+        async function startGame() { // 改為 async 以便 await Tone.start()
             if (isGameRunning) return;
+
+            if (!audioInitialized) {
+                try {
+                    await Tone.start(); // 等待音訊上下文啟動
+                    console.log("AudioContext started by game start.");
+                    setupAudio(); // 確保音效已設定
+                } catch (e) {
+                    console.error("Error starting AudioContext:", e);
+                    // 可以選擇在這裡提示用戶音訊無法啟動，或者靜默失敗
+                }
+            }
             
             isGameRunning = true;
             accumulatedWeight = 0;
@@ -659,6 +773,10 @@
             scoreFormContainer.style.display = 'none'; 
             scoreFormContainer.innerHTML = ''; 
 
+            if (!isGloballyMuted) { // 只有在非靜音狀態下才播放BGM
+                toggleBGM(true);
+            }
+
             cancelAnimationFrame(animationFrameId); 
             gameLoop();
         }
@@ -672,6 +790,7 @@
             }
             timerDisplay.textContent = elapsedSeconds.toFixed(2);
             startButton.disabled = false; 
+            toggleBGM(false); // 遊戲結束時停止BGM
         }
 
         function gameOver(message) {
@@ -954,7 +1073,7 @@
                 if (canvas.width > 0 && canvas.height > 0) { 
                     drawPlayer(); 
                 }
-                // statusMessage.innerHTML = ""; // 移除此行，避免清除勝利/失敗訊息
+                // statusMessage.innerHTML = ""; // 不在此處清除 statusMessage，確保勝利/失敗訊息在resize後保留
                 startButton.disabled = false; 
             }
         }
