@@ -28,13 +28,55 @@
             width: 100%;
             max-width: 900px; 
         }
+        #gameInstructions {
+            background-color: #e0f2fe;
+            border: 1px solid #93c5fd;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            max-width: 500px; /* 與遊戲容器寬度一致 */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        #gameInstructions h2 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #1e40af;
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+        #gameInstructions ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 0.75rem;
+        }
+        #gameInstructions li {
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+            color: #1e3a8a;
+            margin-bottom: 0.3rem;
+        }
+        #gameInstructions li .emoji {
+            font-size: 1.5rem; /* 加大說明中的 emoji */
+            margin-right: 0.5rem;
+            width: 30px; /* 固定寬度對齊 */
+            text-align: center;
+        }
+        #gameInstructions p {
+            font-size: 0.9rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 0.25rem;
+        }
+
         #gameAndFormContainer { 
             width: 100%;
             max-width: 500px; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 70px; /* 為固定在底部的觸控按鈕留出空間 (略微減少) */
+            margin-bottom: 70px; 
         }
         #gameContainer {
             background-color: #ffffff;
@@ -142,28 +184,28 @@
             left: 0;
             right: 0; 
             width: 100%;
-            padding: 10px 8px; /* 調整內邊距 */
+            padding: 10px 8px; 
             box-sizing: border-box;
             justify-content: space-between; 
             align-items: center;
             z-index: 100; 
-            background-color: rgba(224, 242, 254, 0.75); /* 略微調整透明度 */
+            background-color: rgba(224, 242, 254, 0.75); 
             border-top: 1px solid rgba(191, 219, 254, 0.6); 
             pointer-events: none; 
         }
         .control-button {
-            background-color: rgba(59, 130, 246, 0.8); /* 按鈕背景色，略微調整透明度 */
+            background-color: rgba(59, 130, 246, 0.8); 
             color: white;
-            padding: 12px 0; /* 縮小上下 padding */
-            border-radius: 8px; /* 調整圓角 */
-            font-size: 1.8rem; /* 縮小箭頭字體 */
+            padding: 10px 0; 
+            border-radius: 8px; 
+            font-size: 1.7rem; 
             border: none;
             cursor: pointer;
             user-select: none; 
-            box-shadow: 0 1px 4px rgba(0,0,0,0.15); /* 調整陰影 */
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15); 
             pointer-events: auto; 
-            flex-basis: 44%; /* 調整基礎寬度 */
-            max-width: 160px; /* 限制最大寬度 */
+            flex-basis: 44%; 
+            max-width: 160px; 
             text-align: center;
             -webkit-tap-highlight-color: transparent; 
         }
@@ -237,6 +279,16 @@
 
 
         @media (max-width: 600px) {
+            #gameInstructions {
+                max-width: 95%;
+                padding: 0.75rem;
+            }
+            #gameInstructions h2 {
+                font-size: 1.1rem;
+            }
+            #gameInstructions li, #gameInstructions p {
+                font-size: 0.85rem;
+            }
             .info-bar {
                 font-size: 0.8rem; 
                 flex-wrap: wrap; 
@@ -254,11 +306,11 @@
                 max-width: 95%;
              }
              .control-button {
-                padding: 10px 0; /* 手機上再微調 */
-                font-size: 1.7rem;
+                padding: 8px 0; 
+                font-size: 1.6rem;
              }
              #gameAndFormContainer {
-                margin-bottom: 80px; 
+                margin-bottom: 70px; 
              }
         }
     </style>
@@ -266,7 +318,21 @@
 <body>
     <div id="pageContainer">
         <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-4 text-center">Galaxy S25 Edge 163克神捕手!</h1>
-        <p class="text-sm text-sky-700 mb-4 text-center">接住物品，精準累積163公克！小心炸彈和超重！</p>
+        <p class="text-sm text-sky-700 mb-2 text-center">接住物品，精準累積163公克！小心炸彈和超重！</p>
+
+        <div id="gameInstructions">
+            <h2>玩法說明</h2>
+            <p>控制下方的籃子 🧺 左右移動，接住從天而降的物品來累積重量。</p>
+            <p><strong>可接物件與重量：</strong></p>
+            <ul id="itemWeightsList">
+                </ul>
+            <p><strong>獲勝條件：</strong></p>
+            <p>當累積的總重量 <strong class="text-green-600">剛好達到 163 公克</strong> 時，即可獲勝！🎉</p>
+            <p><strong>注意事項：</strong></p>
+            <p>🔴 如果總重量超過 163 公克，挑戰將會失敗。</p>
+            <p>💣 小心！接到炸彈會立即導致遊戲結束！</p>
+        </div>
+
 
         <div id="gameAndFormContainer">
             <div id="gameContainer">
@@ -311,6 +377,7 @@
         const leaderboardContainer = document.getElementById('leaderboardContainer');
         const leaderboardList = document.getElementById('leaderboardList');
         const leaderboardStatus = document.getElementById('leaderboardStatus');
+        const itemWeightsList = document.getElementById('itemWeightsList');
 
 
         // --- Google Apps Script Web App URL ---
@@ -332,20 +399,32 @@
             fontSize: 0 
         };
 
-        const BASE_SPEED_MULTIPLIER = 2.7 * 0.9; // 原 2.7，再乘以 0.9 使其變慢
+        const BASE_SPEED_MULTIPLIER = 2.7 * 0.9; 
 
         const itemTypes = [
-            { emoji: '📄', weight: 5, type: 'item', speedY_factor: 0.003 * BASE_SPEED_MULTIPLIER },
-            { emoji: '📎', weight: 1, type: 'item', speedY_factor: 0.0025 * BASE_SPEED_MULTIPLIER },
-            { emoji: '🔋', weight: 11, type: 'item', speedY_factor: 0.004 * BASE_SPEED_MULTIPLIER },
-            { emoji: '💡', weight: 20, type: 'item', speedY_factor: 0.005 * BASE_SPEED_MULTIPLIER },
-            { emoji: '💣', weight: 0, type: 'bomb', speedY_factor: 0.006 * BASE_SPEED_MULTIPLIER }  
+            { name: 'A4影印紙', emoji: '📄', weight: 5, type: 'item', speedY_factor: 0.003 * BASE_SPEED_MULTIPLIER },
+            { name: '迴紋針', emoji: '📎', weight: 1, type: 'item', speedY_factor: 0.0025 * BASE_SPEED_MULTIPLIER },
+            { name: 'AAA電池', emoji: '🔋', weight: 11, type: 'item', speedY_factor: 0.004 * BASE_SPEED_MULTIPLIER },
+            { name: '新台幣10元硬幣', emoji: '💰', weight: 7.5, type: 'item', speedY_factor: 0.005 * BASE_SPEED_MULTIPLIER }, // 更新物件
+            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', speedY_factor: 0.006 * BASE_SPEED_MULTIPLIER }  
         ];
         itemTypes.forEach(item => item.speedY = 0); 
 
         let fallingObjects = [];
         let spawnTimer = 0;
-        const SPAWN_INTERVAL = 72; // 配合速度減慢，物件生成間隔略微增加 (原65)
+        const SPAWN_INTERVAL = 72; 
+
+        function displayGameInstructions() {
+            itemWeightsList.innerHTML = ''; 
+            itemTypes.forEach(item => {
+                if (item.type === 'item') { 
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<span class="emoji">${item.emoji}</span> ${item.name}：<strong>${item.weight} 公克</strong>`;
+                    itemWeightsList.appendChild(listItem);
+                }
+            });
+        }
+
 
         function drawPlayer() {
             if (!ctx) return;
@@ -368,7 +447,7 @@
 
                 if (obj.type === 'item') {
                     ctx.font = `bold ${weightFontSize}px Arial`;
-                    ctx.fillStyle = '#FF0000'; // 重量文字改為紅色
+                    ctx.fillStyle = '#FF0000'; 
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'top'; 
                     ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1)); 
@@ -396,8 +475,11 @@
                         gameOver("哎呀！接到炸彈了！");
                     } else {
                         accumulatedWeight += obj.weight;
-                        currentWeightDisplay.textContent = accumulatedWeight;
-                        if (accumulatedWeight === TARGET_WEIGHT) {
+                        // 處理浮點數精度問題，特別是對於 7.5g 的硬幣
+                        accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
+                        currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); // 顯示時也保留一位小數
+
+                        if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { // 比較浮點數時使用容差
                             gameWin();
                         } else if (accumulatedWeight > TARGET_WEIGHT) {
                             gameOver(`哎呀！超過目標 ${TARGET_WEIGHT}g 了！`);
@@ -479,7 +561,7 @@
             
             isGameRunning = true;
             accumulatedWeight = 0;
-            currentWeightDisplay.textContent = accumulatedWeight;
+            currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); // 初始化時也顯示一位小數
             fallingObjects = [];
             player.x = canvas.width / 2 - player.width / 2; 
             statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; 
@@ -500,7 +582,7 @@
 
         function gameOver(message) {
             stopGame();
-            statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight}g，時間: ${gameTime}s</p>`;
+            statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${gameTime}s</p>`;
             startButton.textContent = "再試一次";
         }
 
@@ -581,7 +663,7 @@
                     name: playerName,
                     phone: playerPhone, 
                     time: gameTime,
-                    weight: accumulatedWeight 
+                    weight: accumulatedWeight.toFixed(1) // 提交時也確保是一位小數
                 };
                 
                 document.getElementById('submitScoreButton').disabled = true;
@@ -734,9 +816,8 @@
         function handleResize() {
             canvasWidth = Math.min(480, window.innerWidth - 30); 
             canvasHeight = canvasWidth / aspectRatio;
-            // 增加遊戲畫面高度佔比
-            if (canvasHeight > window.innerHeight * 0.70) { // 原為 0.60
-                canvasHeight = window.innerHeight * 0.70;   // 原為 0.60
+            if (canvasHeight > window.innerHeight * 0.70) { 
+                canvasHeight = window.innerHeight * 0.70;   
                 canvasWidth = canvasHeight * aspectRatio;
             }
             canvas.width = Math.max(150, canvasWidth); 
@@ -776,6 +857,7 @@
 
         window.addEventListener('load', async () => {
             handleResize(); 
+            displayGameInstructions(); 
             startButton.disabled = false; 
             await fetchLeaderboardData(); 
             leaderboardPollIntervalId = setInterval(fetchLeaderboardData, 60000); 
