@@ -476,8 +476,6 @@
         const passRateDisplay = document.getElementById('passRate'); 
 
 
-        // --- Google Apps Script Web App URL ---
-        // Updated Google Apps Script URL
         const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRWoXt98QQPbUdlwqZcmsqWRNFUxUQfmqkPRHCQwPjC0W_SxSnKVVs5r_7VnEjGhq8/exec'; 
         
         const TARGET_WEIGHT = 163;
@@ -486,6 +484,7 @@
         let gameStartTime = 0; 
         let animationFrameId = null; 
         let leaderboardPollIntervalId = null;
+        let lastFrameTime = 0; // For time-based animation
 
         const aspectRatio = 9 / 16; 
         let canvasWidth, canvasHeight;
@@ -496,20 +495,24 @@
             fontSize: 0 
         };
 
-        const BASE_SPEED_MULTIPLIER = 2.7 * 0.9; 
+        const BASE_SPEED_MULTIPLIER = 2.7 * 0.9; // Global speed tuner
+        const TARGET_FPS_FOR_CONVERSION = 60.0; // Used to convert old frame-based factors to per-second
 
+        // Item types: base_ch_per_sec is the base fraction of canvas height to travel per second
+        // if BASE_SPEED_MULTIPLIER were 1.0
         const itemTypes = [
-            { name: 'A4影印紙', emoji: '📄', weight: 5, type: 'item', speedY_factor: 0.003 * BASE_SPEED_MULTIPLIER },
-            { name: '迴紋針', emoji: '📎', weight: 1, type: 'item', speedY_factor: 0.0025 * BASE_SPEED_MULTIPLIER },
-            { name: 'AAA電池', emoji: '🔋', weight: 11, type: 'item', speedY_factor: 0.004 * BASE_SPEED_MULTIPLIER },
-            { name: '新台幣10元硬幣', emoji: '💰', weight: 7.5, type: 'item', speedY_factor: 0.005 * BASE_SPEED_MULTIPLIER }, 
-            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', speedY_factor: 0.006 * BASE_SPEED_MULTIPLIER }
+            { name: 'A4影印紙', emoji: '📄', weight: 5, type: 'item', base_ch_per_sec: 0.003 * TARGET_FPS_FOR_CONVERSION },
+            { name: '迴紋針', emoji: '📎', weight: 1, type: 'item', base_ch_per_sec: 0.0025 * TARGET_FPS_FOR_CONVERSION },
+            { name: 'AAA電池', emoji: '🔋', weight: 11, type: 'item', base_ch_per_sec: 0.004 * TARGET_FPS_FOR_CONVERSION },
+            { name: '新台幣10元硬幣', emoji: '💰', weight: 7.5, type: 'item', base_ch_per_sec: 0.005 * TARGET_FPS_FOR_CONVERSION }, 
+            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: 0.006 * TARGET_FPS_FOR_CONVERSION }
         ];
-        itemTypes.forEach(item => item.speedY = 0); 
+        // Add a placeholder for speedPixelsPerSecond which will be calculated in handleResize
+        itemTypes.forEach(item => item.speedPixelsPerSecond = 0); 
 
         let fallingObjects = [];
         let spawnTimer = 0;
-        const SPAWN_INTERVAL = 72; 
+        const SPAWN_INTERVAL = 72; // Still frame-based for spawn interval, could also be time-based
 
         let catchSound, bombSound, winSound, loseSound;
         let toneJsInitialized = false;
@@ -544,6 +547,7 @@
             ctx.textBaseline = 'middle'; 
             ctx.fillText(player.emoji, player.x + player.width / 2, player.y + player.height / 2);
         }
+
         function drawFallingObjects() { 
             if (!ctx) return;
             fallingObjects.forEach(obj => {
@@ -562,15 +566,17 @@
                 }
             });
         }
+
         function updatePlayerPosition() { 
             player.x += player.dx;
             if (player.x < 0) player.x = 0;
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
         }
-        function updateFallingObjects() { 
+
+        function updateFallingObjects(deltaTime) { // Accept deltaTime
             for (let i = fallingObjects.length - 1; i >= 0; i--) {
                 const obj = fallingObjects[i];
-                obj.y += obj.speedY;
+                obj.y += obj.speedPixelsPerSecond * deltaTime; // Use speed in pixels/sec and deltaTime
 
                 if ( obj.x < player.x + player.width &&
                      obj.x + obj.width > player.x &&
@@ -600,6 +606,7 @@
         function spawnObject() { 
             const randomTypeIndex = Math.floor(Math.random() * itemTypes.length);
             const typeTemplate = itemTypes[randomTypeIndex];
+            // The speedPixelsPerSecond is already calculated and stored in the template by handleResize
             const objWidth = canvas.width * 0.1; 
             const objHeight = canvas.width * 0.1; 
             fallingObjects.push({ ...typeTemplate, x: Math.random() * (canvas.width - objWidth), y: 0 - objHeight, width: objWidth, height: objHeight });
@@ -611,28 +618,37 @@
         
         function updateTimerDisplay() {
             if (isGameRunning && gameStartTime > 0) { 
-                const elapsedTime = (performance.now() - gameStartTime) / 1000;
+                const elapsedTime = (performance.now() - gameStartTime) / 1000; // Use performance.now() for visual timer
                 timerDisplay.textContent = elapsedTime.toFixed(2);
             } else if (!isGameRunning) {
                  timerDisplay.textContent = "0.00"; 
             }
         }
 
-        function gameLoop(timestamp) {
+        function gameLoop(currentTime) { // currentTime is timestamp from requestAnimationFrame
             if (!isGameRunning) return;
-            if (!gameStartTime) gameStartTime = timestamp; 
+
+            if (gameStartTime === 0) { // For the visual game timer
+                gameStartTime = currentTime;
+            }
+            // For deltaTime calculation, lastFrameTime is initialized in startGame
+            const deltaTime = (currentTime - lastFrameTime) / 1000.0; // Delta time in seconds
+            lastFrameTime = currentTime;
+
+            // Cap deltaTime to prevent massive jumps if the tab was inactive or rAF was paused significantly
+            const clampedDeltaTime = Math.min(deltaTime, 1/15); // Max step equivalent to 15 FPS (approx 0.067s)
 
             updateTimerDisplay(); 
 
             try {
                 clearCanvas();
-                spawnTimer++;
+                spawnTimer++; // Spawn interval is still frame-based, could be converted too if needed
                 if (spawnTimer > SPAWN_INTERVAL) {
                     spawnObject();
                     spawnTimer = 0;
                 }
                 updatePlayerPosition();
-                updateFallingObjects();
+                updateFallingObjects(clampedDeltaTime); // Pass clampedDeltaTime
                 drawPlayer();
                 drawFallingObjects();
             } catch (error) {
@@ -663,7 +679,9 @@
             scoreFormContainer.style.display = 'none'; 
             scoreFormContainer.innerHTML = ''; 
             
-            gameStartTime = 0; 
+            gameStartTime = 0; // Reset for the visual timer
+            lastFrameTime = performance.now(); // Initialize for deltaTime calculation
+
             if(animationFrameId) cancelAnimationFrame(animationFrameId); 
             animationFrameId = requestAnimationFrame(gameLoop); 
             fetchGameStats(); 
@@ -928,7 +946,10 @@
             if (isTouchDevice()) player.speed = canvas.width * 0.022; else player.speed = canvas.width * 0.03; 
             player.fontSize = canvas.width * 0.12; 
 
-            itemTypes.forEach(it => { it.speedY = canvas.height * it.speedY_factor; });
+            // Calculate speed in pixels per second for each item type
+            itemTypes.forEach(it => { 
+                it.speedPixelsPerSecond = canvas.height * it.base_ch_per_sec * BASE_SPEED_MULTIPLIER;
+            });
 
             if (!isGameRunning) { 
                 clearCanvas();
