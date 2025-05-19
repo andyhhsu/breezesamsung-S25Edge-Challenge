@@ -6,7 +6,8 @@
     <title>Galaxy S25 Edge 163克神捕手!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script> <style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script> 
+    <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
             background-color: #dbeafe; 
@@ -372,7 +373,8 @@
     <div id="pageContainer">
         <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-3 text-center">Galaxy S25 Edge 163克神捕手!</h1> 
 
-        <img src="YOUR_GITHUB_IMAGE_RAW_URL_HERE"  alt="Galaxy S25 Edge 遊戲主視覺" 
+        <img src="https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/S25%20Edge%20Main%20KV_cmyk_%E6%A9%AB%E5%BC%8F(%E5%A3%93%E7%B8%AE).png"  
+             alt="Galaxy S25 Edge 遊戲主視覺" 
              class="game-banner-image"
              onerror="this.onerror=null; this.src='https://placehold.co/500x200/60a5fa/ffffff?text=圖片載入失敗';">
 
@@ -483,7 +485,7 @@
 
         function initializeSounds() {
             if (Tone.context.state !== 'running') {
-                Tone.start(); // 啟動 Tone.js 音訊上下文
+                Tone.start(); 
             }
             catchSound = new Tone.Synth({
                 oscillator: { type: 'triangle' },
@@ -492,15 +494,14 @@
             bombSound = new Tone.Synth({
                 oscillator: { type: 'square' },
                 envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.2 },
-                volume: -6 // 炸彈聲音小一點
+                volume: -6 
             }).toDestination();
-             bombSound.triggerAttackRelease("C2", "8n"); // 測試用，確保音量設定
-
+            
             winSound = new Tone.Synth({
                 oscillator: { type: 'sine' },
                 envelope: { attack: 0.01, decay: 0.3, sustain: 0.2, release: 0.5 }
             }).toDestination();
-            loseSound = new Tone.FMSynth({ // 嘗試不同的合成器以獲得不同的失敗音效
+            loseSound = new Tone.FMSynth({ 
                 harmonicity: 3,
                 modulationIndex: 10,
                 detune: 0,
@@ -660,9 +661,9 @@
 
         function startGame() {
             if (isGameRunning) return;
-            if (!toneJsInitialized) { // 確保音效已初始化
+            if (!toneJsInitialized) { 
                 initializeSounds();
-            } else if (Tone.context.state !== 'running') { // 如果音訊上下文被暫停，嘗試恢復
+            } else if (Tone.context.state !== 'running') { 
                  Tone.start();
             }
             
@@ -688,7 +689,7 @@
         }
 
         function gameOver(message) {
-            if (toneJsInitialized && loseSound) loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.1); // 延遲一點播放避免與其他聲音衝突
+            if (toneJsInitialized && loseSound) loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.1); 
             stopGame();
             statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${gameTime}s</p>`;
             startButton.textContent = "再試一次";
@@ -755,7 +756,7 @@
                     playerNameInput.focus();
                     return;
                 }
-                // 電話號碼10碼驗證
+                
                 const phoneRegex = /^\d{10}$/;
                 if (!playerPhone) {
                     submitStatus.textContent = '請填寫您的電話！';
