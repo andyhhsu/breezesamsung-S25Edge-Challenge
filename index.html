@@ -324,6 +324,7 @@
             padding: 0.5rem 0.25rem;
             border-bottom: 1px solid #f3f4f6; /* Tailwind gray-100 */
             font-size: 0.9rem;
+            transition: background-color 0.3s ease; /* Smooth transition for highlight */
         }
         #leaderboardList li:last-child {
             border-bottom: none;
@@ -343,6 +344,12 @@
         #leaderboardList .time {
             font-weight: 500;
             color: #1e40af; /* Tailwind blue-700 */
+        }
+        /* 新增：高亮樣式 */
+        .currentUserScoreHighlight {
+            background-color: #fef9c3; /* Tailwind yellow-100 for a subtle highlight */
+            border-left: 4px solid #f59e0b; /* Tailwind amber-500 for a distinct left border */
+            /* box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); */
         }
 
 
@@ -484,7 +491,11 @@
         let gameStartTime = 0; 
         let animationFrameId = null; 
         let leaderboardPollIntervalId = null;
-        let lastFrameTime = 0; // For time-based animation
+        let lastFrameTime = 0; 
+
+        // Variables to store the name and time of the last submitted score for highlighting
+        let nameToHighlightNext = null;
+        let timeToHighlightNext = null;
 
         const aspectRatio = 9 / 16; 
         let canvasWidth, canvasHeight;
@@ -495,12 +506,9 @@
             fontSize: 0 
         };
 
-        // Adjusted BASE_SPEED_MULTIPLIER to increase overall speed by another 1.2 times
-        const BASE_SPEED_MULTIPLIER = (((2.7 * 0.9) * 1.2) * 1.2) * 1.2; // Global speed tuner
-        const TARGET_FPS_FOR_CONVERSION = 60.0; // Used to convert old frame-based factors to per-second
+        const BASE_SPEED_MULTIPLIER = (((2.7 * 0.9) * 1.2) * 1.2) * 1.2; 
+        const TARGET_FPS_FOR_CONVERSION = 60.0; 
 
-        // Item types: base_ch_per_sec is the base fraction of canvas height to travel per second
-        // if BASE_SPEED_MULTIPLIER were 1.0
         const itemTypes = [
             { name: 'A4影印紙', emoji: '📄', weight: 5, type: 'item', base_ch_per_sec: 0.003 * TARGET_FPS_FOR_CONVERSION },
             { name: '迴紋針', emoji: '📎', weight: 1, type: 'item', base_ch_per_sec: 0.0025 * TARGET_FPS_FOR_CONVERSION },
@@ -508,12 +516,11 @@
             { name: '新台幣10元硬幣', emoji: '💰', weight: 7.5, type: 'item', base_ch_per_sec: 0.005 * TARGET_FPS_FOR_CONVERSION }, 
             { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: 0.006 * TARGET_FPS_FOR_CONVERSION }
         ];
-        // Add a placeholder for speedPixelsPerSecond which will be calculated in handleResize
         itemTypes.forEach(item => item.speedPixelsPerSecond = 0); 
 
         let fallingObjects = [];
         let spawnTimer = 0;
-        const SPAWN_INTERVAL = 72; // Still frame-based for spawn interval, could also be time-based
+        const SPAWN_INTERVAL = 72; 
 
         let catchSound, bombSound, winSound, loseSound;
         let toneJsInitialized = false;
@@ -574,10 +581,10 @@
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
         }
 
-        function updateFallingObjects(deltaTime) { // Accept deltaTime
+        function updateFallingObjects(deltaTime) { 
             for (let i = fallingObjects.length - 1; i >= 0; i--) {
                 const obj = fallingObjects[i];
-                obj.y += obj.speedPixelsPerSecond * deltaTime; // Use speed in pixels/sec and deltaTime
+                obj.y += obj.speedPixelsPerSecond * deltaTime; 
 
                 if ( obj.x < player.x + player.width &&
                      obj.x + obj.width > player.x &&
@@ -607,7 +614,6 @@
         function spawnObject() { 
             const randomTypeIndex = Math.floor(Math.random() * itemTypes.length);
             const typeTemplate = itemTypes[randomTypeIndex];
-            // The speedPixelsPerSecond is already calculated and stored in the template by handleResize
             const objWidth = canvas.width * 0.1; 
             const objHeight = canvas.width * 0.1; 
             fallingObjects.push({ ...typeTemplate, x: Math.random() * (canvas.width - objWidth), y: 0 - objHeight, width: objWidth, height: objHeight });
@@ -619,37 +625,35 @@
         
         function updateTimerDisplay() {
             if (isGameRunning && gameStartTime > 0) { 
-                const elapsedTime = (performance.now() - gameStartTime) / 1000; // Use performance.now() for visual timer
+                const elapsedTime = (performance.now() - gameStartTime) / 1000; 
                 timerDisplay.textContent = elapsedTime.toFixed(2);
             } else if (!isGameRunning) {
                  timerDisplay.textContent = "0.00"; 
             }
         }
 
-        function gameLoop(currentTime) { // currentTime is timestamp from requestAnimationFrame
+        function gameLoop(currentTime) { 
             if (!isGameRunning) return;
 
-            if (gameStartTime === 0) { // For the visual game timer
+            if (gameStartTime === 0) { 
                 gameStartTime = currentTime;
             }
-            // For deltaTime calculation, lastFrameTime is initialized in startGame
-            const deltaTime = (currentTime - lastFrameTime) / 1000.0; // Delta time in seconds
+            const deltaTime = (currentTime - lastFrameTime) / 1000.0; 
             lastFrameTime = currentTime;
 
-            // Cap deltaTime to prevent massive jumps if the tab was inactive or rAF was paused significantly
-            const clampedDeltaTime = Math.min(deltaTime, 1/15); // Max step equivalent to 15 FPS (approx 0.067s)
+            const clampedDeltaTime = Math.min(deltaTime, 1/15); 
 
             updateTimerDisplay(); 
 
             try {
                 clearCanvas();
-                spawnTimer++; // Spawn interval is still frame-based, could be converted too if needed
+                spawnTimer++; 
                 if (spawnTimer > SPAWN_INTERVAL) {
                     spawnObject();
                     spawnTimer = 0;
                 }
                 updatePlayerPosition();
-                updateFallingObjects(clampedDeltaTime); // Pass clampedDeltaTime
+                updateFallingObjects(clampedDeltaTime); 
                 drawPlayer();
                 drawFallingObjects();
             } catch (error) {
@@ -680,8 +684,8 @@
             scoreFormContainer.style.display = 'none'; 
             scoreFormContainer.innerHTML = ''; 
             
-            gameStartTime = 0; // Reset for the visual timer
-            lastFrameTime = performance.now(); // Initialize for deltaTime calculation
+            gameStartTime = 0; 
+            lastFrameTime = performance.now(); 
 
             if(animationFrameId) cancelAnimationFrame(animationFrameId); 
             animationFrameId = requestAnimationFrame(gameLoop); 
@@ -802,12 +806,29 @@
                     });
                     submitStatus.textContent = '成績已提交！感謝您的參與！';
                     submitStatus.style.color = 'green';
+
+                    // 設定高亮目標並刷新排行榜
+                    nameToHighlightNext = playerName;
+                    timeToHighlightNext = finalTime;
                     await fetchLeaderboardData(); 
+
+                    // 確保排行榜可見並捲動
+                    leaderboardContainer.style.display = 'block';
+                    const highlightedItem = leaderboardList.querySelector('.currentUserScoreHighlight');
+                    if (highlightedItem) {
+                        highlightedItem.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+                    } else {
+                        leaderboardContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+
                 } catch (error) {
                     console.error('Error submitting score:', error);
                     submitStatus.textContent = '提交失敗，請稍後再試或檢查網路連線。';
                     submitStatus.style.color = 'red';
                     document.getElementById('submitScoreButton').disabled = false;
+                     // 如果提交失敗，清除高亮標記，避免影響下一次正常的排行榜刷新
+                    nameToHighlightNext = null;
+                    timeToHighlightNext = null;
                 }
             });
         }
@@ -880,6 +901,7 @@
 
 
         async function fetchLeaderboardData() { 
+            // 此函式不直接處理高亮，高亮標記由 displayLeaderboard 根據全域變數決定
             if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
                 leaderboardStatus.textContent = '排行榜後端未配置。'; leaderboardContainer.style.display = 'block'; return;
             }
@@ -894,10 +916,14 @@
                 }
                 const data = await response.json();
                 if (data.status === 'error' && data.message) throw new Error(`Leaderboard fetch error from Apps Script: ${data.message}`);
-                displayLeaderboard(data); leaderboardStatus.textContent = ''; 
+                displayLeaderboard(data); // displayLeaderboard 會檢查並使用高亮標記
+                leaderboardStatus.textContent = ''; 
             } catch (error) {
                 console.error('Error fetching leaderboard:', error);
                 leaderboardStatus.textContent = '無法加載排行榜，請稍後再試。';
+                 // 如果讀取排行榜失敗，也清除高亮標記
+                nameToHighlightNext = null;
+                timeToHighlightNext = null;
             }
         }
 
@@ -909,15 +935,36 @@
                 noRecordLi.style.textAlign = 'center';
                 noRecordLi.style.color = '#6b7280'; 
                 leaderboardList.appendChild(noRecordLi);
+                nameToHighlightNext = null; // 清除高亮標記，因為沒有資料可高亮
+                timeToHighlightNext = null;
                 return;
             }
+
+            let highlightAppliedThisCall = false; // 標記此輪 displayLeaderboard 是否已套用高亮
+
             scores.forEach((score, index) => {
                 const listItem = document.createElement('li');
                 let rankDisplay;
                 if (index === 0) rankDisplay = '🥇'; else if (index === 1) rankDisplay = '🥈'; else if (index === 2) rankDisplay = '🥉'; else rankDisplay = `${index + 1}.`;
-                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="name">${escapeHTML(score.name || '匿名')}</span> <span class="time">${typeof score.time === 'number' ? score.time : '-'} 秒</span>`;
+                
+                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="name">${escapeHTML(score.name || '匿名')}</span> <span class="time">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`; // 確保時間顯示兩位小數
+
+                // 檢查是否需要高亮此項目
+                if (!highlightAppliedThisCall && nameToHighlightNext && timeToHighlightNext &&
+                    score.name === nameToHighlightNext &&
+                    Math.abs(parseFloat(score.time) - timeToHighlightNext) < 0.01) {
+                    
+                    listItem.classList.add('currentUserScoreHighlight');
+                    highlightAppliedThisCall = true; // 標記已套用，避免同一輪重複套用
+                }
                 leaderboardList.appendChild(listItem);
             });
+
+            // 如果此輪 displayLeaderboard 的目的是高亮，並且已成功高亮，則清除標記供下次使用
+            if (highlightAppliedThisCall) {
+                nameToHighlightNext = null;
+                timeToHighlightNext = null;
+            }
         }
         
         function escapeHTML(str) { 
@@ -947,7 +994,6 @@
             if (isTouchDevice()) player.speed = canvas.width * 0.022; else player.speed = canvas.width * 0.03; 
             player.fontSize = canvas.width * 0.12; 
 
-            // Calculate speed in pixels per second for each item type
             itemTypes.forEach(it => { 
                 it.speedPixelsPerSecond = canvas.height * it.base_ch_per_sec * BASE_SPEED_MULTIPLIER;
             });
@@ -965,7 +1011,12 @@
             startButton.disabled = false; 
             await fetchLeaderboardData(); 
             await fetchGameStats(); 
-            leaderboardPollIntervalId = setInterval(fetchLeaderboardData, 60000); 
+            leaderboardPollIntervalId = setInterval(async () => {
+                // 自動刷新時，不應有高亮目標
+                nameToHighlightNext = null;
+                timeToHighlightNext = null;
+                await fetchLeaderboardData();
+            }, 60000); 
         }); 
         window.addEventListener('resize', handleResize);
 
