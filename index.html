@@ -34,7 +34,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 500px; /* 與遊戲容器寬度一致 */
+            max-width: 500px; 
             margin-bottom: 0.5rem;
         }
         #muteButton {
@@ -410,7 +410,7 @@
 
         <div id="gameInstructions">
             <h2 id="instructionTitle">神捕手速成秘笈！🎯</h2>
-            <p id="instructionIntro">體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，操控籃子 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
+            <p id="instructionIntro">體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，透過方向鍵操控籃子 🧺左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
             <p><strong>可接物件與重量：</strong></p>
             <ul id="itemWeightsList">
                 </ul>
@@ -484,7 +484,7 @@
         let elapsedSeconds = 0; 
         let animationFrameId = null; 
         let displayUpdateIntervalId = null; 
-        let audioInitialized = false; // 追蹤音訊是否已初始化
+        let audioInitialized = false; 
 
         // 音效相關變數
         let bgmSynth, bgmLoop, scoreSynth, bombSynth;
@@ -520,9 +520,9 @@
             if (audioInitialized) return;
 
             bgmSynth = new Tone.Synth({
-                oscillator: { type: "fatsawtooth" }, // 嘗試不同的波形
+                oscillator: { type: "fatsawtooth" }, 
                 envelope: { attack: 0.2, decay: 0.1, sustain: 0.3, release: 0.8 },
-                volume: -28 // BGM 音量再小一點
+                volume: -28 
             }).toDestination();
 
             const bgmNotes = ["C3", "G3", "E3", "A3"];
@@ -530,16 +530,16 @@
             bgmLoop = new Tone.Loop(time => {
                 bgmSynth.triggerAttackRelease(bgmNotes[bgmNoteIndex % bgmNotes.length], "1n", time);
                 bgmNoteIndex++;
-            }, "1n").start(0); // 先準備好，但不立即播放 Transport
+            }, "1n").start(0); 
 
             scoreSynth = new Tone.Synth({
-                oscillator: { type: "triangle8" }, // 嘗試不同的波形
+                oscillator: { type: "triangle8" }, 
                 envelope: { attack: 0.005, decay: 0.1, sustain: 0.01, release: 0.1 },
                 volume: -15
             }).toDestination();
 
             bombSynth = new Tone.NoiseSynth({
-                noise: { type: "brown" }, // 嘗試不同的噪音類型
+                noise: { type: "brown" }, 
                 envelope: { attack: 0.005, decay: 0.3, sustain: 0, release: 0.2 },
                 volume: -10
             }).toDestination();
@@ -549,27 +549,26 @@
         }
 
         function toggleBGM(play) {
-            if (!audioInitialized) setupAudio(); // 如果音訊未初始化，先設定
+            if (!audioInitialized) setupAudio(); 
 
             if (play && bgmLoop && Tone.Transport.state !== 'started') {
                 Tone.Transport.start();
                 console.log("BGM started.");
             } else if (!play && bgmLoop && Tone.Transport.state === 'started') {
                 Tone.Transport.stop();
-                Tone.Transport.seconds = 0; // 重置播放頭
+                Tone.Transport.seconds = 0; 
                 console.log("BGM stopped.");
             }
         }
 
         muteButton.addEventListener('click', async () => {
-            if (!audioInitialized) { // 如果音訊未初始化，點擊靜音按鈕時也嘗試初始化
+            if (!audioInitialized) { 
                 try {
                     await Tone.start();
                     console.log("AudioContext started by mute button.");
                     setupAudio();
                 } catch (e) {
                     console.error("Error starting AudioContext via mute button:", e);
-                    // 可以提示用戶需要再次互動
                 }
             }
             isGloballyMuted = !isGloballyMuted;
@@ -577,10 +576,9 @@
             muteButton.textContent = isGloballyMuted ? "🔊 開啟聲音" : "🔇 靜音";
             console.log("Global mute toggled:", isGloballyMuted);
 
-            // 如果是取消靜音且遊戲正在運行，則嘗試播放BGM
             if (!isGloballyMuted && isGameRunning) {
                 toggleBGM(true);
-            } else if (isGloballyMuted) { // 如果是靜音，則停止BGM
+            } else if (isGloballyMuted) { 
                 toggleBGM(false);
             }
         });
@@ -588,7 +586,7 @@
 
         function displayGameInstructions() {
             instructionTitle.textContent = '神捕手速成秘笈！🎯'; 
-            document.getElementById('instructionIntro').innerHTML = '體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，操控籃子 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！';
+            document.getElementById('instructionIntro').innerHTML = '體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，透過方向鍵操控籃子 🧺左右移動，接住同樣輕盈的掉落物，精準累積重量吧！';
             document.getElementById('instructionWin').innerHTML = '挑戰 Galaxy S25 Edge 的完美重量！當累積總重 <strong class="text-green-600">精準達到 163 公克</strong> 時，即可獲勝！🎉';
             document.getElementById('instructionOverweight').innerHTML = '🔴 精準是關鍵！總重量超過 163 公克，挑戰將會失敗。';
             document.getElementById('instructionBomb').innerHTML = '💣 保持警覺！接到炸彈 💣 會立即結束遊戲！';
@@ -739,17 +737,16 @@
             animationFrameId = requestAnimationFrame(gameLoop);
         }
 
-        async function startGame() { // 改為 async 以便 await Tone.start()
+        async function startGame() { 
             if (isGameRunning) return;
 
             if (!audioInitialized) {
                 try {
-                    await Tone.start(); // 等待音訊上下文啟動
+                    await Tone.start(); 
                     console.log("AudioContext started by game start.");
-                    setupAudio(); // 確保音效已設定
+                    setupAudio(); 
                 } catch (e) {
                     console.error("Error starting AudioContext:", e);
-                    // 可以選擇在這裡提示用戶音訊無法啟動，或者靜默失敗
                 }
             }
             
@@ -773,7 +770,7 @@
             scoreFormContainer.style.display = 'none'; 
             scoreFormContainer.innerHTML = ''; 
 
-            if (!isGloballyMuted) { // 只有在非靜音狀態下才播放BGM
+            if (!isGloballyMuted) { 
                 toggleBGM(true);
             }
 
@@ -790,7 +787,7 @@
             }
             timerDisplay.textContent = elapsedSeconds.toFixed(2);
             startButton.disabled = false; 
-            toggleBGM(false); // 遊戲結束時停止BGM
+            toggleBGM(false); 
         }
 
         function gameOver(message) {
@@ -1073,7 +1070,7 @@
                 if (canvas.width > 0 && canvas.height > 0) { 
                     drawPlayer(); 
                 }
-                // statusMessage.innerHTML = ""; // 不在此處清除 statusMessage，確保勝利/失敗訊息在resize後保留
+                // statusMessage.innerHTML = ""; // 移除此行，確保勝利/失敗訊息在resize後保留
                 startButton.disabled = false; 
             }
         }
