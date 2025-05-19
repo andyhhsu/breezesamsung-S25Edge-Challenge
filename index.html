@@ -28,6 +28,20 @@
             width: 100%;
             max-width: 900px; 
         }
+        .product-image-container {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: center;
+        }
+        .product-image-container img {
+            max-width: 100%; /* 讓圖片寬度能適應容器 */
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            object-fit: cover; /* 確保圖片能適當縮放並填滿，可能需要調整 */
+        }
         #gameInstructions {
             background-color: #e0f2fe;
             border: 1px solid #93c5fd;
@@ -39,7 +53,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         #gameInstructions h2 {
-            font-size: 1.1rem; 
+            font-size: 1.2rem; 
             font-weight: bold;
             color: #1e40af;
             text-align: center;
@@ -68,6 +82,14 @@
             color: #374151;
             line-height: 1.5;
             margin-bottom: 0.2rem; 
+        }
+        .reward-teaser { 
+            margin-top: 0.75rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed #93c5fd;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #1d4ed8;
         }
 
         #gameAndFormContainer { 
@@ -108,47 +130,64 @@
             padding: 0.2rem 0.4rem; 
             border-radius: 0.25rem;
         }
+        .info-bar .info-label { 
+            font-weight: bold;
+        }
+
         #statusMessage { 
             margin-top: 0.75rem; 
             padding: 0.75rem; 
-            background-color: #e0f2fe; 
             border-radius: 0.5rem;
-            border: 1px solid #93c5fd; 
+            border-width: 1px;
+            border-style: solid;
             font-size: 0.9rem; 
             font-weight: normal; 
-            color: #1e3a8a; 
-            min-height: 60px; /* 調整最小高度 */
-            max-height: 25vh; /* 調整最大高度 (原30vh) */
+            min-height: 60px; 
+            max-height: 28vh; 
             overflow-y: auto;  
             text-align: left; 
             width: 100%;
             box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
         }
+        .status-win {
+            background-color: #dcfce7; 
+            border-color: #86efac;
+            color: #166534;
+        }
+        .status-win h3, .status-win h4, .status-win strong { color: #15803d; }
+        .status-win .promotion-highlight { background-color: #fef9c3; border-color: #fde047;}
+        .status-win .promotion-highlight .event-title { color: #a16207;}
+
+
+        .status-lose {
+            background-color: #fee2e2; 
+            border-color: #fca5a5;
+            color: #991b1b;
+        }
+        .status-lose p { text-align: center; } 
+
+
         #statusMessage h3 { 
             font-size: 1.1rem; 
             font-weight: bold;
-            color: #1d4ed8; 
             margin-bottom: 0.4rem; 
             text-align: center;
         }
         #statusMessage h4 { 
             font-size: 1rem; 
             font-weight: bold;
-            color: #1e40af; 
             margin-top: 0.6rem; 
             margin-bottom: 0.4rem; 
             text-align: center;
-            border-top: 1px solid #93c5fd;
+            border-top: 1px solid #93c5fd; 
             padding-top: 0.6rem; 
         }
+        .status-win h4 { border-top-color: #a3e635; } 
+
         #statusMessage p {
             margin-bottom: 0.4rem; 
             line-height: 1.5;
             font-size: 0.85rem; 
-        }
-        #statusMessage strong {
-            font-weight: bold;
-            color: #1e40af;
         }
         #statusMessage ul {
             list-style: disc;
@@ -285,9 +324,18 @@
             font-weight: 500;
             color: #1e40af;
         }
+        .player-feedback { 
+            animation: pulse 0.3s ease-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
 
 
         @media (max-width: 600px) {
+            .product-image-container img { max-width: 100%; } /* 手機上讓圖片寬度滿容器 */
             #gameInstructions {
                 max-width: 95%;
                 padding: 0.6rem; 
@@ -304,9 +352,9 @@
             }
             #statusMessage {
                 font-size: 0.85rem; 
-                min-height: 50px; /* 再調整手機上的最小高度 */
-                max-height: 28vh; /* 再調整手機上最大高度 (原35vh) */
-                padding: 0.6rem;
+                 min-height: 50px; 
+                 max-height: 28vh; 
+                 padding: 0.6rem;
             }
             #statusMessage h3 { font-size: 1rem; }
             #statusMessage h4 { font-size: 0.9rem; }
@@ -331,8 +379,12 @@
         <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-3 text-center">Galaxy S25 Edge 163克神捕手!</h1> 
         <p class="text-sm text-sky-700 mb-1 text-center">接住物品，精準累積163公克！小心炸彈和超重！</p> 
 
+        <div class="product-image-container">
+            <img src="S25 Edge Main KV_cmyk_橫式.jpg" alt="Galaxy S25 Edge 產品主視覺" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=圖片載入失敗';">
+        </div>
+
         <div id="gameInstructions">
-            <h2>玩法說明</h2>
+            <h2 id="instructionTitle">神捕手速成秘笈！🎯</h2>
             <p id="instructionIntro">體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，操控籃子 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
             <p><strong>可接物件與重量：</strong></p>
             <ul id="itemWeightsList">
@@ -342,15 +394,18 @@
             <p><strong>注意事項：</strong></p>
             <p id="instructionOverweight">🔴 精準是關鍵！總重量超過 163 公克，挑戰將會失敗。</p>
             <p id="instructionBomb">💣 保持警覺！接到炸彈 💣 會立即結束遊戲！</p>
+            <div class="reward-teaser">
+                <p>🌟 挑戰成功就有機會贏取豐富獎品，並可憑遊戲畫面至門市兌換好禮！詳情請於獲勝後查看！🌟</p>
+            </div>
         </div>
 
 
         <div id="gameAndFormContainer">
             <div id="gameContainer">
                 <div class="info-bar">
-                    <span>目前重量: <span id="currentWeight">0</span> g</span>
-                    <span>目標: 163 g</span>
-                    <span>時間: <span id="timerDisplay">0</span> s</span>
+                    <span><span class="info-label">目前重量:</span> <span id="currentWeight">0.00</span> g</span>
+                    <span><span class="info-label">目標:</span> 163 g</span>
+                    <span><span class="info-label">時間:</span> <span id="timerDisplay">0.00</span> s</span>
                 </div>
                 <canvas id="gameCanvas"></canvas>
                 <div id="statusMessage"></div> 
@@ -389,6 +444,7 @@
         const leaderboardList = document.getElementById('leaderboardList');
         const leaderboardStatus = document.getElementById('leaderboardStatus');
         const itemWeightsList = document.getElementById('itemWeightsList');
+        const instructionTitle = document.getElementById('instructionTitle');
 
 
         // --- Google Apps Script Web App URL ---
@@ -397,9 +453,12 @@
         const TARGET_WEIGHT = 163;
         let accumulatedWeight = 0;
         let isGameRunning = false;
-        let gameTime = 0;
-        let timerIntervalId = null;
-        let leaderboardPollIntervalId = null;
+        
+        let gameStartTime = 0; 
+        let elapsedSeconds = 0; 
+        let animationFrameId = null; 
+        let displayUpdateIntervalId = null; 
+
 
         const aspectRatio = 9 / 16; 
         let canvasWidth, canvasHeight;
@@ -407,7 +466,8 @@
         const player = {
             width: 0, height: 0, x: 0, y: 0, speed: 0, dx: 0,
             emoji: '🧺', 
-            fontSize: 0 
+            fontSize: 0,
+            element: null 
         };
 
         const BASE_SPEED_MULTIPLIER = 2.7 * 0.9; 
@@ -426,6 +486,7 @@
         const SPAWN_INTERVAL = 72; 
 
         function displayGameInstructions() {
+            instructionTitle.textContent = '神捕手速成秘笈！🎯'; 
             document.getElementById('instructionIntro').innerHTML = '體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，操控籃子 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！';
             document.getElementById('instructionWin').innerHTML = '挑戰 Galaxy S25 Edge 的完美重量！當累積總重 <strong class="text-green-600">精準達到 163 公克</strong> 時，即可獲勝！🎉';
             document.getElementById('instructionOverweight').innerHTML = '🔴 精準是關鍵！總重量超過 163 公克，挑戰將會失敗。';
@@ -449,6 +510,15 @@
             ctx.textBaseline = 'middle'; 
             ctx.fillText(player.emoji, player.x + player.width / 2, player.y + player.height / 2);
         }
+        
+        function triggerPlayerFeedback() {
+            const originalFontSize = player.fontSize;
+            player.fontSize *= 1.15; 
+            setTimeout(() => {
+                player.fontSize = originalFontSize; 
+            }, 150); 
+        }
+
 
         function drawFallingObjects() {
             if (!ctx) return;
@@ -490,6 +560,7 @@
                     if (obj.type === 'bomb') {
                         gameOver("哎呀！接到炸彈了！");
                     } else {
+                        triggerPlayerFeedback(); 
                         accumulatedWeight += obj.weight;
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
                         currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
@@ -527,26 +598,22 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
         
-        function startTimer() {
-            gameTime = 0;
-            timerDisplay.textContent = gameTime;
-            clearInterval(timerIntervalId); 
-            timerIntervalId = setInterval(() => {
-                if (isGameRunning) { 
-                    gameTime++;
-                    timerDisplay.textContent = gameTime;
-                }
-            }, 1000);
-        }
-
-        function stopTimer() {
-            clearInterval(timerIntervalId);
+        function updateTimerDisplay() {
+            if (isGameRunning) {
+                elapsedSeconds = (performance.now() - gameStartTime) / 1000;
+                timerDisplay.textContent = elapsedSeconds.toFixed(2);
+            }
         }
 
         function gameLoop() {
-            if (!isGameRunning) return;
+            if (!isGameRunning) {
+                cancelAnimationFrame(animationFrameId);
+                clearInterval(displayUpdateIntervalId);
+                return;
+            }
 
             try {
+                updateTimerDisplay(); 
                 clearCanvas();
                 
                 spawnTimer++;
@@ -566,9 +633,7 @@
                 return; 
             }
             
-            if (isGameRunning) { 
-                requestAnimationFrame(gameLoop);
-            }
+            animationFrameId = requestAnimationFrame(gameLoop);
         }
 
         function startGame() {
@@ -579,33 +644,50 @@
             currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
             fallingObjects = [];
             player.x = canvas.width / 2 - player.width / 2; 
+            
+            gameStartTime = performance.now();
+            elapsedSeconds = 0;
+            timerDisplay.textContent = elapsedSeconds.toFixed(2);
+            
+            clearInterval(displayUpdateIntervalId); 
+            displayUpdateIntervalId = setInterval(updateTimerDisplay, 50); 
+
+            statusMessage.className = 'status-message'; 
             statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; 
             startButton.textContent = "遊戲進行中";
             startButton.disabled = true; 
             scoreFormContainer.style.display = 'none'; 
             scoreFormContainer.innerHTML = ''; 
 
-            startTimer();
+            cancelAnimationFrame(animationFrameId); 
             gameLoop();
         }
         
         function stopGame() {
             isGameRunning = false;
-            stopTimer();
+            cancelAnimationFrame(animationFrameId);
+            clearInterval(displayUpdateIntervalId);
+            if (gameStartTime > 0) { 
+                 elapsedSeconds = (performance.now() - gameStartTime) / 1000;
+            }
+            timerDisplay.textContent = elapsedSeconds.toFixed(2);
             startButton.disabled = false; 
         }
 
         function gameOver(message) {
             stopGame();
-            statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${gameTime}s</p>`;
+            statusMessage.className = 'status-lose'; 
+            statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${elapsedSeconds.toFixed(2)}s</p>`;
             startButton.textContent = "再試一次";
         }
 
         async function gameWin() { 
             stopGame();
+            statusMessage.className = 'status-win'; 
             const winPopupMessage = `
                 <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
-                <p class="text-center mb-3">您的成績：<strong>${gameTime} 秒</strong></p>
+                <p class="text-center mb-3">您的成績：<strong>${elapsedSeconds.toFixed(2)} 秒</strong></p>
+                <p class="text-center text-xs text-gray-600 mb-2">(建議截圖此畫面以便兌獎 📸)</p>
 
                 <h4>🎁 挑戰成功好康 & 活動辦法 🎁</h4>
 
@@ -618,7 +700,7 @@
                 <p class="text-xs text-gray-600 mb-2">排行榜結算至 2025/6/30 23:59，詳情與得獎名單請見官方粉絲專頁。</p>
 
                 <p><strong>🎁 來店兌換精美小禮：</strong></p>
-                <p class="text-sm">憑此遊戲成功畫面截圖，即可於活動期間 (2025/6/1 - 2025/6/30) 至 <strong>微風南山三星體驗館 (台北市信義區松智路17號二樓)</strong> 兌換「線上挑戰成功精美小禮」一份！</p>
+                <p class="text-sm">憑此遊戲成功畫面截圖，即可於活動期間 (2025/6/1 - 2025/6/30) 至 <strong>微風南山三星體驗館 (台北市信義區松智路17號二樓)</strong> 兌換「線上挑戰成功精美小禮」一份！(您可自行搜尋地圖前往)</p>
                 <p class="text-xs text-gray-500 mb-2">(數量有限，送完為止，每人限兌換一次)</p>
 
                 <p><strong>⚡ 加碼抽大獎：</strong></p>
@@ -679,7 +761,7 @@
                     timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
                     name: playerName,
                     phone: playerPhone, 
-                    time: gameTime,
+                    time: parseFloat(elapsedSeconds.toFixed(2)), 
                     weight: accumulatedWeight.toFixed(1) 
                 };
                 
@@ -808,11 +890,16 @@
 
             scores.forEach((score, index) => {
                 const listItem = document.createElement('li');
+                let rankDisplay = `${index + 1}.`;
+                if (index === 0) rankDisplay = '🥇';
+                else if (index === 1) rankDisplay = '🥈';
+                else if (index === 2) rankDisplay = '🥉';
+
                 listItem.innerHTML = `
-                    <span class="rank">${index + 1}.</span>
+                    <span class="rank">${rankDisplay}</span>
                     <span class="name">${escapeHTML(score.name || '匿名')}</span> 
-                    <span class="time">${typeof score.time === 'number' ? score.time : '-'} 秒</span>
-                `;
+                    <span class="time">${(typeof score.time === 'number' ? score.time.toFixed(2) : '-')} 秒</span>
+                `; 
                 leaderboardList.appendChild(listItem);
             });
         }
@@ -867,7 +954,7 @@
                 if (canvas.width > 0 && canvas.height > 0) { 
                     drawPlayer(); 
                 }
-                // statusMessage.innerHTML = ""; // Removed: No longer clearing status message here
+                // statusMessage.innerHTML = ""; // 不在此處清除 statusMessage，確保勝利/失敗訊息在resize後保留
                 startButton.disabled = false; 
             }
         }
@@ -875,7 +962,7 @@
         window.addEventListener('load', async () => {
             handleResize(); 
             displayGameInstructions(); 
-            statusMessage.innerHTML = ""; // Set initial status message to empty
+            statusMessage.innerHTML = ""; 
             startButton.disabled = false; 
             await fetchLeaderboardData(); 
             leaderboardPollIntervalId = setInterval(fetchLeaderboardData, 60000); 
