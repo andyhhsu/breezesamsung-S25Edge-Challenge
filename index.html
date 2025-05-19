@@ -165,7 +165,7 @@
             font-size: 0.9rem; 
             font-weight: normal; 
             min-height: 60px; 
-            max-height: 30vh; /* 稍微增加最大高度，以容納新文字 */
+            max-height: 30vh; 
             overflow-y: auto;  
             text-align: left; 
             width: 100%;
@@ -773,7 +773,7 @@
             if (!isGloballyMuted) { 
                 toggleBGM(true);
             }
-            if (isTouchDevice()) { // 確保遊戲開始時，如果之前隱藏了，就顯示回來
+            if (isTouchDevice()) { 
                 touchControls.style.display = 'flex';
             }
 
@@ -798,7 +798,7 @@
             statusMessage.className = 'status-lose'; 
             statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${elapsedSeconds.toFixed(2)}s</p>`;
             startButton.textContent = "再試一次";
-            if (isTouchDevice()) { // 遊戲結束時，如果之前隱藏了，就顯示回來
+            if (isTouchDevice()) { 
                 touchControls.style.display = 'flex';
             }
         }
@@ -831,7 +831,7 @@
             `;
             statusMessage.innerHTML = winPopupMessage;
             startButton.textContent = "再玩一局";
-            if (isTouchDevice()) { // 獲勝後隱藏觸控按鈕
+            if (isTouchDevice()) { 
                 touchControls.style.display = 'none';
             }
             showScoreForm(); 
@@ -849,7 +849,7 @@
                     </div>
                     <div>
                         <label for="playerPhone">您的電話(僅供活動抽獎聯繫使用)：</label>
-                        <input type="tel" id="playerPhone" name="playerPhone" maxlength="20" required>
+                        <input type="tel" id="playerPhone" name="playerPhone" inputmode="numeric" pattern="[0-9]*" maxlength="10" required>
                     </div>
                     <button id="submitScoreButton" class="game-button">提交成績</button>
                     <p id="submitStatus" class="text-sm text-center mt-2"></p>
@@ -869,8 +869,16 @@
                     playerNameInput.focus();
                     return;
                 }
+                // 電話號碼驗證
+                const phoneRegex = /^[0-9]{10}$/; // 必須是剛好10位數字
                 if (!playerPhone) {
                     submitStatus.textContent = '請填寫您的電話！';
+                    submitStatus.style.color = 'red';
+                    playerPhoneInput.focus();
+                    return;
+                }
+                if (!phoneRegex.test(playerPhone)) {
+                    submitStatus.textContent = '電話號碼格式不正確，請輸入10位數字。';
                     submitStatus.style.color = 'red';
                     playerPhoneInput.focus();
                     return;
@@ -960,7 +968,7 @@
         }
 
         if (isTouchDevice()) {
-            touchControls.style.display = 'flex'; // 初始時就顯示觸控按鈕
+            touchControls.style.display = 'flex'; 
             leftButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = -player.speed; }); 
             leftButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
             rightButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = player.speed; }); 
