@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>S25 Edge 掉落物挑戰 v2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #dbeafe; /* 更明亮的淡藍色天空背景 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 10px;
+            overflow: hidden; 
+        }
+        #gameContainer {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px_25px_-5px rgba(0,0,0,0.1), 0 8px_10px_-6px rgba(0,0,0,0.1); /* 更柔和的陰影 */
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px; /* 稍微增加最大寬度 */
+        }
+        canvas {
+            background-color: #eff6ff; /* 非常淡的畫布背景 */
+            border-radius: 0.5rem;
+            border: 1px solid #bfdbfe; /* 淡藍色邊框 */
+        }
+        .info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 0.75rem; /* 增加間距 */
+            font-size: 0.9rem; /* 調整字體大小以容納更多資訊 */
+            font-weight: 500;
+            color: #1e3a8a; /* 更深的藍色文字 */
+        }
+        .info-bar span {
+            background-color: #e0f2fe;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+        #statusMessage {
+            margin-top: 1rem;
+            font-size: 1.1rem; /* 調整狀態訊息字體 */
+            font-weight: bold;
+            color: #2563eb; 
+            min-height: 3.5rem; 
+            text-align: center;
+            width: 100%; 
+        }
+        .game-button {
+            background-color: #2563eb; 
+            color: white;
+            padding: 0.7rem 1.4rem; /* 調整按鈕大小 */
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+        }
+        .game-button:hover {
+            background-color: #1d4ed8; 
+        }
+        .game-button:disabled {
+            background-color: #94a3b8; /* 更明顯的禁用顏色 */
+            cursor: not-allowed;
+        }
+        .controls {
+            display: none; 
+            justify-content: space-around;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 1rem;
+        }
+        .control-button {
+            background-color: #60a5fa; /* 控制按鈕顏色 */
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.5rem;
+            border: none;
+            cursor: pointer;
+            user-select: none; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+         .control-button:active {
+            background-color: #3b82f6;
+        }
+        /* 排行榜提交表單樣式 */
+        #scoreForm {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f9fafb;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
+        }
+        #scoreForm label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+        }
+        #scoreForm input[type="text"], #scoreForm input[type="tel"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+        }
+        #scoreForm button {
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .info-bar {
+                font-size: 0.8rem; /* 手機上再小一點 */
+                flex-wrap: wrap; /* 允許換行 */
+                justify-content: center;
+                gap: 0.5rem;
+            }
+            .info-bar span {
+                white-space: nowrap;
+            }
+            #statusMessage {
+                font-size: 1rem;
+                 min-height: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 mb-2 text-center">S25 Edge 掉落物挑戰 v2</h1>
+    <p class="text-sm text-sky-700 mb-4 text-center">接住物品，精準累積163公克！小心炸彈和超重！</p>
+
+    <div id="gameContainer">
+        <div class="info-bar">
+            <span>目前重量: <span id="currentWeight">0</span> g</span>
+            <span>目標: 163 g</span>
+            <span>時間: <span id="timerDisplay">0</span> s</span>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div id="statusMessage">準備好了嗎？</div>
+        <button id="startButton" class="game-button">開始遊戲</button>
+        <div id="scoreFormContainer" style="display: none;">
+             </div>
+    </div>
+
+    <div id="touchControls" class="controls">
+        <button id="leftButton" class="control-button">⬅️</button>
+        <button id="rightButton" class="control-button">➡️</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const currentWeightDisplay = document.getElementById('currentWeight');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const statusMessage = document.getElementById('statusMessage');
+        const startButton = document.getElementById('startButton');
+        const touchControls = document.getElementById('touchControls');
+        const leftButton = document.getElementById('leftButton');
+        const rightButton = document.getElementById('rightButton');
+        const scoreFormContainer = document.getElementById('scoreFormContainer');
+
+        // --- Google Apps Script Web App URL ---
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwaSCEeNvHsLjKbfUnFYoa5eMM5nUi_2kFcnAveqOP4zK8R1ThfRByhdqHkgD7UvYWd/exec'; 
+        
+        const TARGET_WEIGHT = 163;
+        let accumulatedWeight = 0;
+        let isGameRunning = false;
+        let gameTime = 0;
+        let timerIntervalId = null;
+
+        const aspectRatio = 9 / 16; 
+        let canvasWidth, canvasHeight;
+
+        const player = {
+            width: 0, height: 0, x: 0, y: 0, speed: 0, dx: 0,
+            emoji: '🧺', 
+            fontSize: 0 
+        };
+
+        const BASE_SPEED_MULTIPLIER = 1.5; 
+
+        const itemTypes = [
+            { emoji: '📄', weight: 5, type: 'item', speedY_factor: 0.003 * BASE_SPEED_MULTIPLIER },
+            { emoji: '📎', weight: 1, type: 'item', speedY_factor: 0.0025 * BASE_SPEED_MULTIPLIER },
+            { emoji: '🔋', weight: 11, type: 'item', speedY_factor: 0.004 * BASE_SPEED_MULTIPLIER },
+            { emoji: '💡', weight: 20, type: 'item', speedY_factor: 0.005 * BASE_SPEED_MULTIPLIER },
+            { emoji: '💣', weight: 0, type: 'bomb', speedY_factor: 0.006 * BASE_SPEED_MULTIPLIER }  
+        ];
+        itemTypes.forEach(item => item.speedY = 0); 
+
+        let fallingObjects = [];
+        let spawnTimer = 0;
+        const SPAWN_INTERVAL = 80; 
+
+        function drawPlayer() {
+            if (!ctx) return;
+            ctx.font = `${player.fontSize}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle'; 
+            ctx.fillText(player.emoji, player.x + player.width / 2, player.y + player.height / 2);
+        }
+
+        function drawFallingObjects() {
+            if (!ctx) return;
+            fallingObjects.forEach(obj => {
+                const objFontSize = canvas.width * 0.07; 
+                const weightFontSize = canvas.width * 0.035; 
+
+                ctx.font = `${objFontSize}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom'; 
+                ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
+
+                if (obj.type === 'item') {
+                    ctx.font = `bold ${weightFontSize}px Arial`;
+                    ctx.fillStyle = '#334155'; 
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'top'; 
+                    ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + 2); 
+                }
+            });
+        }
+
+        function updatePlayerPosition() {
+            player.x += player.dx;
+            if (player.x < 0) player.x = 0;
+            if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
+        }
+
+        function updateFallingObjects() {
+            for (let i = fallingObjects.length - 1; i >= 0; i--) {
+                const obj = fallingObjects[i];
+                obj.y += obj.speedY;
+                
+                if ( obj.x < player.x + player.width &&
+                     obj.x + obj.width > player.x &&
+                     obj.y < player.y + player.height && 
+                     obj.y + obj.height > player.y ) { 
+                    
+                    if (obj.type === 'bomb') {
+                        gameOver("哎呀！接到炸彈了！");
+                    } else {
+                        accumulatedWeight += obj.weight;
+                        currentWeightDisplay.textContent = accumulatedWeight;
+                        if (accumulatedWeight === TARGET_WEIGHT) {
+                            gameWin();
+                        } else if (accumulatedWeight > TARGET_WEIGHT) {
+                            gameOver(`哎呀！超過目標 ${TARGET_WEIGHT}g 了！`);
+                        }
+                    }
+                    fallingObjects.splice(i, 1); 
+                } else if (obj.y > canvas.height + obj.height + 20) { 
+                    fallingObjects.splice(i, 1); 
+                }
+            }
+        }
+
+        function spawnObject() {
+            const randomTypeIndex = Math.floor(Math.random() * itemTypes.length);
+            const typeTemplate = itemTypes[randomTypeIndex];
+            const objWidth = canvas.width * 0.1; 
+            const objHeight = canvas.width * 0.1;
+
+            fallingObjects.push({
+                ...typeTemplate, 
+                x: Math.random() * (canvas.width - objWidth),
+                y: 0 - objHeight, 
+                width: objWidth,
+                height: objHeight,
+            });
+        }
+        
+        function clearCanvas() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        function startTimer() {
+            gameTime = 0;
+            timerDisplay.textContent = gameTime;
+            clearInterval(timerIntervalId); 
+            timerIntervalId = setInterval(() => {
+                if (isGameRunning) { 
+                    gameTime++;
+                    timerDisplay.textContent = gameTime;
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerIntervalId);
+        }
+
+        function gameLoop() {
+            if (!isGameRunning) return;
+
+            try {
+                clearCanvas();
+                
+                spawnTimer++;
+                if (spawnTimer > SPAWN_INTERVAL) {
+                    spawnObject();
+                    spawnTimer = 0;
+                }
+
+                updatePlayerPosition();
+                updateFallingObjects();
+
+                drawPlayer();
+                drawFallingObjects();
+            } catch (error) {
+                console.error("Error in gameLoop:", error);
+                gameOver("遊戲發生錯誤，請重新整理頁面再試一次"); 
+                return; 
+            }
+            
+            if (isGameRunning) { 
+                requestAnimationFrame(gameLoop);
+            }
+        }
+
+        function startGame() {
+            if (isGameRunning) return;
+            
+            isGameRunning = true;
+            accumulatedWeight = 0;
+            currentWeightDisplay.textContent = accumulatedWeight;
+            fallingObjects = [];
+            player.x = canvas.width / 2 - player.width / 2; 
+            statusMessage.textContent = "遊戲進行中...";
+            startButton.textContent = "遊戲進行中";
+            startButton.disabled = true; 
+            scoreFormContainer.style.display = 'none'; 
+            scoreFormContainer.innerHTML = ''; 
+
+            startTimer();
+            gameLoop();
+        }
+        
+        function stopGame() {
+            isGameRunning = false;
+            stopTimer();
+            startButton.disabled = false;
+        }
+
+        function gameOver(message) {
+            stopGame();
+            statusMessage.textContent = message + ` 最終重量: ${accumulatedWeight}g，時間: ${gameTime}s`;
+            startButton.textContent = "再試一次";
+        }
+
+        function gameWin() {
+            stopGame();
+            const winMessage = `🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！耗時 ${gameTime} 秒！ 🎉`;
+            statusMessage.textContent = winMessage;
+            startButton.textContent = "再玩一局";
+            showScoreForm();
+        }
+
+        function showScoreForm() {
+            scoreFormContainer.style.display = 'block';
+            scoreFormContainer.innerHTML = `
+                <div id="scoreForm">
+                    <h3 class="text-lg font-semibold text-center mb-3 text-sky-700">成功登頂！記錄您的佳績</h3>
+                    <div>
+                        <label for="playerName">您的名稱：</label>
+                        <input type="text" id="playerName" name="playerName" required>
+                    </div>
+                    <div>
+                        <label for="playerPhone">您的電話 (僅供記錄，不會公開)：</label>
+                        <input type="tel" id="playerPhone" name="playerPhone" required>
+                    </div>
+                    <button id="submitScoreButton" class="game-button">提交成績</button>
+                    <p id="submitStatus" class="text-sm text-center mt-2"></p>
+                </div>
+            `;
+
+            document.getElementById('submitScoreButton').addEventListener('click', async () => {
+                const playerName = document.getElementById('playerName').value.trim();
+                const playerPhone = document.getElementById('playerPhone').value.trim();
+                const submitStatus = document.getElementById('submitStatus');
+
+                if (!playerName || !playerPhone) {
+                    submitStatus.textContent = '請填寫名稱和電話！';
+                    submitStatus.style.color = 'red';
+                    return;
+                }
+                if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL) { // 檢查是否為佔位符或空
+                     submitStatus.textContent = '後端URL未配置或無效，無法提交。';
+                     submitStatus.style.color = 'orange';
+                     console.warn("Google Apps Script URL is not configured or is invalid.");
+                     return;
+                }
+
+                const scoreData = {
+                    timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
+                    name: playerName,
+                    phone: playerPhone, 
+                    time: gameTime,
+                    weight: accumulatedWeight 
+                };
+                
+                document.getElementById('submitScoreButton').disabled = true;
+                submitStatus.textContent = '提交中...';
+                submitStatus.style.color = 'blue';
+
+                try {
+                    const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors', 
+                        cache: 'no-cache',
+                        // headers: { // 'Content-Type': 'application/json' }, // 在 no-cors 模式下，此標頭可能不被允許或被忽略
+                        redirect: 'follow',
+                        body: JSON.stringify(scoreData) 
+                    });
+                    submitStatus.textContent = '成績已提交！感謝您的參與！';
+                    submitStatus.style.color = 'green';
+                    console.log('Score submission attempted. Check Google Sheet.');
+                     setTimeout(() => {
+                        scoreFormContainer.style.display = 'none';
+                     }, 3000);
+
+                } catch (error) {
+                    console.error('Error submitting score:', error);
+                    submitStatus.textContent = '提交失敗，請稍後再試或檢查網路連線。';
+                    submitStatus.style.color = 'red';
+                    document.getElementById('submitScoreButton').disabled = false;
+                }
+            });
+        }
+
+
+        function keyDown(e) {
+            if (!isGameRunning && (e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left')) {
+                if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
+                else player.dx = -player.speed;
+                updatePlayerPosition(); 
+                clearCanvas();
+                drawPlayer(); 
+                player.dx = 0; 
+                return;
+            }
+            if (!isGameRunning) return; 
+
+            if (e.key === 'ArrowRight' || e.key === 'Right') {
+                player.dx = player.speed;
+            } else if (e.key === 'ArrowLeft' || e.key === 'Left') {
+                player.dx = -player.speed;
+            }
+        }
+        function keyUp(e) {
+            if ( e.key === 'ArrowRight' || e.key === 'Right' ||
+                 e.key === 'ArrowLeft' || e.key === 'Left' ) {
+                player.dx = 0;
+            }
+        }
+
+        document.addEventListener('keydown', keyDown);
+        document.addEventListener('keyup', keyUp);
+        startButton.addEventListener('click', startGame);
+
+        function isTouchDevice() {
+            return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+        }
+
+        if (isTouchDevice()) {
+            touchControls.style.display = 'flex';
+            leftButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = -player.speed; });
+            leftButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
+            rightButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = player.speed; });
+            rightButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
+        }
+        
+        function handleResize() {
+            canvasWidth = Math.min(480, window.innerWidth - 30); 
+            canvasHeight = canvasWidth / aspectRatio;
+            if (canvasHeight > window.innerHeight * 0.65) { 
+                canvasHeight = window.innerHeight * 0.65;
+                canvasWidth = canvasHeight * aspectRatio;
+            }
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
+
+            const infoBar = document.querySelector('.info-bar');
+            if (infoBar) {
+                 infoBar.style.maxWidth = `${canvasWidth}px`;
+            }
+
+            player.width = canvas.width * 0.15;
+            player.height = canvas.height * 0.06; 
+            player.x = canvas.width / 2 - player.width / 2; 
+            player.y = canvas.height - player.height - (canvas.height * 0.03); 
+            player.speed = canvas.width * 0.03; 
+            player.fontSize = canvas.width * 0.12; 
+
+            itemTypes.forEach(it => {
+                it.speedY = canvas.height * it.speedY_factor;
+            });
+            
+            if (!isGameRunning) { 
+                clearCanvas();
+                drawPlayer(); 
+                statusMessage.textContent = "準備好了嗎？";
+            }
+        }
+
+        window.addEventListener('load', handleResize); 
+        window.addEventListener('resize', handleResize);
+
+    </script>
+</body>
+</html>

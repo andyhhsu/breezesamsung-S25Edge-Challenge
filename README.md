@@ -1,1 +1,0 @@
-# breezesamsung-S25Edge-Challenge
