@@ -34,7 +34,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 80px; /* 為固定在底部的觸控按鈕留出空間 */
+            margin-bottom: 70px; /* 為固定在底部的觸控按鈕留出空間 (略微減少) */
         }
         #gameContainer {
             background-color: #ffffff;
@@ -142,33 +142,33 @@
             left: 0;
             right: 0; 
             width: 100%;
-            padding: 12px 10px; 
+            padding: 10px 8px; /* 調整內邊距 */
             box-sizing: border-box;
             justify-content: space-between; 
             align-items: center;
             z-index: 100; 
-            background-color: rgba(224, 242, 254, 0.8); 
-            border-top: 1px solid rgba(191, 219, 254, 0.7); 
+            background-color: rgba(224, 242, 254, 0.75); /* 略微調整透明度 */
+            border-top: 1px solid rgba(191, 219, 254, 0.6); 
             pointer-events: none; 
         }
         .control-button {
-            background-color: rgba(59, 130, 246, 0.85); 
+            background-color: rgba(59, 130, 246, 0.8); /* 按鈕背景色，略微調整透明度 */
             color: white;
-            padding: 15px 0; 
-            border-radius: 10px; 
-            font-size: 2rem; 
+            padding: 12px 0; /* 縮小上下 padding */
+            border-radius: 8px; /* 調整圓角 */
+            font-size: 1.8rem; /* 縮小箭頭字體 */
             border: none;
             cursor: pointer;
             user-select: none; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15); /* 調整陰影 */
             pointer-events: auto; 
-            flex-basis: 45%; 
-            max-width: 180px; 
+            flex-basis: 44%; /* 調整基礎寬度 */
+            max-width: 160px; /* 限制最大寬度 */
             text-align: center;
             -webkit-tap-highlight-color: transparent; 
         }
          .control-button:active {
-            background-color: rgba(29, 78, 216, 0.9); 
+            background-color: rgba(29, 78, 216, 0.85); 
         }
 
         #scoreFormContainer, #leaderboardContainer {
@@ -254,11 +254,11 @@
                 max-width: 95%;
              }
              .control-button {
-                padding: 12px 0; 
-                font-size: 1.8rem;
+                padding: 10px 0; /* 手機上再微調 */
+                font-size: 1.7rem;
              }
              #gameAndFormContainer {
-                margin-bottom: 90px; 
+                margin-bottom: 80px; 
              }
         }
     </style>
@@ -332,7 +332,7 @@
             fontSize: 0 
         };
 
-        const BASE_SPEED_MULTIPLIER = 2.7; 
+        const BASE_SPEED_MULTIPLIER = 2.7 * 0.9; // 原 2.7，再乘以 0.9 使其變慢
 
         const itemTypes = [
             { emoji: '📄', weight: 5, type: 'item', speedY_factor: 0.003 * BASE_SPEED_MULTIPLIER },
@@ -345,7 +345,7 @@
 
         let fallingObjects = [];
         let spawnTimer = 0;
-        const SPAWN_INTERVAL = 65; 
+        const SPAWN_INTERVAL = 72; // 配合速度減慢，物件生成間隔略微增加 (原65)
 
         function drawPlayer() {
             if (!ctx) return;
@@ -358,8 +358,8 @@
         function drawFallingObjects() {
             if (!ctx) return;
             fallingObjects.forEach(obj => {
-                const objFontSize = canvas.width * 0.085; // 加大圖示 Emoji 尺寸
-                const weightFontSize = canvas.width * 0.04; // 加大重量文字尺寸
+                const objFontSize = canvas.width * 0.085; 
+                const weightFontSize = canvas.width * 0.04; 
 
                 ctx.font = `${objFontSize}px Arial`;
                 ctx.textAlign = 'center';
@@ -368,10 +368,9 @@
 
                 if (obj.type === 'item') {
                     ctx.font = `bold ${weightFontSize}px Arial`;
-                    ctx.fillStyle = '#000000'; // 重量文字改為純黑色以增強對比
+                    ctx.fillStyle = '#FF0000'; // 重量文字改為紅色
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'top'; 
-                    // 稍微調整 Y 軸偏移以配合較大的 Emoji
                     ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1)); 
                 }
             });
@@ -735,8 +734,9 @@
         function handleResize() {
             canvasWidth = Math.min(480, window.innerWidth - 30); 
             canvasHeight = canvasWidth / aspectRatio;
-            if (canvasHeight > window.innerHeight * 0.60) { 
-                canvasHeight = window.innerHeight * 0.60;
+            // 增加遊戲畫面高度佔比
+            if (canvasHeight > window.innerHeight * 0.70) { // 原為 0.60
+                canvasHeight = window.innerHeight * 0.70;   // 原為 0.60
                 canvasWidth = canvasHeight * aspectRatio;
             }
             canvas.width = Math.max(150, canvasWidth); 
