@@ -342,8 +342,7 @@
                     <span>時間: <span id="timerDisplay">0</span> s</span>
                 </div>
                 <canvas id="gameCanvas"></canvas>
-                <div id="statusMessage">準備好了嗎？</div>
-                <button id="startButton" class="game-button">開始遊戲</button>
+                <div id="statusMessage"></div> <button id="startButton" class="game-button">開始遊戲</button>
             </div>
             <div id="scoreFormContainer" style="display: none;">
                 </div>
@@ -405,7 +404,7 @@
             { name: 'A4影印紙', emoji: '📄', weight: 5, type: 'item', speedY_factor: 0.003 * BASE_SPEED_MULTIPLIER },
             { name: '迴紋針', emoji: '📎', weight: 1, type: 'item', speedY_factor: 0.0025 * BASE_SPEED_MULTIPLIER },
             { name: 'AAA電池', emoji: '🔋', weight: 11, type: 'item', speedY_factor: 0.004 * BASE_SPEED_MULTIPLIER },
-            { name: '新台幣10元硬幣', emoji: '💰', weight: 7.5, type: 'item', speedY_factor: 0.005 * BASE_SPEED_MULTIPLIER }, // 更新物件
+            { name: '新台幣10元硬幣', emoji: '💰', weight: 7.5, type: 'item', speedY_factor: 0.005 * BASE_SPEED_MULTIPLIER }, 
             { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', speedY_factor: 0.006 * BASE_SPEED_MULTIPLIER }  
         ];
         itemTypes.forEach(item => item.speedY = 0); 
@@ -475,11 +474,10 @@
                         gameOver("哎呀！接到炸彈了！");
                     } else {
                         accumulatedWeight += obj.weight;
-                        // 處理浮點數精度問題，特別是對於 7.5g 的硬幣
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
-                        currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); // 顯示時也保留一位小數
+                        currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
 
-                        if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { // 比較浮點數時使用容差
+                        if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { 
                             gameWin();
                         } else if (accumulatedWeight > TARGET_WEIGHT) {
                             gameOver(`哎呀！超過目標 ${TARGET_WEIGHT}g 了！`);
@@ -561,7 +559,7 @@
             
             isGameRunning = true;
             accumulatedWeight = 0;
-            currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); // 初始化時也顯示一位小數
+            currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
             fallingObjects = [];
             player.x = canvas.width / 2 - player.width / 2; 
             statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; 
@@ -663,7 +661,7 @@
                     name: playerName,
                     phone: playerPhone, 
                     time: gameTime,
-                    weight: accumulatedWeight.toFixed(1) // 提交時也確保是一位小數
+                    weight: accumulatedWeight.toFixed(1) 
                 };
                 
                 document.getElementById('submitScoreButton').disabled = true;
@@ -850,7 +848,7 @@
                 if (canvas.width > 0 && canvas.height > 0) { 
                     drawPlayer(); 
                 }
-                statusMessage.innerHTML = "<p class='text-center font-bold'>準備好了嗎？</p>";
+                // statusMessage.innerHTML = "<p class='text-center font-bold'>準備好了嗎？</p>"; // 已移除此行
                 startButton.disabled = false; 
             }
         }
