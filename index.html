@@ -6,7 +6,6 @@
     <title>Galaxy S25 Edge 163克神捕手!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
@@ -29,41 +28,6 @@
             width: 100%;
             max-width: 900px; 
         }
-        .header-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 500px; 
-            margin-bottom: 0.5rem;
-        }
-        #muteButton {
-            background-color: #bfdbfe;
-            color: #1e3a8a;
-            padding: 0.3rem 0.6rem;
-            border-radius: 0.375rem;
-            font-size: 0.8rem;
-            border: 1px solid #93c5fd;
-            cursor: pointer;
-        }
-        #muteButton:hover {
-            background-color: #93c5fd;
-        }
-
-        .product-image-container {
-            width: 100%;
-            max-width: 500px;
-            margin-bottom: 0.75rem;
-            display: flex;
-            justify-content: center;
-        }
-        .product-image-container img {
-            max-width: 100%; 
-            height: auto;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            object-fit: cover; 
-        }
         #gameInstructions {
             background-color: #e0f2fe;
             border: 1px solid #93c5fd;
@@ -75,7 +39,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         #gameInstructions h2 {
-            font-size: 1.2rem; 
+            font-size: 1.1rem; 
             font-weight: bold;
             color: #1e40af;
             text-align: center;
@@ -104,14 +68,6 @@
             color: #374151;
             line-height: 1.5;
             margin-bottom: 0.2rem; 
-        }
-        .reward-teaser { 
-            margin-top: 0.75rem;
-            padding-top: 0.5rem;
-            border-top: 1px dashed #93c5fd;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #1d4ed8;
         }
 
         #gameAndFormContainer { 
@@ -152,64 +108,47 @@
             padding: 0.2rem 0.4rem; 
             border-radius: 0.25rem;
         }
-        .info-bar .info-label { 
-            font-weight: bold;
-        }
-
         #statusMessage { 
             margin-top: 0.75rem; 
             padding: 0.75rem; 
+            background-color: #e0f2fe; 
             border-radius: 0.5rem;
-            border-width: 1px;
-            border-style: solid;
+            border: 1px solid #93c5fd; 
             font-size: 0.9rem; 
             font-weight: normal; 
-            min-height: 60px; 
+            color: #1e3a8a; 
+            min-height: 80px; 
             max-height: 30vh; 
             overflow-y: auto;  
             text-align: left; 
             width: 100%;
             box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
         }
-        .status-win {
-            background-color: #dcfce7; 
-            border-color: #86efac;
-            color: #166534;
-        }
-        .status-win h3, .status-win h4, .status-win strong { color: #15803d; }
-        .status-win .promotion-highlight { background-color: #fef9c3; border-color: #fde047;}
-        .status-win .promotion-highlight .event-title { color: #a16207;}
-
-
-        .status-lose {
-            background-color: #fee2e2; 
-            border-color: #fca5a5;
-            color: #991b1b;
-        }
-        .status-lose p { text-align: center; } 
-
-
         #statusMessage h3 { 
             font-size: 1.1rem; 
             font-weight: bold;
+            color: #1d4ed8; 
             margin-bottom: 0.4rem; 
             text-align: center;
         }
         #statusMessage h4 { 
             font-size: 1rem; 
             font-weight: bold;
+            color: #1e40af; 
             margin-top: 0.6rem; 
             margin-bottom: 0.4rem; 
             text-align: center;
-            border-top: 1px solid #93c5fd; 
+            border-top: 1px solid #93c5fd;
             padding-top: 0.6rem; 
         }
-        .status-win h4 { border-top-color: #a3e635; } 
-
         #statusMessage p {
             margin-bottom: 0.4rem; 
             line-height: 1.5;
             font-size: 0.85rem; 
+        }
+        #statusMessage strong {
+            font-weight: bold;
+            color: #1e40af;
         }
         #statusMessage ul {
             list-style: disc;
@@ -346,18 +285,9 @@
             font-weight: 500;
             color: #1e40af;
         }
-        .player-feedback { 
-            animation: pulse 0.3s ease-out;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
 
 
         @media (max-width: 600px) {
-            .product-image-container img { max-width: 100%; } 
             #gameInstructions {
                 max-width: 95%;
                 padding: 0.6rem; 
@@ -374,8 +304,8 @@
             }
             #statusMessage {
                 font-size: 0.85rem; 
-                 min-height: 50px; 
-                 max-height: 28vh; 
+                 min-height: 60px; 
+                 max-height: 35vh; 
                  padding: 0.6rem;
             }
             #statusMessage h3 { font-size: 1rem; }
@@ -398,19 +328,12 @@
 </head>
 <body>
     <div id="pageContainer">
-        <div class="header-controls">
-            <h1 class="text-xl sm:text-2xl font-bold text-sky-800 text-center flex-grow">Galaxy S25 Edge 163克神捕手!</h1> 
-            <button id="muteButton">🔇 靜音</button>
-        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-3 text-center">Galaxy S25 Edge 163克神捕手!</h1> 
         <p class="text-sm text-sky-700 mb-1 text-center">接住物品，精準累積163公克！小心炸彈和超重！</p> 
 
-        <div class="product-image-container">
-            <img src="S25 Edge Main KV_cmyk_橫式(壓縮).png" alt="Galaxy S25 Edge 產品主視覺" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=圖片載入失敗';">
-        </div>
-
         <div id="gameInstructions">
-            <h2 id="instructionTitle">神捕手速成秘笈！🎯</h2>
-            <p id="instructionIntro">體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，透過方向鍵操控籃子 🧺左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
+            <h2>玩法說明</h2>
+            <p id="instructionIntro">體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，操控籃子 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
             <p><strong>可接物件與重量：</strong></p>
             <ul id="itemWeightsList">
                 </ul>
@@ -419,18 +342,15 @@
             <p><strong>注意事項：</strong></p>
             <p id="instructionOverweight">🔴 精準是關鍵！總重量超過 163 公克，挑戰將會失敗。</p>
             <p id="instructionBomb">💣 保持警覺！接到炸彈 💣 會立即結束遊戲！</p>
-            <div class="reward-teaser">
-                <p>🌟 挑戰成功就有機會贏取豐富獎品，並可憑遊戲畫面至門市兌換好禮！詳情請於獲勝後查看！🌟</p>
-            </div>
         </div>
 
 
         <div id="gameAndFormContainer">
             <div id="gameContainer">
                 <div class="info-bar">
-                    <span><span class="info-label">目前重量:</span> <span id="currentWeight">0.00</span> g</span>
-                    <span><span class="info-label">目標:</span> 163 g</span>
-                    <span><span class="info-label">時間:</span> <span id="timerDisplay">0.00</span> s</span>
+                    <span>目前重量: <span id="currentWeight">0</span> g</span>
+                    <span>目標: 163 g</span>
+                    <span>時間: <span id="timerDisplay">0</span> s</span>
                 </div>
                 <canvas id="gameCanvas"></canvas>
                 <div id="statusMessage"></div> 
@@ -469,8 +389,6 @@
         const leaderboardList = document.getElementById('leaderboardList');
         const leaderboardStatus = document.getElementById('leaderboardStatus');
         const itemWeightsList = document.getElementById('itemWeightsList');
-        const instructionTitle = document.getElementById('instructionTitle');
-        const muteButton = document.getElementById('muteButton');
 
 
         // --- Google Apps Script Web App URL ---
@@ -479,17 +397,9 @@
         const TARGET_WEIGHT = 163;
         let accumulatedWeight = 0;
         let isGameRunning = false;
-        
-        let gameStartTime = 0; 
-        let elapsedSeconds = 0; 
-        let animationFrameId = null; 
-        let displayUpdateIntervalId = null; 
-        let audioInitialized = false; 
-
-        // 音效相關變數
-        let bgmSynth, bgmLoop, scoreSynth, bombSynth;
-        let isGloballyMuted = false;
-
+        let gameTime = 0;
+        let timerIntervalId = null;
+        let leaderboardPollIntervalId = null;
 
         const aspectRatio = 9 / 16; 
         let canvasWidth, canvasHeight;
@@ -497,11 +407,10 @@
         const player = {
             width: 0, height: 0, x: 0, y: 0, speed: 0, dx: 0,
             emoji: '🧺', 
-            fontSize: 0,
-            element: null 
+            fontSize: 0 
         };
 
-        const BASE_SPEED_MULTIPLIER = 2.7 * 0.9; 
+        const BASE_SPEED_MULTIPLIER = 3.2; // 調整基礎速度 (原 4.5, 再之前 2.43)
 
         const itemTypes = [
             { name: 'A4影印紙', emoji: '📄', weight: 5, type: 'item', speedY_factor: 0.003 * BASE_SPEED_MULTIPLIER },
@@ -514,79 +423,10 @@
 
         let fallingObjects = [];
         let spawnTimer = 0;
-        const SPAWN_INTERVAL = 72; 
-
-        function setupAudio() {
-            if (audioInitialized) return;
-
-            bgmSynth = new Tone.Synth({
-                oscillator: { type: "fatsawtooth" }, 
-                envelope: { attack: 0.2, decay: 0.1, sustain: 0.3, release: 0.8 },
-                volume: -28 
-            }).toDestination();
-
-            const bgmNotes = ["C3", "G3", "E3", "A3"];
-            let bgmNoteIndex = 0;
-            bgmLoop = new Tone.Loop(time => {
-                bgmSynth.triggerAttackRelease(bgmNotes[bgmNoteIndex % bgmNotes.length], "1n", time);
-                bgmNoteIndex++;
-            }, "1n").start(0); 
-
-            scoreSynth = new Tone.Synth({
-                oscillator: { type: "triangle8" }, 
-                envelope: { attack: 0.005, decay: 0.1, sustain: 0.01, release: 0.1 },
-                volume: -15
-            }).toDestination();
-
-            bombSynth = new Tone.NoiseSynth({
-                noise: { type: "brown" }, 
-                envelope: { attack: 0.005, decay: 0.3, sustain: 0, release: 0.2 },
-                volume: -10
-            }).toDestination();
-            
-            audioInitialized = true;
-            console.log("Audio setup complete.");
-        }
-
-        function toggleBGM(play) {
-            if (!audioInitialized) setupAudio(); 
-
-            if (play && bgmLoop && Tone.Transport.state !== 'started') {
-                Tone.Transport.start();
-                console.log("BGM started.");
-            } else if (!play && bgmLoop && Tone.Transport.state === 'started') {
-                Tone.Transport.stop();
-                Tone.Transport.seconds = 0; 
-                console.log("BGM stopped.");
-            }
-        }
-
-        muteButton.addEventListener('click', async () => {
-            if (!audioInitialized) { 
-                try {
-                    await Tone.start();
-                    console.log("AudioContext started by mute button.");
-                    setupAudio();
-                } catch (e) {
-                    console.error("Error starting AudioContext via mute button:", e);
-                }
-            }
-            isGloballyMuted = !isGloballyMuted;
-            Tone.Destination.mute = isGloballyMuted;
-            muteButton.textContent = isGloballyMuted ? "🔊 開啟聲音" : "🔇 靜音";
-            console.log("Global mute toggled:", isGloballyMuted);
-
-            if (!isGloballyMuted && isGameRunning) {
-                toggleBGM(true);
-            } else if (isGloballyMuted) { 
-                toggleBGM(false);
-            }
-        });
-
+        const SPAWN_INTERVAL = 55; // 調整物件生成間隔 (原 40, 再之前 72)
 
         function displayGameInstructions() {
-            instructionTitle.textContent = '神捕手速成秘笈！🎯'; 
-            document.getElementById('instructionIntro').innerHTML = '體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，透過方向鍵操控籃子 🧺左右移動，接住同樣輕盈的掉落物，精準累積重量吧！';
+            document.getElementById('instructionIntro').innerHTML = '體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，操控籃子 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！';
             document.getElementById('instructionWin').innerHTML = '挑戰 Galaxy S25 Edge 的完美重量！當累積總重 <strong class="text-green-600">精準達到 163 公克</strong> 時，即可獲勝！🎉';
             document.getElementById('instructionOverweight').innerHTML = '🔴 精準是關鍵！總重量超過 163 公克，挑戰將會失敗。';
             document.getElementById('instructionBomb').innerHTML = '💣 保持警覺！接到炸彈 💣 會立即結束遊戲！';
@@ -609,15 +449,6 @@
             ctx.textBaseline = 'middle'; 
             ctx.fillText(player.emoji, player.x + player.width / 2, player.y + player.height / 2);
         }
-        
-        function triggerPlayerFeedback() {
-            const originalFontSize = player.fontSize;
-            player.fontSize *= 1.15; 
-            setTimeout(() => {
-                player.fontSize = originalFontSize; 
-            }, 150); 
-        }
-
 
         function drawFallingObjects() {
             if (!ctx) return;
@@ -657,11 +488,8 @@
                      obj.y + obj.height > player.y ) { 
                     
                     if (obj.type === 'bomb') {
-                        if (bombSynth && !isGloballyMuted) bombSynth.triggerAttackRelease("0.2s", Tone.now());
                         gameOver("哎呀！接到炸彈了！");
                     } else {
-                        if (scoreSynth && !isGloballyMuted) scoreSynth.triggerAttackRelease("A5", "16n", Tone.now());
-                        triggerPlayerFeedback(); 
                         accumulatedWeight += obj.weight;
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
                         currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
@@ -699,22 +527,26 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
         
-        function updateTimerDisplay() {
-            if (isGameRunning) {
-                elapsedSeconds = (performance.now() - gameStartTime) / 1000;
-                timerDisplay.textContent = elapsedSeconds.toFixed(2);
-            }
+        function startTimer() {
+            gameTime = 0;
+            timerDisplay.textContent = gameTime;
+            clearInterval(timerIntervalId); 
+            timerIntervalId = setInterval(() => {
+                if (isGameRunning) { 
+                    gameTime++;
+                    timerDisplay.textContent = gameTime;
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerIntervalId);
         }
 
         function gameLoop() {
-            if (!isGameRunning) {
-                cancelAnimationFrame(animationFrameId);
-                clearInterval(displayUpdateIntervalId);
-                return;
-            }
+            if (!isGameRunning) return;
 
             try {
-                updateTimerDisplay(); 
                 clearCanvas();
                 
                 spawnTimer++;
@@ -734,83 +566,46 @@
                 return; 
             }
             
-            animationFrameId = requestAnimationFrame(gameLoop);
+            if (isGameRunning) { 
+                requestAnimationFrame(gameLoop);
+            }
         }
 
-        async function startGame() { 
+        function startGame() {
             if (isGameRunning) return;
-
-            if (!audioInitialized) {
-                try {
-                    await Tone.start(); 
-                    console.log("AudioContext started by game start.");
-                    setupAudio(); 
-                } catch (e) {
-                    console.error("Error starting AudioContext:", e);
-                }
-            }
             
             isGameRunning = true;
             accumulatedWeight = 0;
             currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
             fallingObjects = [];
             player.x = canvas.width / 2 - player.width / 2; 
-            
-            gameStartTime = performance.now();
-            elapsedSeconds = 0;
-            timerDisplay.textContent = elapsedSeconds.toFixed(2);
-            
-            clearInterval(displayUpdateIntervalId); 
-            displayUpdateIntervalId = setInterval(updateTimerDisplay, 50); 
-
-            statusMessage.className = 'status-message'; 
             statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; 
             startButton.textContent = "遊戲進行中";
             startButton.disabled = true; 
             scoreFormContainer.style.display = 'none'; 
             scoreFormContainer.innerHTML = ''; 
 
-            if (!isGloballyMuted) { 
-                toggleBGM(true);
-            }
-            if (isTouchDevice()) { 
-                touchControls.style.display = 'flex';
-            }
-
-            cancelAnimationFrame(animationFrameId); 
+            startTimer();
             gameLoop();
         }
         
         function stopGame() {
             isGameRunning = false;
-            cancelAnimationFrame(animationFrameId);
-            clearInterval(displayUpdateIntervalId);
-            if (gameStartTime > 0) { 
-                 elapsedSeconds = (performance.now() - gameStartTime) / 1000;
-            }
-            timerDisplay.textContent = elapsedSeconds.toFixed(2);
+            stopTimer();
             startButton.disabled = false; 
-            toggleBGM(false); 
         }
 
         function gameOver(message) {
             stopGame();
-            statusMessage.className = 'status-lose'; 
-            statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${elapsedSeconds.toFixed(2)}s</p>`;
+            statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${gameTime}s</p>`;
             startButton.textContent = "再試一次";
-            if (isTouchDevice()) { 
-                touchControls.style.display = 'flex';
-            }
         }
 
         async function gameWin() { 
             stopGame();
-            statusMessage.className = 'status-win'; 
             const winPopupMessage = `
                 <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
-                <p class="text-center mb-2">您的成績：<strong>${elapsedSeconds.toFixed(2)} 秒</strong></p>
-                <p class="text-center text-sm text-blue-600 mb-3">想挑戰排行榜並參加抽獎嗎？請於下方登錄您的輝煌戰績！</p>
-                <p class="text-center text-xs text-gray-600 mb-2">(建議截圖此畫面以便兌獎 📸)</p>
+                <p class="text-center mb-3">您的成績：<strong>${gameTime} 秒</strong></p>
 
                 <h4>🎁 挑戰成功好康 & 活動辦法 🎁</h4>
 
@@ -823,7 +618,7 @@
                 <p class="text-xs text-gray-600 mb-2">排行榜結算至 2025/6/30 23:59，詳情與得獎名單請見官方粉絲專頁。</p>
 
                 <p><strong>🎁 來店兌換精美小禮：</strong></p>
-                <p class="text-sm">憑此遊戲成功畫面截圖，即可於活動期間 (2025/6/1 - 2025/6/30) 至 <strong>微風南山三星體驗館 (台北市信義區松智路17號二樓)</strong> 兌換「線上挑戰成功精美小禮」一份！(您可自行搜尋地圖前往)</p>
+                <p class="text-sm">憑此遊戲成功畫面截圖，即可於活動期間 (2025/6/1 - 2025/6/30) 至 <strong>微風南山三星體驗館 (台北市信義區松智路17號二樓)</strong> 兌換「線上挑戰成功精美小禮」一份！</p>
                 <p class="text-xs text-gray-500 mb-2">(數量有限，送完為止，每人限兌換一次)</p>
 
                 <p><strong>⚡ 加碼抽大獎：</strong></p>
@@ -831,9 +626,6 @@
             `;
             statusMessage.innerHTML = winPopupMessage;
             startButton.textContent = "再玩一局";
-            if (isTouchDevice()) { 
-                touchControls.style.display = 'none';
-            }
             showScoreForm(); 
             await fetchLeaderboardData(); 
         }
@@ -849,7 +641,7 @@
                     </div>
                     <div>
                         <label for="playerPhone">您的電話(僅供活動抽獎聯繫使用)：</label>
-                        <input type="tel" id="playerPhone" name="playerPhone" inputmode="numeric" pattern="[0-9]*" maxlength="10" required>
+                        <input type="tel" id="playerPhone" name="playerPhone" maxlength="20" required>
                     </div>
                     <button id="submitScoreButton" class="game-button">提交成績</button>
                     <p id="submitStatus" class="text-sm text-center mt-2"></p>
@@ -869,16 +661,8 @@
                     playerNameInput.focus();
                     return;
                 }
-                // 電話號碼驗證
-                const phoneRegex = /^[0-9]{10}$/; // 必須是剛好10位數字
                 if (!playerPhone) {
                     submitStatus.textContent = '請填寫您的電話！';
-                    submitStatus.style.color = 'red';
-                    playerPhoneInput.focus();
-                    return;
-                }
-                if (!phoneRegex.test(playerPhone)) {
-                    submitStatus.textContent = '電話號碼格式不正確，請輸入10位數字。';
                     submitStatus.style.color = 'red';
                     playerPhoneInput.focus();
                     return;
@@ -895,7 +679,7 @@
                     timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
                     name: playerName,
                     phone: playerPhone, 
-                    time: parseFloat(elapsedSeconds.toFixed(2)), 
+                    time: gameTime,
                     weight: accumulatedWeight.toFixed(1) 
                 };
                 
@@ -968,7 +752,7 @@
         }
 
         if (isTouchDevice()) {
-            touchControls.style.display = 'flex'; 
+            touchControls.style.display = 'flex';
             leftButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = -player.speed; }); 
             leftButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
             rightButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = player.speed; }); 
@@ -1024,16 +808,11 @@
 
             scores.forEach((score, index) => {
                 const listItem = document.createElement('li');
-                let rankDisplay = `${index + 1}.`;
-                if (index === 0) rankDisplay = '🥇';
-                else if (index === 1) rankDisplay = '🥈';
-                else if (index === 2) rankDisplay = '🥉';
-
                 listItem.innerHTML = `
-                    <span class="rank">${rankDisplay}</span>
+                    <span class="rank">${index + 1}.</span>
                     <span class="name">${escapeHTML(score.name || '匿名')}</span> 
-                    <span class="time">${(typeof score.time === 'number' ? score.time.toFixed(2) : '-')} 秒</span>
-                `; 
+                    <span class="time">${typeof score.time === 'number' ? score.time : '-'} 秒</span>
+                `;
                 leaderboardList.appendChild(listItem);
             });
         }
@@ -1088,7 +867,7 @@
                 if (canvas.width > 0 && canvas.height > 0) { 
                     drawPlayer(); 
                 }
-                // statusMessage.innerHTML = ""; // 不在此處清除 statusMessage，確保勝利/失敗訊息在resize後保留
+                statusMessage.innerHTML = ""; 
                 startButton.disabled = false; 
             }
         }
@@ -1096,7 +875,6 @@
         window.addEventListener('load', async () => {
             handleResize(); 
             displayGameInstructions(); 
-            statusMessage.innerHTML = ""; 
             startButton.disabled = false; 
             await fetchLeaderboardData(); 
             leaderboardPollIntervalId = setInterval(fetchLeaderboardData, 60000); 
@@ -1110,3 +888,4 @@
     </script>
 </body>
 </html>
+
