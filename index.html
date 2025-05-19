@@ -6,185 +6,203 @@
     <title>Galaxy S25 Edge 163克神捕手!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: #dbeafe; 
+            background-color: #dbeafe; /* Tailwind blue-100 */
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; 
+            justify-content: flex-start; /* Align content to the top */
             min-height: 100vh;
-            height: -webkit-fill-available; 
+            height: -webkit-fill-available; /* For iOS Safari full height */
             margin: 0;
             padding: 10px;
-            overflow-x: hidden; 
-            overflow-y: auto; 
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-y: auto; /* Allow vertical scroll if content overflows */
         }
-        #pageContainer { 
+        #pageContainer { /* New container for all page content */
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 900px; 
+            max-width: 900px; /* Max width for larger screens */
         }
         .game-banner-image {
             width: 100%;
-            max-width: 500px; 
+            max-width: 500px; /* Max width of the banner */
             height: auto;
             border-radius: 0.5rem;
             margin-bottom: 0.75rem;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         #gameInstructions {
-            background-color: #e0f2fe;
-            border: 1px solid #93c5fd;
+            background-color: #e0f2fe; /* Tailwind sky-100 */
+            border: 1px solid #93c5fd; /* Tailwind blue-300 */
             border-radius: 0.5rem;
-            padding: 1rem; 
-            margin-bottom: 1rem; 
+            padding: 1rem; /* Increased padding */
+            margin-bottom: 1rem; /* Space below instructions */
             width: 100%;
-            max-width: 500px; 
+            max-width: 500px; /* Consistent max-width */
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        #gameInstructions h2 { 
-            font-size: 1.25rem; 
+        #gameInstructions h2 { /* Title for instructions */
+            font-size: 1.25rem; /* Slightly larger */
             font-weight: bold;
-            color: #1e3a8a; 
+            color: #1e3a8a; /* Tailwind blue-800 */
             text-align: center;
-            margin-bottom: 0.75rem; 
+            margin-bottom: 0.75rem; /* Space below title */
         }
-        #gameInstructions h3 { 
-            font-size: 1.1rem; 
+        #gameInstructions h3 { /* Sub-title for rewards */
+            font-size: 1.1rem; /* Slightly larger */
             font-weight: bold;
-            color: #1d4ed8; 
+            color: #1d4ed8; /* Tailwind blue-700 */
             text-align: center;
-            margin-top: 1rem; 
-            margin-bottom: 0.5rem; 
-            padding-top: 0.75rem; 
-            border-top: 1px dashed #93c5fd; 
+            margin-top: 1rem; /* Space above */
+            margin-bottom: 0.5rem; /* Space below */
+            padding-top: 0.75rem; /* Space above text */
+            border-top: 1px dashed #93c5fd; /* Separator */
         }
         #gameInstructions ul {
             list-style: none;
             padding: 0;
-            margin-bottom: 0.75rem; 
+            margin-bottom: 0.75rem; /* Space below list */
         }
         #gameInstructions li {
             display: flex;
             align-items: center;
-            font-size: 0.9rem; 
-            color: #1e3a8a;
-            margin-bottom: 0.3rem; 
+            font-size: 0.9rem; /* Standardized text size */
+            color: #1e3a8a; /* Tailwind blue-800 */
+            margin-bottom: 0.3rem; /* Space between items */
         }
         #gameInstructions li .emoji {
-            font-size: 1.4rem; 
+            font-size: 1.4rem; /* Larger emoji */
             margin-right: 0.5rem;
-            width: 28px; 
+            width: 28px; /* Fixed width for alignment */
             text-align: center;
         }
-        #gameInstructions p, #gameInstructions .instruction-text { 
-            font-size: 0.9rem; 
-            color: #374151; 
+        #gameInstructions p, #gameInstructions .instruction-text { /* Paragraphs and instruction text */
+            font-size: 0.9rem; /* Standardized text size */
+            color: #374151; /* Tailwind gray-700 */
             line-height: 1.6;
-            margin-bottom: 0.4rem; 
+            margin-bottom: 0.4rem; /* Space between paragraphs */
         }
-        #gameInstructions strong { 
+        #gameInstructions strong { /* Bold text in instructions */
             font-weight: bold;
-            color: #1e40af; 
+            color: #1e40af; /* Tailwind blue-700 */
         }
-        #gameInstructions .text-green-600 { 
-            color: #059669; 
+        #gameInstructions .text-green-600 { /* Custom class for green text */
+            color: #059669; /* Tailwind green-600 */
         }
-        #gameInstructions .text-red-600 { 
-            color: #dc2626;
+        #gameInstructions .text-red-600 { /* Custom class for red text */
+            color: #dc2626; /* Tailwind red-600 */
         }
-        #gameInstructions .reward-point { 
-            font-size: 0.9rem; 
-            color: #1e3a8a; 
+        #gameInstructions .reward-point { /* Styling for reward points */
+            font-size: 0.9rem; /* Standardized text size */
+            color: #1e3a8a; /* Tailwind blue-800 */
             margin-bottom: 0.4rem;
-            padding-left: 0.5rem; 
+            padding-left: 0.5rem; /* Indent for medal */
         }
-        #gameInstructions .reward-point::before { 
+        #gameInstructions .reward-point::before { /* Medal emoji for reward points */
             content: "🏅 ";
             margin-right: 0.25rem;
         }
 
 
-        #gameAndFormContainer { 
+        #gameAndFormContainer { /* Container for game canvas and score form */
             width: 100%;
-            max-width: 500px; 
+            max-width: 500px; /* Max width of game area */
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 70px; 
+            margin-bottom: 70px; /* Space for fixed touch controls */
         }
         #gameContainer {
             background-color: #ffffff;
             border-radius: 0.75rem;
-            box-shadow: 0 10px_25px_-5px rgba(0,0,0,0.1), 0 8px_10px_-6px rgba(0,0,0,0.1); 
-            padding: 0.75rem; 
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); /* Softer shadow */
+            padding: 0.75rem; /* Padding around canvas and button */
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
         }
         canvas {
-            background-color: #eff6ff; 
+            background-color: #eff6ff; /* Tailwind blue-50, lighter canvas */
             border-radius: 0.5rem;
-            display: block; 
+            display: block; /* Remove extra space below canvas */
         }
         .info-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: 0.5rem; 
-            font-size: 0.85rem; 
+            margin-bottom: 0.5rem; /* Space below info bar */
+            font-size: 0.85rem; /* Slightly smaller font */
             font-weight: 500;
-            color: #1e3a8a; 
+            color: #1e3a8a; /* Tailwind blue-800 */
         }
         .info-bar span {
-            background-color: #e0f2fe;
-            padding: 0.2rem 0.4rem; 
+            background-color: #e0f2fe; /* Tailwind sky-100 */
+            padding: 0.2rem 0.4rem; /* Padding inside spans */
             border-radius: 0.25rem;
         }
-        #statusMessage { 
-            margin-top: 0.75rem; 
-            padding: 0.75rem; 
-            background-color: #e0f2fe; 
+        #gameStatsDisplay { /* Container for total wins/losses/pass rate */
+            display: flex;
+            justify-content: space-around;
+            align-items: center; /* Align items vertically */
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            width: 100%;
+            max-width: 400px; /* Adjusted max width to accommodate new stat */
+            margin-top: 0.5rem;
+            margin-bottom: 0.25rem;
+            font-size: 0.8rem;
+            color: #4b5563; /* Tailwind gray-600 */
+            gap: 0.5rem; /* Add gap between stat items */
+        }
+         #gameStatsDisplay > span { /* Style for individual stat items */
+            background-color: #f3f4f6; /* Light gray background for each stat */
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+        }
+        #statusMessage { /* Message box for game status */
+            margin-top: 0.75rem; /* Space above message box */
+            padding: 0.75rem; /* Padding inside message box */
+            background-color: #e0f2fe; /* Tailwind sky-100 */
             border-radius: 0.5rem;
-            border: 1px solid #93c5fd; 
-            font-size: 0.9rem; 
-            font-weight: normal; 
-            color: #1e3a8a; 
-            min-height: 80px; 
-            max-height: 30vh; 
-            overflow-y: auto;  
-            text-align: left; 
+            border: 1px solid #93c5fd; /* Tailwind blue-300 */
+            font-size: 0.9rem; /* Standardized text size */
+            font-weight: normal; /* Normal weight for messages */
+            color: #1e3a8a; /* Tailwind blue-800 */
+            min-height: 80px; /* Minimum height to prevent collapsing */
+            max-height: 30vh; /* Max height to prevent excessive length */
+            overflow-y: auto;  /* Scroll for long messages */
+            text-align: left; /* Align text to left for readability */
             width: 100%;
             box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
         }
-        #statusMessage h3 { 
-            font-size: 1.1rem; 
+        #statusMessage h3 { /* Title within status message (e.g., Win popup) */
+            font-size: 1.1rem; /* Slightly larger */
             font-weight: bold;
-            color: #1d4ed8; 
-            margin-bottom: 0.4rem; 
+            color: #1d4ed8; /* Tailwind blue-700 */
+            margin-bottom: 0.4rem; /* Space below title */
             text-align: center;
         }
-        #statusMessage h4 { 
-            font-size: 1rem; 
+        #statusMessage h4 { /* Sub-title within status message */
+            font-size: 1rem; /* Standard size */
             font-weight: bold;
-            color: #1e40af; 
-            margin-top: 0.6rem; 
-            margin-bottom: 0.4rem; 
+            color: #1e40af; /* Tailwind blue-700 */
+            margin-top: 0.6rem; /* Space above */
+            margin-bottom: 0.4rem; /* Space below */
             text-align: center;
-            border-top: 1px solid #93c5fd;
-            padding-top: 0.6rem; 
+            border-top: 1px solid #93c5fd; /* Separator */
+            padding-top: 0.6rem; /* Space above text */
         }
         #statusMessage p {
-            margin-bottom: 0.4rem; 
+            margin-bottom: 0.4rem; /* Space between paragraphs */
             line-height: 1.5;
-            font-size: 0.85rem; 
+            font-size: 0.85rem; /* Slightly smaller for details */
         }
         #statusMessage strong {
             font-weight: bold;
@@ -192,104 +210,104 @@
         }
         #statusMessage ul {
             list-style: disc;
-            padding-left: 1.2rem; 
-            margin-bottom: 0.4rem; 
-            font-size: 0.8rem; 
+            padding-left: 1.2rem; /* Indent for list items */
+            margin-bottom: 0.4rem; /* Space below list */
+            font-size: 0.8rem; /* Smaller for list items */
         }
-        #statusMessage .text-xs { 
-            font-size: 0.7rem; 
+        #statusMessage .text-xs { /* Utility for very small text */
+            font-size: 0.7rem; /* Tailwind text-xs */
         }
         #statusMessage .promotion-highlight {
-             padding: 0.6rem; 
+            padding: 0.6rem; /* Padding for highlighted section */
         }
 
 
         .game-button {
-            background-color: #2563eb; 
+            background-color: #2563eb; /* Tailwind blue-600 */
             color: white;
-            padding: 0.6rem 1.2rem; 
+            padding: 0.6rem 1.2rem; /* Comfortable padding */
             border-radius: 0.5rem;
-            font-size: 0.95rem; 
+            font-size: 0.95rem; /* Readable font size */
             font-weight: 500;
             border: none;
             cursor: pointer;
-            transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out; 
-            margin-top: 0.75rem; 
+            transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out; /* Smooth transitions */
+            margin-top: 0.75rem; /* Space above button */
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
         }
-        .game-button:hover:not(:disabled) { 
-            background-color: #1d4ed8; 
+        .game-button:hover:not(:disabled) { /* Hover effect for enabled button */
+            background-color: #1d4ed8; /* Tailwind blue-700 */
         }
         .game-button:disabled {
-            background-color: #94a3b8; 
+            background-color: #94a3b8; /* Tailwind slate-400 */
             cursor: not-allowed;
-            opacity: 0.7; 
+            opacity: 0.7; /* Indicate disabled state */
         }
-       
+        
         #touchControls {
-            display: none; 
-            position: fixed; 
+            display: none; /* Hidden by default, shown by JS for touch devices */
+            position: fixed; /* Fixed at the bottom */
             bottom: 0;
             left: 0;
-            right: 0; 
+            right: 0; /* Stretch across width */
             width: 100%;
-            padding: 10px 8px; 
+            padding: 10px 8px; /* Padding around buttons */
             box-sizing: border-box;
-            justify-content: space-between; 
+            justify-content: space-between; /* Space out left/right buttons */
             align-items: center;
-            z-index: 100; 
-            background-color: rgba(224, 242, 254, 0.75); 
-            border-top: 1px solid rgba(191, 219, 254, 0.6); 
-            pointer-events: none; 
+            z-index: 100; /* Above other content */
+            background-color: rgba(224, 242, 254, 0.75); /* Semi-transparent sky-100 */
+            border-top: 1px solid rgba(191, 219, 254, 0.6); /* Semi-transparent blue-200 */
+            pointer-events: none; /* Allow clicks to pass through container */
         }
         .control-button {
-            background-color: rgba(59, 130, 246, 0.8); 
+            background-color: rgba(59, 130, 246, 0.8); /* Semi-transparent blue-500 */
             color: white;
-            padding: 10px 0; 
-            border-radius: 8px; 
-            font-size: 1.7rem; 
+            padding: 10px 0; /* Vertical padding, horizontal will be auto by flex */
+            border-radius: 8px; /* Rounded corners */
+            font-size: 1.7rem; /* Large, easy-to-tap icons */
             border: none;
             cursor: pointer;
-            user-select: none; 
-            box-shadow: 0 1px 4px rgba(0,0,0,0.15); 
-            pointer-events: auto; 
-            flex-basis: 44%; 
-            max-width: 160px; 
+            user-select: none; /* Prevent text selection on tap */
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15); /* Subtle shadow */
+            pointer-events: auto; /* Buttons themselves are interactive */
+            flex-basis: 44%; /* Each button takes up almost half the space */
+            max-width: 160px; /* Max width for very large screens */
             text-align: center;
-            -webkit-tap-highlight-color: transparent; 
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
         }
          .control-button:active {
-            background-color: rgba(29, 78, 216, 0.85); 
+            background-color: rgba(29, 78, 216, 0.85); /* Darker blue on press (blue-700) */
         }
 
         #scoreFormContainer, #leaderboardContainer {
-            margin-top: 1.5rem; 
+            margin-top: 1.5rem; /* Space above form/leaderboard */
             padding: 1rem;
-            background-color: #f9fafb;
+            background-color: #f9fafb; /* Tailwind gray-50 */
             border-radius: 0.5rem;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #e5e7eb; /* Tailwind gray-200 */
             width: 100%;
-            max-width: 450px; 
+            max-width: 450px; /* Consistent max-width */
             box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
         }
         #scoreForm label, #leaderboardContainer h3 {
             display: block;
             margin-bottom: 0.25rem;
-            font-size: 0.875rem;
+            font-size: 0.875rem; /* Tailwind text-sm */
             font-weight: 500;
-            color: #374151;
+            color: #374151; /* Tailwind gray-700 */
         }
-         #leaderboardContainer h3 { 
+         #leaderboardContainer h3 { /* Specific for leaderboard title */
             font-size: 1.25rem;
             text-align: center;
-            color: #1e3a8a;
+            color: #1e3a8a; /* Tailwind blue-800 */
             margin-bottom: 0.75rem;
-         }
+        }
         #scoreForm input[type="text"], #scoreForm input[type="tel"] {
             width: 100%;
             padding: 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
+            border: 1px solid #d1d5db; /* Tailwind gray-300 */
+            border-radius: 0.375rem; /* Tailwind rounded-md */
             margin-bottom: 0.75rem;
             font-size: 0.875rem;
         }
@@ -304,7 +322,7 @@
             display: flex;
             justify-content: space-between;
             padding: 0.5rem 0.25rem;
-            border-bottom: 1px solid #f3f4f6;
+            border-bottom: 1px solid #f3f4f6; /* Tailwind gray-100 */
             font-size: 0.9rem;
         }
         #leaderboardList li:last-child {
@@ -312,44 +330,49 @@
         }
         #leaderboardList .rank {
             font-weight: bold;
-            color: #4b5563;
-            min-width: 25px; 
+            color: #4b5563; /* Tailwind gray-600 */
+            min-width: 35px; /* Ensure rank alignment */
+            text-align: left;
         }
         #leaderboardList .name {
-            color: #1f2937;
+            color: #1f2937; /* Tailwind gray-800 */
             flex-grow: 1;
             padding-left: 0.5rem;
-            word-break: break-all; 
+            word-break: break-all; /* Prevent long names from breaking layout */
         }
         #leaderboardList .time {
             font-weight: 500;
-            color: #1e40af;
+            color: #1e40af; /* Tailwind blue-700 */
         }
 
 
         @media (max-width: 600px) {
             #gameInstructions {
                 max-width: 95%;
-                padding: 0.6rem; 
+                padding: 0.6rem; /* Slightly reduced padding */
             }
             #gameInstructions h2 {
-                font-size: 1rem; 
+                font-size: 1rem; /* Smaller title */
             }
-            #gameInstructions h3 { 
+            #gameInstructions h3 { /* Smaller sub-title */
                 font-size: 0.9rem;
             }
             #gameInstructions li, #gameInstructions p, #gameInstructions .reward-point {
-                font-size: 0.8rem; 
+                font-size: 0.8rem; /* Smaller text */
             }
             .info-bar {
-                font-size: 0.75rem; 
+                font-size: 0.75rem; /* Smaller info bar text */
                 gap: 0.3rem;
             }
+            #gameStatsDisplay {
+                font-size: 0.7rem;
+                max-width: 95%; /* Allow more space on small screens */
+            }
             #statusMessage {
-                font-size: 0.85rem; 
-                 min-height: 60px; 
-                 max-height: 35vh; 
-                 padding: 0.6rem;
+                font-size: 0.85rem; /* Smaller status message */
+                min-height: 60px; /* Adjusted min height */
+                max-height: 35vh; /* Adjusted max height */
+                padding: 0.6rem;
             }
             #statusMessage h3 { font-size: 1rem; }
             #statusMessage h4 { font-size: 0.9rem; }
@@ -358,31 +381,30 @@
 
              #leaderboardContainer, #scoreFormContainer {
                 max-width: 95%;
-             }
+            }
              .control-button {
-                padding: 8px 0; 
+                padding: 8px 0; /* Slightly smaller buttons */
                 font-size: 1.6rem;
-             }
+            }
              #gameAndFormContainer {
-                margin-bottom: 70px; 
-             }
+                margin-bottom: 70px; /* Ensure space for touch controls */
+            }
         }
     </style>
 </head>
 <body>
     <div id="pageContainer">
-        <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-3 text-center">Galaxy S25 Edge 163克神捕手!</h1> 
-
-        <img src="https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/S25%20Edge%20Main%20KV_cmyk_%E6%A9%AB%E5%BC%8F(%E5%A3%93%E7%B8%AE).png"  
+        <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-3 text-center">Galaxy S25 Edge 163克神捕手!</h1>
+        <img src="https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/S25%20Edge%20Main%20KV_cmyk_%E6%A9%AB%E5%BC%8F(%E5%A3%93%E7%B8%AE).png" 
              alt="Galaxy S25 Edge 遊戲主視覺" 
              class="game-banner-image"
              onerror="this.onerror=null; this.src='https://placehold.co/500x200/60a5fa/ffffff?text=圖片載入失敗';">
 
         <div id="gameInstructions">
             <h2>挑戰開始！</h2>
-            <p class="instruction-text">感受 Galaxy S25 Edge 無可比擬的輕盈！化身「163克神捕手」，敏捷操控購物籃 🧺，接住從天而降的「輕巧系」物件，目標是精準集滿不多不少的 163 公克！</p>
+            <p class="instruction-text">感受 Galaxy S25 Edge 無可比擬的輕盈！化身「163克神捕手」，敏捷操控購物籃 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
             
-            <p class="instruction-text mt-3"><strong>可接物件與重量：</strong></p>
+            <p class="instruction-text mt-3"><strong>物件與重量：</strong></p>
             <ul id="itemWeightsList">
                 </ul>
 
@@ -402,9 +424,14 @@
         <div id="gameAndFormContainer">
             <div id="gameContainer">
                 <div class="info-bar">
-                    <span>目前重量: <span id="currentWeight">0</span> g</span>
+                    <span>目前重量: <span id="currentWeight">0.0</span> g</span>
                     <span>目標: 163 g</span>
-                    <span>時間: <span id="timerDisplay">0</span> s</span>
+                    <span>時間: <span id="timerDisplay">0.00</span> s</span>
+                </div>
+                <div id="gameStatsDisplay"> 
+                    <span>總成功數: <span id="totalWins">--</span></span>
+                    <span>總失敗數: <span id="totalLosses">--</span></span>
+                    <span>過關率: <span id="passRate">--</span>%</span>
                 </div>
                 <canvas id="gameCanvas"></canvas>
                 <div id="statusMessage"></div> 
@@ -429,6 +456,7 @@
     </div>
 
     <script>
+        // Game constants and variables
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const currentWeightDisplay = document.getElementById('currentWeight');
@@ -443,16 +471,20 @@
         const leaderboardList = document.getElementById('leaderboardList');
         const leaderboardStatus = document.getElementById('leaderboardStatus');
         const itemWeightsList = document.getElementById('itemWeightsList');
+        const totalWinsDisplay = document.getElementById('totalWins'); 
+        const totalLossesDisplay = document.getElementById('totalLosses'); 
+        const passRateDisplay = document.getElementById('passRate'); 
 
 
         // --- Google Apps Script Web App URL ---
-        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybRVvvc3cOQhaWPeOUVh0nJiLjBLQK19s1DlxutQWoZB0k2Bey5BGKMyk5dZPEO5Br/exec'; 
+        // Updated Google Apps Script URL
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRWoXt98QQPbUdlwqZcmsqWRNFUxUQfmqkPRHCQwPjC0W_SxSnKVVs5r_7VnEjGhq8/exec'; 
         
         const TARGET_WEIGHT = 163;
         let accumulatedWeight = 0;
         let isGameRunning = false;
-        let gameTime = 0;
-        let timerIntervalId = null;
+        let gameStartTime = 0; 
+        let animationFrameId = null; 
         let leaderboardPollIntervalId = null;
 
         const aspectRatio = 9 / 16; 
@@ -471,7 +503,7 @@
             { name: '迴紋針', emoji: '📎', weight: 1, type: 'item', speedY_factor: 0.0025 * BASE_SPEED_MULTIPLIER },
             { name: 'AAA電池', emoji: '🔋', weight: 11, type: 'item', speedY_factor: 0.004 * BASE_SPEED_MULTIPLIER },
             { name: '新台幣10元硬幣', emoji: '💰', weight: 7.5, type: 'item', speedY_factor: 0.005 * BASE_SPEED_MULTIPLIER }, 
-            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', speedY_factor: 0.006 * BASE_SPEED_MULTIPLIER }  
+            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', speedY_factor: 0.006 * BASE_SPEED_MULTIPLIER }
         ];
         itemTypes.forEach(item => item.speedY = 0); 
 
@@ -479,7 +511,6 @@
         let spawnTimer = 0;
         const SPAWN_INTERVAL = 72; 
 
-        // 音效合成器 (Synths)
         let catchSound, bombSound, winSound, loseSound;
         let toneJsInitialized = false;
 
@@ -487,33 +518,13 @@
             if (Tone.context.state !== 'running') {
                 Tone.start(); 
             }
-            catchSound = new Tone.Synth({
-                oscillator: { type: 'triangle' },
-                envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.1 }
-            }).toDestination();
-            bombSound = new Tone.Synth({
-                oscillator: { type: 'square' },
-                envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.2 },
-                volume: -6 
-            }).toDestination();
-            
-            winSound = new Tone.Synth({
-                oscillator: { type: 'sine' },
-                envelope: { attack: 0.01, decay: 0.3, sustain: 0.2, release: 0.5 }
-            }).toDestination();
-            loseSound = new Tone.FMSynth({ 
-                harmonicity: 3,
-                modulationIndex: 10,
-                detune: 0,
-                oscillator: { type: "sine" },
-                envelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 },
-                modulation: { type: "square" },
-                modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 }
-            }).toDestination();
+            catchSound = new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.1 } }).toDestination();
+            bombSound = new Tone.Synth({ oscillator: { type: 'square' }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.2 }, volume: -6 }).toDestination();
+            winSound = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.01, decay: 0.3, sustain: 0.2, release: 0.5 } }).toDestination();
+            loseSound = new Tone.FMSynth({ harmonicity: 3, modulationIndex: 10, detune: 0, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 }, modulation: { type: "square" }, modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 } }).toDestination();
             toneJsInitialized = true;
             console.log("Tone.js sounds initialized.");
         }
-
 
         function displayGameInstructions() {
             itemWeightsList.innerHTML = ''; 
@@ -526,26 +537,22 @@
             });
         }
 
-
-        function drawPlayer() {
+        function drawPlayer() { 
             if (!ctx) return;
             ctx.font = `${player.fontSize}px Arial`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle'; 
             ctx.fillText(player.emoji, player.x + player.width / 2, player.y + player.height / 2);
         }
-
-        function drawFallingObjects() {
+        function drawFallingObjects() { 
             if (!ctx) return;
             fallingObjects.forEach(obj => {
                 const objFontSize = canvas.width * 0.085; 
                 const weightFontSize = canvas.width * 0.04; 
-
                 ctx.font = `${objFontSize}px Arial`;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'bottom'; 
                 ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
-
                 if (obj.type === 'item') {
                     ctx.font = `bold ${weightFontSize}px Arial`;
                     ctx.fillStyle = '#FF0000'; 
@@ -555,32 +562,28 @@
                 }
             });
         }
-
-        function updatePlayerPosition() {
+        function updatePlayerPosition() { 
             player.x += player.dx;
             if (player.x < 0) player.x = 0;
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
         }
-
-        function updateFallingObjects() {
+        function updateFallingObjects() { 
             for (let i = fallingObjects.length - 1; i >= 0; i--) {
                 const obj = fallingObjects[i];
                 obj.y += obj.speedY;
-                
+
                 if ( obj.x < player.x + player.width &&
                      obj.x + obj.width > player.x &&
                      obj.y < player.y + player.height && 
-                     obj.y + obj.height > player.y ) { 
-                    
+                     obj.y + obj.height > player.y ) {  
                     if (obj.type === 'bomb') {
                         if (toneJsInitialized && bombSound) bombSound.triggerAttackRelease("C2", "8n", Tone.now());
                         gameOver("哎呀！接到炸彈了！");
                     } else {
                         if (toneJsInitialized && catchSound) catchSound.triggerAttackRelease("C4", "16n", Tone.now());
                         accumulatedWeight += obj.weight;
-                        accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
+                        accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1)); 
                         currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
-
                         if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { 
                             gameWin();
                         } else if (accumulatedWeight > TARGET_WEIGHT) {
@@ -594,58 +597,42 @@
                 }
             }
         }
-
-        function spawnObject() {
+        function spawnObject() { 
             const randomTypeIndex = Math.floor(Math.random() * itemTypes.length);
             const typeTemplate = itemTypes[randomTypeIndex];
             const objWidth = canvas.width * 0.1; 
-            const objHeight = canvas.width * 0.1;
-
-            fallingObjects.push({
-                ...typeTemplate, 
-                x: Math.random() * (canvas.width - objWidth),
-                y: 0 - objHeight, 
-                width: objWidth,
-                height: objHeight,
-            });
+            const objHeight = canvas.width * 0.1; 
+            fallingObjects.push({ ...typeTemplate, x: Math.random() * (canvas.width - objWidth), y: 0 - objHeight, width: objWidth, height: objHeight });
         }
-        
-        function clearCanvas() {
+        function clearCanvas() { 
             if (!ctx) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
         
-        function startTimer() {
-            gameTime = 0;
-            timerDisplay.textContent = gameTime;
-            clearInterval(timerIntervalId); 
-            timerIntervalId = setInterval(() => {
-                if (isGameRunning) { 
-                    gameTime++;
-                    timerDisplay.textContent = gameTime;
-                }
-            }, 1000);
+        function updateTimerDisplay() {
+            if (isGameRunning && gameStartTime > 0) { 
+                const elapsedTime = (performance.now() - gameStartTime) / 1000;
+                timerDisplay.textContent = elapsedTime.toFixed(2);
+            } else if (!isGameRunning) {
+                 timerDisplay.textContent = "0.00"; 
+            }
         }
 
-        function stopTimer() {
-            clearInterval(timerIntervalId);
-        }
-
-        function gameLoop() {
+        function gameLoop(timestamp) {
             if (!isGameRunning) return;
+            if (!gameStartTime) gameStartTime = timestamp; 
+
+            updateTimerDisplay(); 
 
             try {
                 clearCanvas();
-                
                 spawnTimer++;
                 if (spawnTimer > SPAWN_INTERVAL) {
                     spawnObject();
                     spawnTimer = 0;
                 }
-
                 updatePlayerPosition();
                 updateFallingObjects();
-
                 drawPlayer();
                 drawFallingObjects();
             } catch (error) {
@@ -654,9 +641,7 @@
                 return; 
             }
             
-            if (isGameRunning) { 
-                requestAnimationFrame(gameLoop);
-            }
+            animationFrameId = requestAnimationFrame(gameLoop);
         }
 
         function startGame() {
@@ -677,33 +662,54 @@
             startButton.disabled = true; 
             scoreFormContainer.style.display = 'none'; 
             scoreFormContainer.innerHTML = ''; 
-
-            startTimer();
-            gameLoop();
+            
+            gameStartTime = 0; 
+            if(animationFrameId) cancelAnimationFrame(animationFrameId); 
+            animationFrameId = requestAnimationFrame(gameLoop); 
+            fetchGameStats(); 
         }
         
         function stopGame() {
             isGameRunning = false;
-            stopTimer();
+            if(animationFrameId) cancelAnimationFrame(animationFrameId);
             startButton.disabled = false; 
         }
+        
+        async function recordGameOutcome(isSuccess) {
+            const eventType = isSuccess ? "gameWinEvent" : "gameLossEvent";
+            console.log("Recording game outcome:", eventType);
+            try {
+                await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', 
+                    cache: 'no-cache',
+                    body: JSON.stringify({ eventType: eventType })
+                });
+                console.log(`Event ${eventType} sent to backend.`);
+                fetchGameStats(); 
+            } catch (error) {
+                console.error(`Error recording ${eventType}:`, error);
+            }
+        }
+
 
         function gameOver(message) {
             if (toneJsInitialized && loseSound) loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.1); 
             stopGame();
-            statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${gameTime}s</p>`;
+            const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
+            statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${elapsedTime}s</p>`;
             startButton.textContent = "再試一次";
+            recordGameOutcome(false); 
         }
 
         async function gameWin() { 
             if (toneJsInitialized && winSound) winSound.triggerAttackRelease("C5", "2n", Tone.now());
             stopGame();
+            const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
             const winPopupMessage = `
                 <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
-                <p class="text-center mb-3">您的成績：<strong>${gameTime} 秒</strong></p>
-
+                <p class="text-center mb-3">您的成績：<strong>${elapsedTime} 秒</strong></p>
                 <h4>🎁 挑戰成功好康 & 活動辦法 🎁</h4>
-
                 <p class="mt-2"><strong>🏆 神捕手排行榜獎勵：</strong></p>
                 <ul class="text-sm">
                     <li>冠軍：三星雙向閃電快充行動電源 (20,000mAh)</li>
@@ -711,21 +717,19 @@
                     <li>季軍：HYDY 不鏽鋼雙層真空保溫瓶</li>
                 </ul>
                 <p class="text-xs text-gray-600 mb-2">排行榜結算至 2025/6/30 23:59，詳情與得獎名單請見官方粉絲專頁。</p>
-
                 <p><strong>🎁 來店兌換精美小禮：</strong></p>
                 <p class="text-sm">憑此遊戲成功畫面截圖，即可於活動期間 (2025/6/1 - 2025/6/30) 至 <strong>微風南山三星體驗館 (台北市信義區松智路17號二樓)</strong> 兌換「線上挑戰成功精美小禮」一份！</p>
                 <p class="text-xs text-gray-500 mb-2">(數量有限，送完為止，每人限兌換一次)</p>
-
                 <p><strong>⚡ 加碼抽大獎：</strong></p>
                 <p class="text-sm">想再抽三星行動電源？快到我們的<strong>官方粉絲專頁</strong>查看指定貼文，參與互動分享活動！</p>
             `;
             statusMessage.innerHTML = winPopupMessage;
             startButton.textContent = "再玩一局";
-            showScoreForm(); 
-            await fetchLeaderboardData(); 
+            showScoreForm(parseFloat(elapsedTime)); 
+            recordGameOutcome(true); 
         }
 
-        function showScoreForm() {
+        function showScoreForm(finalTime) { 
             scoreFormContainer.style.display = 'block';
             scoreFormContainer.innerHTML = `
                 <div id="scoreForm">
@@ -736,7 +740,7 @@
                     </div>
                     <div>
                         <label for="playerPhone">您的電話(僅供活動抽獎聯繫使用)：</label>
-                        <input type="tel" id="playerPhone" name="playerPhone" required>
+                        <input type="tel" id="playerPhone" name="playerPhone" maxlength="10" required>
                     </div>
                     <button id="submitScoreButton" class="game-button">提交成績</button>
                     <p id="submitStatus" class="text-sm text-center mt-2"></p>
@@ -750,40 +754,23 @@
                 const playerPhone = playerPhoneInput.value.trim();
                 const submitStatus = document.getElementById('submitStatus');
 
-                if (!playerName) {
-                    submitStatus.textContent = '請填寫您的名稱！';
-                    submitStatus.style.color = 'red';
-                    playerNameInput.focus();
-                    return;
-                }
-                
-                const phoneRegex = /^\d{10}$/;
-                if (!playerPhone) {
-                    submitStatus.textContent = '請填寫您的電話！';
-                    submitStatus.style.color = 'red';
-                    playerPhoneInput.focus();
-                    return;
-                }
-                if (!phoneRegex.test(playerPhone)) {
-                    submitStatus.textContent = '電話號碼格式不正確，請輸入10位數字。';
-                    submitStatus.style.color = 'red';
-                    playerPhoneInput.focus();
-                    return;
-                }
+                if (!playerName) { submitStatus.textContent = '請輸入您的名稱。'; submitStatus.style.color = 'red'; playerNameInput.focus(); return; }
+                const phoneRegex = /^\d{10}$/; 
+                if (!playerPhone || !phoneRegex.test(playerPhone)) { submitStatus.textContent = '請輸入有效的10位數字電話號碼。'; submitStatus.style.color = 'red'; playerPhoneInput.focus(); return; }
                 
                 if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
                      submitStatus.textContent = '後端URL未配置或無效，無法提交。';
                      submitStatus.style.color = 'orange';
-                     console.warn("Google Apps Script URL is not configured or is invalid.");
                      return;
-                }
+                 }
 
                 const scoreData = {
                     timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
                     name: playerName,
                     phone: playerPhone, 
-                    time: gameTime,
-                    weight: accumulatedWeight.toFixed(1) 
+                    time: finalTime, 
+                    weight: accumulatedWeight.toFixed(1),
+                    eventType: "scoreSubmit" 
                 };
                 
                 document.getElementById('submitScoreButton').disabled = true;
@@ -791,20 +778,12 @@
                 submitStatus.style.color = 'blue';
 
                 try {
-                    const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors', 
-                        cache: 'no-cache',
-                        body: JSON.stringify(scoreData) 
+                    await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                        method: 'POST', mode: 'no-cors', cache: 'no-cache', body: JSON.stringify(scoreData) 
                     });
                     submitStatus.textContent = '成績已提交！感謝您的參與！';
                     submitStatus.style.color = 'green';
-                    console.log('Score submission attempted. Check Google Sheet.');
                     await fetchLeaderboardData(); 
-                     setTimeout(() => {
-                        // scoreFormContainer.style.display = 'none'; 
-                     }, 3000);
-
                 } catch (error) {
                     console.error('Error submitting score:', error);
                     submitStatus.textContent = '提交失敗，請稍後再試或檢查網路連線。';
@@ -815,46 +794,35 @@
         }
 
 
-        function keyDown(e) {
+        function keyDown(e) { 
             if (!isGameRunning && (e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left')) {
                 if (player.speed === 0 && canvas.width > 0) { 
                      player.speed = isTouchDevice() ? canvas.width * 0.022 : canvas.width * 0.03; 
                 }
                 if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
                 else player.dx = -player.speed;
-                
                 if (player.dx !== 0 && canvas.width > 0) { 
-                    updatePlayerPosition(); 
-                    clearCanvas();
-                    drawPlayer(); 
-                    player.dx = 0; 
+                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; 
                 }
                 return;
             }
             if (!isGameRunning) return; 
-
-            if (e.key === 'ArrowRight' || e.key === 'Right') {
-                player.dx = player.speed;
-            } else if (e.key === 'ArrowLeft' || e.key === 'Left') {
-                player.dx = -player.speed;
-            }
+            if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
+            else if (e.key === 'ArrowLeft' || e.key === 'Left') player.dx = -player.speed;
         }
-        function keyUp(e) {
-            if ( e.key === 'ArrowRight' || e.key === 'Right' ||
-                 e.key === 'ArrowLeft' || e.key === 'Left' ) {
-                player.dx = 0;
-            }
+        function keyUp(e) { 
+            if ( e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left' ) player.dx = 0;
         }
 
         document.addEventListener('keydown', keyDown);
         document.addEventListener('keyup', keyUp);
         startButton.addEventListener('click', startGame);
 
-        function isTouchDevice() {
+        function isTouchDevice() { 
             return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
         }
 
-        if (isTouchDevice()) {
+        if (isTouchDevice()) { 
             touchControls.style.display = 'flex';
             leftButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = -player.speed; }); 
             leftButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
@@ -862,115 +830,109 @@
             rightButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
         }
         
-        async function fetchLeaderboardData() {
+        async function fetchGameStats() {
             if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
-                leaderboardStatus.textContent = '排行榜後端未配置。';
-                leaderboardContainer.style.display = 'block'; 
+                console.warn("Game stats backend URL not configured.");
+                totalWinsDisplay.textContent = 'N/A';
+                totalLossesDisplay.textContent = 'N/A';
+                passRateDisplay.textContent = 'N/A'; 
                 return;
             }
-            leaderboardStatus.textContent = '排行榜加載中...';
-            leaderboardContainer.style.display = 'block'; 
+            try {
+                const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getGameStats'); 
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const stats = await response.json();
+                totalWinsDisplay.textContent = stats.wins !== undefined ? stats.wins : '--';
+                totalLossesDisplay.textContent = stats.losses !== undefined ? stats.losses : '--';
+                
+                if (stats.passRate !== undefined && !isNaN(parseFloat(stats.passRate))) {
+                    passRateDisplay.textContent = parseFloat(stats.passRate).toFixed(1);
+                } else {
+                    passRateDisplay.textContent = '--'; 
+                }
 
+            } catch (error) {
+                console.error('Error fetching game stats:', error);
+                totalWinsDisplay.textContent = '錯誤';
+                totalLossesDisplay.textContent = '錯誤';
+                passRateDisplay.textContent = '錯誤'; 
+            }
+        }
+
+
+        async function fetchLeaderboardData() { 
+            if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
+                leaderboardStatus.textContent = '排行榜後端未配置。'; leaderboardContainer.style.display = 'block'; return;
+            }
+            leaderboardStatus.textContent = '排行榜加載中...'; leaderboardContainer.style.display = 'block'; 
             try {
                 const response = await fetch(GOOGLE_APPS_SCRIPT_URL); 
                 if (!response.ok) {
-                    console.warn(`Leaderboard fetch response not OK. Status: ${response.status} (may be opaque)`);
                     let errorMsg = `HTTP error! status: ${response.status}.`;
-                    try {
-                        const errorData = await response.json(); 
-                        if (errorData && errorData.message) {
-                             errorMsg += ` Message: ${errorData.message}`;
-                        }
-                    } catch (jsonError) {
-                        errorMsg += ` Failed to parse error JSON.`;
-                    }
+                    try { const errorData = await response.json(); if (errorData && errorData.message) errorMsg += ` Message: ${errorData.message}`; } 
+                    catch (jsonError) { errorMsg += ` Failed to parse error JSON.`; }
                     throw new Error(errorMsg);
                 }
                 const data = await response.json();
-                if (data.status === 'error' && data.message) { 
-                    throw new Error(`Leaderboard fetch error from Apps Script: ${data.message}`);
-                }
-                displayLeaderboard(data); 
-                leaderboardStatus.textContent = ''; 
+                if (data.status === 'error' && data.message) throw new Error(`Leaderboard fetch error from Apps Script: ${data.message}`);
+                displayLeaderboard(data); leaderboardStatus.textContent = ''; 
             } catch (error) {
                 console.error('Error fetching leaderboard:', error);
                 leaderboardStatus.textContent = '無法加載排行榜，請稍後再試。';
             }
         }
 
-        function displayLeaderboard(scores) {
+        function displayLeaderboard(scores) { 
             leaderboardList.innerHTML = ''; 
             if (!scores || !Array.isArray(scores) || scores.length === 0) { 
                 const noRecordLi = document.createElement('li');
                 noRecordLi.textContent = '目前尚無紀錄或資料格式錯誤。';
                 noRecordLi.style.textAlign = 'center';
-                noRecordLi.style.color = '#6b7280';
+                noRecordLi.style.color = '#6b7280'; 
                 leaderboardList.appendChild(noRecordLi);
                 return;
             }
-
             scores.forEach((score, index) => {
                 const listItem = document.createElement('li');
-                listItem.innerHTML = `
-                    <span class="rank">${index + 1}.</span>
-                    <span class="name">${escapeHTML(score.name || '匿名')}</span> 
-                    <span class="time">${typeof score.time === 'number' ? score.time : '-'} 秒</span>
-                `;
+                let rankDisplay;
+                if (index === 0) rankDisplay = '🥇'; else if (index === 1) rankDisplay = '🥈'; else if (index === 2) rankDisplay = '🥉'; else rankDisplay = `${index + 1}.`;
+                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="name">${escapeHTML(score.name || '匿名')}</span> <span class="time">${typeof score.time === 'number' ? score.time : '-'} 秒</span>`;
                 leaderboardList.appendChild(listItem);
             });
         }
         
         function escapeHTML(str) { 
             return String(str).replace(/[&<>"']/g, function (match) {
-                return {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#39;'
-                }[match];
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[match];
             });
         }
 
-
-        function handleResize() {
+        function handleResize() { 
             canvasWidth = Math.min(480, window.innerWidth - 30); 
-            canvasHeight = canvasWidth / aspectRatio;
+            canvasHeight = canvasWidth / aspectRatio; 
+
             if (canvasHeight > window.innerHeight * 0.48) { 
-                canvasHeight = window.innerHeight * 0.48;   
+                canvasHeight = window.innerHeight * 0.48;    
                 canvasWidth = canvasHeight * aspectRatio;
             }
             canvas.width = Math.max(150, canvasWidth); 
             canvas.height = Math.max(200, canvasHeight); 
-
+            
             const infoBar = document.querySelector('.info-bar');
-            if (infoBar) {
-                 infoBar.style.maxWidth = `${canvas.width}px`;
-            }
+            if (infoBar) infoBar.style.maxWidth = `${canvas.width}px`; 
 
             player.width = canvas.width * 0.15;
             player.height = canvas.height * 0.06; 
             player.x = canvas.width / 2 - player.width / 2; 
             player.y = canvas.height - player.height - (canvas.height * 0.03); 
-            
-            if (isTouchDevice()) {
-                player.speed = canvas.width * 0.022; 
-            } else {
-                player.speed = canvas.width * 0.03; 
-            }
-            
+            if (isTouchDevice()) player.speed = canvas.width * 0.022; else player.speed = canvas.width * 0.03; 
             player.fontSize = canvas.width * 0.12; 
 
-            itemTypes.forEach(it => {
-                it.speedY = canvas.height * it.speedY_factor;
-            });
-            
+            itemTypes.forEach(it => { it.speedY = canvas.height * it.speedY_factor; });
+
             if (!isGameRunning) { 
                 clearCanvas();
-                if (canvas.width > 0 && canvas.height > 0) { 
-                    drawPlayer(); 
-                }
-                // statusMessage.innerHTML = ""; // 保持此行被移除
+                if (canvas.width > 0 && canvas.height > 0) drawPlayer(); 
                 startButton.disabled = false; 
             }
         }
@@ -980,6 +942,7 @@
             displayGameInstructions(); 
             startButton.disabled = false; 
             await fetchLeaderboardData(); 
+            await fetchGameStats(); 
             leaderboardPollIntervalId = setInterval(fetchLeaderboardData, 60000); 
         }); 
         window.addEventListener('resize', handleResize);
