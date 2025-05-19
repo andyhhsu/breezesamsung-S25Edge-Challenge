@@ -15,7 +15,7 @@
             align-items: center;
             justify-content: flex-start; 
             min-height: 100vh;
-            height: -webkit-fill-available; /* iOS Safari 100vh fix */
+            height: -webkit-fill-available; 
             margin: 0;
             padding: 10px;
             overflow-x: hidden; 
@@ -32,42 +32,42 @@
             background-color: #e0f2fe;
             border: 1px solid #93c5fd;
             border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
+            padding: 0.75rem; 
+            margin-bottom: 0.75rem; 
             width: 100%;
-            max-width: 500px; /* 與遊戲容器寬度一致 */
+            max-width: 500px; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         #gameInstructions h2 {
-            font-size: 1.25rem;
+            font-size: 1.1rem; 
             font-weight: bold;
             color: #1e40af;
             text-align: center;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem; 
         }
         #gameInstructions ul {
             list-style: none;
             padding: 0;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem; 
         }
         #gameInstructions li {
             display: flex;
             align-items: center;
-            font-size: 0.95rem;
+            font-size: 0.9rem; 
             color: #1e3a8a;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem; 
         }
         #gameInstructions li .emoji {
-            font-size: 1.5rem; /* 加大說明中的 emoji */
-            margin-right: 0.5rem;
-            width: 30px; /* 固定寬度對齊 */
+            font-size: 1.3rem; 
+            margin-right: 0.4rem;
+            width: 25px; 
             text-align: center;
         }
         #gameInstructions p {
-            font-size: 0.9rem;
+            font-size: 0.85rem; 
             color: #374151;
-            line-height: 1.6;
-            margin-bottom: 0.25rem;
+            line-height: 1.5;
+            margin-bottom: 0.2rem; 
         }
 
         #gameAndFormContainer { 
@@ -82,7 +82,7 @@
             background-color: #ffffff;
             border-radius: 0.75rem;
             box-shadow: 0 10px_25px_-5px rgba(0,0,0,0.1), 0 8px_10px_-6px rgba(0,0,0,0.1); 
-            padding: 1rem;
+            padding: 0.75rem; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -91,7 +91,7 @@
         canvas {
             background-color: #eff6ff; 
             border-radius: 0.5rem;
-            border: 1px solid #bfdbfe; 
+            /* border: 1px solid #bfdbfe; REMOVED BORDER */
             display: block; 
         }
         .info-bar {
@@ -99,73 +99,81 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: 0.75rem; 
-            font-size: 0.9rem; 
+            margin-bottom: 0.5rem; 
+            font-size: 0.85rem; 
             font-weight: 500;
             color: #1e3a8a; 
         }
         .info-bar span {
             background-color: #e0f2fe;
-            padding: 0.25rem 0.5rem;
+            padding: 0.2rem 0.4rem; 
             border-radius: 0.25rem;
         }
-        #statusMessage {
-            margin-top: 1rem;
-            padding: 1rem;
+        #statusMessage { 
+            margin-top: 0.75rem; 
+            padding: 0.75rem; 
             background-color: #e0f2fe; 
             border-radius: 0.5rem;
             border: 1px solid #93c5fd; 
-            font-size: 1rem; 
+            font-size: 0.9rem; 
             font-weight: normal; 
             color: #1e3a8a; 
-            min-height: 3.5rem; 
+            min-height: 2.5rem; 
             text-align: left; 
             width: 100%;
             box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
         }
-        #statusMessage h3 {
-            font-size: 1.25rem;
+        #statusMessage h3 { 
+            font-size: 1.1rem; 
             font-weight: bold;
             color: #1d4ed8; 
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem; 
             text-align: center;
         }
+        #statusMessage h4 { 
+            font-size: 1rem; 
+            font-weight: bold;
+            color: #1e40af; 
+            margin-top: 0.6rem; 
+            margin-bottom: 0.4rem; 
+            text-align: center;
+            border-top: 1px solid #93c5fd;
+            padding-top: 0.6rem; 
+        }
         #statusMessage p {
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
+            margin-bottom: 0.4rem; 
+            line-height: 1.5;
+            font-size: 0.85rem; 
         }
         #statusMessage strong {
             font-weight: bold;
             color: #1e40af;
         }
+        #statusMessage ul {
+            list-style: disc;
+            padding-left: 1.2rem; 
+            margin-bottom: 0.4rem; 
+            font-size: 0.8rem; 
+        }
+        #statusMessage .text-xs { 
+            font-size: 0.7rem; 
+        }
         #statusMessage .promotion-highlight {
-            background-color: #fffbeb; 
-            padding: 0.75rem;
-            border-radius: 0.375rem;
-            margin-top: 1rem;
-            border: 1px dashed #fcd34d; 
+             padding: 0.6rem; 
         }
-        #statusMessage .promotion-highlight p {
-            margin-bottom: 0.25rem;
-        }
-        #statusMessage .promotion-highlight .event-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #b45309; 
-            margin-bottom: 0.5rem;
-        }
+
 
         .game-button {
             background-color: #2563eb; 
             color: white;
-            padding: 0.7rem 1.4rem; 
+            padding: 0.6rem 1.2rem; 
             border-radius: 0.5rem;
-            font-size: 1rem;
+            font-size: 0.95rem; 
             font-weight: 500;
             border: none;
             cursor: pointer;
             transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out; 
-            margin-top: 1rem;
+            margin-top: 0.75rem; 
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
         }
         .game-button:hover:not(:disabled) { 
@@ -281,27 +289,28 @@
         @media (max-width: 600px) {
             #gameInstructions {
                 max-width: 95%;
-                padding: 0.75rem;
+                padding: 0.6rem; 
             }
             #gameInstructions h2 {
-                font-size: 1.1rem;
+                font-size: 1rem; 
             }
             #gameInstructions li, #gameInstructions p {
-                font-size: 0.85rem;
+                font-size: 0.8rem; 
             }
             .info-bar {
-                font-size: 0.8rem; 
-                flex-wrap: wrap; 
-                justify-content: center;
-                gap: 0.5rem;
-            }
-            .info-bar span {
-                white-space: nowrap;
+                font-size: 0.75rem; 
+                gap: 0.3rem;
             }
             #statusMessage {
-                font-size: 0.9rem; 
-                 min-height: 3rem;
+                font-size: 0.85rem; 
+                 min-height: 2.2rem; 
+                 padding: 0.6rem;
             }
+            #statusMessage h3 { font-size: 1rem; }
+            #statusMessage h4 { font-size: 0.9rem; }
+            #statusMessage p, #statusMessage ul { font-size: 0.8rem; }
+
+
              #leaderboardContainer, #scoreFormContainer {
                 max-width: 95%;
              }
@@ -317,20 +326,20 @@
 </head>
 <body>
     <div id="pageContainer">
-        <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-4 text-center">Galaxy S25 Edge 163克神捕手!</h1>
-        <p class="text-sm text-sky-700 mb-2 text-center">接住物品，精準累積163公克！小心炸彈和超重！</p>
+        <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-3 text-center">Galaxy S25 Edge 163克神捕手!</h1> 
+        <p class="text-sm text-sky-700 mb-1 text-center">接住物品，精準累積163公克！小心炸彈和超重！</p> 
 
         <div id="gameInstructions">
             <h2>玩法說明</h2>
-            <p>控制下方的籃子 🧺 左右移動，接住從天而降的物品來累積重量。</p>
+            <p id="instructionIntro">體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，操控籃子 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
             <p><strong>可接物件與重量：</strong></p>
             <ul id="itemWeightsList">
                 </ul>
             <p><strong>獲勝條件：</strong></p>
-            <p>當累積的總重量 <strong class="text-green-600">剛好達到 163 公克</strong> 時，即可獲勝！🎉</p>
+            <p id="instructionWin">挑戰 Galaxy S25 Edge 的完美重量！當累積總重 <strong class="text-green-600">精準達到 163 公克</strong> 時，即可獲勝！🎉</p>
             <p><strong>注意事項：</strong></p>
-            <p>🔴 如果總重量超過 163 公克，挑戰將會失敗。</p>
-            <p>💣 小心！接到炸彈會立即導致遊戲結束！</p>
+            <p id="instructionOverweight">🔴 精準是關鍵！總重量超過 163 公克，挑戰將會失敗。</p>
+            <p id="instructionBomb">💣 保持警覺！接到炸彈 💣 會立即結束遊戲！</p>
         </div>
 
 
@@ -342,7 +351,8 @@
                     <span>時間: <span id="timerDisplay">0</span> s</span>
                 </div>
                 <canvas id="gameCanvas"></canvas>
-                <div id="statusMessage"></div> <button id="startButton" class="game-button">開始遊戲</button>
+                <div id="statusMessage"></div> 
+                <button id="startButton" class="game-button">開始遊戲</button>
             </div>
             <div id="scoreFormContainer" style="display: none;">
                 </div>
@@ -377,7 +387,6 @@
         const leaderboardList = document.getElementById('leaderboardList');
         const leaderboardStatus = document.getElementById('leaderboardStatus');
         const itemWeightsList = document.getElementById('itemWeightsList');
-
 
         // --- Google Apps Script Web App URL ---
         const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybRVvvc3cOQhaWPeOUVh0nJiLjBLQK19s1DlxutQWoZB0k2Bey5BGKMyk5dZPEO5Br/exec'; 
@@ -414,6 +423,12 @@
         const SPAWN_INTERVAL = 72; 
 
         function displayGameInstructions() {
+            // 更新說明文字
+            document.getElementById('instructionIntro').innerHTML = '體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，操控籃子 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！';
+            document.getElementById('instructionWin').innerHTML = '挑戰 Galaxy S25 Edge 的完美重量！當累積總重 <strong class="text-green-600">精準達到 163 公克</strong> 時，即可獲勝！🎉';
+            document.getElementById('instructionOverweight').innerHTML = '🔴 精準是關鍵！總重量超過 163 公克，挑戰將會失敗。';
+            document.getElementById('instructionBomb').innerHTML = '💣 保持警覺！接到炸彈 💣 會立即結束遊戲！';
+
             itemWeightsList.innerHTML = ''; 
             itemTypes.forEach(item => {
                 if (item.type === 'item') { 
@@ -586,24 +601,26 @@
 
         async function gameWin() { 
             stopGame();
-            const currentYear = new Date().getFullYear(); 
             const winPopupMessage = `
                 <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
                 <p class="text-center mb-3">您的成績：<strong>${gameTime} 秒</strong></p>
-                
-                <div class="mt-4 pt-3 border-t border-gray-300">
-                    <p class="text-md font-semibold text-blue-600 mb-1">🎁 線上挑戰成功禮：</p>
-                    <p>恭喜您完成挑戰！請憑此成功畫面至 <strong>微風南山三星體驗館</strong> 兌換您的「線上挑戰成功小禮品」一份！</p>
-                    <p class="text-xs text-gray-500">(小禮品數量有限，送完為止，兌換詳情請洽門市)</p>
-                </div>
 
-                <div class="promotion-highlight mt-4">
-                    <p class="event-title text-center">✨ 特別加碼活動：誰比我輕？✨</p>
-                    <p><strong>活動期間：</strong>即日起至 ${currentYear}/5/31</p>
-                    <p><strong>活動地點：</strong>微風南山三星體驗館 (台北市信義區松智路17號二樓)</p>
-                    <p><strong>活動內容：</strong>帶上您的手機，參加現場秤重挑戰！只要您的手機比 Galaxy S25 Edge (163g) 更輕，即可獲得精美好禮！還有機會抽中膠囊咖啡機！</p>
-                    <p class="text-xs text-gray-500 mt-1">(詳情請見門市公告)</p>
-                </div>
+                <h4>🎁 挑戰成功好康 & 活動辦法 🎁</h4>
+
+                <p class="mt-2"><strong>🏆 神捕手排行榜獎勵：</strong></p>
+                <ul class="text-sm">
+                    <li>冠軍：三星雙向閃電快充行動電源 (20,000mAh)</li>
+                    <li>亞軍：MINIPRO 深層震動筋膜按摩槍</li>
+                    <li>季軍：HYDY 不鏽鋼雙層真空保溫瓶</li>
+                </ul>
+                <p class="text-xs text-gray-600 mb-2">排行榜結算至 2025/6/30 23:59，詳情與得獎名單請見官方粉絲專頁。</p>
+
+                <p><strong>🎁 來店兌換精美小禮：</strong></p>
+                <p class="text-sm">憑此遊戲成功畫面截圖，即可於活動期間 (2025/6/1 - 2025/6/30) 至 <strong>微風南山三星體驗館 (台北市信義區松智路17號二樓)</strong> 兌換「線上挑戰成功精美小禮」一份！</p>
+                <p class="text-xs text-gray-500 mb-2">(數量有限，送完為止，每人限兌換一次)</p>
+
+                <p><strong>⚡ 加碼抽大獎：</strong></p>
+                <p class="text-sm">想再抽三星行動電源？快到我們的<strong>官方粉絲專頁</strong>查看指定貼文，參與互動分享活動！</p>
             `;
             statusMessage.innerHTML = winPopupMessage;
             startButton.textContent = "再玩一局";
@@ -814,8 +831,8 @@
         function handleResize() {
             canvasWidth = Math.min(480, window.innerWidth - 30); 
             canvasHeight = canvasWidth / aspectRatio;
-            if (canvasHeight > window.innerHeight * 0.70) { 
-                canvasHeight = window.innerHeight * 0.70;   
+            if (canvasHeight > window.innerHeight * 0.48) { 
+                canvasHeight = window.innerHeight * 0.48;   
                 canvasWidth = canvasHeight * aspectRatio;
             }
             canvas.width = Math.max(150, canvasWidth); 
@@ -848,7 +865,7 @@
                 if (canvas.width > 0 && canvas.height > 0) { 
                     drawPlayer(); 
                 }
-                // statusMessage.innerHTML = "<p class='text-center font-bold'>準備好了嗎？</p>"; // 已移除此行
+                statusMessage.innerHTML = ""; 
                 startButton.disabled = false; 
             }
         }
