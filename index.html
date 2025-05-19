@@ -50,7 +50,7 @@
             background-color: #eff6ff; 
             border-radius: 0.5rem;
             border: 1px solid #bfdbfe; 
-            display: block; /* 確保 canvas 是塊級元素 */
+            display: block; 
         }
         .info-bar {
             display: flex;
@@ -135,41 +135,40 @@
             opacity: 0.7; 
         }
        
-        /* 觸控按鈕優化 */
         #touchControls {
-            display: none; /* JS 會在觸控裝置上設為 'flex' */
-            position: fixed; /* 固定在底部 */
+            display: none; 
+            position: fixed; 
             bottom: 0;
             left: 0;
-            right: 0; /* 左右延展 */
+            right: 0; 
             width: 100%;
-            padding: 12px 10px; /* 調整內邊距 */
+            padding: 12px 10px; 
             box-sizing: border-box;
             justify-content: space-between; 
             align-items: center;
             z-index: 100; 
-            background-color: rgba(224, 242, 254, 0.8); /* 半透明背景，避免完全遮擋 */
-            border-top: 1px solid rgba(191, 219, 254, 0.7); /* 分隔線 */
-            pointer-events: none; /* 容器本身不攔截事件 */
+            background-color: rgba(224, 242, 254, 0.8); 
+            border-top: 1px solid rgba(191, 219, 254, 0.7); 
+            pointer-events: none; 
         }
         .control-button {
-            background-color: rgba(59, 130, 246, 0.85); /* 按鈕背景色，帶透明度 */
+            background-color: rgba(59, 130, 246, 0.85); 
             color: white;
-            padding: 15px 0; /* 上下padding增加高度，左右由flex控制 */
+            padding: 15px 0; 
             border-radius: 10px; 
-            font-size: 2rem; /* 加大箭頭字體 */
+            font-size: 2rem; 
             border: none;
             cursor: pointer;
             user-select: none; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            pointer-events: auto; /* 按鈕本身可互動 */
-            flex-basis: 45%; /* 每個按鈕基礎寬度佔45% */
-            max-width: 180px; /* 限制最大寬度，避免過大 */
+            pointer-events: auto; 
+            flex-basis: 45%; 
+            max-width: 180px; 
             text-align: center;
-            -webkit-tap-highlight-color: transparent; /* 移除iOS點擊高亮 */
+            -webkit-tap-highlight-color: transparent; 
         }
          .control-button:active {
-            background-color: rgba(29, 78, 216, 0.9); /* 按下時顏色加深 */
+            background-color: rgba(29, 78, 216, 0.9); 
         }
 
         #scoreFormContainer, #leaderboardContainer {
@@ -255,11 +254,11 @@
                 max-width: 95%;
              }
              .control-button {
-                padding: 12px 0; /* 調整手機上按鈕大小 */
+                padding: 12px 0; 
                 font-size: 1.8rem;
              }
              #gameAndFormContainer {
-                margin-bottom: 90px; /* 確保觸控按鈕不會遮擋遊戲結束後的表單 */
+                margin-bottom: 90px; 
              }
         }
     </style>
@@ -359,8 +358,8 @@
         function drawFallingObjects() {
             if (!ctx) return;
             fallingObjects.forEach(obj => {
-                const objFontSize = canvas.width * 0.07; 
-                const weightFontSize = canvas.width * 0.035; 
+                const objFontSize = canvas.width * 0.085; // 加大圖示 Emoji 尺寸
+                const weightFontSize = canvas.width * 0.04; // 加大重量文字尺寸
 
                 ctx.font = `${objFontSize}px Arial`;
                 ctx.textAlign = 'center';
@@ -369,10 +368,11 @@
 
                 if (obj.type === 'item') {
                     ctx.font = `bold ${weightFontSize}px Arial`;
-                    ctx.fillStyle = '#334155'; 
+                    ctx.fillStyle = '#000000'; // 重量文字改為純黑色以增強對比
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'top'; 
-                    ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + 2); 
+                    // 稍微調整 Y 軸偏移以配合較大的 Emoji
+                    ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1)); 
                 }
             });
         }
@@ -617,7 +617,7 @@
         function keyDown(e) {
             if (!isGameRunning && (e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left')) {
                 if (player.speed === 0 && canvas.width > 0) { 
-                     player.speed = isTouchDevice() ? canvas.width * 0.022 : canvas.width * 0.03; // 應用觸控速度調整
+                     player.speed = isTouchDevice() ? canvas.width * 0.022 : canvas.width * 0.03; 
                 }
                 if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
                 else player.dx = -player.speed;
@@ -655,9 +655,9 @@
 
         if (isTouchDevice()) {
             touchControls.style.display = 'flex';
-            leftButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = -player.speed; }); // 速度已在 handleResize 中調整
+            leftButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = -player.speed; }); 
             leftButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
-            rightButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = player.speed; }); // 速度已在 handleResize 中調整
+            rightButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = player.speed; }); 
             rightButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
         }
         
@@ -752,11 +752,10 @@
             player.x = canvas.width / 2 - player.width / 2; 
             player.y = canvas.height - player.height - (canvas.height * 0.03); 
             
-            // 調整觸控與鍵盤的移動速度
             if (isTouchDevice()) {
-                player.speed = canvas.width * 0.022; // 觸控裝置使用較慢的移動速度
+                player.speed = canvas.width * 0.022; 
             } else {
-                player.speed = canvas.width * 0.03; // 鍵盤使用原始速度
+                player.speed = canvas.width * 0.03; 
             }
             
             player.fontSize = canvas.width * 0.12; 
