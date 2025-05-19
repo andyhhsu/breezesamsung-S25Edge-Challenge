@@ -6,7 +6,7 @@
     <title>Galaxy S25 Edge 163克神捕手!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script> <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
             background-color: #dbeafe; 
@@ -28,47 +28,86 @@
             width: 100%;
             max-width: 900px; 
         }
+        .game-banner-image {
+            width: 100%;
+            max-width: 500px; 
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
         #gameInstructions {
             background-color: #e0f2fe;
             border: 1px solid #93c5fd;
             border-radius: 0.5rem;
-            padding: 0.75rem; 
-            margin-bottom: 0.75rem; 
+            padding: 1rem; 
+            margin-bottom: 1rem; 
             width: 100%;
             max-width: 500px; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        #gameInstructions h2 {
+        #gameInstructions h2 { 
+            font-size: 1.25rem; 
+            font-weight: bold;
+            color: #1e3a8a; 
+            text-align: center;
+            margin-bottom: 0.75rem; 
+        }
+        #gameInstructions h3 { 
             font-size: 1.1rem; 
             font-weight: bold;
-            color: #1e40af;
+            color: #1d4ed8; 
             text-align: center;
+            margin-top: 1rem; 
             margin-bottom: 0.5rem; 
+            padding-top: 0.75rem; 
+            border-top: 1px dashed #93c5fd; 
         }
         #gameInstructions ul {
             list-style: none;
             padding: 0;
-            margin-bottom: 0.5rem; 
+            margin-bottom: 0.75rem; 
         }
         #gameInstructions li {
             display: flex;
             align-items: center;
             font-size: 0.9rem; 
             color: #1e3a8a;
-            margin-bottom: 0.25rem; 
+            margin-bottom: 0.3rem; 
         }
         #gameInstructions li .emoji {
-            font-size: 1.3rem; 
-            margin-right: 0.4rem;
-            width: 25px; 
+            font-size: 1.4rem; 
+            margin-right: 0.5rem;
+            width: 28px; 
             text-align: center;
         }
-        #gameInstructions p {
-            font-size: 0.85rem; 
-            color: #374151;
-            line-height: 1.5;
-            margin-bottom: 0.2rem; 
+        #gameInstructions p, #gameInstructions .instruction-text { 
+            font-size: 0.9rem; 
+            color: #374151; 
+            line-height: 1.6;
+            margin-bottom: 0.4rem; 
         }
+        #gameInstructions strong { 
+            font-weight: bold;
+            color: #1e40af; 
+        }
+        #gameInstructions .text-green-600 { 
+            color: #059669; 
+        }
+        #gameInstructions .text-red-600 { 
+            color: #dc2626;
+        }
+        #gameInstructions .reward-point { 
+            font-size: 0.9rem; 
+            color: #1e3a8a; 
+            margin-bottom: 0.4rem;
+            padding-left: 0.5rem; 
+        }
+        #gameInstructions .reward-point::before { 
+            content: "🏅 ";
+            margin-right: 0.25rem;
+        }
+
 
         #gameAndFormContainer { 
             width: 100%;
@@ -295,7 +334,10 @@
             #gameInstructions h2 {
                 font-size: 1rem; 
             }
-            #gameInstructions li, #gameInstructions p {
+            #gameInstructions h3 { 
+                font-size: 0.9rem;
+            }
+            #gameInstructions li, #gameInstructions p, #gameInstructions .reward-point {
                 font-size: 0.8rem; 
             }
             .info-bar {
@@ -329,19 +371,29 @@
 <body>
     <div id="pageContainer">
         <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-3 text-center">Galaxy S25 Edge 163克神捕手!</h1> 
-        <p class="text-sm text-sky-700 mb-1 text-center">接住物品，精準累積163公克！小心炸彈和超重！</p> 
+
+        <img src="YOUR_GITHUB_IMAGE_RAW_URL_HERE"  alt="Galaxy S25 Edge 遊戲主視覺" 
+             class="game-banner-image"
+             onerror="this.onerror=null; this.src='https://placehold.co/500x200/60a5fa/ffffff?text=圖片載入失敗';">
 
         <div id="gameInstructions">
-            <h2>玩法說明</h2>
-            <p id="instructionIntro">體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，操控籃子 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
-            <p><strong>可接物件與重量：</strong></p>
+            <h2>挑戰開始！</h2>
+            <p class="instruction-text">感受 Galaxy S25 Edge 無可比擬的輕盈！化身「163克神捕手」，敏捷操控購物籃 🧺，接住從天而降的「輕巧系」物件，目標是精準集滿不多不少的 163 公克！</p>
+            
+            <p class="instruction-text mt-3"><strong>可接物件與重量：</strong></p>
             <ul id="itemWeightsList">
                 </ul>
-            <p><strong>獲勝條件：</strong></p>
-            <p id="instructionWin">挑戰 Galaxy S25 Edge 的完美重量！當累積總重 <strong class="text-green-600">精準達到 163 公克</strong> 時，即可獲勝！🎉</p>
-            <p><strong>注意事項：</strong></p>
-            <p id="instructionOverweight">🔴 精準是關鍵！總重量超過 163 公克，挑戰將會失敗。</p>
-            <p id="instructionBomb">💣 保持警覺！接到炸彈 💣 會立即結束遊戲！</p>
+
+            <p class="instruction-text mt-3"><strong>獲勝條件：追求完美，毫釐不差！</strong></p>
+            <p class="instruction-text">當購物籃中的物件總重，<strong class="text-green-600">不多不少，正好是 163 公克</strong>，即可光榮獲勝！🎉 展現你對「輕」的極致掌控力！</p>
+            
+            <p class="instruction-text mt-3"><strong>注意事項：小心！這些情況會讓你挑戰失敗：</strong></p>
+            <p class="instruction-text"><strong class="text-red-600">🔴 超重注意！</strong> 一旦超過 163 公克，就與勝利擦肩而過囉！</p>
+            <p class="instruction-text"><strong class="text-red-600">💣 炸彈警報！</strong> 接到炸彈 💣 會立即結束遊戲，請務必閃避！</p>
+            
+            <h3>🎁 挑戰好康 🎁</h3>
+            <p class="reward-point">參加排行榜，挑戰最短時間，贏得三星雙向閃電快充行動電源等大獎！</p>
+            <p class="reward-point">憑遊戲成功過關畫面截圖，可至「微風南山三星體驗館」兌換精美好禮一份！</p>
         </div>
 
 
@@ -410,7 +462,7 @@
             fontSize: 0 
         };
 
-        const BASE_SPEED_MULTIPLIER = 3.2; // 調整基礎速度 (原 4.5, 再之前 2.43)
+        const BASE_SPEED_MULTIPLIER = 2.7 * 0.9; 
 
         const itemTypes = [
             { name: 'A4影印紙', emoji: '📄', weight: 5, type: 'item', speedY_factor: 0.003 * BASE_SPEED_MULTIPLIER },
@@ -423,14 +475,46 @@
 
         let fallingObjects = [];
         let spawnTimer = 0;
-        const SPAWN_INTERVAL = 55; // 調整物件生成間隔 (原 40, 再之前 72)
+        const SPAWN_INTERVAL = 72; 
+
+        // 音效合成器 (Synths)
+        let catchSound, bombSound, winSound, loseSound;
+        let toneJsInitialized = false;
+
+        function initializeSounds() {
+            if (Tone.context.state !== 'running') {
+                Tone.start(); // 啟動 Tone.js 音訊上下文
+            }
+            catchSound = new Tone.Synth({
+                oscillator: { type: 'triangle' },
+                envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.1 }
+            }).toDestination();
+            bombSound = new Tone.Synth({
+                oscillator: { type: 'square' },
+                envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.2 },
+                volume: -6 // 炸彈聲音小一點
+            }).toDestination();
+             bombSound.triggerAttackRelease("C2", "8n"); // 測試用，確保音量設定
+
+            winSound = new Tone.Synth({
+                oscillator: { type: 'sine' },
+                envelope: { attack: 0.01, decay: 0.3, sustain: 0.2, release: 0.5 }
+            }).toDestination();
+            loseSound = new Tone.FMSynth({ // 嘗試不同的合成器以獲得不同的失敗音效
+                harmonicity: 3,
+                modulationIndex: 10,
+                detune: 0,
+                oscillator: { type: "sine" },
+                envelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 },
+                modulation: { type: "square" },
+                modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 }
+            }).toDestination();
+            toneJsInitialized = true;
+            console.log("Tone.js sounds initialized.");
+        }
+
 
         function displayGameInstructions() {
-            document.getElementById('instructionIntro').innerHTML = '體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，操控籃子 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！';
-            document.getElementById('instructionWin').innerHTML = '挑戰 Galaxy S25 Edge 的完美重量！當累積總重 <strong class="text-green-600">精準達到 163 公克</strong> 時，即可獲勝！🎉';
-            document.getElementById('instructionOverweight').innerHTML = '🔴 精準是關鍵！總重量超過 163 公克，挑戰將會失敗。';
-            document.getElementById('instructionBomb').innerHTML = '💣 保持警覺！接到炸彈 💣 會立即結束遊戲！';
-
             itemWeightsList.innerHTML = ''; 
             itemTypes.forEach(item => {
                 if (item.type === 'item') { 
@@ -488,8 +572,10 @@
                      obj.y + obj.height > player.y ) { 
                     
                     if (obj.type === 'bomb') {
+                        if (toneJsInitialized && bombSound) bombSound.triggerAttackRelease("C2", "8n", Tone.now());
                         gameOver("哎呀！接到炸彈了！");
                     } else {
+                        if (toneJsInitialized && catchSound) catchSound.triggerAttackRelease("C4", "16n", Tone.now());
                         accumulatedWeight += obj.weight;
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
                         currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
@@ -497,6 +583,7 @@
                         if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { 
                             gameWin();
                         } else if (accumulatedWeight > TARGET_WEIGHT) {
+                            if (toneJsInitialized && loseSound) loseSound.triggerAttackRelease("A2", "4n", Tone.now());
                             gameOver(`哎呀！超過目標 ${TARGET_WEIGHT}g 了！`);
                         }
                     }
@@ -573,6 +660,11 @@
 
         function startGame() {
             if (isGameRunning) return;
+            if (!toneJsInitialized) { // 確保音效已初始化
+                initializeSounds();
+            } else if (Tone.context.state !== 'running') { // 如果音訊上下文被暫停，嘗試恢復
+                 Tone.start();
+            }
             
             isGameRunning = true;
             accumulatedWeight = 0;
@@ -596,12 +688,14 @@
         }
 
         function gameOver(message) {
+            if (toneJsInitialized && loseSound) loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.1); // 延遲一點播放避免與其他聲音衝突
             stopGame();
             statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${gameTime}s</p>`;
             startButton.textContent = "再試一次";
         }
 
         async function gameWin() { 
+            if (toneJsInitialized && winSound) winSound.triggerAttackRelease("C5", "2n", Tone.now());
             stopGame();
             const winPopupMessage = `
                 <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
@@ -641,7 +735,7 @@
                     </div>
                     <div>
                         <label for="playerPhone">您的電話(僅供活動抽獎聯繫使用)：</label>
-                        <input type="tel" id="playerPhone" name="playerPhone" maxlength="20" required>
+                        <input type="tel" id="playerPhone" name="playerPhone" required>
                     </div>
                     <button id="submitScoreButton" class="game-button">提交成績</button>
                     <p id="submitStatus" class="text-sm text-center mt-2"></p>
@@ -661,8 +755,16 @@
                     playerNameInput.focus();
                     return;
                 }
+                // 電話號碼10碼驗證
+                const phoneRegex = /^\d{10}$/;
                 if (!playerPhone) {
                     submitStatus.textContent = '請填寫您的電話！';
+                    submitStatus.style.color = 'red';
+                    playerPhoneInput.focus();
+                    return;
+                }
+                if (!phoneRegex.test(playerPhone)) {
+                    submitStatus.textContent = '電話號碼格式不正確，請輸入10位數字。';
                     submitStatus.style.color = 'red';
                     playerPhoneInput.focus();
                     return;
@@ -867,7 +969,7 @@
                 if (canvas.width > 0 && canvas.height > 0) { 
                     drawPlayer(); 
                 }
-                statusMessage.innerHTML = ""; 
+                // statusMessage.innerHTML = ""; // 保持此行被移除
                 startButton.disabled = false; 
             }
         }
@@ -888,4 +990,3 @@
     </script>
 </body>
 </html>
-
