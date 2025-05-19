@@ -91,7 +91,6 @@
         canvas {
             background-color: #eff6ff; 
             border-radius: 0.5rem;
-            /* border: 1px solid #bfdbfe; REMOVED BORDER */
             display: block; 
         }
         .info-bar {
@@ -118,7 +117,9 @@
             font-size: 0.9rem; 
             font-weight: normal; 
             color: #1e3a8a; 
-            min-height: 2.5rem; 
+            min-height: 80px; /* 確保有基本高度 */
+            max-height: 30vh; /* 限制最大高度，例如視窗高度的30% */
+            overflow-y: auto;  /* 如果內容超出最大高度，則顯示捲動條 */
             text-align: left; 
             width: 100%;
             box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
@@ -303,8 +304,9 @@
             }
             #statusMessage {
                 font-size: 0.85rem; 
-                 min-height: 2.2rem; 
-                 padding: 0.6rem;
+                min-height: 60px; /* 調整手機上的最小高度 */
+                max-height: 35vh; /* 手機上最大高度 */
+                padding: 0.6rem;
             }
             #statusMessage h3 { font-size: 1rem; }
             #statusMessage h4 { font-size: 0.9rem; }
@@ -388,6 +390,7 @@
         const leaderboardStatus = document.getElementById('leaderboardStatus');
         const itemWeightsList = document.getElementById('itemWeightsList');
 
+
         // --- Google Apps Script Web App URL ---
         const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybRVvvc3cOQhaWPeOUVh0nJiLjBLQK19s1DlxutQWoZB0k2Bey5BGKMyk5dZPEO5Br/exec'; 
         
@@ -423,7 +426,6 @@
         const SPAWN_INTERVAL = 72; 
 
         function displayGameInstructions() {
-            // 更新說明文字
             document.getElementById('instructionIntro').innerHTML = '體驗 Galaxy S25 Edge 的極致輕巧！化身神捕手，操控籃子 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！';
             document.getElementById('instructionWin').innerHTML = '挑戰 Galaxy S25 Edge 的完美重量！當累積總重 <strong class="text-green-600">精準達到 163 公克</strong> 時，即可獲勝！🎉';
             document.getElementById('instructionOverweight').innerHTML = '🔴 精準是關鍵！總重量超過 163 公克，挑戰將會失敗。';
