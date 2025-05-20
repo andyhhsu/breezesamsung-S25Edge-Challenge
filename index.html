@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Galaxy S25 Edge 163克神捕手!</title>
+    <title>🏆 Galaxy S25 Edge 輕巧配重挑戰賽 🏆</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
@@ -148,61 +148,65 @@
             padding: 0.2rem 0.4rem; /* Padding inside spans */
             border-radius: 0.25rem;
         }
-        #gameStatsDisplay { /* Container for total wins/losses/pass rate */
+        #currentWeight {
+            color: #dc2626; 
+            font-weight: bold;
+        }
+        #gameStatsDisplay { 
             display: flex;
             justify-content: space-around;
-            align-items: center; /* Align items vertically */
-            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            align-items: center; 
+            flex-wrap: wrap; 
             width: 100%;
-            max-width: 400px; /* Adjusted max width to accommodate new stat */
+            max-width: 400px; 
             margin-top: 0.5rem;
             margin-bottom: 0.25rem;
             font-size: 0.8rem;
-            color: #4b5563; /* Tailwind gray-600 */
-            gap: 0.5rem; /* Add gap between stat items */
+            color: #4b5563; 
+            gap: 0.5rem; 
         }
-         #gameStatsDisplay > span { /* Style for individual stat items */
-            background-color: #f3f4f6; /* Light gray background for each stat */
+         #gameStatsDisplay > span { 
+            background-color: #f3f4f6; 
             padding: 0.2rem 0.4rem;
             border-radius: 0.25rem;
         }
-        #statusMessage { /* Message box for game status */
-            margin-top: 0.75rem; /* Space above message box */
-            padding: 0.75rem; /* Padding inside message box */
-            background-color: #e0f2fe; /* Tailwind sky-100 */
+        #statusMessage { 
+            margin-top: 0.75rem; 
+            padding: 0.75rem; 
+            background-color: #e0f2fe; 
             border-radius: 0.5rem;
-            border: 1px solid #93c5fd; /* Tailwind blue-300 */
-            font-size: 0.9rem; /* Standardized text size */
-            font-weight: normal; /* Normal weight for messages */
-            color: #1e3a8a; /* Tailwind blue-800 */
-            min-height: 80px; /* Minimum height to prevent collapsing */
-            max-height: 30vh; /* Max height to prevent excessive length */
-            overflow-y: auto;  /* Scroll for long messages */
-            text-align: left; /* Align text to left for readability */
+            border: 1px solid #93c5fd; 
+            font-size: 0.9rem; 
+            font-weight: normal; 
+            color: #1e3a8a; 
+            min-height: 80px; 
+            max-height: 30vh; 
+            overflow-y: auto;  
+            text-align: left; 
             width: 100%;
             box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
         }
-        #statusMessage h3 { /* Title within status message (e.g., Win popup) */
-            font-size: 1.1rem; /* Slightly larger */
+        #statusMessage h3 { 
+            font-size: 1.1rem; 
             font-weight: bold;
-            color: #1d4ed8; /* Tailwind blue-700 */
-            margin-bottom: 0.4rem; /* Space below title */
+            color: #1d4ed8; 
+            margin-bottom: 0.4rem; 
             text-align: center;
         }
-        #statusMessage h4 { /* Sub-title within status message */
-            font-size: 1rem; /* Standard size */
+        #statusMessage h4 { 
+            font-size: 1rem; 
             font-weight: bold;
-            color: #1e40af; /* Tailwind blue-700 */
-            margin-top: 0.6rem; /* Space above */
-            margin-bottom: 0.4rem; /* Space below */
+            color: #1e40af; 
+            margin-top: 0.6rem; 
+            margin-bottom: 0.4rem; 
             text-align: center;
-            border-top: 1px solid #93c5fd; /* Separator */
-            padding-top: 0.6rem; /* Space above text */
+            border-top: 1px solid #93c5fd; 
+            padding-top: 0.6rem; 
         }
         #statusMessage p {
-            margin-bottom: 0.4rem; /* Space between paragraphs */
+            margin-bottom: 0.4rem; 
             line-height: 1.5;
-            font-size: 0.85rem; /* Slightly smaller for details */
+            font-size: 0.85rem; 
         }
         #statusMessage strong {
             font-weight: bold;
@@ -210,104 +214,114 @@
         }
         #statusMessage ul {
             list-style: disc;
-            padding-left: 1.2rem; /* Indent for list items */
-            margin-bottom: 0.4rem; /* Space below list */
-            font-size: 0.8rem; /* Smaller for list items */
+            padding-left: 1.2rem; 
+            margin-bottom: 0.4rem; 
+            font-size: 0.8rem; 
         }
-        #statusMessage .text-xs { /* Utility for very small text */
-            font-size: 0.7rem; /* Tailwind text-xs */
+        #statusMessage .text-xs { 
+            font-size: 0.7rem; 
         }
         #statusMessage .promotion-highlight {
-            padding: 0.6rem; /* Padding for highlighted section */
+            padding: 0.6rem; 
         }
-
 
         .game-button {
-            background-color: #2563eb; /* Tailwind blue-600 */
+            background-image: linear-gradient(to right, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
             color: white;
-            padding: 0.6rem 1.2rem; /* Comfortable padding */
-            border-radius: 0.5rem;
-            font-size: 0.95rem; /* Readable font size */
-            font-weight: 500;
+            padding: 0.8rem 1.8rem; 
+            border-radius: 0.75rem; 
+            font-size: 1.1rem;  
+            font-weight: bold; 
             border: none;
             cursor: pointer;
-            transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out; /* Smooth transitions */
-            margin-top: 0.75rem; /* Space above button */
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            transition: all 0.3s ease-in-out; 
+            margin-top: 1rem; 
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4); 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em; 
         }
-        .game-button:hover:not(:disabled) { /* Hover effect for enabled button */
-            background-color: #1d4ed8; /* Tailwind blue-700 */
+        .game-button:hover:not(:disabled) { 
+            background-image: linear-gradient(to right, #2563eb 0%, #1d4ed8 50%, #1e3a8a 100%);
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 20px rgba(29, 78, 216, 0.5); 
+        }
+        .game-button:active:not(:disabled) {
+            transform: translateY(1px); 
+            box-shadow: 0 3px 10px rgba(29, 78, 216, 0.4);
         }
         .game-button:disabled {
-            background-color: #94a3b8; /* Tailwind slate-400 */
+            background-image: none; 
+            background-color: #94a3b8; 
             cursor: not-allowed;
-            opacity: 0.7; /* Indicate disabled state */
+            opacity: 0.7; 
+            transform: translateY(0);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
         }
         
         #touchControls {
-            display: none; /* Hidden by default, shown by JS for touch devices */
-            position: fixed; /* Fixed at the bottom */
+            display: none; 
+            position: fixed; 
             bottom: 0;
             left: 0;
-            right: 0; /* Stretch across width */
+            right: 0; 
             width: 100%;
-            padding: 10px 8px; /* Padding around buttons */
+            padding: 10px 8px; 
             box-sizing: border-box;
-            justify-content: space-between; /* Space out left/right buttons */
+            justify-content: space-between; 
             align-items: center;
-            z-index: 100; /* Above other content */
-            background-color: rgba(224, 242, 254, 0.75); /* Semi-transparent sky-100 */
-            border-top: 1px solid rgba(191, 219, 254, 0.6); /* Semi-transparent blue-200 */
-            pointer-events: none; /* Allow clicks to pass through container */
+            z-index: 100; 
+            background-color: rgba(224, 242, 254, 0.75); 
+            border-top: 1px solid rgba(191, 219, 254, 0.6); 
+            pointer-events: none; 
         }
         .control-button {
-            background-color: rgba(59, 130, 246, 0.8); /* Semi-transparent blue-500 */
+            background-color: rgba(59, 130, 246, 0.8); 
             color: white;
-            padding: 10px 0; /* Vertical padding, horizontal will be auto by flex */
-            border-radius: 8px; /* Rounded corners */
-            font-size: 1.7rem; /* Large, easy-to-tap icons */
+            padding: 10px 0; 
+            border-radius: 8px; 
+            font-size: 1.7rem; 
             border: none;
             cursor: pointer;
-            user-select: none; /* Prevent text selection on tap */
-            box-shadow: 0 1px 4px rgba(0,0,0,0.15); /* Subtle shadow */
-            pointer-events: auto; /* Buttons themselves are interactive */
-            flex-basis: 44%; /* Each button takes up almost half the space */
-            max-width: 160px; /* Max width for very large screens */
+            user-select: none; 
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15); 
+            pointer-events: auto; 
+            flex-basis: 44%; 
+            max-width: 160px; 
             text-align: center;
-            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+            -webkit-tap-highlight-color: transparent; 
         }
          .control-button:active {
-            background-color: rgba(29, 78, 216, 0.85); /* Darker blue on press (blue-700) */
+            background-color: rgba(29, 78, 216, 0.85); 
         }
 
         #scoreFormContainer, #leaderboardContainer {
-            margin-top: 1.5rem; /* Space above form/leaderboard */
+            margin-top: 1.5rem; 
             padding: 1rem;
-            background-color: #f9fafb; /* Tailwind gray-50 */
+            background-color: #f9fafb; 
             border-radius: 0.5rem;
-            border: 1px solid #e5e7eb; /* Tailwind gray-200 */
+            border: 1px solid #e5e7eb; 
             width: 100%;
-            max-width: 450px; /* Consistent max-width */
+            max-width: 450px; 
             box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
         }
         #scoreForm label, #leaderboardContainer h3 {
             display: block;
             margin-bottom: 0.25rem;
-            font-size: 0.875rem; /* Tailwind text-sm */
+            font-size: 0.875rem; 
             font-weight: 500;
-            color: #374151; /* Tailwind gray-700 */
+            color: #374151; 
         }
-         #leaderboardContainer h3 { /* Specific for leaderboard title */
+         #leaderboardContainer h3 { 
             font-size: 1.25rem;
             text-align: center;
-            color: #1e3a8a; /* Tailwind blue-800 */
+            color: #1e3a8a; 
             margin-bottom: 0.75rem;
         }
         #scoreForm input[type="text"], #scoreForm input[type="tel"] {
             width: 100%;
             padding: 0.5rem;
-            border: 1px solid #d1d5db; /* Tailwind gray-300 */
-            border-radius: 0.375rem; /* Tailwind rounded-md */
+            border: 1px solid #d1d5db; 
+            border-radius: 0.375rem; 
             margin-bottom: 0.75rem;
             font-size: 0.875rem;
         }
@@ -322,63 +336,61 @@
             display: flex;
             justify-content: space-between;
             padding: 0.5rem 0.25rem;
-            border-bottom: 1px solid #f3f4f6; /* Tailwind gray-100 */
+            border-bottom: 1px solid #f3f4f6; 
             font-size: 0.9rem;
-            transition: background-color 0.3s ease; /* Smooth transition for highlight */
+            transition: background-color 0.3s ease; 
         }
         #leaderboardList li:last-child {
             border-bottom: none;
         }
         #leaderboardList .rank {
             font-weight: bold;
-            color: #4b5563; /* Tailwind gray-600 */
-            min-width: 35px; /* Ensure rank alignment */
+            color: #4b5563; 
+            min-width: 35px; 
             text-align: left;
         }
         #leaderboardList .name {
-            color: #1f2937; /* Tailwind gray-800 */
+            color: #1f2937; 
             flex-grow: 1;
             padding-left: 0.5rem;
-            word-break: break-all; /* Prevent long names from breaking layout */
+            word-break: break-all; 
         }
         #leaderboardList .time {
             font-weight: 500;
-            color: #1e40af; /* Tailwind blue-700 */
+            color: #1e40af; 
         }
-        /* 新增：高亮樣式 */
         .currentUserScoreHighlight {
-            background-color: #fef9c3; /* Tailwind yellow-100 for a subtle highlight */
-            border-left: 4px solid #f59e0b; /* Tailwind amber-500 for a distinct left border */
-            /* box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); */
+            background-color: #fef9c3; 
+            border-left: 4px solid #f59e0b; 
         }
 
 
         @media (max-width: 600px) {
             #gameInstructions {
                 max-width: 95%;
-                padding: 0.6rem; /* Slightly reduced padding */
+                padding: 0.6rem; 
             }
             #gameInstructions h2 {
-                font-size: 1rem; /* Smaller title */
+                font-size: 1rem; 
             }
-            #gameInstructions h3 { /* Smaller sub-title */
+            #gameInstructions h3 { 
                 font-size: 0.9rem;
             }
             #gameInstructions li, #gameInstructions p, #gameInstructions .reward-point {
-                font-size: 0.8rem; /* Smaller text */
+                font-size: 0.8rem; 
             }
             .info-bar {
-                font-size: 0.75rem; /* Smaller info bar text */
+                font-size: 0.75rem; 
                 gap: 0.3rem;
             }
             #gameStatsDisplay {
                 font-size: 0.7rem;
-                max-width: 95%; /* Allow more space on small screens */
+                max-width: 95%; 
             }
             #statusMessage {
-                font-size: 0.85rem; /* Smaller status message */
-                min-height: 60px; /* Adjusted min height */
-                max-height: 35vh; /* Adjusted max height */
+                font-size: 0.85rem; 
+                min-height: 60px; 
+                max-height: 35vh; 
                 padding: 0.6rem;
             }
             #statusMessage h3 { font-size: 1rem; }
@@ -390,25 +402,25 @@
                 max-width: 95%;
             }
              .control-button {
-                padding: 8px 0; /* Slightly smaller buttons */
+                padding: 8px 0; 
                 font-size: 1.6rem;
             }
              #gameAndFormContainer {
-                margin-bottom: 70px; /* Ensure space for touch controls */
+                margin-bottom: 70px; 
             }
         }
     </style>
 </head>
 <body>
     <div id="pageContainer">
-        <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-3 text-center">Galaxy S25 Edge 163克神捕手!</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-sky-800 my-3 text-center">🏆 Galaxy S25 Edge 輕巧配重挑戰賽 🏆</h1>
         <img src="https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/S25%20Edge%20Main%20KV_cmyk_%E6%A9%AB%E5%BC%8F(%E5%A3%93%E7%B8%AE).png" 
              alt="Galaxy S25 Edge 遊戲主視覺" 
              class="game-banner-image"
              onerror="this.onerror=null; this.src='https://placehold.co/500x200/60a5fa/ffffff?text=圖片載入失敗';">
 
         <div id="gameInstructions">
-            <h2>挑戰開始！</h2>
+            <h2>遊戲說明</h2>
             <p class="instruction-text">感受 Galaxy S25 Edge 無可比擬的輕盈！化身「163克神捕手」，敏捷操控購物籃 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
             
             <p class="instruction-text mt-3"><strong>物件與重量：</strong></p>
@@ -493,7 +505,6 @@
         let leaderboardPollIntervalId = null;
         let lastFrameTime = 0; 
 
-        // Variables to store the name and time of the last submitted score for highlighting
         let nameToHighlightNext = null;
         let timeToHighlightNext = null;
 
@@ -506,8 +517,7 @@
             fontSize: 0 
         };
 
-        // Adjusted BASE_SPEED_MULTIPLIER to increase overall speed by another 1.1 times
-        const BASE_SPEED_MULTIPLIER = (((((2.7 * 0.9) * 1.2) * 1.2) * 1.2) * 1.1) * 1.1; // Global speed tuner
+        const BASE_SPEED_MULTIPLIER = (((((2.7 * 0.9) * 1.2) * 1.2) * 1.2) * 1.1) * 1.1; 
         const TARGET_FPS_FOR_CONVERSION = 60.0; 
 
         const itemTypes = [
@@ -688,6 +698,13 @@
             gameStartTime = 0; 
             lastFrameTime = performance.now(); 
 
+            // 新增：點擊開始遊戲時，捲動到遊戲容器頂部
+            const gameContainerElement = document.getElementById('gameContainer');
+            if (gameContainerElement) {
+                gameContainerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+
             if(animationFrameId) cancelAnimationFrame(animationFrameId); 
             animationFrameId = requestAnimationFrame(gameLoop); 
             fetchGameStats(); 
@@ -808,12 +825,10 @@
                     submitStatus.textContent = '成績已提交！感謝您的參與！';
                     submitStatus.style.color = 'green';
 
-                    // 設定高亮目標並刷新排行榜
                     nameToHighlightNext = playerName;
                     timeToHighlightNext = finalTime;
                     await fetchLeaderboardData(); 
 
-                    // 確保排行榜可見並捲動
                     leaderboardContainer.style.display = 'block';
                     const highlightedItem = leaderboardList.querySelector('.currentUserScoreHighlight');
                     if (highlightedItem) {
@@ -827,7 +842,6 @@
                     submitStatus.textContent = '提交失敗，請稍後再試或檢查網路連線。';
                     submitStatus.style.color = 'red';
                     document.getElementById('submitScoreButton').disabled = false;
-                     // 如果提交失敗，清除高亮標記，避免影響下一次正常的排行榜刷新
                     nameToHighlightNext = null;
                     timeToHighlightNext = null;
                 }
@@ -838,7 +852,7 @@
         function keyDown(e) { 
             if (!isGameRunning && (e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left')) {
                 if (player.speed === 0 && canvas.width > 0) { 
-                     player.speed = isTouchDevice() ? canvas.width * 0.022 : canvas.width * 0.03; 
+                     player.speed = isTouchDevice() ? canvas.width * 0.015 : canvas.width * 0.02; 
                 }
                 if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
                 else player.dx = -player.speed;
@@ -902,7 +916,6 @@
 
 
         async function fetchLeaderboardData() { 
-            // 此函式不直接處理高亮，高亮標記由 displayLeaderboard 根據全域變數決定
             if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
                 leaderboardStatus.textContent = '排行榜後端未配置。'; leaderboardContainer.style.display = 'block'; return;
             }
@@ -917,12 +930,11 @@
                 }
                 const data = await response.json();
                 if (data.status === 'error' && data.message) throw new Error(`Leaderboard fetch error from Apps Script: ${data.message}`);
-                displayLeaderboard(data); // displayLeaderboard 會檢查並使用高亮標記
+                displayLeaderboard(data); 
                 leaderboardStatus.textContent = ''; 
             } catch (error) {
                 console.error('Error fetching leaderboard:', error);
                 leaderboardStatus.textContent = '無法加載排行榜，請稍後再試。';
-                 // 如果讀取排行榜失敗，也清除高亮標記
                 nameToHighlightNext = null;
                 timeToHighlightNext = null;
             }
@@ -936,32 +948,30 @@
                 noRecordLi.style.textAlign = 'center';
                 noRecordLi.style.color = '#6b7280'; 
                 leaderboardList.appendChild(noRecordLi);
-                nameToHighlightNext = null; // 清除高亮標記，因為沒有資料可高亮
+                nameToHighlightNext = null; 
                 timeToHighlightNext = null;
                 return;
             }
 
-            let highlightAppliedThisCall = false; // 標記此輪 displayLeaderboard 是否已套用高亮
+            let highlightAppliedThisCall = false; 
 
             scores.forEach((score, index) => {
                 const listItem = document.createElement('li');
                 let rankDisplay;
                 if (index === 0) rankDisplay = '🥇'; else if (index === 1) rankDisplay = '🥈'; else if (index === 2) rankDisplay = '🥉'; else rankDisplay = `${index + 1}.`;
                 
-                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="name">${escapeHTML(score.name || '匿名')}</span> <span class="time">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`; // 確保時間顯示兩位小數
+                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="name">${escapeHTML(score.name || '匿名')}</span> <span class="time">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`; 
 
-                // 檢查是否需要高亮此項目
                 if (!highlightAppliedThisCall && nameToHighlightNext && timeToHighlightNext &&
                     score.name === nameToHighlightNext &&
                     Math.abs(parseFloat(score.time) - timeToHighlightNext) < 0.01) {
                     
                     listItem.classList.add('currentUserScoreHighlight');
-                    highlightAppliedThisCall = true; // 標記已套用，避免同一輪重複套用
+                    highlightAppliedThisCall = true; 
                 }
                 leaderboardList.appendChild(listItem);
             });
 
-            // 如果此輪 displayLeaderboard 的目的是高亮，並且已成功高亮，則清除標記供下次使用
             if (highlightAppliedThisCall) {
                 nameToHighlightNext = null;
                 timeToHighlightNext = null;
@@ -992,7 +1002,7 @@
             player.height = canvas.height * 0.06; 
             player.x = canvas.width / 2 - player.width / 2; 
             player.y = canvas.height - player.height - (canvas.height * 0.03); 
-            if (isTouchDevice()) player.speed = canvas.width * 0.022; else player.speed = canvas.width * 0.03; 
+            if (isTouchDevice()) player.speed = canvas.width * 0.015; else player.speed = canvas.width * 0.02; 
             player.fontSize = canvas.width * 0.12; 
 
             itemTypes.forEach(it => { 
@@ -1013,7 +1023,6 @@
             await fetchLeaderboardData(); 
             await fetchGameStats(); 
             leaderboardPollIntervalId = setInterval(async () => {
-                // 自動刷新時，不應有高亮目標
                 nameToHighlightNext = null;
                 timeToHighlightNext = null;
                 await fetchLeaderboardData();
