@@ -14,138 +14,167 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Align content to the top */
+            justify-content: flex-start; 
             min-height: 100vh;
-            height: -webkit-fill-available; /* For iOS Safari full height */
+            height: -webkit-fill-available; 
             margin: 0;
             padding: 10px;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            overflow-y: auto; /* Allow vertical scroll if content overflows */
+            overflow-x: hidden; 
+            overflow-y: auto; 
         }
-        #pageContainer { /* New container for all page content */
+        #pageContainer { 
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 900px; /* Max width for larger screens */
+            max-width: 900px; 
         }
         .game-banner-image {
             width: 100%;
-            max-width: 500px; /* Max width of the banner */
+            max-width: 500px; 
             height: auto;
             border-radius: 0.5rem;
             margin-bottom: 0.75rem;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         #gameInstructions {
-            background-color: #e0f2fe; /* Tailwind sky-100 */
-            border: 1px solid #93c5fd; /* Tailwind blue-300 */
+            background-color: #e0f2fe; 
+            border: 1px solid #93c5fd; 
             border-radius: 0.5rem;
-            padding: 1rem; /* Increased padding */
-            margin-bottom: 1rem; /* Space below instructions */
+            padding: 1rem; 
+            margin-bottom: 1rem; 
             width: 100%;
-            max-width: 500px; /* Consistent max-width */
+            max-width: 500px; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        #gameInstructions h2 { /* Title for instructions */
-            font-size: 1.25rem; /* Slightly larger */
+        #gameInstructions h2 { 
+            font-size: 1.25rem; 
             font-weight: bold;
-            color: #1e3a8a; /* Tailwind blue-800 */
+            color: #1e3a8a; 
             text-align: center;
-            margin-bottom: 0.75rem; /* Space below title */
+            margin-bottom: 0.75rem; 
         }
-        #gameInstructions h3 { /* Sub-title for rewards */
-            font-size: 1.1rem; /* Slightly larger */
+        #gameInstructions h3 { 
+            font-size: 1.1rem; 
             font-weight: bold;
-            color: #1d4ed8; /* Tailwind blue-700 */
+            color: #1d4ed8; 
             text-align: center;
-            margin-top: 1rem; /* Space above */
-            margin-bottom: 0.5rem; /* Space below */
-            padding-top: 0.75rem; /* Space above text */
-            border-top: 1px dashed #93c5fd; /* Separator */
+            margin-top: 1rem; 
+            margin-bottom: 0.5rem; 
+            padding-top: 0.75rem; 
+            border-top: 1px dashed #93c5fd; 
         }
-        #gameInstructions ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 0.75rem; /* Space below list */
+        .item-grid-container {
+            display: grid;
+            /* 修改：讓卡片能容納更多文字，調整為 repeat(auto-fit, minmax(130px, 1fr)) 或固定欄數 */
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+            gap: 0.75rem; 
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
         }
-        #gameInstructions li {
+        .item-card {
+            background-color: #ffffff;
+            border: 1px solid #bfdbfe; 
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around; 
+            min-height: 110px; /* 增加最小高度以容納效果說明 */
+        }
+        .item-card .item-emoji {
+            font-size: 2rem; 
+            margin-bottom: 0.25rem;
+            line-height: 1;
+        }
+        .item-card .item-name {
+            font-size: 0.8rem;
+            color: #374151; 
+            margin-bottom: 0.25rem;
+            min-height: 2.4em; 
             display: flex;
             align-items: center;
-            font-size: 0.9rem; /* Standardized text size */
-            color: #1e3a8a; /* Tailwind blue-800 */
-            margin-bottom: 0.3rem; /* Space between items */
+            justify-content: center;
         }
-        #gameInstructions li .emoji {
-            font-size: 1.4rem; /* Larger emoji */
-            margin-right: 0.5rem;
-            width: 28px; /* Fixed width for alignment */
-            text-align: center;
-        }
-        #gameInstructions p, #gameInstructions .instruction-text { /* Paragraphs and instruction text */
-            font-size: 0.9rem; /* Standardized text size */
-            color: #374151; /* Tailwind gray-700 */
-            line-height: 1.6;
-            margin-bottom: 0.4rem; /* Space between paragraphs */
-        }
-        #gameInstructions strong { /* Bold text in instructions */
+        .item-card .item-weight { 
+            font-size: 0.9rem;
             font-weight: bold;
-            color: #1e40af; /* Tailwind blue-700 */
+            color: #1e40af; 
         }
-        #gameInstructions .text-green-600 { /* Custom class for green text */
-            color: #059669; /* Tailwind green-600 */
+        .item-card .item-effect { /* 特殊道具效果說明 */
+            font-size: 0.75rem; /* 效果文字稍小 */
+            font-weight: bold;
+            color: #7c3aed; /* 紫色用於特殊效果 */
+            margin-top: 0.2rem;
         }
-        #gameInstructions .text-red-600 { /* Custom class for red text */
-            color: #dc2626; /* Tailwind red-600 */
+
+        #gameInstructions p, #gameInstructions .instruction-text { 
+            font-size: 0.9rem; 
+            color: #374151; 
+            line-height: 1.6;
+            margin-bottom: 0.4rem; 
         }
-        #gameInstructions .reward-point { /* Styling for reward points */
-            font-size: 0.9rem; /* Standardized text size */
-            color: #1e3a8a; /* Tailwind blue-800 */
+        #gameInstructions strong { 
+            font-weight: bold;
+            color: #1e40af; 
+        }
+        #gameInstructions .text-green-600 { 
+            color: #059669; 
+        }
+        #gameInstructions .text-red-600 { 
+            color: #dc2626; 
+        }
+        #gameInstructions .reward-point { 
+            font-size: 0.9rem; 
+            color: #1e3a8a; 
             margin-bottom: 0.4rem;
-            padding-left: 0.5rem; /* Indent for medal */
+            padding-left: 0.5rem; 
         }
-        #gameInstructions .reward-point::before { /* Medal emoji for reward points */
+        #gameInstructions .reward-point::before { 
             content: "🏅 ";
             margin-right: 0.25rem;
         }
 
 
-        #gameAndFormContainer { /* Container for game canvas and score form */
+        #gameAndFormContainer { 
             width: 100%;
-            max-width: 500px; /* Max width of game area */
+            max-width: 500px; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 70px; /* Space for fixed touch controls */
+            margin-bottom: 70px; 
         }
         #gameContainer {
             background-color: #ffffff;
             border-radius: 0.75rem;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); /* Softer shadow */
-            padding: 0.75rem; /* Padding around canvas and button */
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); 
+            padding: 0.75rem; 
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
         }
         canvas {
-            background-color: #eff6ff; /* Tailwind blue-50, lighter canvas */
+            background-color: #eff6ff; 
             border-radius: 0.5rem;
-            display: block; /* Remove extra space below canvas */
+            display: block; 
         }
         .info-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: 0.5rem; /* Space below info bar */
-            font-size: 0.85rem; /* Slightly smaller font */
+            margin-bottom: 0.5rem; 
+            font-size: 0.85rem; 
             font-weight: 500;
-            color: #1e3a8a; /* Tailwind blue-800 */
+            color: #1e3a8a; 
         }
         .info-bar span {
-            background-color: #e0f2fe; /* Tailwind sky-100 */
-            padding: 0.2rem 0.4rem; /* Padding inside spans */
+            background-color: #e0f2fe; 
+            padding: 0.2rem 0.4rem; 
             border-radius: 0.25rem;
         }
         #currentWeight {
@@ -376,7 +405,26 @@
             #gameInstructions h3 { 
                 font-size: 0.9rem;
             }
-            #gameInstructions li, #gameInstructions p, #gameInstructions .reward-point {
+            .item-grid-container {
+                /* 維持兩欄，但可調整minmax讓卡片在極小螢幕下也能良好顯示 */
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); 
+                gap: 0.5rem;
+            }
+            .item-card {
+                padding: 0.5rem;
+                min-height: 100px; /* 調整手機版最小高度 */
+            }
+            .item-card .item-emoji {
+                font-size: 1.8rem; 
+            }
+            .item-card .item-name {
+                font-size: 0.75rem;
+                 min-height: 2.2em; 
+            }
+            .item-card .item-weight, .item-card .item-effect { /* 統一手機版字體大小 */
+                font-size: 0.8rem;
+            }
+            #gameInstructions p, #gameInstructions .reward-point { 
                 font-size: 0.8rem; 
             }
             .info-bar {
@@ -421,11 +469,11 @@
 
         <div id="gameInstructions">
             <h2>遊戲說明</h2>
-            <p class="instruction-text">感受 Galaxy S25 Edge 無可比擬的輕盈！化身「163克神捕手」，敏捷操控購物籃 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
+            <p class="instruction-text">感受「Galaxy S25 Edge 輕巧配重挑戰賽」無可比擬的輕盈！化身「163克神捕手」，敏捷操控購物籃 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
             
             <p class="instruction-text mt-3"><strong>物件與重量：</strong></p>
-            <ul id="itemWeightsList">
-                </ul>
+            <div id="itemDisplayGrid" class="item-grid-container">
+                </div>
 
             <p class="instruction-text mt-3"><strong>獲勝條件：追求完美，毫釐不差！</strong></p>
             <p class="instruction-text">當購物籃中的物件總重，<strong class="text-green-600">不多不少，正好是 163 公克</strong>，即可光榮獲勝！🎉 展現你對「輕」的極致掌控力！</p>
@@ -433,7 +481,9 @@
             <p class="instruction-text mt-3"><strong>注意事項：小心！這些情況會讓你挑戰失敗：</strong></p>
             <p class="instruction-text"><strong class="text-red-600">🔴 超重注意！</strong> 一旦超過 163 公克，就與勝利擦肩而過囉！</p>
             <p class="instruction-text"><strong class="text-red-600">💣 炸彈警報！</strong> 接到炸彈 💣 會立即結束遊戲，請務必閃避！</p>
-            
+            <p class="instruction-text"><strong class="text-purple-600">✨ 星塵加倍！</strong> 接到增重火箭 🚀，目前總重量立即 x2！</p>
+
+
             <h3>🎁 挑戰好康 🎁</h3>
             <p class="reward-point">參加排行榜，挑戰最短時間，贏得三星雙向閃電快充行動電源等大獎！</p>
             <p class="reward-point">憑遊戲成功過關畫面截圖，可至「微風南山三星體驗館」兌換精美好禮一份！</p>
@@ -489,7 +539,7 @@
         const leaderboardContainer = document.getElementById('leaderboardContainer');
         const leaderboardList = document.getElementById('leaderboardList');
         const leaderboardStatus = document.getElementById('leaderboardStatus');
-        const itemWeightsList = document.getElementById('itemWeightsList');
+        const itemDisplayGrid = document.getElementById('itemDisplayGrid'); 
         const totalWinsDisplay = document.getElementById('totalWins'); 
         const totalLossesDisplay = document.getElementById('totalLosses'); 
         const passRateDisplay = document.getElementById('passRate'); 
@@ -520,20 +570,23 @@
         const BASE_SPEED_MULTIPLIER = (((((2.7 * 0.9) * 1.2) * 1.2) * 1.2) * 1.1) * 1.1; 
         const TARGET_FPS_FOR_CONVERSION = 60.0; 
 
+        // 更新物件列表與出現權重 (spawnChance)
         const itemTypes = [
-            { name: 'A4影印紙', emoji: '📄', weight: 5, type: 'item', base_ch_per_sec: 0.003 * TARGET_FPS_FOR_CONVERSION },
-            { name: '迴紋針', emoji: '📎', weight: 1, type: 'item', base_ch_per_sec: 0.0025 * TARGET_FPS_FOR_CONVERSION },
-            { name: 'AAA電池', emoji: '🔋', weight: 11, type: 'item', base_ch_per_sec: 0.004 * TARGET_FPS_FOR_CONVERSION },
-            { name: '新台幣10元硬幣', emoji: '💰', weight: 7.5, type: 'item', base_ch_per_sec: 0.005 * TARGET_FPS_FOR_CONVERSION }, 
-            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: 0.006 * TARGET_FPS_FOR_CONVERSION }
+            { name: 'S Pen', emoji: '✏️', weight: 3, type: 'item', base_ch_per_sec: 0.0025 * TARGET_FPS_FOR_CONVERSION, spawnChance: 25 },
+            { name: 'Galaxy Buds3 (單耳)', emoji: '🎧', weight: 5, type: 'item', base_ch_per_sec: 0.0030 * TARGET_FPS_FOR_CONVERSION, spawnChance: 25 },
+            { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 20 },
+            { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: 0.0058 * TARGET_FPS_FOR_CONVERSION, spawnChance: 15 },
+            { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 }, // 速度快，機率低
+            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: 0.0065 * TARGET_FPS_FOR_CONVERSION, spawnChance: 10 }
         ];
         itemTypes.forEach(item => item.speedPixelsPerSecond = 0); 
 
         let fallingObjects = [];
         let spawnTimer = 0;
-        const SPAWN_INTERVAL = 72; 
+        const SPAWN_INTERVAL = 72; // 可以考慮也改成時間依賴
 
-        let catchSound, bombSound, winSound, loseSound;
+        // 新增音效變數
+        let catchSound, bombSound, winSound, loseSound, boosterSound;
         let toneJsInitialized = false;
 
         function initializeSounds() {
@@ -544,19 +597,47 @@
             bombSound = new Tone.Synth({ oscillator: { type: 'square' }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.2 }, volume: -6 }).toDestination();
             winSound = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.01, decay: 0.3, sustain: 0.2, release: 0.5 } }).toDestination();
             loseSound = new Tone.FMSynth({ harmonicity: 3, modulationIndex: 10, detune: 0, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 }, modulation: { type: "square" }, modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 } }).toDestination();
+            // 新增：增重火箭音效 (可調整)
+            boosterSound = new Tone.Synth({ oscillator: { type: 'sawtooth' }, envelope: { attack: 0.01, decay: 0.15, sustain: 0.08, release: 0.2 }, volume: -3 }).toDestination();
             toneJsInitialized = true;
             console.log("Tone.js sounds initialized.");
         }
 
         function displayGameInstructions() {
-            itemWeightsList.innerHTML = ''; 
-            itemTypes.forEach(item => {
-                if (item.type === 'item') { 
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `<span class="emoji">${item.emoji}</span> ${item.name}：<strong>${item.weight} 公克</strong>`;
-                    itemWeightsList.appendChild(listItem);
-                }
-            });
+            if (itemDisplayGrid) { 
+                itemDisplayGrid.innerHTML = ''; 
+                itemTypes.forEach(item => {
+                    // 不在說明中顯示炸彈，但顯示增重火箭
+                    if (item.type === 'item' || item.type === 'weight_booster') { 
+                        const itemCard = document.createElement('div');
+                        itemCard.className = 'item-card';
+                        
+                        const itemEmoji = document.createElement('span');
+                        itemEmoji.className = 'item-emoji';
+                        itemEmoji.textContent = item.emoji;
+                        
+                        const itemName = document.createElement('span');
+                        itemName.className = 'item-name';
+                        itemName.textContent = item.name;
+                        
+                        itemCard.appendChild(itemEmoji);
+                        itemCard.appendChild(itemName);
+
+                        if (item.type === 'weight_booster') {
+                            const itemEffect = document.createElement('span');
+                            itemEffect.className = 'item-effect';
+                            itemEffect.textContent = '當前重量x2';
+                            itemCard.appendChild(itemEffect);
+                        } else {
+                            const itemWeight = document.createElement('span');
+                            itemWeight.className = 'item-weight';
+                            itemWeight.innerHTML = `<strong>${item.weight}</strong> 公克`;
+                            itemCard.appendChild(itemWeight);
+                        }
+                        itemDisplayGrid.appendChild(itemCard);
+                    }
+                });
+            }
         }
 
         function drawPlayer() { 
@@ -576,7 +657,9 @@
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'bottom'; 
                 ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
-                if (obj.type === 'item') {
+                
+                // 只為普通物品顯示重量標籤
+                if (obj.type === 'item' && obj.weight > 0) {
                     ctx.font = `bold ${weightFontSize}px Arial`;
                     ctx.fillStyle = '#FF0000'; 
                     ctx.textAlign = 'center';
@@ -601,10 +684,29 @@
                      obj.x + obj.width > player.x &&
                      obj.y < player.y + player.height && 
                      obj.y + obj.height > player.y ) {  
+                    
                     if (obj.type === 'bomb') {
                         if (toneJsInitialized && bombSound) bombSound.triggerAttackRelease("C2", "8n", Tone.now());
                         gameOver("哎呀！接到炸彈了！");
-                    } else {
+                    } else if (obj.type === 'weight_booster') {
+                        if (toneJsInitialized && boosterSound) boosterSound.triggerAttackRelease("G4", "8n", Tone.now()); // 特殊音效
+                        accumulatedWeight *= 2;
+                        accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1)); 
+                        currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
+                        statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 重量翻倍！</p>"; // 提示訊息
+                        setTimeout(() => { // 短暫提示後恢復
+                            if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>";
+                        }, 1500);
+
+                        // 立即檢查遊戲狀態
+                        if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { 
+                            gameWin();
+                        } else if (accumulatedWeight > TARGET_WEIGHT) {
+                            if (toneJsInitialized && loseSound) loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.1); // 延遲一點播放失敗音效
+                            gameOver(`哎呀！重量翻倍後超過目標 ${TARGET_WEIGHT}g 了！`);
+                        }
+
+                    } else { // 普通物品
                         if (toneJsInitialized && catchSound) catchSound.triggerAttackRelease("C4", "16n", Tone.now());
                         accumulatedWeight += obj.weight;
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1)); 
@@ -622,13 +724,31 @@
                 }
             }
         }
+        
+        // 修改：使用加權隨機生成物件
         function spawnObject() { 
-            const randomTypeIndex = Math.floor(Math.random() * itemTypes.length);
-            const typeTemplate = itemTypes[randomTypeIndex];
+            const totalChance = itemTypes.reduce((sum, item) => sum + item.spawnChance, 0);
+            let randomRoll = Math.random() * totalChance;
+            let selectedType = null;
+
+            for (const item of itemTypes) {
+                if (randomRoll < item.spawnChance) {
+                    selectedType = item;
+                    break;
+                }
+                randomRoll -= item.spawnChance;
+            }
+
+            if (!selectedType) { // 備案，理論上不應發生
+                selectedType = itemTypes[0]; 
+            }
+            
+            const typeTemplate = selectedType;
             const objWidth = canvas.width * 0.1; 
             const objHeight = canvas.width * 0.1; 
             fallingObjects.push({ ...typeTemplate, x: Math.random() * (canvas.width - objWidth), y: 0 - objHeight, width: objWidth, height: objHeight });
         }
+
         function clearCanvas() { 
             if (!ctx) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -698,7 +818,6 @@
             gameStartTime = 0; 
             lastFrameTime = performance.now(); 
 
-            // 新增：點擊開始遊戲時，捲動到遊戲容器頂部
             const gameContainerElement = document.getElementById('gameContainer');
             if (gameContainerElement) {
                 gameContainerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
