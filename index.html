@@ -614,10 +614,8 @@
             { name: 'S Pen', emoji: '✏️', weight: 3, type: 'item', base_ch_per_sec: 0.0025 * TARGET_FPS_FOR_CONVERSION, spawnChance: 25 },
             { name: 'Galaxy Buds3 (單耳)', emoji: '🎧', weight: 5, type: 'item', base_ch_per_sec: 0.0030 * TARGET_FPS_FOR_CONVERSION, spawnChance: 25 },
             { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 20 },
-            // 修改：調整 SmartTag2 速度
             { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: (0.0058 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 15 },
             { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 }, 
-            // 修改：調整炸彈速度
             { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 }
         ];
         itemTypes.forEach(item => item.speedPixelsPerSecond = 0); 
@@ -689,7 +687,7 @@
         function drawFallingObjects() { 
             if (!ctx) return;
             fallingObjects.forEach(obj => {
-                const objFontSize = canvas.width * 0.085; 
+                const objFontSize = canvas.width * 0.095; // 修改：加大掉落物件 Emoji
                 const weightFontSize = canvas.width * 0.04; 
                 ctx.font = `${objFontSize}px Arial`;
                 ctx.textAlign = 'center';
@@ -1191,9 +1189,11 @@
             player.height = canvas.height * 0.06; 
             player.x = canvas.width / 2 - player.width / 2; 
             player.y = canvas.height - player.height - (canvas.height * 0.03); 
-            // 更新後的移動速度因子
+            // 修改：加大籃子 Emoji 尺寸
+            player.fontSize = canvas.width * 0.135; 
+
+            // 更新後的移動速度因子 (已包含在內)
             if (isTouchDevice()) player.speed = canvas.width * 0.018; else player.speed = canvas.width * 0.024; 
-            player.fontSize = canvas.width * 0.12; 
 
             itemTypes.forEach(it => { 
                 it.speedPixelsPerSecond = canvas.height * it.base_ch_per_sec * BASE_SPEED_MULTIPLIER;
