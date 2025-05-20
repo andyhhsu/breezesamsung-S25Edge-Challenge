@@ -66,7 +66,6 @@
         }
         .item-grid-container {
             display: grid;
-            /* 修改：讓卡片能容納更多文字，調整為 repeat(auto-fit, minmax(130px, 1fr)) 或固定欄數 */
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
             gap: 0.75rem; 
             margin-top: 0.5rem;
@@ -83,7 +82,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-around; 
-            min-height: 110px; /* 增加最小高度以容納效果說明 */
+            min-height: 110px; 
         }
         .item-card .item-emoji {
             font-size: 2rem; 
@@ -104,10 +103,10 @@
             font-weight: bold;
             color: #1e40af; 
         }
-        .item-card .item-effect { /* 特殊道具效果說明 */
-            font-size: 0.75rem; /* 效果文字稍小 */
+        .item-card .item-effect { 
+            font-size: 0.75rem; 
             font-weight: bold;
-            color: #7c3aed; /* 紫色用於特殊效果 */
+            color: #7c3aed; 
             margin-top: 0.2rem;
         }
 
@@ -127,15 +126,42 @@
         #gameInstructions .text-red-600 { 
             color: #dc2626; 
         }
-        #gameInstructions .reward-point { 
-            font-size: 0.9rem; 
-            color: #1e3a8a; 
-            margin-bottom: 0.4rem;
-            padding-left: 0.5rem; 
+        #gameInstructions .reward-section {
+            margin-top: 0.75rem;
         }
-        #gameInstructions .reward-point::before { 
-            content: "🏅 ";
+        #gameInstructions .reward-title {
+            font-weight: bold;
+            color: #1e40af; 
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+        #gameInstructions .prize-list {
+            list-style: none; 
+            padding-left: 0.5rem; 
+            font-size: 0.85rem;
+            color: #374151; 
+        }
+        #gameInstructions .prize-list li {
+            margin-bottom: 0.2rem;
+            display: flex; 
+            align-items: baseline;
+        }
+        #gameInstructions .prize-rank {
+            font-weight: 500;
+            color: #1d4ed8; 
             margin-right: 0.25rem;
+            min-width: 40px; 
+        }
+        #gameInstructions .reward-detail {
+            font-size: 0.85rem;
+            color: #374151; 
+            padding-left: 0.5rem; 
+            line-height: 1.5;
+        }
+        #gameInstructions .reward-detail .text-xs { 
+            display: block; 
+            margin-top: 0.15rem;
+            color: #6b7280; 
         }
 
 
@@ -406,13 +432,12 @@
                 font-size: 0.9rem;
             }
             .item-grid-container {
-                /* 維持兩欄，但可調整minmax讓卡片在極小螢幕下也能良好顯示 */
                 grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); 
                 gap: 0.5rem;
             }
             .item-card {
                 padding: 0.5rem;
-                min-height: 100px; /* 調整手機版最小高度 */
+                min-height: 100px; 
             }
             .item-card .item-emoji {
                 font-size: 1.8rem; 
@@ -421,11 +446,17 @@
                 font-size: 0.75rem;
                  min-height: 2.2em; 
             }
-            .item-card .item-weight, .item-card .item-effect { /* 統一手機版字體大小 */
+            .item-card .item-weight, .item-card .item-effect { 
                 font-size: 0.8rem;
             }
             #gameInstructions p, #gameInstructions .reward-point { 
                 font-size: 0.8rem; 
+            }
+             #gameInstructions .reward-title { 
+                font-size: 0.9rem;
+            }
+            #gameInstructions .prize-list, #gameInstructions .reward-detail { 
+                font-size: 0.75rem;
             }
             .info-bar {
                 font-size: 0.75rem; 
@@ -481,12 +512,21 @@
             <p class="instruction-text mt-3"><strong>注意事項：小心！這些情況會讓你挑戰失敗：</strong></p>
             <p class="instruction-text"><strong class="text-red-600">🔴 超重注意！</strong> 一旦超過 163 公克，就與勝利擦肩而過囉！</p>
             <p class="instruction-text"><strong class="text-red-600">💣 炸彈警報！</strong> 接到炸彈 💣 會立即結束遊戲，請務必閃避！</p>
-            <p class="instruction-text"><strong class="text-purple-600">✨ 星塵加倍！</strong> 接到增重火箭 🚀，目前總重量立即 x2！</p>
-
+            <p class="instruction-text"><strong class="text-purple-600">🚀 重量翻倍！</strong> 接到增重火箭，目前總重量立即 x2！</p>
 
             <h3>🎁 挑戰好康 🎁</h3>
-            <p class="reward-point">參加排行榜，挑戰最短時間，贏得三星雙向閃電快充行動電源等大獎！</p>
-            <p class="reward-point">憑遊戲成功過關畫面截圖，可至「微風南山三星體驗館」兌換精美好禮一份！</p>
+            <div class="reward-section">
+                <p class="reward-title">🏆 光速排行榜獎勵</p>
+                <ul class="prize-list">
+                    <li><span class="prize-rank">冠軍：</span>三星雙向閃電快充行動電源 (20,000mAh)</li>
+                    <li><span class="prize-rank">亞軍：</span>深層震動筋膜按摩槍</li>
+                    <li><span class="prize-rank">季軍：</span>不鏽鋼保溫瓶</li>
+                </ul>
+            </div>
+            <div class="reward-section mt-3">
+                <p class="reward-title">🎁 微風南山三星體驗館限定</p>
+                <p class="reward-detail">憑遊戲成功過關截圖，兌換精美好禮！<br><span class="text-xs text-gray-500">(數量有限，送完為止，每人限兌換一次)</span></p>
+            </div>
         </div>
 
 
@@ -545,7 +585,7 @@
         const passRateDisplay = document.getElementById('passRate'); 
 
 
-        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRWoXt98QQPbUdlwqZcmsqWRNFUxUQfmqkPRHCQwPjC0W_SxSnKVVs5r_7VnEjGhq8/exec'; 
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzIrUHOWYlBJ_UENM0pTBn6pSIbMK9fToFyP6ILJr5mLuYXidG_cGXBtCF6bjTWxzSG/exec'; 
         
         const TARGET_WEIGHT = 163;
         let accumulatedWeight = 0;
@@ -570,22 +610,22 @@
         const BASE_SPEED_MULTIPLIER = (((((2.7 * 0.9) * 1.2) * 1.2) * 1.2) * 1.1) * 1.1; 
         const TARGET_FPS_FOR_CONVERSION = 60.0; 
 
-        // 更新物件列表與出現權重 (spawnChance)
         const itemTypes = [
             { name: 'S Pen', emoji: '✏️', weight: 3, type: 'item', base_ch_per_sec: 0.0025 * TARGET_FPS_FOR_CONVERSION, spawnChance: 25 },
             { name: 'Galaxy Buds3 (單耳)', emoji: '🎧', weight: 5, type: 'item', base_ch_per_sec: 0.0030 * TARGET_FPS_FOR_CONVERSION, spawnChance: 25 },
             { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 20 },
-            { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: 0.0058 * TARGET_FPS_FOR_CONVERSION, spawnChance: 15 },
-            { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 }, // 速度快，機率低
-            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: 0.0065 * TARGET_FPS_FOR_CONVERSION, spawnChance: 10 }
+            // 修改：調整 SmartTag2 速度
+            { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: (0.0058 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 15 },
+            { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 }, 
+            // 修改：調整炸彈速度
+            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 }
         ];
         itemTypes.forEach(item => item.speedPixelsPerSecond = 0); 
 
         let fallingObjects = [];
         let spawnTimer = 0;
-        const SPAWN_INTERVAL = 72; // 可以考慮也改成時間依賴
+        const SPAWN_INTERVAL = 72; 
 
-        // 新增音效變數
         let catchSound, bombSound, winSound, loseSound, boosterSound;
         let toneJsInitialized = false;
 
@@ -597,7 +637,6 @@
             bombSound = new Tone.Synth({ oscillator: { type: 'square' }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.2 }, volume: -6 }).toDestination();
             winSound = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.01, decay: 0.3, sustain: 0.2, release: 0.5 } }).toDestination();
             loseSound = new Tone.FMSynth({ harmonicity: 3, modulationIndex: 10, detune: 0, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 }, modulation: { type: "square" }, modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 } }).toDestination();
-            // 新增：增重火箭音效 (可調整)
             boosterSound = new Tone.Synth({ oscillator: { type: 'sawtooth' }, envelope: { attack: 0.01, decay: 0.15, sustain: 0.08, release: 0.2 }, volume: -3 }).toDestination();
             toneJsInitialized = true;
             console.log("Tone.js sounds initialized.");
@@ -607,7 +646,6 @@
             if (itemDisplayGrid) { 
                 itemDisplayGrid.innerHTML = ''; 
                 itemTypes.forEach(item => {
-                    // 不在說明中顯示炸彈，但顯示增重火箭
                     if (item.type === 'item' || item.type === 'weight_booster') { 
                         const itemCard = document.createElement('div');
                         itemCard.className = 'item-card';
@@ -658,7 +696,6 @@
                 ctx.textBaseline = 'bottom'; 
                 ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
                 
-                // 只為普通物品顯示重量標籤
                 if (obj.type === 'item' && obj.weight > 0) {
                     ctx.font = `bold ${weightFontSize}px Arial`;
                     ctx.fillStyle = '#FF0000'; 
@@ -689,24 +726,22 @@
                         if (toneJsInitialized && bombSound) bombSound.triggerAttackRelease("C2", "8n", Tone.now());
                         gameOver("哎呀！接到炸彈了！");
                     } else if (obj.type === 'weight_booster') {
-                        if (toneJsInitialized && boosterSound) boosterSound.triggerAttackRelease("G4", "8n", Tone.now()); // 特殊音效
+                        if (toneJsInitialized && boosterSound) boosterSound.triggerAttackRelease("G4", "8n", Tone.now()); 
                         accumulatedWeight *= 2;
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1)); 
                         currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
-                        statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 重量翻倍！</p>"; // 提示訊息
-                        setTimeout(() => { // 短暫提示後恢復
+                        statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 重量翻倍！</p>"; 
+                        setTimeout(() => { 
                             if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>";
                         }, 1500);
 
-                        // 立即檢查遊戲狀態
                         if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { 
                             gameWin();
                         } else if (accumulatedWeight > TARGET_WEIGHT) {
-                            if (toneJsInitialized && loseSound) loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.1); // 延遲一點播放失敗音效
                             gameOver(`哎呀！重量翻倍後超過目標 ${TARGET_WEIGHT}g 了！`);
                         }
 
-                    } else { // 普通物品
+                    } else { 
                         if (toneJsInitialized && catchSound) catchSound.triggerAttackRelease("C4", "16n", Tone.now());
                         accumulatedWeight += obj.weight;
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1)); 
@@ -714,7 +749,6 @@
                         if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { 
                             gameWin();
                         } else if (accumulatedWeight > TARGET_WEIGHT) {
-                            if (toneJsInitialized && loseSound) loseSound.triggerAttackRelease("A2", "4n", Tone.now());
                             gameOver(`哎呀！超過目標 ${TARGET_WEIGHT}g 了！`);
                         }
                     }
@@ -725,7 +759,6 @@
             }
         }
         
-        // 修改：使用加權隨機生成物件
         function spawnObject() { 
             const totalChance = itemTypes.reduce((sum, item) => sum + item.spawnChance, 0);
             let randomRoll = Math.random() * totalChance;
@@ -739,7 +772,7 @@
                 randomRoll -= item.spawnChance;
             }
 
-            if (!selectedType) { // 備案，理論上不應發生
+            if (!selectedType) { 
                 selectedType = itemTypes[0]; 
             }
             
@@ -831,8 +864,13 @@
         
         function stopGame() {
             isGameRunning = false;
-            if(animationFrameId) cancelAnimationFrame(animationFrameId);
-            startButton.disabled = false; 
+            if(animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null; 
+            }
+            if (startButton) { 
+                startButton.disabled = false; 
+            }
         }
         
         async function recordGameOutcome(isSuccess) {
@@ -852,39 +890,71 @@
             }
         }
 
-
         function gameOver(message) {
-            if (toneJsInitialized && loseSound) loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.1); 
-            stopGame();
+            stopGame(); 
+            if (startButton) {
+                startButton.textContent = "再試一次";
+            }
+            if (toneJsInitialized && loseSound) {
+                if (Tone.context.state !== 'running') {
+                    Tone.start().then(() => {
+                        if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
+                           loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05); 
+                        }
+                    }).catch(err => console.error("Tone.start error in gameOver:", err));
+                } else {
+                    if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
+                        loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05);
+                    }
+                }
+            }
             const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
-            statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${elapsedTime}s</p>`;
-            startButton.textContent = "再試一次";
+            if (statusMessage) {
+                statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${elapsedTime}s</p>`;
+            }
             recordGameOutcome(false); 
         }
 
+
         async function gameWin() { 
-            if (toneJsInitialized && winSound) winSound.triggerAttackRelease("C5", "2n", Tone.now());
             stopGame();
+             if (startButton) {
+                startButton.textContent = "再玩一局";
+            }
+            if (toneJsInitialized && winSound) {
+                 if (Tone.context.state !== 'running') {
+                    Tone.start().then(() => {
+                        if (winSound && typeof winSound.triggerAttackRelease === 'function') {
+                            winSound.triggerAttackRelease("C5", "2n", Tone.now());
+                        }
+                    }).catch(err => console.error("Tone.start error in gameWin:", err));
+                } else {
+                     if (winSound && typeof winSound.triggerAttackRelease === 'function') {
+                        winSound.triggerAttackRelease("C5", "2n", Tone.now());
+                    }
+                }
+            }
             const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
             const winPopupMessage = `
                 <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
                 <p class="text-center mb-3">您的成績：<strong>${elapsedTime} 秒</strong></p>
                 <h4>🎁 挑戰成功好康 & 活動辦法 🎁</h4>
-                <p class="mt-2"><strong>🏆 神捕手排行榜獎勵：</strong></p>
+                <p class="mt-2"><strong>🏆 光速排行榜獎勵：</strong></p>
                 <ul class="text-sm">
                     <li>冠軍：三星雙向閃電快充行動電源 (20,000mAh)</li>
-                    <li>亞軍：MINIPRO 深層震動筋膜按摩槍</li>
-                    <li>季軍：HYDY 不鏽鋼雙層真空保溫瓶</li>
+                    <li>亞軍：深層震動筋膜按摩槍</li>
+                    <li>季軍：不鏽鋼保溫瓶</li>
                 </ul>
-                <p class="text-xs text-gray-600 mb-2">排行榜結算至 2025/6/30 23:59，詳情與得獎名單請見官方粉絲專頁。</p>
+                <p class="text-xs text-gray-600 mb-2">排行榜結算至 2025/6/30 23:59，詳情與得獎名單請見微風南山三星粉專頁。</p>
                 <p><strong>🎁 來店兌換精美小禮：</strong></p>
-                <p class="text-sm">憑此遊戲成功畫面截圖，即可於活動期間 (2025/6/1 - 2025/6/30) 至 <strong>微風南山三星體驗館 (台北市信義區松智路17號二樓)</strong> 兌換「線上挑戰成功精美小禮」一份！</p>
+                <p class="text-sm">憑此遊戲成功畫面截圖，即可於活動期間 (2025/6/1 - 2025/6/30) 至 <strong>微風南山三星體驗館 (台北市信義區松智路17號二樓)</strong>&nbsp;兌換「挑戰成功精美小禮」一份！</p>
                 <p class="text-xs text-gray-500 mb-2">(數量有限，送完為止，每人限兌換一次)</p>
                 <p><strong>⚡ 加碼抽大獎：</strong></p>
-                <p class="text-sm">想再抽三星行動電源？快到我們的<strong>官方粉絲專頁</strong>查看指定貼文，參與互動分享活動！</p>
+                <p class="text-sm">想再抽三星行動電源？快到微風南山三星粉專頁查看指定貼文，參與互動分享活動！</p>
             `;
-            statusMessage.innerHTML = winPopupMessage;
-            startButton.textContent = "再玩一局";
+            if (statusMessage) {
+                statusMessage.innerHTML = winPopupMessage;
+            }
             showScoreForm(parseFloat(elapsedTime)); 
             recordGameOutcome(true); 
         }
@@ -971,7 +1041,7 @@
         function keyDown(e) { 
             if (!isGameRunning && (e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left')) {
                 if (player.speed === 0 && canvas.width > 0) { 
-                     player.speed = isTouchDevice() ? canvas.width * 0.015 : canvas.width * 0.02; 
+                     player.speed = isTouchDevice() ? canvas.width * 0.018 : canvas.width * 0.024; 
                 }
                 if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
                 else player.dx = -player.speed;
@@ -1121,7 +1191,8 @@
             player.height = canvas.height * 0.06; 
             player.x = canvas.width / 2 - player.width / 2; 
             player.y = canvas.height - player.height - (canvas.height * 0.03); 
-            if (isTouchDevice()) player.speed = canvas.width * 0.015; else player.speed = canvas.width * 0.02; 
+            // 更新後的移動速度因子
+            if (isTouchDevice()) player.speed = canvas.width * 0.018; else player.speed = canvas.width * 0.024; 
             player.fontSize = canvas.width * 0.12; 
 
             itemTypes.forEach(it => { 
