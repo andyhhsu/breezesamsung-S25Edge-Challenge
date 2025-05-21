@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxy S25 Edge 彩蛋動畫</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            background-color: #111827; /* 深色背景，突顯效果 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+
+        .easter-egg-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            visibility: hidden; /* 初始隱藏，由JS控制顯示 */
+            animation: fadeInContainer 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInContainer {
+            to {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        .phone-image-container {
+            position: relative;
+            margin-bottom: 20px; /* 稍微減少手機和文字間的距離 */
+        }
+
+        .phone-image {
+            width: 150px; /* 調整手機圖片大小 */
+            height: auto;
+            border-radius: 20px; /* 圓角 */
+            box-shadow: 0 0 30px rgba(79, 70, 229, 0.7); /* 發光效果 */
+            opacity: 0;
+            transform: scale(0.5);
+            animation: popInPhone 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.5s forwards;
+        }
+
+        @keyframes popInPhone {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-15deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .shine-effect {
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            animation: shine 2s ease-in-out 1.5s forwards;
+            opacity: 0;
+        }
+
+        @keyframes shine {
+            0% { left: -150%; opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { left: 150%; opacity: 0; }
+        }
+
+        .phone-text {
+            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 15px #4f46e5, 0 0 25px #4f46e5;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInText 1s ease-out 1.8s forwards;
+        }
+
+        @keyframes slideInText {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .particles-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1px;
+            height: 1px;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #facc15;
+            border-radius: 50%;
+            opacity: 0;
+            animation: burst 1.5s ease-out forwards;
+        }
+
+        @keyframes burst {
+            0% { opacity: 1; transform: translate(0, 0) scale(1); }
+            100% { opacity: 0; transform: var(--transform-end) scale(0); }
+        }
+
+        .common-celebration-message { /* 通用的恭喜訊息 */
+            margin-top: 10px; /* 減少上邊距，使文字上移 */
+            font-size: 1.2rem;
+            color: #d1d5db;
+            opacity: 0;
+            animation: fadeInMessage 1s ease-out 3.5s forwards;
+        }
+
+        @keyframes fadeInMessage {
+            to { opacity: 1; }
+        }
+
+        /* 兌換狀態訊息容器 */
+        .redemption-status-container {
+            margin-top: 10px; /* 減少上邊距，使文字上移 */
+            opacity: 0;
+            animation: fadeInStatus 1s ease-out 4.0s forwards; /* 在通用恭喜訊息後出現 */
+            line-height: 1.7;
+        }
+        
+        @keyframes fadeInStatus {
+            to { opacity: 1; }
+        }
+
+        .gift-available-message, .gift-claimed-message {
+            display: none; /* 預設隱藏，由 JS 控制顯示哪個 */
+        }
+
+        .gift-available-message p, .gift-claimed-message p {
+            margin-bottom: 8px;
+        }
+
+        /* 兌換碼樣式不再需要，但保留以防未來變化，或者可以完全刪除 .redemption-code */
+        .redemption-code {
+            font-weight: bold;
+            color: #facc15; 
+            font-size: 1.1em;
+        }
+
+        .disclaimer-text {
+            font-size: 0.9rem;
+            color: #9ca3af; /* 稍暗的灰色 */
+        }
+        
+        .highlight-text { 
+            color: #fde047; 
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="easter-egg-container" id="easterEggContainer">
+        <div class="phone-image-container">
+            <img src="https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png" alt="Galaxy S25 Edge 手機圖片" class="phone-image" id="phoneImage" onerror="this.onerror=null;this.src='https://placehold.co/200x400/333/FFF?text=Image+Not+Found';">
+            <div class="shine-effect"></div>
+        </div>
+        <h1 class="phone-text">Galaxy S25 Edge</h1>
+        
+        <p class="common-celebration-message" id="commonCelebrationMessage">🎉 恭喜發現彩蛋！ 🎉</p>
+
+        <div class="redemption-status-container" id="redemptionStatusContainer">
+            <div id="giftAvailableMessage" class="gift-available-message">
+                <p>憑此畫面<br>可至微風南山三星旗艦館兌換特殊小禮！ (限量五名)</p>
+                <p class="disclaimer-text">*兌換時需由店員核對並確認資格*</p> 
+            </div>
+
+            <div id="giftClaimedMessage" class="gift-claimed-message">
+                <p class="highlight-text text-xl">所有特別版小禮物已被兌換完畢！</p>
+                <p class="mt-2">感謝您的參與，希望您依然喜歡這段驚喜動畫！</p>
+            </div>
+        </div>
+
+        <div class="particles-container" id="particlesContainer">
+            </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('easterEggContainer');
+            const particlesContainer = document.getElementById('particlesContainer');
+            const numParticles = 30;
+
+            container.style.opacity = '0'; 
+            container.style.visibility = 'visible';
+
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const colors = ['#facc15', '#60a5fa', '#f87171', '#34d399', '#a78bfa'];
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 8 + 4;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                const angle = Math.random() * 360;
+                const distance = Math.random() * 150 + 100;
+                const x = Math.cos(angle * Math.PI / 180) * distance;
+                const y = Math.sin(angle * Math.PI / 180) * distance;
+                particle.style.setProperty('--transform-end', `translate(${x}px, ${y}px)`);
+                particle.style.animationDelay = `${2.5 + Math.random() * 0.5}s`;
+                particlesContainer.appendChild(particle);
+            }
+
+            function checkGiftAvailability() {
+                // 人工核銷版本：固定顯示可兌換狀態。
+                return true; 
+            }
+
+            // generateMockRedemptionCode 函數不再需要，已移除
+            // const giftAvailable = checkGiftAvailability(); // 這行不再需要 giftAvailable 變數，因為總顯示可兌換
+            const giftAvailableMessageDiv = document.getElementById('giftAvailableMessage');
+            const giftClaimedMessageDiv = document.getElementById('giftClaimedMessage');
+            
+            // 因為總是顯示可兌換狀態，直接設定
+            giftAvailableMessageDiv.style.display = 'block';
+            giftClaimedMessageDiv.style.display = 'none';
+            // document.getElementById('redemptionCodeElem').textContent = generateMockRedemptionCode(); // 這行已移除
+
+            // 更新 disclaimer-text 的內容，移除 "兌換碼" 字眼
+            const disclaimerTextElement = giftAvailableMessageDiv.querySelector('.disclaimer-text');
+            if (disclaimerTextElement) {
+                disclaimerTextElement.textContent = '*兌換時需由店員核對並確認資格*';
+            }
+
+        });
+    </script>
+</body>
+</html>
