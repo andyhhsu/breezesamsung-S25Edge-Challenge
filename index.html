@@ -132,10 +132,10 @@
         }
         #gameInstructions .easter-egg-hint {
             font-style: italic;
-            color: #581c87; /* A slightly mysterious purple */
+            color: #581c87; 
             margin-top: 0.75rem;
             padding: 0.5rem;
-            background-color: #ede9fe; /* Lighter purple background */
+            background-color: #ede9fe; 
             border-left: 3px solid #7c3aed;
             font-size: 0.85rem;
             border-radius: 0.25rem;
@@ -201,7 +201,11 @@
             display: block; 
             max-width: 100%;
             height: auto;
-            touch-action: none; /* Prevent default touch actions like scrolling when interacting with canvas */
+            touch-action: none; 
+            cursor: grab; 
+        }
+        canvas:active {
+            cursor: grabbing;
         }
         .info-bar {
             display: flex;
@@ -224,11 +228,11 @@
         }
         #gameStatsDisplay { 
             display: flex;
-            justify-content: space-around;
+            justify-content: space-around; 
             align-items: center; 
             flex-wrap: wrap; 
             width: 100%;
-            max-width: 400px; 
+            max-width: 450px; 
             margin-top: 0.5rem;
             margin-bottom: 0.25rem;
             font-size: 0.8rem;
@@ -453,7 +457,6 @@
             justify-content: center;
             text-align: center;
             visibility: hidden; /* Initial hidden, controlled by JS */
-            /* animation: fadeInContainer 0.5s ease-out forwards; /* Applied by JS */
         }
 
         @keyframes fadeInContainer {
@@ -475,7 +478,6 @@
             box-shadow: 0 0 30px rgba(79, 70, 229, 0.7); 
             opacity: 0;
             transform: scale(0.5);
-            /* animation: popInPhone 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.5s forwards; /* Applied by JS */
         }
 
         @keyframes popInPhone {
@@ -497,7 +499,6 @@
             height: 100%;
             background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
             transform: skewX(-25deg);
-            /* animation: shine 2s ease-in-out 1.5s forwards; /* Applied by JS */
             opacity: 0;
         }
 
@@ -515,7 +516,6 @@
             text-shadow: 0 0 15px #4f46e5, 0 0 25px #4f46e5;
             opacity: 0;
             transform: translateY(30px);
-            /* animation: slideInText 1s ease-out 1.8s forwards; /* Applied by JS */
         }
 
         @keyframes slideInText {
@@ -535,10 +535,9 @@
             position: absolute;
             width: 8px;
             height: 8px;
-            background-color: #facc15; /* Default, will be overridden by JS */
+            background-color: #facc15; 
             border-radius: 50%;
             opacity: 0;
-            /* animation: burst 1.5s ease-out forwards; /* Applied by JS with delay */
         }
 
         @keyframes burst {
@@ -551,7 +550,6 @@
             font-size: 1.2rem;
             color: #d1d5db;
             opacity: 0;
-            /* animation: fadeInMessage 1s ease-out 3.5s forwards; /* Applied by JS */
         }
 
         @keyframes fadeInMessage {
@@ -561,7 +559,6 @@
         .redemption-status-container {
             margin-top: 10px; 
             opacity: 0;
-            /* animation: fadeInStatus 1s ease-out 4.0s forwards; /* Applied by JS */
             line-height: 1.7;
         }
         
@@ -577,7 +574,7 @@
             margin-bottom: 8px;
         }
 
-        .redemption-code { /* Not currently used in new HTML but kept for reference */
+        .redemption-code { 
             font-weight: bold;
             color: #facc15; 
             font-size: 1.1em;
@@ -640,6 +637,10 @@
                 font-size: 0.7rem;
                 max-width: 95%; 
             }
+            .touch-hint { /* Responsive hint */
+                font-size: 0.65rem;
+                padding: 0.1rem 0.2rem;
+            }
             #statusMessage {
                 font-size: 0.85rem; 
                 min-height: 60px; 
@@ -655,9 +656,6 @@
              .control-button { /* For arrow buttons */
                 padding: 8px 0; 
                 font-size: 1.6rem;
-            }
-            #touchSliderContainer { /* Responsive for slider */
-                margin-bottom: 5px; /* Ensure space from bottom controls if they overlap */
             }
              #gameAndFormContainer {
                 margin-bottom: 70px; 
@@ -730,19 +728,11 @@
                     <span>總成功數: <span id="totalWins">--</span></span>
                     <span>總失敗數: <span id="totalLosses">--</span></span>
                     <span>過關率: <span id="passRate">--</span>%</span>
-                </div>
+                    </div>
                 <canvas id="gameCanvas"></canvas>
                 <div id="statusMessage"></div> 
                 <button id="startButton" class="game-button">開始遊戲</button>
-                <div id="touchSliderContainer" class="w-full max-w-xs mx-auto mt-4 mb-2"> <p class="text-center text-xs text-sky-700 mb-1">或使用下方滑桿操控</p>
-                    <div id="touchSlider" class="h-8 bg-slate-300 rounded-full cursor-pointer relative flex items-center justify-center touch-manipulation" style="touch-action: pan-y;"> <div id="touchSliderThumb" class="w-10 h-10 bg-blue-500 rounded-full shadow-md absolute flex items-center justify-center" style="left: 50%; transform: translateX(-50%); top: -4px; pointer-events: none;">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
-                                <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707V19.5a.75.75 0 0 0 .5.707A9.735 9.735 0 0 0 6 21a9.707 9.707 0 0 0 5.25-1.533.75.75 0 0 0 0-1.239V5.772a.75.75 0 0 0 0-1.239Zm1.5 0a.75.75 0 0 0 0 1.239v12.456a.75.75 0 0 0 0 1.239A9.707 9.707 0 0 0 18 21a9.735 9.735 0 0 0 3.25-.555.75.75 0 0 0 .5-.707V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533Z" />
-                            </svg>
-                        </div>
-                    </div>
                 </div>
-            </div>
             <div id="scoreFormContainer" style="display: none;">
             </div>
         </div>
@@ -790,7 +780,7 @@
         const statusMessage = document.getElementById('statusMessage');
         const startButton = document.getElementById('startButton');
         
-        const touchControlsUI = document.getElementById('touchControls'); // The container for arrow buttons
+        const touchControlsUI = document.getElementById('touchControls'); 
         const leftButton = document.getElementById('leftButton');
         const rightButton = document.getElementById('rightButton');
 
@@ -803,13 +793,7 @@
         const totalLossesDisplay = document.getElementById('totalLosses'); 
         const passRateDisplay = document.getElementById('passRate'); 
 
-        // New Easter Egg elements
         const newEasterEggOverlay = document.getElementById('newEasterEggOverlay');
-
-        // Touch Slider elements
-        const touchSlider = document.getElementById('touchSlider');
-        const touchSliderThumb = document.getElementById('touchSliderThumb');
-
 
         const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzIrUHOWYlBJ_UENM0pTBn6pSIbMK9fToFyP6ILJr5mLuYXidG_cGXBtCF6bjTWxzSG/exec'; 
         
@@ -837,10 +821,8 @@
             player.imageLoaded = true;
             console.log("Player image loaded successfully from GitHub.");
             if (!isGameRunning && canvas.width > 0) { 
-                handleResize(); 
-                clearCanvas();
-                drawPlayer();
-                updateSliderThumbPosition(); // Initial thumb position
+                handleResize(); // Sets player.y to its base
+                // No need to call clearCanvas/drawPlayer here, idleAnimationLoop will handle it
             }
         };
         player.image.onerror = () => {
@@ -852,9 +834,6 @@
                  console.log("Fallback placeholder image loaded.");
                 if (!isGameRunning && canvas.width > 0) {
                     handleResize();
-                    clearCanvas();
-                    drawPlayer();
-                    updateSliderThumbPosition(); // Initial thumb position
                 }
             };
             player.image.onerror = () => { 
@@ -862,6 +841,10 @@
                 player.imageLoaded = false;
             };
         };
+
+        // Idle Animation Variables
+        let isIdleAnimating = false;
+        let idleAnimationFrameId = null;
 
 
         const BASE_SPEED_MULTIPLIER = (((((2.7 * 0.9) * 1.2) * 1.2) * 1.2) * 1.1) * 1.1; 
@@ -994,20 +977,22 @@
             }
         }
 
-        function drawPlayer() { 
+        function drawPlayer(bounceOffsetY = 0) { // Added bounceOffsetY parameter
             if (!ctx) return;
+            const currentY = player.y + bounceOffsetY; // Apply bounce for drawing
+
             if (player.imageLoaded && player.image.complete && player.image.naturalHeight !== 0) {
-                ctx.drawImage(player.image, player.x, player.y, player.width, player.height);
+                ctx.drawImage(player.image, player.x, currentY, player.width, player.height);
             } else if (player.image.src.includes('placehold.co') && player.imageLoaded) { 
-                 ctx.drawImage(player.image, player.x, player.y, player.width, player.height);
+                 ctx.drawImage(player.image, player.x, currentY, player.width, player.height);
             } else if (!player.imageLoaded && player.image.src.includes('placehold.co')) {
                 ctx.fillStyle = '#a5b4fc'; 
-                ctx.fillRect(player.x, player.y, player.width, player.height);
+                ctx.fillRect(player.x, currentY, player.width, player.height);
                 ctx.fillStyle = '#1e3a8a';
                 ctx.font = `${Math.min(player.width * 0.25, player.height * 0.5)}px Noto Sans TC`; 
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                ctx.fillText("S25", player.x + player.width / 2, player.y + player.height / 2);
+                ctx.fillText("S25", player.x + player.width / 2, currentY + player.height / 2);
             }
         }
 
@@ -1069,7 +1054,6 @@
             player.x += player.dx;
             if (player.x < 0) player.x = 0;
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
-            updateSliderThumbPosition(); 
         }
 
         function updateFallingObjects(deltaTime) {
@@ -1103,7 +1087,7 @@
                              statusMessage.innerHTML = "<p class='text-center font-bold'>✨ 彩蛋發現！ ✨</p>";
                         }
 
-                        showNewEasterEgg(); // Show the new easter egg animation
+                        showNewEasterEgg(); 
 
                         fallingObjects.splice(i, 1); 
                         return; 
@@ -1241,7 +1225,7 @@
                 }
                 updatePlayerPosition(); 
                 updateFallingObjects(clampedDeltaTime); 
-                drawPlayer();
+                drawPlayer(); // Draws player at its base player.y
                 drawFallingObjects();
             } catch (error) {
                 console.error("Error in gameLoop: Name:", error.name, "Message:", error.message, "Stack:", error.stack, "Full error object:", error);
@@ -1251,9 +1235,52 @@
             
             animationFrameId = requestAnimationFrame(gameLoop);
         }
+        
+        // Idle Animation Loop
+        function idleAnimationLoop() {
+            if (!isIdleAnimating) return; 
+
+            if (!canvas.width || !player.width || !player.imageLoaded) {
+                idleAnimationFrameId = requestAnimationFrame(idleAnimationLoop); 
+                return;
+            }
+            
+            const bounceFrequency = 1.5; 
+            const bounceAmplitude = Math.max(1, canvas.height * 0.0035); 
+            const elapsedTime = performance.now() / 1000; 
+            const bounceOffset = Math.sin(elapsedTime * bounceFrequency * 2 * Math.PI) * bounceAmplitude;
+
+            clearCanvas();
+            drawPlayer(bounceOffset); // Pass bounce offset to drawPlayer
+
+            idleAnimationFrameId = requestAnimationFrame(idleAnimationLoop);
+        }
+
+        function startIdleAnimation() {
+            if (isIdleAnimating) return;
+            isIdleAnimating = true;
+            if(idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId); // Clear previous if any
+            idleAnimationLoop();
+        }
+
+        function stopIdleAnimation() {
+            isIdleAnimating = false;
+            if (idleAnimationFrameId) {
+                cancelAnimationFrame(idleAnimationFrameId);
+                idleAnimationFrameId = null;
+            }
+            // Redraw player in static position if canvas is ready
+            if (canvas.width > 0 && player.width > 0 && player.imageLoaded) {
+                 clearCanvas();
+                 drawPlayer(); // Draw without bounce
+            }
+        }
+
 
         function startGame() {
             if (isGameRunning) return;
+            stopIdleAnimation(); // Stop idle animation when game starts
+
             if (!toneJsInitialized) { 
                 initializeSounds(); 
             } else if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') { 
@@ -1269,11 +1296,12 @@
             currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
             fallingObjects = [];
             if (player.imageLoaded || player.image.src.includes('placehold.co')) {
-                 player.x = canvas.width / 2 - player.width / 2;
+                 player.x = canvas.width / 2 - player.width / 2; // Reset player x position
+                 player.y = canvas.height - player.height - (canvas.height * 0.03); // Reset player y base position
             } else { 
                  player.x = canvas.width / 2 - (canvas.width * 0.12) / 2; 
+                 player.y = canvas.height - (canvas.width * 0.12 / (player.image.naturalWidth / player.image.naturalHeight || 0.5)) - (canvas.height * 0.03);
             }
-            updateSliderThumbPosition(); // Set initial thumb position for new game
 
             statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; 
             startButton.textContent = "遊戲進行中";
@@ -1294,7 +1322,7 @@
             fetchGameStats(); 
         }
         
-        function stopGame() {
+        function stopGame() { // Called on game over, win, or manual stop (like easter egg)
             isGameRunning = false;
             if(animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
@@ -1302,6 +1330,9 @@
             }
             if (startButton) { 
                 startButton.disabled = false; 
+            }
+            if (canvas.width > 0 && player.width > 0) { // Ensure things are ready before starting idle anim
+                 startIdleAnimation(); // Restart idle animation
             }
         }
         
@@ -1499,7 +1530,6 @@
                 return;
             }
 
-            // 重置動畫元素狀態
             container.style.animation = 'none';
             phoneImage.style.animation = 'none';
             shineEffect.style.animation = 'none';
@@ -1507,10 +1537,8 @@
             commonMessage.style.animation = 'none';
             redemptionStatus.style.animation = 'none';
             
-            // 強制重繪以確保動畫重置生效
             void container.offsetWidth; 
 
-            // 恢復初始狀態以便動畫重新播放
             container.style.visibility = 'hidden';
             container.style.opacity = '0';
             phoneImage.style.opacity = '0';
@@ -1522,14 +1550,12 @@
             commonMessage.style.opacity = '0';
             redemptionStatus.style.opacity = '0';
 
-            particlesContainer.innerHTML = ''; // 清除舊的粒子
+            particlesContainer.innerHTML = ''; 
 
-            overlay.style.display = 'flex'; // 顯示覆蓋層
+            overlay.style.display = 'flex'; 
 
-            // 延遲後啟動動畫，確保樣式已重置
             setTimeout(() => {
                 container.style.animation = 'fadeInContainer 0.5s ease-out forwards';
-                
                 phoneImage.style.animation = 'popInPhone 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.5s forwards';
                 shineEffect.style.animation = 'shine 2s ease-in-out 1.5s forwards';
                 phoneText.style.animation = 'slideInText 1s ease-out 1.8s forwards';
@@ -1596,7 +1622,7 @@
             if (isGameRunning || (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co')))) {
                 e.preventDefault(); 
                 const touch = e.touches[0];
-                movePlayerToTouch(touch); // Initial move
+                movePlayerToTouch(touch); 
                 player.dx = 0; 
             }
         }
@@ -1609,7 +1635,7 @@
             }
         }
         
-        function movePlayerToTouch(touch) { // Used by canvas drag
+        function movePlayerToTouch(touch) { 
             const rect = canvas.getBoundingClientRect();
             const touchX = touch.clientX - rect.left;
             let newPlayerX = touchX - player.width / 2;
@@ -1618,62 +1644,10 @@
             if (newPlayerX + player.width > canvas.width) newPlayerX = canvas.width - player.width;
             
             player.x = newPlayerX;
-            updateSliderThumbPosition(); 
 
             if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                clearCanvas();
-                drawPlayer();
+                 // No separate draw needed here if idleAnimationLoop is running and handles pre-game player drawing
             }
-        }
-
-        // Touch Slider Control Logic
-        function updateSliderThumbPosition() {
-            if (touchSlider && touchSliderThumb && canvas.width > 0 && player.width > 0) { // Ensure player.width is positive
-                const playerCenterX = player.x + player.width / 2;
-                let leftPercentage = (playerCenterX / canvas.width) * 100;
-                const thumbWidthPercentage = (touchSliderThumb.offsetWidth / touchSlider.offsetWidth) * 100;
-                
-                leftPercentage -= thumbWidthPercentage / 2; // Center the thumb
-                leftPercentage = Math.max(0, Math.min(100 - thumbWidthPercentage, leftPercentage)); // Clamp
-
-                touchSliderThumb.style.left = `${leftPercentage}%`;
-            } else if (touchSliderThumb) { // Default to center if canvas/player not ready
-                 touchSliderThumb.style.left = `calc(50% - ${touchSliderThumb.offsetWidth / 2}px)`;
-            }
-        }
-
-        if (touchSlider) {
-            const sliderTouchHandler = (e) => {
-                if (isGameRunning || (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co')))) {
-                    // Allow vertical scroll on the page, but horizontal drag on slider controls player
-                    if (e.cancelable && Math.abs(e.touches[0].clientX - (e.targetTouches[0]?.clientX || e.touches[0].clientX)) > Math.abs(e.touches[0].clientY - (e.targetTouches[0]?.clientY || e.touches[0].clientY))) {
-                        e.preventDefault(); // Prevent horizontal scroll if primarily horizontal movement
-                    }
-
-                    const touch = e.touches[0] || e.changedTouches[0];
-                    const sliderRect = touchSlider.getBoundingClientRect();
-                    let touchXInSlider = touch.clientX - sliderRect.left;
-
-                    touchXInSlider = Math.max(0, Math.min(sliderRect.width, touchXInSlider));
-                    
-                    let targetPlayerCenterX = (touchXInSlider / sliderRect.width) * canvas.width;
-                    let newPlayerX = targetPlayerCenterX - player.width / 2;
-
-                    if (newPlayerX < 0) newPlayerX = 0;
-                    if (newPlayerX + player.width > canvas.width) newPlayerX = canvas.width - player.width;
-                    
-                    player.x = newPlayerX;
-                    player.dx = 0; 
-                    updateSliderThumbPosition(); 
-
-                    if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                        clearCanvas();
-                        drawPlayer();
-                    }
-                }
-            };
-            touchSlider.addEventListener('touchstart', sliderTouchHandler, { passive: false });
-            touchSlider.addEventListener('touchmove', sliderTouchHandler, { passive: false });
         }
 
 
@@ -1686,9 +1660,8 @@
                 else player.dx = -player.speed;
                 
                 if (player.dx !== 0 && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) { 
-                    updatePlayerPosition(); 
-                    clearCanvas(); 
-                    drawPlayer(); 
+                    updatePlayerPosition(); // Update position based on dx
+                    // No separate draw needed here if idleAnimationLoop is running
                 }
                 return;
             }
@@ -1699,11 +1672,7 @@
         function keyUp(e) { 
             if ( e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left' ) {
                 player.dx = 0;
-                if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                    clearCanvas();
-                    drawPlayer();
-                    updateSliderThumbPosition(); 
-                }
+                 // No separate draw needed here if idleAnimationLoop is running
             }
         }
 
@@ -1711,10 +1680,8 @@
         document.addEventListener('keyup', keyUp);
         startButton.addEventListener('click', startGame);
 
-        // Canvas direct touch listeners
         canvas.addEventListener('touchstart', handleCanvasTouchStart, { passive: false });
         canvas.addEventListener('touchmove', handleCanvasTouchMove, { passive: false });
-        // canvas.addEventListener('touchend', handleTouchEnd, { passive: false }); // Optional: handle touchend on canvas if needed
 
 
         function isTouchDevice() { 
@@ -1731,7 +1698,9 @@
                 if(isGameRunning) player.dx = -player.speed; 
                  else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { 
                     player.dx = -player.speed;
-                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; 
+                    updatePlayerPosition(); 
+                    // No separate draw if idle anim handles it
+                    player.dx = 0; 
                 }
             }); 
             leftButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
@@ -1742,12 +1711,14 @@
                 if(isGameRunning) player.dx = player.speed; 
                  else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { 
                     player.dx = player.speed;
-                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; 
+                    updatePlayerPosition(); 
+                    // No separate draw if idle anim handles it
+                    player.dx = 0; 
                 }
             }); 
             rightButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
         } else {
-            touchControlsUI.style.display = 'none'; // Hide arrow buttons if not a touch device
+            touchControlsUI.style.display = 'none'; 
         }
         
         async function fetchGameStats() {
@@ -1824,8 +1795,8 @@
                 const listItem = document.createElement('li');
                 let rankDisplay;
                 if (index === 0) rankDisplay = '🥇'; 
-                else if (index === 1) rankDisplay = '�'; 
-                else if (index === 2) rankDisplay = '🥉'; 
+                else if (index === 1) rankDisplay = '2️⃣'; 
+                else if (index === 2) rankDisplay = '3️⃣'; 
                 else rankDisplay = `${index + 1}.`;
                 
                 listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="name">${escapeHTML(score.name || '匿名')}</span> <span class="time">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`; 
@@ -1853,6 +1824,7 @@
         }
 
         function handleResize() { 
+            stopIdleAnimation(); // Stop during resize
             const gameArea = document.getElementById('gameContainer');
             const availableWidth = gameArea ? Math.min(gameArea.clientWidth - 16, window.innerWidth - 30) : window.innerWidth * 0.9;
             
@@ -1888,7 +1860,7 @@
             if (infoBar) infoBar.style.maxWidth = `${canvas.width}px`; 
 
             player.x = canvas.width / 2 - player.width / 2; 
-            player.y = canvas.height - player.height - (canvas.height * 0.03); 
+            player.y = canvas.height - player.height - (canvas.height * 0.03); // Set base Y
 
             if (isTouchDevice()) player.speed = canvas.width * 0.018; else player.speed = canvas.width * 0.024; 
 
@@ -1897,11 +1869,13 @@
             });
 
             if (!isGameRunning) { 
-                clearCanvas();
-                if (canvas.width > 0 && canvas.height > 0) drawPlayer(); 
+                clearCanvas(); // Clear before restarting idle anim
+                drawPlayer();    // Draw one static frame at new position
+                startIdleAnimation(); // Restart with new dimensions/positions
                 startButton.disabled = false; 
+            } else {
+                // If game is running, gameLoop will handle redraw with new dimensions
             }
-            updateSliderThumbPosition(); // Update thumb on resize
         }
 
 
@@ -1933,9 +1907,12 @@
                         startButton.textContent = "重新開始";
                         startButton.disabled = false;
                     }
+                    if (!isGameRunning) startIdleAnimation(); // Resume idle if game not running
                 });
             }
-            updateSliderThumbPosition(); // Set initial thumb position after everything is loaded
+            if (!isGameRunning && player.imageLoaded) { // Start idle animation on load if image is ready
+                startIdleAnimation();
+            }
         }); 
         window.addEventListener('resize', handleResize);
 
@@ -1946,4 +1923,3 @@
     </script>
 </body>
 </html>
-�
