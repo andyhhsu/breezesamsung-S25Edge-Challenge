@@ -130,6 +130,16 @@
         #gameInstructions .text-red-600 { 
             color: #dc2626; 
         }
+        #gameInstructions .easter-egg-hint {
+            font-style: italic;
+            color: #581c87; /* A slightly mysterious purple */
+            margin-top: 0.75rem;
+            padding: 0.5rem;
+            background-color: #ede9fe; /* Lighter purple background */
+            border-left: 3px solid #7c3aed;
+            font-size: 0.85rem;
+            border-radius: 0.25rem;
+        }
         #gameInstructions .reward-section {
             margin-top: 0.75rem;
         }
@@ -316,7 +326,7 @@
             transform: translateY(0);
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
         }
-        #touchControls {
+        #touchControls { /* For arrow buttons */
             display: none; 
             position: fixed; 
             bottom: 0;
@@ -332,7 +342,7 @@
             border-top: 1px solid rgba(191, 219, 254, 0.6); 
             pointer-events: none; 
         }
-        .control-button {
+        .control-button { /* For arrow buttons */
             background-color: rgba(59, 130, 246, 0.8); 
             color: white;
             padding: 10px 0; 
@@ -642,9 +652,12 @@
              #leaderboardContainer, #scoreFormContainer {
                 max-width: 95%;
             }
-             .control-button {
+             .control-button { /* For arrow buttons */
                 padding: 8px 0; 
                 font-size: 1.6rem;
+            }
+            #touchSliderContainer { /* Responsive for slider */
+                margin-bottom: 5px; /* Ensure space from bottom controls if they overlap */
             }
              #gameAndFormContainer {
                 margin-bottom: 70px; 
@@ -688,6 +701,8 @@
             <p class="instruction-text"><strong class="text-red-600">🔴 超重警告！</strong> 一旦超過 163 公克，你的 S25 Edge 就會「甜蜜超載」囉！</p>
             <p class="instruction-text"><strong class="text-red-600">💣 系統崩潰！</strong> 接到炸彈 💣 會導致 S25 Edge 系統過熱，遊戲立即結束，請務必閃避！</p>
             <p class="instruction-text"><strong class="text-purple-600">🚀 AI 加速！</strong> 接到增重火箭，S25 Edge 的 AI 配重系統將啟動，目前總重量立即 x2！</p>
+            <p class="instruction-text easter-egg-hint">據說，在極為罕見的情況下，當宇宙的粒子完美對齊時，Galaxy S25 Edge 會展現出超越輕巧的... 獨特光芒 ✨。但這只是個傳說，對吧？</p>
+            
             <h3>🎁 挑戰好康 🎁</h3>
             <div class="reward-section">
                 <p class="reward-title">🏆 光速排行榜獎勵</p>
@@ -719,6 +734,14 @@
                 <canvas id="gameCanvas"></canvas>
                 <div id="statusMessage"></div> 
                 <button id="startButton" class="game-button">開始遊戲</button>
+                <div id="touchSliderContainer" class="w-full max-w-xs mx-auto mt-4 mb-2"> <p class="text-center text-xs text-sky-700 mb-1">或使用下方滑桿操控</p>
+                    <div id="touchSlider" class="h-8 bg-slate-300 rounded-full cursor-pointer relative flex items-center justify-center touch-manipulation" style="touch-action: pan-y;"> <div id="touchSliderThumb" class="w-10 h-10 bg-blue-500 rounded-full shadow-md absolute flex items-center justify-center" style="left: 50%; transform: translateX(-50%); top: -4px; pointer-events: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
+                                <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707V19.5a.75.75 0 0 0 .5.707A9.735 9.735 0 0 0 6 21a9.707 9.707 0 0 0 5.25-1.533.75.75 0 0 0 0-1.239V5.772a.75.75 0 0 0 0-1.239Zm1.5 0a.75.75 0 0 0 0 1.239v12.456a.75.75 0 0 0 0 1.239A9.707 9.707 0 0 0 18 21a9.735 9.735 0 0 0 3.25-.555.75.75 0 0 0 .5-.707V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="scoreFormContainer" style="display: none;">
             </div>
@@ -754,8 +777,7 @@
     </div>
 
 
-    <div id="touchControls" class="controls">
-        <button id="leftButton" class="control-button">⬅️</button>
+    <div id="touchControls" class="controls"> <button id="leftButton" class="control-button">⬅️</button>
         <button id="rightButton" class="control-button">➡️</button>
     </div>
 
@@ -767,9 +789,11 @@
         const timerDisplay = document.getElementById('timerDisplay');
         const statusMessage = document.getElementById('statusMessage');
         const startButton = document.getElementById('startButton');
-        const touchControls = document.getElementById('touchControls');
+        
+        const touchControlsUI = document.getElementById('touchControls'); // The container for arrow buttons
         const leftButton = document.getElementById('leftButton');
         const rightButton = document.getElementById('rightButton');
+
         const scoreFormContainer = document.getElementById('scoreFormContainer');
         const leaderboardContainer = document.getElementById('leaderboardContainer');
         const leaderboardList = document.getElementById('leaderboardList');
@@ -781,7 +805,10 @@
 
         // New Easter Egg elements
         const newEasterEggOverlay = document.getElementById('newEasterEggOverlay');
-        // const closeNewEasterEggButton = document.getElementById('closeNewEasterEggButton'); // Defined and event listener added in window.onload
+
+        // Touch Slider elements
+        const touchSlider = document.getElementById('touchSlider');
+        const touchSliderThumb = document.getElementById('touchSliderThumb');
 
 
         const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzIrUHOWYlBJ_UENM0pTBn6pSIbMK9fToFyP6ILJr5mLuYXidG_cGXBtCF6bjTWxzSG/exec'; 
@@ -813,6 +840,7 @@
                 handleResize(); 
                 clearCanvas();
                 drawPlayer();
+                updateSliderThumbPosition(); // Initial thumb position
             }
         };
         player.image.onerror = () => {
@@ -826,6 +854,7 @@
                     handleResize();
                     clearCanvas();
                     drawPlayer();
+                    updateSliderThumbPosition(); // Initial thumb position
                 }
             };
             player.image.onerror = () => { 
@@ -858,18 +887,18 @@
             { 
                 name: 'Galaxy S25 Edge 彩蛋', 
                 emoji: '✨', 
-                imageSrc: S25_IMAGE_URL, // This will be used by the falling object renderer if imageObj fails
-                imageObj: new Image(), // This is for the falling object renderer
-                imageLoaded: false,    // For the falling object renderer
+                imageSrc: S25_IMAGE_URL, 
+                imageObj: new Image(), 
+                imageLoaded: false,    
                 type: 'easter_egg', 
                 base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION, 
-                spawnChance: 0.1 // MODIFIED: Easter egg spawn chance reduced from 1 to 0.1 (approx 1/1000)
+                spawnChance: 0.1 
             }
         ];
         itemTypes.forEach(item => item.speedPixelsPerSecond = 0); 
 
         const easterEggItemDefinition = itemTypes.find(item => item.type === 'easter_egg');
-        if (easterEggItemDefinition && easterEggItemDefinition.imageObj) { // Check if imageObj exists
+        if (easterEggItemDefinition && easterEggItemDefinition.imageObj) { 
             easterEggItemDefinition.imageObj.src = easterEggItemDefinition.imageSrc;
             easterEggItemDefinition.imageObj.onload = () => {
                 easterEggItemDefinition.imageLoaded = true;
@@ -1038,9 +1067,9 @@
 
         function updatePlayerPosition() { 
             player.x += player.dx;
-            // Boundary checks for keyboard/button movement are applied here
             if (player.x < 0) player.x = 0;
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
+            updateSliderThumbPosition(); 
         }
 
         function updateFallingObjects(deltaTime) {
@@ -1210,7 +1239,7 @@
                     spawnObject();
                     spawnTimer = 0;
                 }
-                updatePlayerPosition(); // Keyboard/button movement applied here
+                updatePlayerPosition(); 
                 updateFallingObjects(clampedDeltaTime); 
                 drawPlayer();
                 drawFallingObjects();
@@ -1244,6 +1273,7 @@
             } else { 
                  player.x = canvas.width / 2 - (canvas.width * 0.12) / 2; 
             }
+            updateSliderThumbPosition(); // Set initial thumb position for new game
 
             statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; 
             startButton.textContent = "遊戲進行中";
@@ -1342,7 +1372,7 @@
                 <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
                 <p class="text-center mb-3">您的成績：<strong>${elapsedTime} 秒</strong></p>
                 <h4>🎁 挑戰成功好康 & 活動辦法 🎁</h4>
-                <p class="mt-2"><strong>� 光速排行榜獎勵：</strong></p>
+                <p class="mt-2"><strong>🏆 光速排行榜獎勵：</strong></p>
                 <ul class="text-sm">
                     <li>冠軍：三星雙向閃電快充行動電源 (20,000mAh)*1</li>
                     <li>亞軍：深層震動筋膜按摩槍*1</li>
@@ -1503,10 +1533,9 @@
                 phoneImage.style.animation = 'popInPhone 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.5s forwards';
                 shineEffect.style.animation = 'shine 2s ease-in-out 1.5s forwards';
                 phoneText.style.animation = 'slideInText 1s ease-out 1.8s forwards';
-                commonMessage.style.animation = 'fadeInMessage 1s ease-out 3.5s forwards'; // 配合手機動畫後的文字出現
-                redemptionStatus.style.animation = 'fadeInStatus 1s ease-out 4.0s forwards'; // 再晚一點出現
+                commonMessage.style.animation = 'fadeInMessage 1s ease-out 3.5s forwards'; 
+                redemptionStatus.style.animation = 'fadeInStatus 1s ease-out 4.0s forwards'; 
 
-                // 生成粒子
                 const numParticles = 30;
                 for (let i = 0; i < numParticles; i++) {
                     const particle = document.createElement('div');
@@ -1517,16 +1546,15 @@
                     particle.style.width = `${size}px`;
                     particle.style.height = `${size}px`;
                     const angle = Math.random() * 360;
-                    const distance = Math.random() * 150 + 100; // 調整粒子散佈範圍
+                    const distance = Math.random() * 150 + 100; 
                     const x = Math.cos(angle * Math.PI / 180) * distance;
                     const y = Math.sin(angle * Math.PI / 180) * distance;
                     particle.style.setProperty('--transform-end', `translate(${x}px, ${y}px)`);
-                    particle.style.animation = `burst 1.5s ease-out ${1.5 + Math.random() * 0.5}s forwards`; // 延遲粒子爆發
+                    particle.style.animation = `burst 1.5s ease-out ${1.5 + Math.random() * 0.5}s forwards`; 
                     particlesContainer.appendChild(particle);
                 }
             }, 50); 
 
-            // 禮品可用性邏輯 (來自用戶提供的代碼)
             const giftAvailableMessageDiv = document.getElementById('giftAvailableMessage');
             const giftClaimedMessageDiv = document.getElementById('giftClaimedMessage');
             if (giftAvailableMessageDiv && giftClaimedMessageDiv) {
@@ -1544,13 +1572,10 @@
             if (overlay) {
                 overlay.style.display = 'none';
             }
-             // 可選：如果希望每次關閉都重置動畫元素的內聯樣式，可以在這裡添加
             const container = document.getElementById('easterEggContainerAnimate');
             if (container) {
-                // 例如，重置透明度和可見性，以便下次 fadeInContainer 能正確作用
                 container.style.opacity = '0';
                 container.style.visibility = 'hidden';
-                // 清理其他元素的動畫樣式
                 const elementsToReset = [
                     container.querySelector('.phone-image'),
                     container.querySelector('.shine-effect'),
@@ -1562,55 +1587,93 @@
                     if (el) el.style.animation = 'none';
                 });
                 const particlesContainer = document.getElementById('particlesContainerAnimate');
-                if(particlesContainer) particlesContainer.innerHTML = ''; // 清除粒子
+                if(particlesContainer) particlesContainer.innerHTML = ''; 
             }
         }
 
-        // Touch control functions
-        function handleTouchStart(e) {
-            // Allow moving player even if game not started, if start button is active or player is visible
+        // Touch control functions for canvas direct drag
+        function handleCanvasTouchStart(e) {
             if (isGameRunning || (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co')))) {
-                e.preventDefault(); // Prevent page scroll
+                e.preventDefault(); 
                 const touch = e.touches[0];
-                movePlayerToTouch(touch);
-                 player.dx = 0; // Stop keyboard/button movement when touch starts
+                movePlayerToTouch(touch); // Initial move
+                player.dx = 0; 
             }
         }
 
-        function handleTouchMove(e) {
+        function handleCanvasTouchMove(e) {
             if (isGameRunning || (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co')))) {
-                e.preventDefault(); // Prevent page scroll
+                e.preventDefault(); 
                 const touch = e.touches[0];
                 movePlayerToTouch(touch);
             }
         }
         
-        function handleTouchEnd(e) {
-            // Optional: if you want player to stop immediately on touchend when not using dx
-            // if (isGameRunning) player.dx = 0; // Or some other logic if needed
-        }
-
-
-        function movePlayerToTouch(touch) {
+        function movePlayerToTouch(touch) { // Used by canvas drag
             const rect = canvas.getBoundingClientRect();
             const touchX = touch.clientX - rect.left;
             let newPlayerX = touchX - player.width / 2;
 
-            // Boundary checks
-            if (newPlayerX < 0) {
-                newPlayerX = 0;
-            } else if (newPlayerX + player.width > canvas.width) {
-                newPlayerX = canvas.width - player.width;
-            }
+            if (newPlayerX < 0) newPlayerX = 0;
+            if (newPlayerX + player.width > canvas.width) newPlayerX = canvas.width - player.width;
+            
             player.x = newPlayerX;
+            updateSliderThumbPosition(); 
 
-            // If game is not running, we need to redraw manually as gameLoop isn't active
-            // This allows player to be positioned before starting the game
             if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                 clearCanvas();
                 drawPlayer();
-                // drawFallingObjects(); // Only if there are objects to draw pre-game (usually not)
             }
+        }
+
+        // Touch Slider Control Logic
+        function updateSliderThumbPosition() {
+            if (touchSlider && touchSliderThumb && canvas.width > 0 && player.width > 0) { // Ensure player.width is positive
+                const playerCenterX = player.x + player.width / 2;
+                let leftPercentage = (playerCenterX / canvas.width) * 100;
+                const thumbWidthPercentage = (touchSliderThumb.offsetWidth / touchSlider.offsetWidth) * 100;
+                
+                leftPercentage -= thumbWidthPercentage / 2; // Center the thumb
+                leftPercentage = Math.max(0, Math.min(100 - thumbWidthPercentage, leftPercentage)); // Clamp
+
+                touchSliderThumb.style.left = `${leftPercentage}%`;
+            } else if (touchSliderThumb) { // Default to center if canvas/player not ready
+                 touchSliderThumb.style.left = `calc(50% - ${touchSliderThumb.offsetWidth / 2}px)`;
+            }
+        }
+
+        if (touchSlider) {
+            const sliderTouchHandler = (e) => {
+                if (isGameRunning || (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co')))) {
+                    // Allow vertical scroll on the page, but horizontal drag on slider controls player
+                    if (e.cancelable && Math.abs(e.touches[0].clientX - (e.targetTouches[0]?.clientX || e.touches[0].clientX)) > Math.abs(e.touches[0].clientY - (e.targetTouches[0]?.clientY || e.touches[0].clientY))) {
+                        e.preventDefault(); // Prevent horizontal scroll if primarily horizontal movement
+                    }
+
+                    const touch = e.touches[0] || e.changedTouches[0];
+                    const sliderRect = touchSlider.getBoundingClientRect();
+                    let touchXInSlider = touch.clientX - sliderRect.left;
+
+                    touchXInSlider = Math.max(0, Math.min(sliderRect.width, touchXInSlider));
+                    
+                    let targetPlayerCenterX = (touchXInSlider / sliderRect.width) * canvas.width;
+                    let newPlayerX = targetPlayerCenterX - player.width / 2;
+
+                    if (newPlayerX < 0) newPlayerX = 0;
+                    if (newPlayerX + player.width > canvas.width) newPlayerX = canvas.width - player.width;
+                    
+                    player.x = newPlayerX;
+                    player.dx = 0; 
+                    updateSliderThumbPosition(); 
+
+                    if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
+                        clearCanvas();
+                        drawPlayer();
+                    }
+                }
+            };
+            touchSlider.addEventListener('touchstart', sliderTouchHandler, { passive: false });
+            touchSlider.addEventListener('touchmove', sliderTouchHandler, { passive: false });
         }
 
 
@@ -1622,12 +1685,10 @@
                 if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
                 else player.dx = -player.speed;
                 
-                // Allow pre-game movement visualization with keyboard
                 if (player.dx !== 0 && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) { 
                     updatePlayerPosition(); 
                     clearCanvas(); 
                     drawPlayer(); 
-                    // player.dx = 0; // Keep dx if key is held, for continuous pre-game move feel
                 }
                 return;
             }
@@ -1638,10 +1699,10 @@
         function keyUp(e) { 
             if ( e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left' ) {
                 player.dx = 0;
-                 // If game not running, and key is lifted, redraw to show static player
                 if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                     clearCanvas();
                     drawPlayer();
+                    updateSliderThumbPosition(); 
                 }
             }
         }
@@ -1650,10 +1711,10 @@
         document.addEventListener('keyup', keyUp);
         startButton.addEventListener('click', startGame);
 
-        // Add touch event listeners to the canvas
-        canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
-        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-        canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+        // Canvas direct touch listeners
+        canvas.addEventListener('touchstart', handleCanvasTouchStart, { passive: false });
+        canvas.addEventListener('touchmove', handleCanvasTouchMove, { passive: false });
+        // canvas.addEventListener('touchend', handleTouchEnd, { passive: false }); // Optional: handle touchend on canvas if needed
 
 
         function isTouchDevice() { 
@@ -1661,16 +1722,16 @@
         }
 
         if (isTouchDevice()) { 
-            touchControls.style.display = 'flex'; // Show buttons for touch devices
+            touchControlsUI.style.display = 'flex'; 
             const initialTouchSpeed = canvas.width * 0.018 || 5; 
 
             leftButton.addEventListener('touchstart', (e) => { 
                 e.preventDefault(); 
                 player.speed = canvas.width * 0.018 || initialTouchSpeed; 
                 if(isGameRunning) player.dx = -player.speed; 
-                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { // Pre-game movement with buttons
+                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { 
                     player.dx = -player.speed;
-                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; // Move once
+                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; 
                 }
             }); 
             leftButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
@@ -1679,12 +1740,14 @@
                 e.preventDefault(); 
                 player.speed = canvas.width * 0.018 || initialTouchSpeed; 
                 if(isGameRunning) player.dx = player.speed; 
-                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { // Pre-game movement
+                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { 
                     player.dx = player.speed;
-                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; // Move once
+                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; 
                 }
             }); 
             rightButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
+        } else {
+            touchControlsUI.style.display = 'none'; // Hide arrow buttons if not a touch device
         }
         
         async function fetchGameStats() {
@@ -1761,7 +1824,7 @@
                 const listItem = document.createElement('li');
                 let rankDisplay;
                 if (index === 0) rankDisplay = '🥇'; 
-                else if (index === 1) rankDisplay = '🥈'; // Standard silver medal emoji
+                else if (index === 1) rankDisplay = '�'; 
                 else if (index === 2) rankDisplay = '🥉'; 
                 else rankDisplay = `${index + 1}.`;
                 
@@ -1838,6 +1901,7 @@
                 if (canvas.width > 0 && canvas.height > 0) drawPlayer(); 
                 startButton.disabled = false; 
             }
+            updateSliderThumbPosition(); // Update thumb on resize
         }
 
 
@@ -1865,12 +1929,13 @@
                     if (statusMessage) {
                         statusMessage.innerHTML = "<p class='text-center font-bold'>已關閉彩蛋。點擊「重新開始」可再玩一次。</p>";
                     }
-                     if (startButton) { // Ensure startButton is re-enabled and correctly labeled
+                     if (startButton) { 
                         startButton.textContent = "重新開始";
                         startButton.disabled = false;
                     }
                 });
             }
+            updateSliderThumbPosition(); // Set initial thumb position after everything is loaded
         }); 
         window.addEventListener('resize', handleResize);
 
