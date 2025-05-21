@@ -109,6 +109,12 @@
             color: #7c3aed; 
             margin-top: 0.2rem;
         }
+         .item-card .item-mystery-effect { 
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #581c87; 
+        }
+
 
         #gameInstructions p, #gameInstructions .instruction-text { 
             font-size: 0.9rem; 
@@ -187,6 +193,8 @@
             background-color: #eff6ff; 
             border-radius: 0.5rem;
             display: block; 
+            max-width: 100%;
+            height: auto;
         }
         .info-bar {
             display: flex;
@@ -359,12 +367,18 @@
             max-width: 450px; 
             box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
         }
-        #scoreForm label, #leaderboardContainer h3 {
+        #scoreForm label, #leaderboardContainer h3 { 
             display: block;
             margin-bottom: 0.25rem;
             font-size: 0.875rem; 
             font-weight: 500;
             color: #374151; 
+        }
+        #scoreForm .form-field-description { 
+            font-size: 0.75rem;
+            color: #6b7280; 
+            margin-bottom: 0.5rem;
+            margin-top: -0.15rem; 
         }
          #leaderboardContainer h3 { 
             font-size: 1.25rem;
@@ -446,7 +460,7 @@
                 font-size: 0.75rem;
                  min-height: 2.2em; 
             }
-            .item-card .item-weight, .item-card .item-effect { 
+            .item-card .item-weight, .item-card .item-effect, .item-card .item-mystery-effect { 
                 font-size: 0.8rem;
             }
             #gameInstructions p, #gameInstructions .reward-point { 
@@ -500,20 +514,18 @@
 
         <div id="gameInstructions">
             <h2>遊戲說明</h2>
-            <p class="instruction-text">感受「Galaxy S25 Edge 輕巧配重挑戰賽」無可比擬的輕盈！化身「163克神捕手」，敏捷操控購物籃 🧺 左右移動，接住同樣輕盈的掉落物，精準累積重量吧！</p>
+            <p class="instruction-text">體驗前所未有的輕盈快感！手持你的 <strong>Galaxy S25 Edge</strong>，化身為「輕巧配重達人」，靈活操控手機左右移動，精準捕捉從天而降的輕量級配件，挑戰完美的 <strong>163 公克</strong>黃金配重！</p>
             
-            <p class="instruction-text mt-3"><strong>物件與重量：</strong></p>
-            <div id="itemDisplayGrid" class="item-grid-container">
+            <p class="instruction-text mt-3"><strong>配件與重量：</strong></p> <div id="itemDisplayGrid" class="item-grid-container">
                 </div>
 
-            <p class="instruction-text mt-3"><strong>獲勝條件：追求完美，毫釐不差！</strong></p>
-            <p class="instruction-text">當購物籃中的物件總重，<strong class="text-green-600">不多不少，正好是 163 公克</strong>，即可光榮獲勝！🎉 展現你對「輕」的極致掌控力！</p>
+            <p class="instruction-text mt-3"><strong>獲勝條件：神乎其技，克不容失！</strong></p>
+            <p class="instruction-text">當你手中的 Galaxy S25 Edge 成功收集的配件總重，<strong class="text-green-600">不多不少，正好是 163 公克</strong>，即可贏得「輕巧配重達人」的榮耀！🎉 展現你對 S25 Edge 極致輕巧與精準操控的完美駕馭！</p>
             
             <p class="instruction-text mt-3"><strong>注意事項：小心！這些情況會讓你挑戰失敗：</strong></p>
-            <p class="instruction-text"><strong class="text-red-600">🔴 超重注意！</strong> 一旦超過 163 公克，就與勝利擦肩而過囉！</p>
-            <p class="instruction-text"><strong class="text-red-600">💣 炸彈警報！</strong> 接到炸彈 💣 會立即結束遊戲，請務必閃避！</p>
-            <p class="instruction-text"><strong class="text-purple-600">🚀 重量翻倍！</strong> 接到增重火箭，目前總重量立即 x2！</p>
-
+            <p class="instruction-text"><strong class="text-red-600">🔴 超重警告！</strong> 一旦超過 163 公克，你的 S25 Edge 就會「甜蜜超載」囉！</p>
+            <p class="instruction-text"><strong class="text-red-600">💣 系統崩潰！</strong> 接到炸彈 💣 會導致 S25 Edge 系統過熱，遊戲立即結束，請務必閃避！</p>
+            <p class="instruction-text"><strong class="text-purple-600">🚀 AI 加速！</strong> 接到增重火箭，S25 Edge 的 AI 配重系統將啟動，目前總重量立即 x2！</p>
             <h3>🎁 挑戰好康 🎁</h3>
             <div class="reward-section">
                 <p class="reward-title">🏆 光速排行榜獎勵</p>
@@ -603,39 +615,124 @@
 
         const player = {
             width: 0, height: 0, x: 0, y: 0, speed: 0, dx: 0,
-            emoji: '🧺', 
-            fontSize: 0 
+            image: new Image(), 
+            imageLoaded: false 
         };
+        player.image.src = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png'; 
+        player.image.onload = () => {
+            player.imageLoaded = true;
+            console.log("Player image loaded successfully from GitHub.");
+            if (!isGameRunning && canvas.width > 0) { 
+                handleResize(); 
+                clearCanvas();
+                drawPlayer();
+            }
+        };
+        player.image.onerror = () => {
+            console.error("Player image failed to load from GitHub. Using fallback placeholder.");
+            player.imageLoaded = false; 
+            player.image.src = 'https://placehold.co/80x160/c7d2fe/1e3a8a?text=S25&font=noto-sans';
+            player.image.onload = () => { 
+                player.imageLoaded = true; 
+                 console.log("Fallback placeholder image loaded.");
+                if (!isGameRunning && canvas.width > 0) {
+                    handleResize();
+                    clearCanvas();
+                    drawPlayer();
+                }
+            };
+            player.image.onerror = () => { 
+                console.error("Fallback placeholder also failed to load.");
+                player.imageLoaded = false;
+            };
+        };
+
 
         const BASE_SPEED_MULTIPLIER = (((((2.7 * 0.9) * 1.2) * 1.2) * 1.2) * 1.1) * 1.1; 
         const TARGET_FPS_FOR_CONVERSION = 60.0; 
 
+        const S25_IMAGE_URL = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png';
+
         const itemTypes = [
             { name: 'S Pen', emoji: '✏️', weight: 3, type: 'item', base_ch_per_sec: 0.0025 * TARGET_FPS_FOR_CONVERSION, spawnChance: 25 },
             { name: 'Galaxy Buds3 (單耳)', emoji: '🎧', weight: 5, type: 'item', base_ch_per_sec: 0.0030 * TARGET_FPS_FOR_CONVERSION, spawnChance: 25 },
-            { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 20 },
-            { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: (0.0058 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 15 },
+            { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 18 }, 
+            { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: (0.0058 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 12 }, 
             { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 }, 
-            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 }
+            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
+            { 
+                name: '神秘配件', 
+                emoji: '❓', 
+                weight: '???', 
+                type: 'mystery', 
+                base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION, 
+                spawnChance: 8 
+            },
+            { 
+                name: 'Galaxy S25 Edge 彩蛋', 
+                emoji: '✨', 
+                imageSrc: S25_IMAGE_URL,
+                imageObj: new Image(),
+                imageLoaded: false,
+                type: 'easter_egg', 
+                base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION, 
+                spawnChance: 2 
+            }
         ];
         itemTypes.forEach(item => item.speedPixelsPerSecond = 0); 
 
+        const easterEggItemDefinition = itemTypes.find(item => item.type === 'easter_egg');
+        if (easterEggItemDefinition) {
+            easterEggItemDefinition.imageObj.src = easterEggItemDefinition.imageSrc;
+            easterEggItemDefinition.imageObj.onload = () => {
+                easterEggItemDefinition.imageLoaded = true;
+                console.log("Easter egg S25 image loaded.");
+            };
+            easterEggItemDefinition.imageObj.onerror = () => {
+                console.error("Easter egg S25 image failed to load.");
+                easterEggItemDefinition.imageLoaded = false; 
+            };
+        }
+
+
+        const mysteryTransformableItemsMap = {
+            'S Pen': itemTypes.find(it => it.name === 'S Pen'),
+            'Galaxy Buds3 (單耳)': itemTypes.find(it => it.name === 'Galaxy Buds3 (單耳)'),
+            '手機SIM卡托': itemTypes.find(it => it.name === '手機SIM卡托'),
+            'Galaxy SmartTag2': itemTypes.find(it => it.name === 'Galaxy SmartTag2'),
+            '增重火箭': itemTypes.find(it => it.name === '增重火箭')
+        };
+        const mysteryTransformableItemKeys = Object.keys(mysteryTransformableItemsMap).filter(key => mysteryTransformableItemsMap[key]);
+
+
         let fallingObjects = [];
         let spawnTimer = 0;
-        const SPAWN_INTERVAL = 72; 
+        const SPAWN_INTERVAL = 72;
 
-        let catchSound, bombSound, winSound, loseSound, boosterSound;
+        let catchSound, bombSound, winSound, loseSound, boosterSound, mysteryRevealSound, easterEggSound; 
         let toneJsInitialized = false;
 
         function initializeSounds() {
+            if (typeof Tone === 'undefined') {
+                console.error("Tone.js library is not loaded.");
+                toneJsInitialized = false;
+                return;
+            }
             if (Tone.context.state !== 'running') {
-                Tone.start(); 
+                Tone.start().then(() => {
+                    console.log("Tone.js context started by initializeSounds.");
+                }).catch(e => {
+                    console.warn("Tone.start() failed in initializeSounds, user interaction might be needed.", e);
+                });
             }
             catchSound = new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.1 } }).toDestination();
             bombSound = new Tone.Synth({ oscillator: { type: 'square' }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.2 }, volume: -6 }).toDestination();
             winSound = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.01, decay: 0.3, sustain: 0.2, release: 0.5 } }).toDestination();
             loseSound = new Tone.FMSynth({ harmonicity: 3, modulationIndex: 10, detune: 0, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 }, modulation: { type: "square" }, modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 } }).toDestination();
             boosterSound = new Tone.Synth({ oscillator: { type: 'sawtooth' }, envelope: { attack: 0.01, decay: 0.15, sustain: 0.08, release: 0.2 }, volume: -3 }).toDestination();
+            mysteryRevealSound = new Tone.NoiseSynth({ noise: { type: 'pink' }, envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.1 }, volume: -10 }).toDestination(); 
+            easterEggSound = new Tone.PluckSynth({ attackNoise: 0.5, dampening: 4000, resonance: 0.9, volume: -3 }).toDestination(); 
+            
             toneJsInitialized = true;
             console.log("Tone.js sounds initialized.");
         }
@@ -644,7 +741,7 @@
             if (itemDisplayGrid) { 
                 itemDisplayGrid.innerHTML = ''; 
                 itemTypes.forEach(item => {
-                    if (item.type === 'item' || item.type === 'weight_booster') { 
+                    if (item.type === 'item' || item.type === 'weight_booster' || item.type === 'mystery') { 
                         const itemCard = document.createElement('div');
                         itemCard.className = 'item-card';
                         
@@ -659,12 +756,17 @@
                         itemCard.appendChild(itemEmoji);
                         itemCard.appendChild(itemName);
 
-                        if (item.type === 'weight_booster') {
+                        if (item.type === 'mystery') {
+                            const itemMysteryEffect = document.createElement('span');
+                            itemMysteryEffect.className = 'item-mystery-effect';
+                            itemMysteryEffect.innerHTML = `<strong>???</strong>`;
+                            itemCard.appendChild(itemMysteryEffect);
+                        } else if (item.type === 'weight_booster') {
                             const itemEffect = document.createElement('span');
                             itemEffect.className = 'item-effect';
                             itemEffect.textContent = '當前重量x2';
                             itemCard.appendChild(itemEffect);
-                        } else {
+                        } else { 
                             const itemWeight = document.createElement('span');
                             itemWeight.className = 'item-weight';
                             itemWeight.innerHTML = `<strong>${item.weight}</strong> 公克`;
@@ -678,28 +780,71 @@
 
         function drawPlayer() { 
             if (!ctx) return;
-            ctx.font = `${player.fontSize}px Arial`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle'; 
-            ctx.fillText(player.emoji, player.x + player.width / 2, player.y + player.height / 2);
+            if (player.imageLoaded && player.image.complete && player.image.naturalHeight !== 0) {
+                ctx.drawImage(player.image, player.x, player.y, player.width, player.height);
+            } else if (player.image.src.includes('placehold.co') && player.imageLoaded) { 
+                 ctx.drawImage(player.image, player.x, player.y, player.width, player.height);
+            } else if (!player.imageLoaded && player.image.src.includes('placehold.co')) {
+                ctx.fillStyle = '#a5b4fc'; 
+                ctx.fillRect(player.x, player.y, player.width, player.height);
+                ctx.fillStyle = '#1e3a8a';
+                ctx.font = `${Math.min(player.width * 0.25, player.height * 0.5)}px Noto Sans TC`; 
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText("S25", player.x + player.width / 2, player.y + player.height / 2);
+            }
         }
+
 
         function drawFallingObjects() { 
             if (!ctx) return;
             fallingObjects.forEach(obj => {
-                const objFontSize = canvas.width * 0.095; // 修改：加大掉落物件 Emoji
+                const objFontSize = canvas.width * 0.095; 
                 const weightFontSize = canvas.width * 0.04; 
-                ctx.font = `${objFontSize}px Arial`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'bottom'; 
-                ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
-                
-                if (obj.type === 'item' && obj.weight > 0) {
-                    ctx.font = `bold ${weightFontSize}px Arial`;
-                    ctx.fillStyle = '#FF0000'; 
+
+                if (obj.type === 'easter_egg' && obj.imageLoaded && obj.imageObj && obj.imageObj.complete && obj.imageObj.naturalHeight !== 0 && obj.imageObj.naturalWidth !== 0) {
+                    const aspectRatioItem = obj.imageObj.naturalWidth / obj.imageObj.naturalHeight;
+                    let imgWidth = obj.width * 1.2; 
+                    let imgHeight = imgWidth / aspectRatioItem;
+                    const maxDimFactor = 1.5;
+                    const minDim = 5;
+
+                    if (imgHeight > obj.height * maxDimFactor) {
+                        imgHeight = obj.height * maxDimFactor;
+                        imgWidth = imgHeight * aspectRatioItem;
+                    }
+                    if (imgWidth > obj.width * maxDimFactor) {
+                        imgWidth = obj.width * maxDimFactor;
+                        imgHeight = imgWidth / aspectRatioItem;
+                    }
+
+                    if (imgWidth > minDim && imgHeight > minDim && isFinite(imgWidth) && isFinite(imgHeight)) {
+                        ctx.drawImage(obj.imageObj, obj.x + (obj.width - imgWidth) / 2, obj.y + (obj.height - imgHeight) / 2, imgWidth, imgHeight);
+                    } else {
+                        console.warn("Easter egg image calculated dimensions invalid, drawing fallback emoji.", imgWidth, imgHeight);
+                        ctx.font = `${objFontSize}px Arial`;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height);
+                    }
+                } else if (obj.type === 'easter_egg') { 
+                    ctx.font = `${objFontSize}px Arial`;
                     ctx.textAlign = 'center';
-                    ctx.textBaseline = 'top'; 
-                    ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1)); 
+                    ctx.textBaseline = 'bottom'; 
+                    ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height); 
+                } else { 
+                    ctx.font = `${objFontSize}px Arial`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom'; 
+                    ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
+                    
+                    if (obj.type === 'item' && typeof obj.weight === 'number' && obj.weight > 0) {
+                        ctx.font = `bold ${weightFontSize}px Arial`;
+                        ctx.fillStyle = '#FF0000'; 
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'top'; 
+                        ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1)); 
+                    }
                 }
             });
         }
@@ -710,49 +855,89 @@
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
         }
 
-        function updateFallingObjects(deltaTime) { 
+        function updateFallingObjects(deltaTime) {
             for (let i = fallingObjects.length - 1; i >= 0; i--) {
                 const obj = fallingObjects[i];
-                obj.y += obj.speedPixelsPerSecond * deltaTime; 
+                obj.y += obj.speedPixelsPerSecond * deltaTime;
 
-                if ( obj.x < player.x + player.width &&
-                     obj.x + obj.width > player.x &&
-                     obj.y < player.y + player.height && 
-                     obj.y + obj.height > player.y ) {  
-                    
+                let customGameOverMessageOnOverweight = null; 
+
+                if (obj.x < player.x + player.width &&
+                    obj.x + obj.width > player.x &&
+                    obj.y < player.y + player.height &&
+                    obj.y + obj.height > player.y) {
+
                     if (obj.type === 'bomb') {
-                        if (toneJsInitialized && bombSound) bombSound.triggerAttackRelease("C2", "8n", Tone.now());
+                        if (toneJsInitialized && bombSound && Tone.context.state === 'running') bombSound.triggerAttackRelease("C2", "8n", Tone.now());
                         gameOver("哎呀！接到炸彈了！");
-                    } else if (obj.type === 'weight_booster') {
-                        if (toneJsInitialized && boosterSound) boosterSound.triggerAttackRelease("G4", "8n", Tone.now()); 
-                        accumulatedWeight *= 2;
-                        accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1)); 
-                        currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
-                        statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 重量翻倍！</p>"; 
-                        setTimeout(() => { 
-                            if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>";
-                        }, 1500);
+                        fallingObjects.splice(i, 1);
+                        continue; 
+                    }
 
-                        if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { 
-                            gameWin();
-                        } else if (accumulatedWeight > TARGET_WEIGHT) {
-                            gameOver(`哎呀！重量翻倍後超過目標 ${TARGET_WEIGHT}g 了！`);
+                    if (obj.type === 'easter_egg') {
+                        if (toneJsInitialized && easterEggSound && Tone.context.state === 'running') easterEggSound.triggerAttack("A4", Tone.now());
+                        stopGame();
+                        window.location.href = 'galaxy_s25_easter_egg.html'; 
+                        return; 
+                    }
+                    
+                    let revealedItemName = obj.name; 
+
+                    if (obj.type === 'mystery') {
+                        if (toneJsInitialized && mysteryRevealSound && Tone.context.state === 'running') mysteryRevealSound.triggerAttackRelease("8n", Tone.now());
+                        
+                        if (mysteryTransformableItemKeys.length > 0) {
+                            const randomKeyIndex = Math.floor(Math.random() * mysteryTransformableItemKeys.length);
+                            const revealedItemKey = mysteryTransformableItemKeys[randomKeyIndex];
+                            const actualItem = { ...mysteryTransformableItemsMap[revealedItemKey] }; 
+
+                            revealedItemName = actualItem.name; 
+
+                            let revealedMsg = `<p class='text-center font-bold text-blue-600'>神秘配件變成了... <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
+                            if (actualItem.type === 'item') {
+                                revealedMsg += ` (+${actualItem.weight}g)`;
+                                accumulatedWeight += actualItem.weight;
+                                if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
+                                customGameOverMessageOnOverweight = `哎呀！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT}g 了！`;
+                            } else if (actualItem.type === 'weight_booster') {
+                                revealedMsg += ` (重量x2!)`;
+                                accumulatedWeight *= 2;
+                                if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
+                                customGameOverMessageOnOverweight = `哎呀！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT}g 了！`;
+                            }
+                            revealedMsg += `!</p>`;
+                            statusMessage.innerHTML = revealedMsg;
+                            setTimeout(() => {
+                                if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>";
+                            }, 2500);
+                        } else {
+                             console.log("Mystery item had no transformations defined, no effect.");
                         }
-
-                    } else { 
-                        if (toneJsInitialized && catchSound) catchSound.triggerAttackRelease("C4", "16n", Tone.now());
+                    } else if (obj.type === 'weight_booster') {
+                        if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
+                        accumulatedWeight *= 2;
+                        statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 AI 加速！重量翻倍！</p>";
+                        setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; }, 1500);
+                        customGameOverMessageOnOverweight = `哎呀！重量翻倍後超過目標 ${TARGET_WEIGHT}g 了！`;
+                    } else if (obj.type === 'item') { 
+                        if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
                         accumulatedWeight += obj.weight;
-                        accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1)); 
-                        currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
-                        if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { 
+                         customGameOverMessageOnOverweight = `哎呀！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT}g 了！`;
+                    }
+
+                    accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
+                    currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
+                    fallingObjects.splice(i, 1);
+
+                    if (isGameRunning) { 
+                        if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) {
                             gameWin();
                         } else if (accumulatedWeight > TARGET_WEIGHT) {
-                            gameOver(`哎呀！超過目標 ${TARGET_WEIGHT}g 了！`);
+                            gameOver(customGameOverMessageOnOverweight || `哎呀！超過目標 ${TARGET_WEIGHT}g 了！`);
                         }
                     }
-                    fallingObjects.splice(i, 1); 
-                } else if (obj.y > canvas.height + obj.height + 20) { 
-                    fallingObjects.splice(i, 1); 
+                } else if (obj.y > canvas.height + obj.height + 20) {
+                    fallingObjects.splice(i, 1);
                 }
             }
         }
@@ -771,13 +956,25 @@
             }
 
             if (!selectedType) { 
-                selectedType = itemTypes[0]; 
+                selectedType = itemTypes.find(it => it.type === 'item') || itemTypes[0]; 
             }
             
             const typeTemplate = selectedType;
             const objWidth = canvas.width * 0.1; 
             const objHeight = canvas.width * 0.1; 
-            fallingObjects.push({ ...typeTemplate, x: Math.random() * (canvas.width - objWidth), y: 0 - objHeight, width: objWidth, height: objHeight });
+            if (typeTemplate.type === 'easter_egg') {
+                 fallingObjects.push({ 
+                    ...typeTemplate, 
+                    x: Math.random() * (canvas.width - objWidth), 
+                    y: 0 - objHeight, 
+                    width: objWidth, 
+                    height: objHeight,
+                    imageObj: typeTemplate.imageObj, 
+                    imageLoaded: typeTemplate.imageLoaded 
+                });
+            } else {
+                fallingObjects.push({ ...typeTemplate, x: Math.random() * (canvas.width - objWidth), y: 0 - objHeight, width: objWidth, height: objHeight });
+            }
         }
 
         function clearCanvas() { 
@@ -819,7 +1016,8 @@
                 drawPlayer();
                 drawFallingObjects();
             } catch (error) {
-                console.error("Error in gameLoop:", error);
+                // Enhanced error logging
+                console.error("Error in gameLoop: Name:", error.name, "Message:", error.message, "Stack:", error.stack, "Full error object:", error);
                 gameOver("遊戲發生錯誤，請重新整理頁面再試一次"); 
                 return; 
             }
@@ -830,16 +1028,25 @@
         function startGame() {
             if (isGameRunning) return;
             if (!toneJsInitialized) { 
-                initializeSounds();
-            } else if (Tone.context.state !== 'running') { 
-                 Tone.start();
+                initializeSounds(); 
+            } else if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') { 
+                Tone.start().then(() => {
+                    console.log("Tone.js context started by startGame.");
+                }).catch(e => {
+                    console.warn("Tone.start() failed in startGame, user interaction might be needed.", e);
+                });
             }
             
             isGameRunning = true;
             accumulatedWeight = 0;
             currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
             fallingObjects = [];
-            player.x = canvas.width / 2 - player.width / 2; 
+            if (player.imageLoaded || player.image.src.includes('placehold.co')) {
+                 player.x = canvas.width / 2 - player.width / 2;
+            } else { 
+                 player.x = canvas.width / 2 - (canvas.width * 0.12) / 2; 
+            }
+
             statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; 
             startButton.textContent = "遊戲進行中";
             startButton.disabled = true; 
@@ -853,7 +1060,6 @@
             if (gameContainerElement) {
                 gameContainerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-
 
             if(animationFrameId) cancelAnimationFrame(animationFrameId); 
             animationFrameId = requestAnimationFrame(gameLoop); 
@@ -879,6 +1085,7 @@
                     method: 'POST',
                     mode: 'no-cors', 
                     cache: 'no-cache',
+                    headers: { 'Content-Type': 'application/json' }, 
                     body: JSON.stringify({ eventType: eventType })
                 });
                 console.log(`Event ${eventType} sent to backend.`);
@@ -894,13 +1101,13 @@
                 startButton.textContent = "再試一次";
             }
             if (toneJsInitialized && loseSound) {
-                if (Tone.context.state !== 'running') {
+                if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
                     Tone.start().then(() => {
                         if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
                            loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05); 
                         }
                     }).catch(err => console.error("Tone.start error in gameOver:", err));
-                } else {
+                } else if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
                     if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
                         loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05);
                     }
@@ -920,13 +1127,13 @@
                 startButton.textContent = "再玩一局";
             }
             if (toneJsInitialized && winSound) {
-                 if (Tone.context.state !== 'running') {
+                 if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
                     Tone.start().then(() => {
                         if (winSound && typeof winSound.triggerAttackRelease === 'function') {
                             winSound.triggerAttackRelease("C5", "2n", Tone.now());
                         }
                     }).catch(err => console.error("Tone.start error in gameWin:", err));
-                } else {
+                } else if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
                      if (winSound && typeof winSound.triggerAttackRelease === 'function') {
                         winSound.triggerAttackRelease("C5", "2n", Tone.now());
                     }
@@ -961,16 +1168,17 @@
             scoreFormContainer.style.display = 'block';
             scoreFormContainer.innerHTML = `
                 <div id="scoreForm">
-                    <h3 class="text-lg font-semibold text-center mb-3 text-sky-700">精準大師：在此留名！</h3>
+                    <h3 class="text-lg font-semibold text-center mb-3 text-sky-700">🎉 S25 Edge 配重達人留名 🎉</h3>
                     <div>
-                        <label for="playerName">您的名稱：</label>
-                        <input type="text" id="playerName" name="playerName" maxlength="50" required>
+                        <label for="playerName">您的達人稱號 (顯示於排行榜)：</label>
+                        <input type="text" id="playerName" name="playerName" maxlength="50" required placeholder="例如：輕巧神手小明">
                     </div>
                     <div>
-                        <label for="playerPhone">您的電話(僅供活動抽獎聯繫使用)：</label>
-                        <input type="tel" id="playerPhone" name="playerPhone" maxlength="10" required>
+                        <label for="playerPhone">您的手機號碼 (選填)：</label>
+                        <p class="form-field-description">若想參加「光速排行榜」抽獎活動，請務必填寫，以便中獎時與您聯繫。</p>
+                        <input type="tel" id="playerPhone" name="playerPhone" maxlength="10" placeholder="例如：0912345678">
                     </div>
-                    <button id="submitScoreButton" class="game-button">提交成績</button>
+                    <button id="submitScoreButton" class="game-button">提交成績並加入排行榜</button>
                     <p id="submitStatus" class="text-sm text-center mt-2"></p>
                 </div>
             `;
@@ -979,12 +1187,23 @@
                 const playerNameInput = document.getElementById('playerName');
                 const playerPhoneInput = document.getElementById('playerPhone');
                 const playerName = playerNameInput.value.trim();
-                const playerPhone = playerPhoneInput.value.trim();
+                const playerPhone = playerPhoneInput.value.trim(); 
                 const submitStatus = document.getElementById('submitStatus');
 
-                if (!playerName) { submitStatus.textContent = '請輸入您的名稱。'; submitStatus.style.color = 'red'; playerNameInput.focus(); return; }
+                if (!playerName) { 
+                    submitStatus.textContent = '請輸入您的達人稱號。'; 
+                    submitStatus.style.color = 'red'; 
+                    playerNameInput.focus(); 
+                    return; 
+                }
+                
                 const phoneRegex = /^\d{10}$/; 
-                if (!playerPhone || !phoneRegex.test(playerPhone)) { submitStatus.textContent = '請輸入有效的10位數字電話號碼。'; submitStatus.style.color = 'red'; playerPhoneInput.focus(); return; }
+                if (playerPhone && !phoneRegex.test(playerPhone)) { 
+                    submitStatus.textContent = '若要填寫手機號碼，請輸入有效的10位數字。'; 
+                    submitStatus.style.color = 'red'; 
+                    playerPhoneInput.focus(); 
+                    return; 
+                }
                 
                 if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
                      submitStatus.textContent = '後端URL未配置或無效，無法提交。';
@@ -1007,7 +1226,9 @@
 
                 try {
                     await fetch(GOOGLE_APPS_SCRIPT_URL, {
-                        method: 'POST', mode: 'no-cors', cache: 'no-cache', body: JSON.stringify(scoreData) 
+                        method: 'POST', mode: 'no-cors', cache: 'no-cache', 
+                        headers: { 'Content-Type': 'application/json' }, 
+                        body: JSON.stringify(scoreData) 
                     });
                     submitStatus.textContent = '成績已提交！感謝您的參與！';
                     submitStatus.style.color = 'green';
@@ -1066,9 +1287,19 @@
 
         if (isTouchDevice()) { 
             touchControls.style.display = 'flex';
-            leftButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = -player.speed; }); 
+            const initialTouchSpeed = canvas.width * 0.018 || 5; 
+
+            leftButton.addEventListener('touchstart', (e) => { 
+                e.preventDefault(); 
+                player.speed = canvas.width * 0.018 || initialTouchSpeed; 
+                if(isGameRunning) player.dx = -player.speed; 
+            }); 
             leftButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
-            rightButton.addEventListener('touchstart', (e) => { e.preventDefault(); if(isGameRunning) player.dx = player.speed; }); 
+            rightButton.addEventListener('touchstart', (e) => { 
+                e.preventDefault(); 
+                player.speed = canvas.width * 0.018 || initialTouchSpeed; 
+                if(isGameRunning) player.dx = player.speed; 
+            }); 
             rightButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
         }
         
@@ -1108,7 +1339,7 @@
             }
             leaderboardStatus.textContent = '排行榜加載中...'; leaderboardContainer.style.display = 'block'; 
             try {
-                const response = await fetch(GOOGLE_APPS_SCRIPT_URL); 
+                const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getLeaderboard'); 
                 if (!response.ok) {
                     let errorMsg = `HTTP error! status: ${response.status}.`;
                     try { const errorData = await response.json(); if (errorData && errorData.message) errorMsg += ` Message: ${errorData.message}`; } 
@@ -1117,7 +1348,7 @@
                 }
                 const data = await response.json();
                 if (data.status === 'error' && data.message) throw new Error(`Leaderboard fetch error from Apps Script: ${data.message}`);
-                displayLeaderboard(data); 
+                displayLeaderboard(data.leaderboard || data); 
                 leaderboardStatus.textContent = ''; 
             } catch (error) {
                 console.error('Error fetching leaderboard:', error);
@@ -1172,27 +1403,43 @@
         }
 
         function handleResize() { 
-            canvasWidth = Math.min(480, window.innerWidth - 30); 
+            const gameArea = document.getElementById('gameContainer');
+            const availableWidth = gameArea ? Math.min(gameArea.clientWidth - 16, window.innerWidth - 30) : window.innerWidth * 0.9;
+            
+            canvasWidth = Math.min(480, availableWidth); 
+            
+            let phoneImageAspectRatio = 0.5; 
+            if (player.imageLoaded && player.image.naturalWidth > 0 && player.image.naturalHeight > 0) {
+                phoneImageAspectRatio = player.image.naturalWidth / player.image.naturalHeight;
+            }
+            
+            player.width = canvas.width * 0.12; 
+            player.height = player.width / phoneImageAspectRatio; 
+
             canvasHeight = canvasWidth / aspectRatio; 
 
-            if (canvasHeight > window.innerHeight * 0.48) { 
-                canvasHeight = window.innerHeight * 0.48;    
+            const maxHeight = window.innerHeight * 0.48;
+            if (canvasHeight > maxHeight) { 
+                canvasHeight = maxHeight;      
                 canvasWidth = canvasHeight * aspectRatio;
+                player.width = canvas.width * 0.12;
+                player.height = player.width / phoneImageAspectRatio;
             }
+
             canvas.width = Math.max(150, canvasWidth); 
             canvas.height = Math.max(200, canvasHeight); 
+            
+            if (player.height > canvas.height * 0.25) {
+                player.height = canvas.height * 0.25;
+                player.width = player.height * phoneImageAspectRatio; 
+            }
             
             const infoBar = document.querySelector('.info-bar');
             if (infoBar) infoBar.style.maxWidth = `${canvas.width}px`; 
 
-            player.width = canvas.width * 0.15;
-            player.height = canvas.height * 0.06; 
             player.x = canvas.width / 2 - player.width / 2; 
             player.y = canvas.height - player.height - (canvas.height * 0.03); 
-            // 修改：加大籃子 Emoji 尺寸
-            player.fontSize = canvas.width * 0.135; 
 
-            // 更新後的移動速度因子 (已包含在內)
             if (isTouchDevice()) player.speed = canvas.width * 0.018; else player.speed = canvas.width * 0.024; 
 
             itemTypes.forEach(it => { 
@@ -1206,10 +1453,16 @@
             }
         }
 
+
         window.addEventListener('load', async () => {
             handleResize(); 
             displayGameInstructions(); 
             startButton.disabled = false; 
+            if (typeof Tone === 'undefined') { 
+                console.warn("Tone.js not loaded on page load. Sound features might be affected.");
+            } else {
+                initializeSounds();
+            }
             await fetchLeaderboardData(); 
             await fetchGameStats(); 
             leaderboardPollIntervalId = setInterval(async () => {
