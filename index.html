@@ -191,6 +191,7 @@
             display: block; 
             max-width: 100%;
             height: auto;
+            touch-action: none; /* Prevent default touch actions like scrolling when interacting with canvas */
         }
         .info-bar {
             display: flex;
@@ -691,9 +692,9 @@
             <div class="reward-section">
                 <p class="reward-title">🏆 光速排行榜獎勵</p>
                 <ul class="prize-list">
-                    <li><span class="prize-rank">冠軍：</span>三星雙向閃電快充行動電源 (20,000mAh)</li>
-                    <li><span class="prize-rank">亞軍：</span>深層震動筋膜按摩槍</li>
-                    <li><span class="prize-rank">季軍：</span>不鏽鋼保溫瓶</li>
+                    <li><span class="prize-rank">冠軍：</span>三星雙向閃電快充行動電源 (20,000mAh)*1</li>
+                    <li><span class="prize-rank">亞軍：</span>深層震動筋膜按摩槍*1</li>
+                    <li><span class="prize-rank">季軍：</span>不鏽鋼保溫瓶*1</li>
                 </ul>
             </div>
             <div class="reward-section mt-3">
@@ -1037,6 +1038,7 @@
 
         function updatePlayerPosition() { 
             player.x += player.dx;
+            // Boundary checks for keyboard/button movement are applied here
             if (player.x < 0) player.x = 0;
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
         }
@@ -1208,7 +1210,7 @@
                     spawnObject();
                     spawnTimer = 0;
                 }
-                updatePlayerPosition();
+                updatePlayerPosition(); // Keyboard/button movement applied here
                 updateFallingObjects(clampedDeltaTime); 
                 drawPlayer();
                 drawFallingObjects();
@@ -1340,11 +1342,11 @@
                 <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
                 <p class="text-center mb-3">您的成績：<strong>${elapsedTime} 秒</strong></p>
                 <h4>🎁 挑戰成功好康 & 活動辦法 🎁</h4>
-                <p class="mt-2"><strong>🏆 光速排行榜獎勵：</strong></p>
+                <p class="mt-2"><strong>� 光速排行榜獎勵：</strong></p>
                 <ul class="text-sm">
-                    <li>冠軍：三星雙向閃電快充行動電源 (20,000mAh)</li>
-                    <li>亞軍：深層震動筋膜按摩槍</li>
-                    <li>季軍：不鏽鋼保溫瓶</li>
+                    <li>冠軍：三星雙向閃電快充行動電源 (20,000mAh)*1</li>
+                    <li>亞軍：深層震動筋膜按摩槍*1</li>
+                    <li>季軍：不鏽鋼保溫瓶*1</li>
                 </ul>
                 <p class="text-xs text-gray-600 mb-2">排行榜結算至 2025/6/30 23:59，詳情與得獎名單請見微風南山三星粉專頁。</p>
                 <p><strong>🎁 來店兌換精美小禮：</strong></p>
@@ -1564,6 +1566,53 @@
             }
         }
 
+        // Touch control functions
+        function handleTouchStart(e) {
+            // Allow moving player even if game not started, if start button is active or player is visible
+            if (isGameRunning || (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co')))) {
+                e.preventDefault(); // Prevent page scroll
+                const touch = e.touches[0];
+                movePlayerToTouch(touch);
+                 player.dx = 0; // Stop keyboard/button movement when touch starts
+            }
+        }
+
+        function handleTouchMove(e) {
+            if (isGameRunning || (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co')))) {
+                e.preventDefault(); // Prevent page scroll
+                const touch = e.touches[0];
+                movePlayerToTouch(touch);
+            }
+        }
+        
+        function handleTouchEnd(e) {
+            // Optional: if you want player to stop immediately on touchend when not using dx
+            // if (isGameRunning) player.dx = 0; // Or some other logic if needed
+        }
+
+
+        function movePlayerToTouch(touch) {
+            const rect = canvas.getBoundingClientRect();
+            const touchX = touch.clientX - rect.left;
+            let newPlayerX = touchX - player.width / 2;
+
+            // Boundary checks
+            if (newPlayerX < 0) {
+                newPlayerX = 0;
+            } else if (newPlayerX + player.width > canvas.width) {
+                newPlayerX = canvas.width - player.width;
+            }
+            player.x = newPlayerX;
+
+            // If game is not running, we need to redraw manually as gameLoop isn't active
+            // This allows player to be positioned before starting the game
+            if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
+                clearCanvas();
+                drawPlayer();
+                // drawFallingObjects(); // Only if there are objects to draw pre-game (usually not)
+            }
+        }
+
 
         function keyDown(e) { 
             if (!isGameRunning && (e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left')) {
@@ -1572,8 +1621,13 @@
                 }
                 if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
                 else player.dx = -player.speed;
-                if (player.dx !== 0 && canvas.width > 0) { 
-                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; 
+                
+                // Allow pre-game movement visualization with keyboard
+                if (player.dx !== 0 && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) { 
+                    updatePlayerPosition(); 
+                    clearCanvas(); 
+                    drawPlayer(); 
+                    // player.dx = 0; // Keep dx if key is held, for continuous pre-game move feel
                 }
                 return;
             }
@@ -1582,31 +1636,53 @@
             else if (e.key === 'ArrowLeft' || e.key === 'Left') player.dx = -player.speed;
         }
         function keyUp(e) { 
-            if ( e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left' ) player.dx = 0;
+            if ( e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left' ) {
+                player.dx = 0;
+                 // If game not running, and key is lifted, redraw to show static player
+                if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
+                    clearCanvas();
+                    drawPlayer();
+                }
+            }
         }
 
         document.addEventListener('keydown', keyDown);
         document.addEventListener('keyup', keyUp);
         startButton.addEventListener('click', startGame);
 
+        // Add touch event listeners to the canvas
+        canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+
         function isTouchDevice() { 
             return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
         }
 
         if (isTouchDevice()) { 
-            touchControls.style.display = 'flex';
+            touchControls.style.display = 'flex'; // Show buttons for touch devices
             const initialTouchSpeed = canvas.width * 0.018 || 5; 
 
             leftButton.addEventListener('touchstart', (e) => { 
                 e.preventDefault(); 
                 player.speed = canvas.width * 0.018 || initialTouchSpeed; 
                 if(isGameRunning) player.dx = -player.speed; 
+                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { // Pre-game movement with buttons
+                    player.dx = -player.speed;
+                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; // Move once
+                }
             }); 
             leftButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
+            
             rightButton.addEventListener('touchstart', (e) => { 
                 e.preventDefault(); 
                 player.speed = canvas.width * 0.018 || initialTouchSpeed; 
                 if(isGameRunning) player.dx = player.speed; 
+                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { // Pre-game movement
+                    player.dx = player.speed;
+                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; // Move once
+                }
             }); 
             rightButton.addEventListener('touchend', (e) => { e.preventDefault(); if(isGameRunning) player.dx = 0; });
         }
@@ -1684,7 +1760,10 @@
             scores.forEach((score, index) => {
                 const listItem = document.createElement('li');
                 let rankDisplay;
-                if (index === 0) rankDisplay = '🥇'; else if (index === 1) rankDisplay = '�'; else if (index === 2) rankDisplay = '🥉'; else rankDisplay = `${index + 1}.`;
+                if (index === 0) rankDisplay = '🥇'; 
+                else if (index === 1) rankDisplay = '🥈'; // Standard silver medal emoji
+                else if (index === 2) rankDisplay = '🥉'; 
+                else rankDisplay = `${index + 1}.`;
                 
                 listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="name">${escapeHTML(score.name || '匿名')}</span> <span class="time">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`; 
 
