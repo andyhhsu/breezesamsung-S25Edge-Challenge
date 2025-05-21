@@ -862,7 +862,7 @@
                 imageLoaded: false,    // For the falling object renderer
                 type: 'easter_egg', 
                 base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION, 
-                spawnChance: 1 // MODIFIED: Easter egg spawn chance reduced from 2 to 1
+                spawnChance: 0.1 // MODIFIED: Easter egg spawn chance reduced from 1 to 0.1 (approx 1/1000)
             }
         ];
         itemTypes.forEach(item => item.speedPixelsPerSecond = 0); 
@@ -1684,7 +1684,7 @@
             scores.forEach((score, index) => {
                 const listItem = document.createElement('li');
                 let rankDisplay;
-                if (index === 0) rankDisplay = '🥇'; else if (index === 1) rankDisplay = '🥈'; else if (index === 2) rankDisplay = '🥉'; else rankDisplay = `${index + 1}.`;
+                if (index === 0) rankDisplay = '🥇'; else if (index === 1) rankDisplay = '�'; else if (index === 2) rankDisplay = '🥉'; else rankDisplay = `${index + 1}.`;
                 
                 listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="name">${escapeHTML(score.name || '匿名')}</span> <span class="time">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`; 
 
@@ -1802,3 +1802,4 @@
     </script>
 </body>
 </html>
+�
