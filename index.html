@@ -862,7 +862,7 @@
                 imageLoaded: false,    // For the falling object renderer
                 type: 'easter_egg', 
                 base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION, 
-                spawnChance: 2 
+                spawnChance: 1 // MODIFIED: Easter egg spawn chance reduced from 2 to 1
             }
         ];
         itemTypes.forEach(item => item.speedPixelsPerSecond = 0); 
@@ -1371,7 +1371,7 @@
                     </div>
                     <div>
                         <label for="playerPhone">您的手機號碼 (選填)：</label>
-                        <p class="form-field-description">若想參加「光速排行榜」抽獎活動，請務必填寫，以便中獎時與您聯繫。</p>
+                        <p class="form-field-description">若想參加「光速排行榜」和「抽獎活動」，請務必填寫，以便中獎時與您聯繫。</p> 
                         <input type="tel" id="playerPhone" name="playerPhone" maxlength="10" placeholder="例如：0912345678">
                     </div>
                     <button id="submitScoreButton" class="game-button">提交成績並加入排行榜</button>
@@ -1405,7 +1405,7 @@
                      submitStatus.textContent = '後端URL未配置或無效，無法提交。';
                      submitStatus.style.color = 'orange';
                      return;
-                 }
+                }
 
                 const scoreData = {
                     timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
@@ -1728,7 +1728,7 @@
 
             const maxHeight = window.innerHeight * 0.48;
             if (canvasHeight > maxHeight) { 
-                canvasHeight = maxHeight;    
+                canvasHeight = maxHeight;   
                 canvasWidth = canvasHeight * aspectRatio;
                 player.width = canvas.width * 0.12;
                 player.height = player.width / phoneImageAspectRatio;
