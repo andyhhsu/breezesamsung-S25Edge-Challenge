@@ -931,7 +931,7 @@
         let spawnTimer = 0;
         const SPAWN_INTERVAL = 72;
 
-        let catchSound, bombSound, winSound, loseSound, boosterSound, mysteryRevealSound, easterEggSound, timeBonusSound; 
+        let catchSound, bombSound, winSound, loseSound, boosterSound, mysteryRevealSound, easterEggSound, timeBonusSound, easterEggCelebrationSound; 
         let toneJsInitialized = false;
 
         function initializeSounds() {
@@ -955,6 +955,11 @@
             mysteryRevealSound = new Tone.NoiseSynth({ noise: { type: 'pink' }, envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.1 }, volume: -10 }).toDestination(); 
             easterEggSound = new Tone.PluckSynth({ attackNoise: 0.5, dampening: 4000, resonance: 0.9, volume: -3 }).toDestination(); 
             timeBonusSound = new Tone.Synth({ oscillator: { type: 'pulse', width: 0.3 }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.15 }, volume: -4 }).toDestination(); // Sound for time bonus
+            easterEggCelebrationSound = new Tone.PolySynth(Tone.Synth, {
+                oscillator: { type: "triangle8" },
+                envelope: { attack: 0.02, decay: 0.1, sustain: 0.3, release: 0.4 },
+                volume: -5
+            }).toDestination();
             
             toneJsInitialized = true;
             console.log("Tone.js sounds initialized.");
@@ -1566,6 +1571,15 @@
                 console.error("一個或多個新的彩蛋元素未找到。");
                 return;
             }
+
+            // Play Easter Egg Celebration Sound
+            if (toneJsInitialized && easterEggCelebrationSound && Tone.context.state === 'running') {
+                const now = Tone.now();
+                easterEggCelebrationSound.triggerAttackRelease(["C4", "E4", "G4", "C5"], "8n", now);
+                easterEggCelebrationSound.triggerAttackRelease(["E4", "G4", "C5", "E5"], "8n", now + 0.2);
+                easterEggCelebrationSound.triggerAttackRelease(["G4", "C5", "E5", "G5"], "4n", now + 0.4);
+            }
+
 
             container.style.animation = 'none';
             phoneImage.style.animation = 'none';
