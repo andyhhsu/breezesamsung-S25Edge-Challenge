@@ -194,7 +194,7 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            position: relative; /* For positioning the idle hint */
+            position: relative; 
         }
         canvas {
             background-color: #eff6ff; 
@@ -245,25 +245,9 @@
             padding: 0.2rem 0.4rem;
             border-radius: 0.25rem;
         }
-        #idlePlayerHint { /* Styling for the graphical hint */
-            position: absolute;
-            display: none; /* Hidden by default */
-            width: 32px; /* Adjust size as needed */
-            height: 32px;
-            background-color: rgba(59, 130, 246, 0.7); /* Semi-transparent blue */
-            border-radius: 50%;
-            color: white;
-            font-size: 20px; /* Adjust icon size */
-            text-align: center;
-            line-height: 32px; /* Center icon vertically */
-            z-index: 10; /* Above canvas */
-            pointer-events: none; /* So it doesn't interfere with canvas touch */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
+        /* Removed #idlePlayerHint styling as the element is removed */
         #statusMessage { 
-            margin-top: 1rem; /* Increased margin-top for more space */
+            margin-top: 1rem; 
             padding: 0.75rem; 
             background-color: #e0f2fe; 
             border-radius: 0.5rem;
@@ -342,9 +326,9 @@
         }
         .game-button:disabled {
             background-image: none; 
-            background-color: #6b7280; /* Darker gray for disabled state */
+            background-color: #6b7280; 
             cursor: not-allowed;
-            opacity: 0.6; /* Slightly more opaque to show color change */
+            opacity: 0.6; 
             transform: translateY(0);
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
         }
@@ -386,12 +370,12 @@
         #scoreFormContainer, #leaderboardContainer {
             margin-top: 1.5rem; 
             padding: 1rem;
-            background-color: #f8fafc; /* Tailwind slate-50, slightly different from instructions */
+            background-color: #f8fafc; 
             border-radius: 0.5rem;
-            border: 1px solid #e2e8f0; /* Tailwind slate-200 */
+            border: 1px solid #e2e8f0; 
             width: 100%;
             max-width: 450px; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07); /* Slightly different shadow */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
         }
         #scoreForm label, #leaderboardContainer h3 { 
             display: block;
@@ -423,8 +407,8 @@
         }
         #scoreForm input[type="text"]:focus, 
         #scoreForm input[type="tel"]:focus {
-            border-color: #2563eb; /* Tailwind blue-600 */
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* Tailwind blue-500 with opacity */
+            border-color: #2563eb; 
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); 
             outline: none;
         }
         #scoreForm button {
@@ -467,8 +451,8 @@
         }
 
         /* New Easter Egg Styles from user */
-        .easter-egg-container-wrapper { /* Wrapper for full screen overlay */
-            color: white; /* Text color for the new easter egg content */
+        .easter-egg-container-wrapper { 
+            color: white; 
         }
 
         .easter-egg-container {
@@ -481,7 +465,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            visibility: hidden; /* Initial hidden, controlled by JS */
+            visibility: hidden; 
         }
 
         @keyframes fadeInContainer {
@@ -662,12 +646,7 @@
                 font-size: 0.7rem;
                 max-width: 95%; 
             }
-            #idlePlayerHint { /* Responsive hint */
-                width: 28px;
-                height: 28px;
-                font-size: 18px;
-                line-height: 28px;
-            }
+            /* #idlePlayerHint responsive style removed as element is removed */
             #statusMessage {
                 font-size: 0.85rem; 
                 min-height: 60px; 
@@ -716,13 +695,13 @@
             <h2>遊戲說明</h2>
             <p class="instruction-text">體驗前所未有的輕盈快感！手持你的 <strong>Galaxy S25 Edge</strong>，化身為「輕巧配重達人」，靈活操控手機左右移動，精準捕捉從天而降的輕量級配件，挑戰完美的 <strong>163 公克</strong>黃金配重！</p>
             
-            <p class="instruction-text mt-3"><strong>配件與重量：</strong></p> <div id="itemDisplayGrid" class="item-grid-container">
-            </div>
+            <p class="instruction-text mt-3"><strong>配件與重量：</strong></p>
+            <div id="itemDisplayGrid" class="item-grid-container">
+                </div>
             
             <p class="instruction-text mt-3"><strong>注意事項：</strong></p>
             <p class="instruction-text"><strong class="text-red-600">🔴 超重警告：</strong>超過163公克，挑戰失敗！</p>
             <p class="instruction-text"><strong class="text-red-600">💣 炸彈注意：</strong>接到炸彈，遊戲結束！</p>
-            <p class="instruction-text"><strong class="text-purple-600">🚀 火箭注意：</strong>接到火箭，總重x2！</p>
             <p class="instruction-text easter-egg-hint">據說，在極為罕見的情況下，當宇宙的粒子完美對齊時，Galaxy S25 Edge 會展現出超越輕巧的... 獨特光芒 ✨。但這只是個傳說，對吧？</p>
             
             <h3>🎁 挑戰好康 🎁</h3>
@@ -736,8 +715,8 @@
             </div>
             <div class="reward-section mt-3">
                 <p class="reward-title">🎁 微風南山三星體驗館限定</p>
-                <p class="reward-detail">憑遊戲成功過關截圖，兌換精美好禮！<br><span class="text-xs text-gray-500">(數量有限，送完為止，每人限兌換一次)</span></p>
-            </div>
+                <p class="reward-detail">憑遊戲成功過關截圖，兌換精美好禮！</p>
+                </div>
         </div>
 
 
@@ -754,23 +733,24 @@
                     <span>過關率: <span id="passRate">--</span>%</span>
                 </div>
                 <canvas id="gameCanvas"></canvas>
-                <div id="idlePlayerHint">👆</div> <div id="statusMessage"></div> 
+                <div id="statusMessage"></div> 
                 <button id="startButton" class="game-button">開始遊戲</button>
                 </div>
             <div id="scoreFormContainer" style="display: none;">
-            </div>
+                </div>
         </div>
 
         <div id="leaderboardContainer" style="display: none;">
             <h3>🏆 光速排行榜 🏆</h3>
             <ol id="leaderboardList">
-            </ol>
+                </ol>
             <p id="leaderboardStatus" class="text-sm text-center mt-2 text-gray-500"></p>
         </div>
     </div>
 
     <div class="easter-egg-container-wrapper" id="newEasterEggOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(17, 24, 39, 0.95); z-index: 200; align-items: center; justify-content: center;">
-        <div class="easter-egg-container" id="easterEggContainerAnimate"> <div class="phone-image-container">
+        <div class="easter-egg-container" id="easterEggContainerAnimate">
+            <div class="phone-image-container">
                 <img src="https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png" alt="Galaxy S25 Edge 手機圖片" class="phone-image" id="phoneImage" onerror="this.onerror=null;this.src='https://placehold.co/150x300/333/FFF?text=S25+Edge';">
                 <div class="shine-effect"></div>
             </div>
@@ -786,12 +766,14 @@
                     <p class="mt-2">感謝您的參與，希望您依然喜歡這段驚喜動畫！</p>
                 </div>
             </div>
-            <div class="particles-container" id="particlesContainerAnimate"></div> <button id="closeNewEasterEggButton" class="game-button" style="margin-top: 20px; background-image: linear-gradient(to right, #4f46e5 0%, #6d28d9 50%, #7c3aed 100%);">關閉彩蛋</button>
+            <div class="particles-container" id="particlesContainerAnimate"></div>
+            <button id="closeNewEasterEggButton" class="game-button" style="margin-top: 20px; background-image: linear-gradient(to right, #4f46e5 0%, #6d28d9 50%, #7c3aed 100%);">關閉彩蛋</button>
         </div>
     </div>
 
 
-    <div id="touchControls" class="controls"> <button id="leftButton" class="control-button">⬅️</button>
+    <div id="touchControls" class="controls">
+        <button id="leftButton" class="control-button">⬅️</button>
         <button id="rightButton" class="control-button">➡️</button>
     </div>
 
@@ -818,8 +800,7 @@
         const passRateDisplay = document.getElementById('passRate'); 
 
         const newEasterEggOverlay = document.getElementById('newEasterEggOverlay');
-        const idlePlayerHint = document.getElementById('idlePlayerHint'); // Get the hint element
-        let idleHintTimeoutId = null; // For managing the hint's visibility timeout
+        // idlePlayerHint element and its timeout ID removed
 
         const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzIrUHOWYlBJ_UENM0pTBn6pSIbMK9fToFyP6ILJr5mLuYXidG_cGXBtCF6bjTWxzSG/exec'; 
         
@@ -870,6 +851,14 @@
         let isIdleAnimating = false;
         let idleAnimationFrameId = null;
 
+        // Variables for tap detection on canvas to start game
+        let touchStartTime = 0;
+        let touchStartCanvasX = 0; 
+        let touchStartCanvasY = 0; 
+        let touchStartPlayerX = 0; // To detect if player was dragged significantly during a "tap"
+        const MAX_TAP_DURATION = 250; // milliseconds for a tap
+        const MAX_TAP_MOVEMENT_FOR_START = 15; // pixels player can move and still be considered a tap
+
 
         const BASE_SPEED_MULTIPLIER = (((((2.7 * 0.9) * 1.2) * 1.2) * 1.2) * 1.1) * 1.1; 
         const TARGET_FPS_FOR_CONVERSION = 60.0; 
@@ -877,10 +866,10 @@
         const S25_IMAGE_URL = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png';
 
         const itemTypes = [
-            { name: 'S Pen', emoji: '✏️', weight: 3, type: 'item', base_ch_per_sec: 0.0025 * TARGET_FPS_FOR_CONVERSION, spawnChance: 25 },
-            { name: 'Galaxy Buds3 (單耳)', emoji: '🎧', weight: 5, type: 'item', base_ch_per_sec: 0.0030 * TARGET_FPS_FOR_CONVERSION, spawnChance: 25 },
-            { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 18 }, 
-            { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: (0.0058 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 12 }, 
+            { name: 'S Pen', emoji: '✏️', weight: 3, type: 'item', base_ch_per_sec: 0.0025 * TARGET_FPS_FOR_CONVERSION, spawnChance: 23 },
+            { name: 'Galaxy Buds3 (單耳)', emoji: '🎧', weight: 5, type: 'item', base_ch_per_sec: 0.0030 * TARGET_FPS_FOR_CONVERSION, spawnChance: 23 },
+            { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 16 }, 
+            { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: (0.0058 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 }, 
             { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 }, 
             { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
             { 
@@ -892,11 +881,20 @@
                 spawnChance: 8 
             },
             { 
+                name: '時光沙漏', // New item for time reduction
+                emoji: '⏳', 
+                weight: 0, 
+                type: 'time_bonus', 
+                timeEffect: -2, // Seconds to reduce
+                base_ch_per_sec: 0.0020 * TARGET_FPS_FOR_CONVERSION, // Speed if it were to fall (not used directly for mystery reveal)
+                spawnChance: 0 // Not spawned directly, only through mystery item
+            },
+            { 
                 name: 'Galaxy S25 Edge 彩蛋', 
                 emoji: '✨', 
                 imageSrc: S25_IMAGE_URL, 
                 imageObj: new Image(), 
-                imageLoaded: false,    
+                imageLoaded: false,  
                 type: 'easter_egg', 
                 base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION, 
                 spawnChance: 0.1 
@@ -923,7 +921,8 @@
             'Galaxy Buds3 (單耳)': itemTypes.find(it => it.name === 'Galaxy Buds3 (單耳)'),
             '手機SIM卡托': itemTypes.find(it => it.name === '手機SIM卡托'),
             'Galaxy SmartTag2': itemTypes.find(it => it.name === 'Galaxy SmartTag2'),
-            '增重火箭': itemTypes.find(it => it.name === '增重火箭')
+            '增重火箭': itemTypes.find(it => it.name === '增重火箭'),
+            '時光沙漏': itemTypes.find(it => it.name === '時光沙漏') // Add new time bonus item
         };
         const mysteryTransformableItemKeys = Object.keys(mysteryTransformableItemsMap).filter(key => mysteryTransformableItemsMap[key]);
 
@@ -932,7 +931,7 @@
         let spawnTimer = 0;
         const SPAWN_INTERVAL = 72;
 
-        let catchSound, bombSound, winSound, loseSound, boosterSound, mysteryRevealSound, easterEggSound; 
+        let catchSound, bombSound, winSound, loseSound, boosterSound, mysteryRevealSound, easterEggSound, timeBonusSound; 
         let toneJsInitialized = false;
 
         function initializeSounds() {
@@ -955,6 +954,7 @@
             boosterSound = new Tone.Synth({ oscillator: { type: 'sawtooth' }, envelope: { attack: 0.01, decay: 0.15, sustain: 0.08, release: 0.2 }, volume: -3 }).toDestination();
             mysteryRevealSound = new Tone.NoiseSynth({ noise: { type: 'pink' }, envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.1 }, volume: -10 }).toDestination(); 
             easterEggSound = new Tone.PluckSynth({ attackNoise: 0.5, dampening: 4000, resonance: 0.9, volume: -3 }).toDestination(); 
+            timeBonusSound = new Tone.Synth({ oscillator: { type: 'pulse', width: 0.3 }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.15 }, volume: -4 }).toDestination(); // Sound for time bonus
             
             toneJsInitialized = true;
             console.log("Tone.js sounds initialized.");
@@ -964,6 +964,7 @@
             if (itemDisplayGrid) { 
                 itemDisplayGrid.innerHTML = ''; 
                 itemTypes.forEach(item => {
+                    // Display all items except the 'easter_egg' and 'time_bonus' (as it's a mystery outcome) in the grid
                     if (item.type === 'item' || item.type === 'weight_booster' || item.type === 'mystery') { 
                         const itemCard = document.createElement('div');
                         itemCard.className = 'item-card';
@@ -1140,6 +1141,14 @@
                                 accumulatedWeight *= 2;
                                 if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
                                 customGameOverMessageOnOverweight = `哎呀！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT}g 了！`;
+                            } else if (actualItem.type === 'time_bonus') {
+                                revealedMsg += ` (時間 ${actualItem.timeEffect}秒!)`;
+                                gameStartTime -= actualItem.timeEffect * 1000; // Add to start time to reduce elapsed time
+                                if (gameStartTime > performance.now()) { // Prevent future start time
+                                    gameStartTime = performance.now();
+                                }
+                                if (toneJsInitialized && timeBonusSound && Tone.context.state === 'running') timeBonusSound.triggerAttackRelease("E5", "8n", Tone.now());
+                                // No overweight message for time bonus as its weight is 0
                             }
                             revealedMsg += `!</p>`;
                             statusMessage.innerHTML = revealedMsg;
@@ -1162,7 +1171,7 @@
                     }
 
                     accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
-                    currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
+                    currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); 
                     fallingObjects.splice(i, 1);
 
                     if (isGameRunning) { 
@@ -1179,11 +1188,15 @@
         }
         
         function spawnObject() { 
-            const totalChance = itemTypes.reduce((sum, item) => sum + item.spawnChance, 0);
+            // Filter out items with spawnChance 0 (like time_bonus and easter_egg if its chance is 0 for direct spawn)
+            const spawnableItems = itemTypes.filter(item => item.spawnChance > 0);
+            if (spawnableItems.length === 0) return; // No items to spawn
+
+            const totalChance = spawnableItems.reduce((sum, item) => sum + item.spawnChance, 0);
             let randomRoll = Math.random() * totalChance;
             let selectedType = null;
 
-            for (const item of itemTypes) {
+            for (const item of spawnableItems) {
                 if (randomRoll < item.spawnChance) {
                     selectedType = item;
                     break;
@@ -1192,13 +1205,13 @@
             }
 
             if (!selectedType) { 
-                selectedType = itemTypes.find(it => it.type === 'item') || itemTypes[0]; 
+                selectedType = spawnableItems.find(it => it.type === 'item') || spawnableItems[0]; 
             }
             
             const typeTemplate = selectedType;
             const objWidth = canvas.width * 0.1; 
             const objHeight = canvas.width * 0.1; 
-            if (typeTemplate.type === 'easter_egg') {
+            if (typeTemplate.type === 'easter_egg') { // Should only happen if its spawnChance > 0
                  fallingObjects.push({ 
                     ...typeTemplate, 
                     x: Math.random() * (canvas.width - objWidth), 
@@ -1221,7 +1234,7 @@
         function updateTimerDisplay() {
             if (isGameRunning && gameStartTime > 0) { 
                 const elapsedTime = (performance.now() - gameStartTime) / 1000; 
-                timerDisplay.textContent = elapsedTime.toFixed(2);
+                timerDisplay.textContent = Math.max(0, elapsedTime).toFixed(2); // Ensure time is not negative
             } else if (!isGameRunning) {
                  timerDisplay.textContent = "0.00"; 
             }
@@ -1284,23 +1297,6 @@
             isIdleAnimating = true;
             if(idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId); 
             idleAnimationLoop();
-            
-            // Show graphical hint briefly
-            if (idlePlayerHint && player.imageLoaded) {
-                const playerCenterX = player.x + player.width / 2;
-                const playerTopY = player.y - player.height * 0.1; // Slightly above the player
-                
-                idlePlayerHint.style.left = `${playerCenterX - idlePlayerHint.offsetWidth / 2}px`;
-                idlePlayerHint.style.top = `${playerTopY - idlePlayerHint.offsetHeight - 5}px`; // Position above player
-                idlePlayerHint.style.display = 'block';
-                idlePlayerHint.style.opacity = '1';
-
-                clearTimeout(idleHintTimeoutId); // Clear any existing timeout
-                idleHintTimeoutId = setTimeout(() => {
-                    idlePlayerHint.style.opacity = '0';
-                    setTimeout(() => { idlePlayerHint.style.display = 'none'; }, 300); // Hide after fade out
-                }, 3500); // Show for 3.5 seconds
-            }
         }
 
         function stopIdleAnimation() {
@@ -1309,11 +1305,7 @@
                 cancelAnimationFrame(idleAnimationFrameId);
                 idleAnimationFrameId = null;
             }
-            if (idlePlayerHint) { // Hide hint when idle animation stops
-                clearTimeout(idleHintTimeoutId);
-                idlePlayerHint.style.opacity = '0';
-                setTimeout(() => { idlePlayerHint.style.display = 'none'; }, 300);
-            }
+            // No need to hide graphical hint as it's removed
             if (canvas.width > 0 && player.width > 0 && player.imageLoaded) {
                  clearCanvas();
                  drawPlayer(); 
@@ -1443,9 +1435,10 @@
                 }
             }
             const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
+            const finalDisplayTime = Math.max(0, parseFloat(elapsedTime)).toFixed(2); // Ensure displayed time is not negative
             const winPopupMessage = `
                 <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
-                <p class="text-center mb-3">您的成績：<strong>${elapsedTime} 秒</strong></p>
+                <p class="text-center mb-3">您的成績：<strong>${finalDisplayTime} 秒</strong></p>
                 <h4>🎁 挑戰成功好康 & 活動辦法 🎁</h4>
                 <p class="mt-2"><strong>🏆 光速排行榜獎勵：</strong></p>
                 <ul class="text-sm">
@@ -1456,14 +1449,13 @@
                 <p class="text-xs text-gray-600 mb-2">排行榜結算至 2025/6/30 23:59，詳情與得獎名單請見微風南山三星粉專頁。</p>
                 <p><strong>🎁 來店兌換精美小禮：</strong></p>
                 <p class="text-sm">憑此遊戲成功畫面截圖，即可於活動期間 (2025/6/1 - 2025/6/30) 至 <strong>微風南山三星體驗館 (台北市信義區松智路17號二樓)</strong>&nbsp;兌換「挑戰成功精美小禮」一份！</p>
-                <p class="text-xs text-gray-500 mb-2">(數量有限，送完為止，每人限兌換一次)</p>
                 <p><strong>⚡ 加碼抽大獎：</strong></p>
                 <p class="text-sm">想再抽三星行動電源？快到微風南山三星粉專頁查看指定貼文，參與互動分享活動！</p>
             `;
             if (statusMessage) {
                 statusMessage.innerHTML = winPopupMessage;
             }
-            showScoreForm(parseFloat(elapsedTime)); 
+            showScoreForm(parseFloat(finalDisplayTime)); 
             recordGameOutcome(true); 
         }
 
@@ -1671,6 +1663,13 @@
                 e.preventDefault(); 
                 stopIdleAnimation(); 
                 const touch = e.touches[0];
+                
+                touchStartTime = performance.now();
+                const rect = canvas.getBoundingClientRect();
+                touchStartCanvasX = touch.clientX - rect.left; 
+                touchStartCanvasY = touch.clientY - rect.top;  
+                touchStartPlayerX = player.x; 
+
                 movePlayerToTouch(touch); 
                 player.dx = 0; 
             }
@@ -1685,8 +1684,30 @@
         }
 
         function handleCanvasTouchEnd(e) {
-            if (!isGameRunning && canvas.width > 0 && player.width > 0) {
-                startIdleAnimation(); 
+            if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
+                const touchDuration = performance.now() - touchStartTime;
+                
+                const initialPlayerRect = {
+                    x: touchStartPlayerX, 
+                    y: player.y,       
+                    width: player.width,
+                    height: player.height
+                };
+
+                const wasTouchOnPlayerInitially = (
+                    touchStartCanvasX >= initialPlayerRect.x &&
+                    touchStartCanvasX <= initialPlayerRect.x + initialPlayerRect.width &&
+                    touchStartCanvasY >= initialPlayerRect.y &&
+                    touchStartCanvasY <= initialPlayerRect.y + initialPlayerRect.height
+                );
+
+                const playerMovedDistance = Math.abs(player.x - touchStartPlayerX);
+
+                if (wasTouchOnPlayerInitially && touchDuration < MAX_TAP_DURATION && playerMovedDistance < MAX_TAP_MOVEMENT_FOR_START) {
+                    startGame();
+                } else {
+                    startIdleAnimation(); 
+                }
             }
         }
         
@@ -1939,7 +1960,7 @@
 
             if (!isGameRunning) { 
                 clearCanvas(); 
-                drawPlayer();    
+                drawPlayer();   
                 startIdleAnimation(); 
                 startButton.disabled = false; 
             }
