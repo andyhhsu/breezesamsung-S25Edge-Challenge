@@ -686,7 +686,7 @@
                         </div>
                         <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
                             <span class="block text-xs sm:text-sm font-medium text-sky-700">遊戲時間</span>
-                            <span class="block text-base sm:text-lg font-bold text-sky-800">
+                            <span class="block text-base sm:text-lg font-bold text-gray-900"> 
                                 <span id="timerDisplay">0.00</span> s
                             </span>
                         </div>
@@ -697,15 +697,15 @@
                     <div class="flex flex-wrap justify-around items-stretch gap-2">
                         <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
                             <span class="block text-[10px] sm:text-xs font-medium text-slate-700">🏆 總成功</span>
-                            <span id="totalWins" class="block text-sm sm:text-base font-semibold text-green-600">--</span>
+                            <span id="totalWins" class="block text-sm sm:text-base font-semibold text-gray-900">--</span> 
                         </div>
                         <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
                             <span class="block text-[10px] sm:text-xs font-medium text-slate-700">💔 總失敗</span>
-                            <span id="totalLosses" class="block text-sm sm:text-base font-semibold text-red-600">--</span>
+                            <span id="totalLosses" class="block text-sm sm:text-base font-semibold text-gray-900">--</span> 
                         </div>
                         <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
                             <span class="block text-[10px] sm:text-xs font-medium text-slate-700">📈 過關率</span>
-                            <span class="block text-sm sm:text-base font-semibold text-blue-600"><span id="passRate">--</span>%</span>
+                            <span class="block text-sm sm:text-base font-semibold text-gray-900"><span id="passRate">--</span>%</span> 
                         </div>
                     </div>
                 </div>
@@ -1871,7 +1871,7 @@
                 const listItem = document.createElement('li');
                 let rankDisplay;
                 if (index === 0) rankDisplay = '🥇'; 
-                else if (index === 1) rankDisplay = '🥈'; 
+                else if (index === 1) rankDisplay = '�'; 
                 else if (index === 2) rankDisplay = '🥉'; 
                 else rankDisplay = `${index + 1}.`; 
 
@@ -2045,7 +2045,12 @@
                     startButton.disabled = false;
                     if (!isGameRunning) startIdleAnimation();
                 } else if (player.image.complete && player.image.src.includes('placehold.co') && !player.imageLoaded) {
-                    console.warn("Fallback image loading complete but failed. Game will proceed with default player drawing.");
+                    // This case means the fallback image (placeholder) has attempted to load,
+                    // but our player.imageLoaded flag (which is set in the fallback's onload)
+                    // hasn't become true yet, or the fallback itself failed.
+                    // We should still proceed to enable the game to avoid getting stuck.
+                    // handleResize will use default dimensions if needed.
+                    console.warn("Fallback image loading attempt complete, but player.imageLoaded still false. Proceeding to enable game.");
                     clearInterval(checkPlayerImage);
                     if (canvas.width > 0) handleResize(); 
                     startButton.disabled = false;
@@ -2092,3 +2097,4 @@
     </script>
 </body>
 </html>
+�
