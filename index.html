@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Galaxy S25 Edge 配重挑戰賽</title>
+    <title>Galaxy S25 Edge 輕巧配重挑戰賽</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
@@ -905,7 +905,7 @@
             { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 16 },
             { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: (0.0058 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
             { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 }, // 重量加倍
-            { name: '炸彈', emoji: '�', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
+            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
             {
                 name: '神秘配件',
                 emoji: '❓',
@@ -1449,7 +1449,7 @@
             fetchGameStats(); // 每次開始遊戲時獲取統計數據
 
             // **遊戲開始時顯示觸控按鈕 (如果適用)**
-            if (isTouchDevice()) {
+            if (isTouchDevice() && touchControlsUI) { // 新增 touchControlsUI 存在性檢查
                 touchControlsUI.style.display = 'flex';
             }
         }
@@ -1464,12 +1464,15 @@
             if (startButton) { // 啟用開始按鈕
                 startButton.disabled = false;
             }
+
+            // **遊戲停止時隱藏觸控按鈕 (如果適用)**
+            if (touchControlsUI) { // 檢查 touchControlsUI 是否存在
+                 touchControlsUI.style.display = 'none'; // 直接隱藏，不再檢查 isTouchDevice()
+            }
+
+
             if (canvas.width > 0 && player.width > 0) { // 確保畫布和玩家已初始化
                 startIdleAnimation(); // 遊戲停止後開始待機動畫
-            }
-            // **遊戲停止時隱藏觸控按鈕 (如果適用)**
-            if (isTouchDevice()) {
-                touchControlsUI.style.display = 'none';
             }
         }
 
@@ -2293,4 +2296,3 @@
     </script>
 </body>
 </html>
-�
