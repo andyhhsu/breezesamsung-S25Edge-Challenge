@@ -960,7 +960,7 @@
 
         let fallingObjects = []; // 儲存掉落物的陣列
         let spawnTimer = 0; // 掉落物生成計時器
-        const SPAWN_INTERVAL = 50; // ** 掉落物生成間隔 (幀) - 已調整 **
+        const SPAWN_INTERVAL = 55; // ** 掉落物生成間隔 (幀) - 已調整為 55 **
 
         // 音效變數
         let catchSound, bombSound, winSound, loseSound, boosterSound, mysteryRevealSound, easterEggSound, timeBonusSound;
@@ -1133,113 +1133,108 @@
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
         }
 
-        // 更新掉落物位置及碰撞檢測
-        function updateFallingObjects(deltaTime) { // deltaTime: 距離上一幀的時間 (秒)
-            for (let i = fallingObjects.length - 1; i >= 0; i--) {
-                const obj = fallingObjects[i];
-                obj.y += obj.speedPixelsPerSecond * deltaTime; // 根據速度和時間更新 Y 座標
+        // 更新掉落物位置及碰撞檢測 (已修改錯誤處理邏輯)
+        function updateFallingObjects(deltaTime) {
+            let gameEndedThisFrame = false; // 標記此幀內遊戲是否已結束
 
-                let customGameOverMessageOnOverweight = null; // 自訂超重時的遊戲結束訊息
+            for (let i = fallingObjects.length - 1; i >= 0; i--) {
+                if (gameEndedThisFrame && isGameRunning === false) { // 如果遊戲已在本幀結束，則不再處理後續物件
+                    break;
+                }
+
+                const obj = fallingObjects[i];
+                if (!obj) continue; // 防禦性檢查，理論上不應發生
+
+                obj.y += obj.speedPixelsPerSecond * deltaTime;
+                obj.markedForRemoval = obj.markedForRemoval || false; // 初始化標記
 
                 // 碰撞檢測
-                if (obj.x < player.x + player.width &&
+                if (!obj.markedForRemoval && // 只處理未被標記刪除的物件
+                    obj.x < player.x + player.width &&
                     obj.x + obj.width > player.x &&
                     obj.y < player.y + player.height &&
                     obj.y + obj.height > player.y) {
 
-                    if (obj.type === 'bomb') { // 接到炸彈
+                    obj.markedForRemoval = true; // 接觸後標記待刪除
+
+                    if (obj.type === 'bomb') {
                         if (toneJsInitialized && bombSound && Tone.context.state === 'running') bombSound.triggerAttackRelease("C2", "8n", Tone.now());
-                        gameOver("哎呀！接到炸彈了！");
-                        fallingObjects.splice(i, 1); // 移除炸彈
-                        continue; // 繼續處理下一個掉落物
-                    }
-
-                    if (obj.type === 'easter_egg') { // 接到彩蛋
+                        gameOver("哎呀！接到炸彈了！"); // gameOver 會設定 isGameRunning = false
+                        gameEndedThisFrame = true; // 標記遊戲已在本幀結束
+                        // 不再需要 continue 或 break，讓迴圈結束後統一處理 markedForRemoval
+                    } else if (obj.type === 'easter_egg') {
                         if (toneJsInitialized && easterEggSound && Tone.context.state === 'running') easterEggSound.triggerAttack("A4", Tone.now());
-                        stopGame(); // 停止遊戲
-
-                        if(startButton) {
-                            startButton.textContent = "重新開始";
-                            startButton.disabled = false;
-                        }
-                        if (statusMessage) {
-                                statusMessage.innerHTML = "<p class='text-center font-bold'>✨ 彩蛋發現！ ✨</p>";
-                        }
-
+                        stopGame(); // 明確停止遊戲邏輯
                         showNewEasterEgg(); // 顯示彩蛋畫面
+                        gameEndedThisFrame = true; // 標記遊戲已在本幀結束
+                    } else { // 一般物品、神秘道具、增重火箭
+                        let customGameOverMessageOnOverweight = null;
+                        // let revealedItemName = obj.name; // 已在 obj 中
 
-                        fallingObjects.splice(i, 1); // 移除彩蛋
-                        return; // 結束此函數，因為遊戲已停止並進入彩蛋畫面
-                    }
+                        if (obj.type === 'mystery') {
+                            if (toneJsInitialized && mysteryRevealSound && Tone.context.state === 'running') mysteryRevealSound.triggerAttackRelease("8n", Tone.now());
+                            if (mysteryTransformableItemKeys.length > 0) {
+                                const randomKeyIndex = Math.floor(Math.random() * mysteryTransformableItemKeys.length);
+                                const revealedItemKey = mysteryTransformableItemKeys[randomKeyIndex];
+                                const actualItem = { ...mysteryTransformableItemsMap[revealedItemKey] };
+                                // revealedItemName = actualItem.name; // obj.name 已經是 "?"
+                                let revealedMsg = `<p class='text-center font-bold text-blue-600'>神秘配件變成了... <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
 
-                    let revealedItemName = obj.name; // 記錄揭示的物品名稱 (主要用於神秘道具)
-
-                    if (obj.type === 'mystery') { // 接到神秘道具
-                        if (toneJsInitialized && mysteryRevealSound && Tone.context.state === 'running') mysteryRevealSound.triggerAttackRelease("8n", Tone.now());
-
-                        if (mysteryTransformableItemKeys.length > 0) {
-                            // 從可變換物品列表中隨機選擇一個
-                            const randomKeyIndex = Math.floor(Math.random() * mysteryTransformableItemKeys.length);
-                            const revealedItemKey = mysteryTransformableItemKeys[randomKeyIndex];
-                            const actualItem = { ...mysteryTransformableItemsMap[revealedItemKey] }; // 複製一份，避免修改原始定義
-
-                            revealedItemName = actualItem.name; // 更新揭示的物品名稱
-
-                            let revealedMsg = `<p class='text-center font-bold text-blue-600'>神秘配件變成了... <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
-                            if (actualItem.type === 'item') { // 如果變成了普通物品
-                                revealedMsg += ` (+${actualItem.weight}g)`;
-                                accumulatedWeight += actualItem.weight;
-                                if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
-                                customGameOverMessageOnOverweight = `哎呀！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT}g 了！`;
-                            } else if (actualItem.type === 'weight_booster') { // 如果變成了增重火箭
-                                revealedMsg += ` (重量x2!)`;
-                                accumulatedWeight *= 2;
-                                if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
-                                customGameOverMessageOnOverweight = `哎呀！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT}g 了！`;
-                            } else if (actualItem.type === 'time_bonus') { // 如果變成了時光沙漏
-                                revealedMsg += ` (時間 ${actualItem.timeEffect}秒!)`;
-                                gameStartTime -= actualItem.timeEffect * 1000; // 調整遊戲開始時間
-                                if (gameStartTime > performance.now()) { // 確保時間不會變成未來
-                                    gameStartTime = performance.now();
+                                if (actualItem.type === 'item') {
+                                    revealedMsg += ` (+${actualItem.weight}g)`;
+                                    accumulatedWeight += actualItem.weight;
+                                    if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
+                                    customGameOverMessageOnOverweight = `哎呀！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT}g 了！`;
+                                } else if (actualItem.type === 'weight_booster') {
+                                    revealedMsg += ` (重量x2!)`;
+                                    accumulatedWeight *= 2;
+                                    if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
+                                    customGameOverMessageOnOverweight = `哎呀！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT}g 了！`;
+                                } else if (actualItem.type === 'time_bonus') {
+                                    revealedMsg += ` (時間 ${actualItem.timeEffect}秒!)`;
+                                    gameStartTime -= actualItem.timeEffect * 1000;
+                                    if (gameStartTime > performance.now()) gameStartTime = performance.now();
+                                    if (toneJsInitialized && timeBonusSound && Tone.context.state === 'running') timeBonusSound.triggerAttackRelease("E5", "8n", Tone.now());
                                 }
-                                if (toneJsInitialized && timeBonusSound && Tone.context.state === 'running') timeBonusSound.triggerAttackRelease("E5", "8n", Tone.now());
+                                revealedMsg += `!</p>`;
+                                statusMessage.innerHTML = revealedMsg;
+                                setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; }, 2500);
                             }
-                            revealedMsg += `!</p>`;
-                            statusMessage.innerHTML = revealedMsg;
-                            setTimeout(() => { // 短暫顯示後恢復預設訊息
-                                if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>";
-                            }, 2500);
-                        } else {
-                            console.log("神秘道具沒有定義可變換的物品。");
-                        }
-                    } else if (obj.type === 'weight_booster') { // 接到增重火箭
-                        if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
-                        accumulatedWeight *= 2;
-                        statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 AI 加速！重量翻倍！</p>";
-                        setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; }, 1500);
-                        customGameOverMessageOnOverweight = `哎呀！重量翻倍後超過目標 ${TARGET_WEIGHT}g 了！`;
-                    } else if (obj.type === 'item') { // 接到普通物品
-                        if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
-                        accumulatedWeight += obj.weight;
+                        } else if (obj.type === 'weight_booster') {
+                            if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
+                            accumulatedWeight *= 2;
+                            statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 AI 加速！重量翻倍！</p>";
+                            setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; }, 1500);
+                            customGameOverMessageOnOverweight = `哎呀！重量翻倍後超過目標 ${TARGET_WEIGHT}g 了！`;
+                        } else if (obj.type === 'item') {
+                            if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
+                            accumulatedWeight += obj.weight;
                             customGameOverMessageOnOverweight = `哎呀！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT}g 了！`;
-                    }
+                        }
 
-                    accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1)); // 處理浮點數精度問題
-                    currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); // 更新顯示的重量
-                    fallingObjects.splice(i, 1); // 移除接到的物品
+                        accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
+                        currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
 
-                    if (isGameRunning) { // 檢查遊戲是否仍在運行 (避免彩蛋後觸發)
-                        if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { // 達到目標重量 (使用容差比較浮點數)
-                            gameWin();
-                        } else if (accumulatedWeight > TARGET_WEIGHT) { // 超過目標重量
-                            gameOver(customGameOverMessageOnOverweight || `哎呀！超過目標 ${TARGET_WEIGHT}g 了！`);
+                        // 只有在遊戲尚未於本幀結束，且仍在運行時，才檢查勝利/失敗條件
+                        if (!gameEndedThisFrame && isGameRunning) {
+                            if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) {
+                                gameWin(); // gameWin 會設定 isGameRunning = false
+                                gameEndedThisFrame = true;
+                            } else if (accumulatedWeight > TARGET_WEIGHT) {
+                                gameOver(customGameOverMessageOnOverweight || `哎呀！超過目標 ${TARGET_WEIGHT}g 了！`);
+                                gameEndedThisFrame = true;
+                            }
                         }
                     }
                 } else if (obj.y > canvas.height + obj.height + 20) { // 物件掉出畫面底部
-                    fallingObjects.splice(i, 1); // 移除物件
+                    obj.markedForRemoval = true; // 標記待刪除
                 }
             }
+
+            // 在迴圈結束後，統一移除被標記的物件
+            fallingObjects = fallingObjects.filter(obj => !obj.markedForRemoval);
         }
+
 
         // 生成掉落物
         function spawnObject() {
@@ -1274,10 +1269,18 @@
                     width: objWidth,
                     height: objHeight,
                     imageObj: typeTemplate.imageObj, // 傳遞圖片物件
-                    imageLoaded: typeTemplate.imageLoaded // 傳遞圖片載入狀態
+                    imageLoaded: typeTemplate.imageLoaded, // 傳遞圖片載入狀態
+                    markedForRemoval: false // 初始化標記
                 });
             } else { // 其他類型物品
-                fallingObjects.push({ ...typeTemplate, x: Math.random() * (canvas.width - objWidth), y: 0 - objHeight, width: objWidth, height: objHeight });
+                fallingObjects.push({
+                    ...typeTemplate,
+                    x: Math.random() * (canvas.width - objWidth),
+                    y: 0 - objHeight,
+                    width: objWidth,
+                    height: objHeight,
+                    markedForRemoval: false // 初始化標記
+                });
             }
         }
 
@@ -1299,7 +1302,13 @@
 
         // 遊戲主迴圈
         function gameLoop(currentTime) { // currentTime 由 requestAnimationFrame 提供
-            if (!isGameRunning) return; // 如果遊戲未運行，則返回
+            if (!isGameRunning && animationFrameId) { // 如果遊戲已停止但迴圈仍在請求，則取消
+                 cancelAnimationFrame(animationFrameId);
+                 animationFrameId = null;
+                 return;
+            }
+            if (!isGameRunning) return;
+
 
             if (gameStartTime === 0) { // 如果遊戲剛開始，記錄開始時間
                 gameStartTime = currentTime;
@@ -1319,7 +1328,9 @@
                     spawnTimer = 0; // 重置計時器
                 }
                 updatePlayerPosition(); // 更新玩家位置
-                updateFallingObjects(clampedDeltaTime); // 更新掉落物位置和碰撞
+                if (isGameRunning) { // 只有在遊戲進行中才更新掉落物
+                    updateFallingObjects(clampedDeltaTime);
+                }
                 drawPlayer(); // 繪製玩家
                 drawFallingObjects(); // 繪製掉落物
             } catch (error) { // 捕獲遊戲迴圈中的錯誤
@@ -1334,7 +1345,9 @@
                 return; // 發生錯誤後停止遊戲迴圈
             }
 
-            animationFrameId = requestAnimationFrame(gameLoop); // 請求下一幀動畫
+            if (isGameRunning) { // 只有在遊戲運行中才繼續請求下一幀
+                animationFrameId = requestAnimationFrame(gameLoop);
+            }
         }
 
         // 待機動畫迴圈
@@ -1433,7 +1446,7 @@
 
         // 停止遊戲 (通用停止邏輯，不處理遊戲結果)
         function stopGame() {
-            isGameRunning = false;
+            isGameRunning = false; // ** 核心：設定遊戲運行狀態為 false **
             if(animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
@@ -1467,7 +1480,7 @@
 
         // 遊戲結束 (失敗)
         function gameOver(message) {
-            stopGame(); // 停止遊戲
+            stopGame(); // **首先調用 stopGame 來停止遊戲迴圈和更新 isGameRunning**
             if (startButton) {
                 startButton.textContent = "再試一次"; // 更新按鈕文字
             }
@@ -1495,7 +1508,7 @@
 
         // 遊戲勝利
         async function gameWin() {
-            stopGame(); // 停止遊戲
+            stopGame(); // **首先調用 stopGame 來停止遊戲迴圈和更新 isGameRunning**
             if (startButton) {
                 startButton.textContent = "再玩一局"; // 更新按鈕文字
             }
@@ -1633,7 +1646,7 @@
 
         // 顯示新的彩蛋畫面
         function showNewEasterEgg() {
-            stopIdleAnimation(); // 停止待機動畫
+            // stopGame(); // 已在 updateFallingObjects 中呼叫
             const overlay = document.getElementById('newEasterEggOverlay');
             const container = document.getElementById('easterEggContainerAnimate');
             const particlesContainer = document.getElementById('particlesContainerAnimate');
@@ -1673,6 +1686,16 @@
             particlesContainer.innerHTML = ''; // 清空粒子效果
 
             overlay.style.display = 'flex'; // 顯示 overlay
+
+            // 更新狀態訊息和按鈕 (因為 stopGame 已被呼叫)
+            if (statusMessage) {
+                statusMessage.innerHTML = "<p class='text-center font-bold'>✨ 彩蛋發現！ ✨</p>";
+            }
+            if (startButton) {
+                startButton.textContent = "重新開始";
+                startButton.disabled = false;
+            }
+
 
             // 延遲啟動動畫 (確保重置生效)
             setTimeout(() => {
@@ -1998,7 +2021,7 @@
                 let rankDisplay; // 名次顯示
                 if (index === 0) rankDisplay = '🥇'; // 金牌
                 else if (index === 1) rankDisplay = '🥈'; // 銀牌
-                else if (index === 2) rankDisplay = '�'; // 銅牌
+                else if (index === 2) rankDisplay = '🥉'; // 銅牌
                 else rankDisplay = `${index + 1}.`; // 其他名次
 
                 listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="name">${escapeHTML(score.name || '匿名')}</span> <span class="time">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`;
@@ -2242,4 +2265,3 @@
     </script>
 </body>
 </html>
-�
