@@ -697,35 +697,35 @@
                     </div>
                 </div>
 
-                <div class="w-full max-w-md mt-1 mb-2 text-xs text-gray-600 px-1">
-                    <div class="flex flex-wrap justify-around items-stretch gap-2">
-                        <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
-                            <span class="block text-[10px] sm:text-xs font-medium text-slate-700">🏆 總成功</span>
-                            <span id="totalWins" class="block text-sm sm:text-base font-semibold text-gray-900">--</span> 
-                        </div>
-                        <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
-                            <span class="block text-[10px] sm:text-xs font-medium text-slate-700">💔 總失敗</span>
-                            <span id="totalLosses" class="block text-sm sm:text-base font-semibold text-gray-900">--</span> 
-                        </div>
-                        <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
-                            <span class="block text-[10px] sm:text-xs font-medium text-slate-700">📈 過關率</span>
-                            <span class="block text-sm sm:text-base font-semibold text-gray-900"><span id="passRate">--</span>%</span> 
-                        </div>
-                    </div>
-                </div>
-
                 <canvas id="gameCanvas"></canvas>
                 <div id="statusMessage"></div>
                 <button id="startButton" class="game-button">開始遊戲</button>
             </div>
             <div id="scoreFormContainer" style="display: none;">
+            </div>
+        </div>
+
+        <div id="gameStatsSectionToMove" class="w-full max-w-md mt-4 text-xs text-gray-600 px-1">
+            <div id="gameStatsDisplay" class="flex flex-wrap justify-around items-center w-full gap-2">
+                <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
+                    <span class="block text-[10px] sm:text-xs font-medium text-slate-700">🏆 總成功</span>
+                    <span id="totalWins" class="block text-sm sm:text-base font-semibold text-gray-900">--</span> 
                 </div>
+                <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
+                    <span class="block text-[10px] sm:text-xs font-medium text-slate-700">💔 總失敗</span>
+                    <span id="totalLosses" class="block text-sm sm:text-base font-semibold text-gray-900">--</span> 
+                </div>
+                <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
+                    <span class="block text-[10px] sm:text-xs font-medium text-slate-700">📈 過關率</span>
+                    <span class="block text-sm sm:text-base font-semibold text-gray-900"><span id="passRate">--</span>%</span> 
+                </div>
+            </div>
         </div>
 
         <div id="leaderboardContainer" style="display: none;">
-            <h3>🏆 光速排行榜 🏆</h3>
+            <h3>� 光速排行榜 🏆</h3>
             <ol id="leaderboardList">
-                </ol>
+            </ol>
             <p id="leaderboardStatus" class="text-sm text-center mt-2 text-gray-500"></p>
         </div>
     </div>
@@ -2101,3 +2101,4 @@
     </script>
 </body>
 </html>
+�
