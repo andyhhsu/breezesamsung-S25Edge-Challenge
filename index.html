@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Galaxy S25 Edge 配重挑戰賽</title>
+    <title>Galaxy S25 Edge 輕巧配重挑戰賽</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
@@ -487,6 +487,11 @@
             border-left: 4px solid #f59e0b; /* Tailwind amber-500 */
             padding-left: 0.5rem !important;
         }
+        /* 新增前三名顏色 */
+        .rank-1-text { color: #FFD700 !important; font-weight: bold; } /* 金色 */
+        .rank-2-text { color: #C0C0C0 !important; font-weight: bold; } /* 銀色 */
+        .rank-3-text { color: #CD7F32 !important; font-weight: bold; } /* 銅色 */
+
 
         /* 遊戲統計數據 */
         #gameStatsSectionToMove {
@@ -2019,12 +2024,26 @@
             scores.forEach((score, index) => { // 遍歷分數
                 const listItem = document.createElement('li');
                 let rankDisplay; // 名次顯示
-                if (index === 0) rankDisplay = '🥇'; // 金牌
-                else if (index === 1) rankDisplay = '🥈'; // 銀牌
-                else if (index === 2) rankDisplay = '🥉'; // 銅牌
-                else rankDisplay = `${index + 1}.`; // 其他名次
+                let nameClass = 'name';
+                let timeClass = 'time';
 
-                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="name">${escapeHTML(score.name || '匿名')}</span> <span class="time">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`;
+                if (index === 0) {
+                    rankDisplay = '�'; // 金牌
+                    nameClass += ' rank-1-text';
+                    timeClass += ' rank-1-text';
+                } else if (index === 1) {
+                    rankDisplay = '🥈'; // 銀牌
+                    nameClass += ' rank-2-text';
+                    timeClass += ' rank-2-text';
+                } else if (index === 2) {
+                    rankDisplay = '🥉'; // 銅牌
+                    nameClass += ' rank-3-text';
+                    timeClass += ' rank-3-text';
+                } else {
+                    rankDisplay = `${index + 1}.`; // 其他名次
+                }
+
+                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="${nameClass}">${escapeHTML(score.name || '匿名')}</span> <span class="${timeClass}">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`;
 
                 // 檢查是否需要高亮此條目 (用於剛提交成績後)
                 if (!highlightAppliedThisCall && nameToHighlightNext && timeToHighlightNext &&
@@ -2265,3 +2284,4 @@
     </script>
 </body>
 </html>
+�
