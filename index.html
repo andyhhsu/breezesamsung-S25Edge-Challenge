@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Galaxy S25 Edge 配重挑戰賽 v2 - 淺色主題</title>
+    <title>Galaxy S25 Edge 配重挑戰賽</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: #e0f2fe; /* Tailwind sky-100, a very light blue */
-            color: #1f2937; /* Tailwind gray-800 for primary text */
+            background-color: #dbeafe; /* Tailwind blue-100 */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -23,6 +22,9 @@
             overflow-x: hidden;
             overflow-y: auto;
         }
+        .font-orbitron { /* Custom class for Orbitron font */
+            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
+        }
         #pageContainer {
             display: flex;
             flex-direction: column;
@@ -30,177 +32,154 @@
             width: 100%;
             max-width: 900px;
         }
-
-        /* --- Main Title --- */
-        #pageContainer > h1 {
-            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            font-size: 1.8rem;
-            color: #1e3a8a; /* Tailwind blue-800 */
-            text-shadow: 0 0 5px rgba(59, 130, 246, 0.3); /* Softer glow for light theme */
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-
         .game-banner-image {
             width: 100%;
             max-width: 500px;
             height: auto;
-            border-radius: 0.75rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-            border: 1px solid #93c5fd; /* Tailwind blue-300 */
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-
-        /* --- Game Instructions --- */
         #gameInstructions {
-            background-color: #f0f9ff; /* Tailwind sky-50, very light */
-            border: 1px solid #bae6fd; /* sky-200 */
-            border-radius: 0.75rem;
+            background-color: #e0f2fe;
+            border: 1px solid #93c5fd;
+            border-radius: 0.5rem;
             padding: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             width: 100%;
             max-width: 500px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1), inset 0 0 5px rgba(191, 219, 254, 0.3);
-            color: #374151; /* gray-700 */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         #gameInstructions h2 {
-            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: #1d4ed8; /* blue-700 */
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #1e3a8a;
             text-align: center;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 3px rgba(96, 165, 250, 0.4);
-        }
-        #gameInstructions h3 { /* This is for "🎁 挑戰好康 🎁" */
-            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #1d4ed8; /* CHANGED back to blue-700 */
-            text-align: center;
-            margin-top: 1.25rem;
             margin-bottom: 0.75rem;
-            padding-top: 1rem;
-            border-top: 1px dashed #93c5fd; /* blue-300 */
-            text-shadow: 0 0 3px rgba(59, 130, 246, 0.4); /* CHANGED to blue shadow */
         }
-        #gameInstructions p, #gameInstructions .instruction-text {
-            font-size: 0.9rem;
-            color: #374151; /* gray-700 */
-            line-height: 1.7;
-            margin-bottom: 0.5rem;
-        }
-        #gameInstructions strong {
+        #gameInstructions h3 {
+            font-size: 1.1rem;
             font-weight: bold;
-            color: #1e40af; /* blue-600 */
-        }
-        #gameInstructions .text-green-600 {
-            color: #047857; /* green-700 */
-            font-weight: bold;
-        }
-        #gameInstructions .text-red-600 {
-            color: #dc2626; /* red-600 */
-            font-weight: bold;
-        }
-        #gameInstructions .easter-egg-hint {
-            font-style: italic;
-            color: #5b21b6; /* violet-700 */
+            color: #1d4ed8;
+            text-align: center;
             margin-top: 1rem;
-            padding: 0.75rem;
-            background-color: #f5f3ff; /* violet-50 */
-            border-left: 4px solid #a78bfa; /* violet-400 */
-            font-size: 0.85rem;
-            border-radius: 0.375rem;
+            margin-bottom: 0.5rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed #93c5fd;
         }
-         /* --- Item Display Grid in Instructions --- */
         .item-grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 0.75rem;
-            margin-top: 0.75rem;
-            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
         }
         .item-card {
-            background-color: #ffffff; 
-            border: 1px solid #dbeafe; /* blue-100 */
+            background-color: #ffffff;
+            border: 1px solid #bfdbfe;
             border-radius: 0.5rem;
             padding: 0.75rem;
             text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-around;
             min-height: 110px;
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-        }
-        .item-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15), 0 0 10px rgba(147, 197, 253, 0.2);
         }
         .item-card .item-emoji {
-            font-size: 2.2rem;
-            margin-bottom: 0.35rem;
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
             line-height: 1;
         }
         .item-card .item-name {
             font-size: 0.8rem;
-            color: #4b5563; /* gray-600 */
+            color: #374151;
             margin-bottom: 0.25rem;
             min-height: 2.4em;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 500;
         }
         .item-card .item-weight {
             font-size: 0.9rem;
             font-weight: bold;
-            color: #1e40af; /* blue-600 */
-            font-family: 'Orbitron', sans-serif;
+            color: #1e40af;
         }
         .item-card .item-effect {
             font-size: 0.75rem;
             font-weight: bold;
-            color: #7c3aed; /* violet-600 */
+            color: #7c3aed;
             margin-top: 0.2rem;
         }
-        .item-card .item-mystery-effect {
+         .item-card .item-mystery-effect {
             font-size: 0.9rem;
             font-weight: bold;
-            color: #be185d; /* pink-700 */
-            font-family: 'Orbitron', sans-serif;
+            color: #581c87;
         }
-        #gameInstructions .reward-section { margin-top: 1rem; }
-        #gameInstructions .reward-title { /* For "🏆 光速排行榜獎勵" and "🎁 微風南山三星體驗館限定" */
+        #gameInstructions p, #gameInstructions .instruction-text {
+            font-size: 0.9rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 0.4rem;
+        }
+        #gameInstructions strong {
             font-weight: bold;
-            color: #1e40af; /* CHANGED back to blue-600 */
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            /* text-shadow for reward-title can be added if desired, e.g., text-shadow: 0 0 2px rgba(59, 130, 246, 0.2); */
+            color: #1e40af;
+        }
+        #gameInstructions .text-green-600 {
+            color: #059669;
+        }
+        #gameInstructions .text-red-600 {
+            color: #dc2626;
+        }
+        #gameInstructions .easter-egg-hint {
+            font-style: italic;
+            color: #581c87;
+            margin-top: 0.75rem;
+            padding: 0.5rem;
+            background-color: #ede9fe;
+            border-left: 3px solid #7c3aed;
+            font-size: 0.85rem;
+            border-radius: 0.25rem;
+        }
+        #gameInstructions .reward-section {
+            margin-top: 0.75rem;
+        }
+        #gameInstructions .reward-title {
+            font-weight: bold;
+            color: #1e40af;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
         }
         #gameInstructions .prize-list {
             list-style: none;
             padding-left: 0.5rem;
             font-size: 0.85rem;
-            color: #4b5563; /* gray-600 */
+            color: #374151;
         }
-        #gameInstructions .prize-list li { margin-bottom: 0.3rem; display: flex; align-items: baseline;}
+        #gameInstructions .prize-list li {
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: baseline;
+        }
         #gameInstructions .prize-rank {
             font-weight: 500;
-            color: #1d4ed8; /* blue-700 */
-            margin-right: 0.35rem;
-            min-width: 45px;
+            color: #1d4ed8;
+            margin-right: 0.25rem;
+            min-width: 40px;
         }
         #gameInstructions .reward-detail {
             font-size: 0.85rem;
-            color: #4b5563; /* gray-600 */
+            color: #374151;
             padding-left: 0.5rem;
-            line-height: 1.6;
+            line-height: 1.5;
         }
-        #gameInstructions .reward-detail .text-xs { display: block; margin-top: 0.2rem; color: #6b7280; /* gray-500 */}
-
-        /* --- Game Area --- */
+        #gameInstructions .reward-detail .text-xs {
+            display: block;
+            margin-top: 0.15rem;
+            color: #6b7280;
+        }
         #gameAndFormContainer {
             width: 100%;
             max-width: 500px;
@@ -210,102 +189,83 @@
             margin-bottom: 70px;
         }
         #gameContainer {
-            background-color: #ffffff; 
+            background-color: #ffffff;
             border-radius: 0.75rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1), 0 0 8px rgba(59, 130, 246, 0.2) inset;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
             padding: 0.75rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
             position: relative;
-            border: 2px solid #93c5fd; /* blue-300 */
         }
-        /* Game Info Bar (Weight, Target, Time) */
-        #gameContainer .w-full.mb-2.p-1 {
-            background-color: #f0f9ff; /* sky-50 */
-            border-radius: 0.5rem;
-            padding: 0.5rem;
-            margin-bottom: 0.75rem;
-        }
-        #gameContainer .flex-wrap > div {
-            background-color: #e0f2fe; /* sky-100 */
-            border: 1px solid #bfdbfe; /* blue-200 */
-            border-radius: 0.375rem;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
-            padding: 0.5rem 0.6rem;
-        }
-        #gameContainer .flex-wrap > div .text-xs {
-            color: #0c4a6e; /* sky-800 */
-            font-weight: 500;
-        }
-        #currentWeight, #targetWeightDisplay, #timerDisplay {
-            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            color: #1f2937; /* gray-800 */
-            text-shadow: 0 0 2px rgba(147, 197, 253, 0.5);
-        }
-        #currentWeight { color: #dc2626; } /* red-600 */
-        #targetWeightDisplay { color: #059669; } /* green-600 */
-
-
-        canvas#gameCanvas {
-            background-color: #eff6ff; /* blue-50, very light for game play */
+        canvas {
+            background-color: #eff6ff;
             border-radius: 0.5rem;
             display: block;
             max-width: 100%;
             height: auto;
             touch-action: none;
             cursor: grab;
-            border: 2px solid #60a5fa; /* blue-400 */
-            box-shadow: 0 0 10px rgba(96, 165, 250, 0.4), inset 0 0 5px rgba(147, 197, 253, 0.2);
         }
-        canvas#gameCanvas:active { cursor: grabbing; }
+        canvas:active {
+            cursor: grabbing;
+        }
 
-        /* --- Status Message --- */
         #statusMessage {
             margin-top: 1rem;
-            padding: 0.85rem;
-            background-color: #f0f9ff; /* sky-50 */
+            padding: 0.75rem;
+            background-color: #e0f2fe;
             border-radius: 0.5rem;
-            border: 1px solid #bae6fd; /* sky-200 */
+            border: 1px solid #93c5fd;
             font-size: 0.9rem;
             font-weight: normal;
-            color: #1e3a8a; /* blue-800 */
+            color: #1e3a8a;
             min-height: 80px;
             max-height: 30vh;
             overflow-y: auto;
             text-align: left;
             width: 100%;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.07);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
         }
         #statusMessage h3 {
-            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #1d4ed8; /* blue-700 */
-            margin-bottom: 0.6rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1d4ed8;
+            margin-bottom: 0.4rem;
             text-align: center;
-            text-shadow: 0 0 3px rgba(96, 165, 250, 0.4);
         }
         #statusMessage h4 {
-            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #1e40af; /* blue-600 */
-            margin-top: 0.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #1e40af;
+            margin-top: 0.6rem;
+            margin-bottom: 0.4rem;
             text-align: center;
-            border-top: 1px solid #bae6fd; /* sky-200 */
-            padding-top: 0.8rem;
-            text-shadow: 0 0 2px rgba(59, 130, 246, 0.3);
+            border-top: 1px solid #93c5fd;
+            padding-top: 0.6rem;
         }
-        #statusMessage p { margin-bottom: 0.4rem; line-height: 1.6; font-size: 0.85rem; color: #1e3a8a; }
-        #statusMessage strong { font-weight: bold; color: #1e40af; }
-        #statusMessage ul { list-style: disc; padding-left: 1.2rem; margin-bottom: 0.4rem; font-size: 0.8rem; color: #1e3a8a; }
-        #statusMessage .text-xs { font-size: 0.7rem; color: #4b5563; }
-        #statusMessage .promotion-highlight { padding: 0.6rem; }
-
-        /* --- Game Button --- */
+        #statusMessage p {
+            margin-bottom: 0.4rem;
+            line-height: 1.5;
+            font-size: 0.85rem;
+        }
+        #statusMessage strong {
+            font-weight: bold;
+            color: #1e40af;
+        }
+        #statusMessage ul {
+            list-style: disc;
+            padding-left: 1.2rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.8rem;
+        }
+        #statusMessage .text-xs {
+            font-size: 0.7rem;
+        }
+        #statusMessage .promotion-highlight {
+            padding: 0.6rem;
+        }
         .game-button {
             background-image: linear-gradient(to right, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
             color: white;
@@ -313,278 +273,382 @@
             border-radius: 0.75rem;
             font-size: 1.1rem;
             font-weight: bold;
-            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            border: 1px solid #1e40af; /* Darker border for contrast on light button */
+            border: none;
             cursor: pointer;
-            transition: all 0.25s ease-in-out;
+            transition: all 0.3s ease-in-out;
             margin-top: 1rem;
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3), 0 2px 4px rgba(0,0,0,0.1) inset; 
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
         .game-button:hover:not(:disabled) {
             background-image: linear-gradient(to right, #2563eb 0%, #1d4ed8 50%, #1e3a8a 100%);
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(29, 78, 216, 0.4), 0 2px 5px rgba(0,0,0,0.15) inset;
-            border-color: #1e3a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(29, 78, 216, 0.5);
         }
         .game-button:active:not(:disabled) {
-            transform: translateY(0px) scale(1);
-            box-shadow: 0 3px 10px rgba(29, 78, 216, 0.3), 0 1px 3px rgba(0,0,0,0.1) inset;
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(29, 78, 216, 0.4);
         }
         .game-button:disabled {
             background-image: none;
-            background-color: #9ca3af; /* gray-400 */
-            border-color: #6b7280; /* gray-500 */
-            color: #e5e7eb; /* gray-200 */
+            background-color: #6b7280;
             cursor: not-allowed;
-            opacity: 0.7;
-            transform: translateY(0) scale(1);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.05);
+            opacity: 0.6;
+            transform: translateY(0);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
         }
-
-        /* --- Touch Controls --- */
-        #touchControls {
+        #touchControls { 
             display: none;
             position: fixed;
-            bottom: 0; left: 0; right: 0; width: 100%;
-            padding: 10px 8px; box-sizing: border-box;
-            justify-content: space-between; align-items: center;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            padding: 10px 8px;
+            box-sizing: border-box;
+            justify-content: space-between;
+            align-items: center;
             z-index: 100;
-            background-color: rgba(224, 242, 254, 0.85); /* sky-100 with opacity */
-            backdrop-filter: blur(4px);
-            border-top: 1px solid rgba(191, 219, 254, 0.7); /* blue-200 */
+            background-color: rgba(224, 242, 254, 0.75);
+            border-top: 1px solid rgba(191, 219, 254, 0.6);
             pointer-events: none;
         }
-        .control-button {
-            background-color: rgba(59, 130, 246, 0.8); 
+        .control-button { 
+            background-color: rgba(59, 130, 246, 0.8);
             color: white;
-            padding: 10px 0; border-radius: 8px;
-            font-size: 1.8rem;
-            border: 1px solid rgba(37, 99, 235, 0.7); /* blue-600 */
-            cursor: pointer; user-select: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15), inset 0 0 3px rgba(147, 197, 253, 0.2);
-            pointer-events: auto; flex-basis: 44%; max-width: 160px;
-            text-align: center; -webkit-tap-highlight-color: transparent;
-            transition: background-color 0.15s ease, transform 0.15s ease;
+            padding: 10px 0;
+            border-radius: 8px;
+            font-size: 1.7rem;
+            border: none;
+            cursor: pointer;
+            user-select: none;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+            pointer-events: auto;
+            flex-basis: 44%;
+            max-width: 160px;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
         }
-        .control-button:active {
-            background-color: rgba(29, 78, 216, 0.85); /* blue-700 */
-            transform: scale(0.95);
+         .control-button:active {
+            background-color: rgba(29, 78, 216, 0.85);
         }
-
-        /* --- Score Form & Leaderboard --- */
         #scoreFormContainer, #leaderboardContainer {
-            margin-top: 1.5rem; padding: 1.25rem;
-            background-color: #f8fafc; /* slate-50 */
-            border-radius: 0.625rem;
-            border: 1px solid #e2e8f0; /* slate-200 */
-            width: 100%; max-width: 450px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
         }
         #scoreForm label, #leaderboardContainer h3 {
-            display: block; margin-bottom: 0.35rem; font-size: 0.9rem;
-            font-weight: 500; color: #374151; /* gray-700 */
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
         }
-        #scoreForm .form-field-description { font-size: 0.75rem; color: #6b7280; /* gray-500 */ margin-bottom: 0.5rem; margin-top: -0.15rem;}
-        #leaderboardContainer h3 { 
-            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            font-size: 1.3rem; text-align: center; color: #1e3a8a; /* blue-800 */
-            margin-bottom: 1rem; text-shadow: 0 0 3px rgba(59, 130, 246, 0.3);
+        #scoreForm .form-field-description {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            margin-top: -0.15rem;
+        }
+         #leaderboardContainer h3 {
+            font-size: 1.25rem;
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 0.75rem;
         }
         #scoreForm input[type="text"], #scoreForm input[type="tel"] {
-            width: 100%; padding: 0.6rem;
-            border: 1px solid #cbd5e1; /* slate-300 */
-            background-color: #ffffff; 
-            color: #1f2937; /* gray-800 */
-            border-radius: 0.375rem; margin-bottom: 0.85rem; font-size: 0.875rem;
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
             transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
         #scoreForm input[type="text"]:focus,
         #scoreForm input[type="tel"]:focus {
-            border-color: #2563eb; /* blue-600 */
+            border-color: #2563eb;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-            outline: none; background-color: #f9fafb; /* gray-50 */
+            outline: none;
         }
-        #scoreForm button { width: 100%; } 
-        #leaderboardList { list-style: none; padding: 0; }
-        #leaderboardList li {
-            display: flex; justify-content: space-between;
-            padding: 0.6rem 0.35rem;
-            border-bottom: 1px solid #e5e7eb; /* gray-200 */
-            font-size: 0.9rem; color: #374151; /* gray-700 */
-            transition: background-color 0.2s ease;
-        }
-        #leaderboardList li:last-child { border-bottom: none; }
-        #leaderboardList li:hover { background-color: #f3f4f6; /* gray-100 */ }
-        #leaderboardList .rank { font-weight: bold; color: #4b5563; /* gray-600 */ min-width: 35px; text-align: left; }
-        #leaderboardList .name { color: #1f2937; /* gray-800 */ flex-grow: 1; padding-left: 0.5rem; word-break: break-all; }
-        #leaderboardList .time { font-weight: 500; color: #1d4ed8; /* blue-700 */ font-family: 'Orbitron', sans-serif; }
-        .currentUserScoreHighlight {
-            background-color: #fef9c3 !important; /* yellow-100 */
-            border-left: 4px solid #f59e0b; /* amber-500 */
-            border-right: 4px solid #f59e0b;
-        }
-        #leaderboardStatus { color: #6b7280; /* gray-500 */ }
-
-        /* --- Game Stats Display (Total Wins/Losses/Pass Rate) --- */
-        #gameStatsSectionToMove {
+        #scoreForm button {
             width: 100%;
-            max-width: 450px; 
-            margin-top: 1.5rem;
-            padding: 0 0.25rem;
         }
-        #gameStatsDisplay {
-            display: flex; flex-wrap: wrap; justify-content: space-around; align-items: stretch;
-            width: 100%; gap: 0.5rem;
+        #leaderboardList {
+            list-style: none;
+            padding: 0;
         }
-        #gameStatsDisplay > div { 
-            background-color: #f3f4f6; /* gray-100 */
-            border: 1px solid #e5e7eb; /* gray-200 */
-            padding: 0.5rem; border-radius: 0.375rem;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
-            text-align: center; flex: 1; min-width: calc(33.33% - 0.5rem);
+        #leaderboardList li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0.25rem;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
         }
-        #gameStatsDisplay .text-\[10px\] { 
-            font-size: 0.7rem;
-            color: #4b5563; /* gray-600 */
+        #leaderboardList li:last-child {
+            border-bottom: none;
+        }
+        #leaderboardList .rank {
+            font-weight: bold;
+            color: #4b5563;
+            min-width: 35px;
+            text-align: left;
+        }
+        #leaderboardList .name {
+            color: #1f2937;
+            flex-grow: 1;
+            padding-left: 0.5rem;
+            word-break: break-all;
+        }
+        #leaderboardList .time {
             font-weight: 500;
-            display: block; margin-bottom: 0.15rem;
+            color: #1e40af;
         }
-        #gameStatsDisplay .text-sm { 
-            font-size: 1rem;
-            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            color: #1f2937; /* gray-800 */
-            font-weight: 700;
+        .currentUserScoreHighlight {
+            background-color: #fef9c3;
+            border-left: 4px solid #f59e0b;
         }
-        #totalWins { color: #059669; } /* green-600 */
-        #totalLosses { color: #dc2626; } /* red-600 */
-        #passRate { color: #ca8a04; } /* yellow-600 */
 
+        .easter-egg-container-wrapper {
+            color: white;
+        }
 
-        /* --- Easter Egg Overlay --- */
-        .easter-egg-container-wrapper { color: #1f2937; } /* Dark text for light overlay */
         .easter-egg-container {
-            position: relative; width: 100%; max-width: 600px; padding: 20px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; visibility: hidden;
-            background-color: rgba(255, 255, 255, 0.97); /* White with high opacity */
-            border-radius: 1rem;
-            box-shadow: 0 0 30px rgba(96, 165, 250, 0.4), 0 0 15px rgba(59, 130, 246, 0.2) inset;
-            border: 2px solid #93c5fd; /* blue-300 */
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            visibility: hidden;
         }
-        @keyframes fadeInContainer { to { visibility: visible; opacity: 1; } }
-        .phone-image-container { position: relative; margin-bottom: 20px; }
+
+        @keyframes fadeInContainer {
+            to {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        .phone-image-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
         .phone-image {
-            width: 150px; height: auto; border-radius: 20px;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 10px rgba(0,0,0,0.2); 
-            opacity: 0; transform: scale(0.5);
+            width: 150px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(79, 70, 229, 0.7);
+            opacity: 0;
+            transform: scale(0.5);
         }
+
         @keyframes popInPhone {
-            0% { opacity: 0; transform: scale(0.5) rotate(-15deg); }
-            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-15deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
         }
+
         .shine-effect {
-            position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0) 100%);
-            transform: skewX(-25deg); opacity: 0;
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            opacity: 0;
         }
+
         @keyframes shine {
             0% { left: -150%; opacity: 0; }
-            50% { opacity: 0.8; } 
+            50% { opacity: 0.6; }
             100% { left: 150%; opacity: 0; }
         }
-        .phone-text { 
+
+        .phone-text {
             font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            font-size: 2.5rem; font-weight: 700; color: #1d4ed8; /* blue-700 */
-            text-shadow: 0 0 8px rgba(59, 130, 246, 0.4); 
-            opacity: 0; transform: translateY(30px);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 15px #4f46e5, 0 0 25px #4f46e5;
+            opacity: 0;
+            transform: translateY(30px);
         }
-        @keyframes slideInText { to { opacity: 1; transform: translateY(0); } }
-        .particles-container { position: absolute; top: 50%; left: 50%; width: 1px; height: 1px; z-index: -1; }
+
+        @keyframes slideInText {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .particles-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1px;
+            height: 1px;
+            z-index: -1;
+        }
+
         .particle {
-            position: absolute; width: 8px; height: 8px;
-            background-color: #3b82f6; /* blue-500 */
-            border-radius: 50%; opacity: 0;
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #facc15;
+            border-radius: 50%;
+            opacity: 0;
         }
+
         @keyframes burst {
             0% { opacity: 1; transform: translate(0, 0) scale(1); }
             100% { opacity: 0; transform: var(--transform-end) scale(0); }
         }
+
         .common-celebration-message {
-            margin-top: 10px; font-size: 1.2rem; color: #1e3a8a; /* blue-800 */
-            opacity: 0; font-weight: 500;
-        }
-        @keyframes fadeInMessage { to { opacity: 1; } }
-        .redemption-status-container { margin-top: 10px; opacity: 0; line-height: 1.7; color: #374151; }
-        @keyframes fadeInStatus { to { opacity: 1; } }
-        .gift-available-message, .gift-claimed-message { display: none; }
-        .gift-available-message p, .gift-claimed-message p { margin-bottom: 8px; }
-        .redemption-code { font-weight: bold; color: #b45309; /* amber-700 */ font-size: 1.1em; }
-        .disclaimer-text { font-size: 0.9rem; color: #4b5563; /* gray-600 */ }
-        .highlight-text { color: #c2410c; /* orange-600 */ font-weight: bold; }
-        #closeNewEasterEggButton { 
-            background-image: linear-gradient(to right, #2563eb 0%, #1d4ed8 50%, #1e40af 100%) !important; 
-            border-color: #1e40af !important; 
-            box-shadow: 0 5px 15px rgba(29, 78, 216, 0.3), 0 0 8px rgba(59, 130, 246, 0.4) inset !important;
-        }
-        #closeNewEasterEggButton:hover:not(:disabled) {
-            border-color: #1e3a8a !important; 
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #d1d5db;
+            opacity: 0;
         }
 
+        @keyframes fadeInMessage {
+            to { opacity: 1; }
+        }
 
-        /* --- Responsive Adjustments --- */
+        .redemption-status-container {
+            margin-top: 10px;
+            opacity: 0;
+            line-height: 1.7;
+        }
+
+        @keyframes fadeInStatus {
+            to { opacity: 1; }
+        }
+
+        .gift-available-message, .gift-claimed-message {
+            display: none;
+        }
+
+        .gift-available-message p, .gift-claimed-message p {
+            margin-bottom: 8px;
+        }
+
+        .redemption-code {
+            font-weight: bold;
+            color: #facc15;
+            font-size: 1.1em;
+        }
+
+        .disclaimer-text {
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        .highlight-text {
+            color: #fde047;
+            font-weight: bold;
+        }
+
         @media (max-width: 600px) {
-            #pageContainer > h1 { font-size: 1.6rem; line-height: 1.3; margin-top: 0.5rem; margin-bottom: 0.5rem;}
-            .game-banner-image { margin-bottom: 0.75rem; }
-            #gameInstructions { max-width: 95%; padding: 0.75rem; margin-bottom: 1rem;}
-            #gameInstructions h2 { font-size: 1.2rem; margin-bottom: 0.75rem;}
-            #gameInstructions h3 { font-size: 1.1rem; margin-top: 1rem; margin-bottom: 0.6rem; padding-top: 0.75rem;}
-            .item-grid-container { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 0.5rem; }
-            .item-card { padding: 0.6rem; min-height: 100px; }
-            .item-card .item-emoji { font-size: 1.9rem; }
-            .item-card .item-name { font-size: 0.75rem; min-height: 2.2em; }
-            .item-card .item-weight, .item-card .item-effect, .item-card .item-mystery-effect { font-size: 0.8rem; }
-            #gameInstructions p, #gameInstructions .reward-point { font-size: 0.85rem; }
-            #gameInstructions .reward-title { font-size: 0.95rem; }
-            #gameInstructions .prize-list, #gameInstructions .reward-detail { font-size: 0.8rem; }
-
-            #gameContainer { padding: 0.5rem; }
-            #gameContainer .flex-wrap > div { padding: 0.4rem 0.5rem; } 
-            #gameContainer .flex-wrap > div .text-xs { font-size: 0.65rem; } 
-            #currentWeight, #targetWeightDisplay, #timerDisplay { font-size: 0.9rem; } 
-
-
-            #statusMessage { font-size: 0.85rem; min-height: 70px; max-height: 35vh; padding: 0.75rem; }
-            #statusMessage h3 { font-size: 1.1rem; }
-            #statusMessage h4 { font-size: 1rem; }
+            #pageContainer > h1 { /* More specific selector for the main title */
+                font-size: 1.5rem; /* Adjust base size for mobile */
+                line-height: 1.3; /* Adjust line height for better wrapping */
+            }
+            #gameInstructions {
+                max-width: 95%;
+                padding: 0.6rem;
+            }
+            #gameInstructions h2 {
+                font-size: 1rem;
+            }
+            #gameInstructions h3 {
+                font-size: 0.9rem;
+            }
+            .item-grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+                gap: 0.5rem;
+            }
+            .item-card {
+                padding: 0.5rem;
+                min-height: 100px;
+            }
+            .item-card .item-emoji {
+                font-size: 1.8rem;
+            }
+            .item-card .item-name {
+                font-size: 0.75rem;
+                 min-height: 2.2em;
+            }
+            .item-card .item-weight, .item-card .item-effect, .item-card .item-mystery-effect {
+                font-size: 0.8rem;
+            }
+            #gameInstructions p, #gameInstructions .reward-point {
+                font-size: 0.8rem;
+            }
+             #gameInstructions .reward-title {
+                font-size: 0.9rem;
+            }
+            #gameInstructions .prize-list, #gameInstructions .reward-detail {
+                font-size: 0.75rem;
+            }
+            #statusMessage {
+                font-size: 0.85rem;
+                min-height: 60px;
+                max-height: 35vh;
+                padding: 0.6rem;
+            }
+            #statusMessage h3 { font-size: 1rem; }
+            #statusMessage h4 { font-size: 0.9rem; }
             #statusMessage p, #statusMessage ul { font-size: 0.8rem; }
+             #leaderboardContainer, #scoreFormContainer {
+                max-width: 95%;
+            }
+             .control-button { 
+                padding: 8px 0;
+                font-size: 1.6rem;
+            }
+             #gameAndFormContainer {
+                margin-bottom: 70px;
+            }
 
-            .game-button { font-size: 1rem; padding: 0.7rem 1.5rem; }
-
-            #leaderboardContainer, #scoreFormContainer { max-width: 95%; padding: 1rem; }
-            #leaderboardContainer h3, #scoreFormContainer h3 { font-size: 1.15rem; }
-            #scoreForm input[type="text"], #scoreForm input[type="tel"] { padding: 0.5rem; font-size: 0.8rem; }
-            #leaderboardList li { font-size: 0.85rem; padding: 0.5rem 0.25rem; }
-
-
-            .control-button { padding: 8px 0; font-size: 1.7rem; }
-            #gameAndFormContainer { margin-bottom: 70px; }
-
-            .easter-egg-container { padding: 15px; }
-            .phone-image { width: 120px; }
-            .phone-text { font-size: 2rem; }
-            .common-celebration-message { font-size: 1rem; }
+            .easter-egg-container {
+                padding: 15px;
+            }
+            .phone-image {
+                width: 120px;
+            }
+            .phone-text {
+                font-size: 2rem;
+            }
+            .common-celebration-message {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <div id="pageContainer">
-        <h1 class="text-xl sm:text-2xl md:text-3xl font-bold my-3 text-center px-2">🏆 Galaxy S25 Edge <span class="sm:hidden"><br></span>輕巧配重挑戰賽</h1>
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-sky-800 my-3 text-center px-2 font-orbitron tracking-wide">🏆 Galaxy S25 Edge <span class="sm:hidden"><br></span>輕巧配重挑戰賽</h1>
         <img src="https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/S25%20Edge%20Main%20KV_cmyk_%E6%A9%AB%E5%BC%8F(%E5%A3%93%E7%B8%AE).png"
              alt="Galaxy S25 Edge 遊戲主視覺"
              class="game-banner-image"
-             onerror="this.onerror=null; this.src='https://placehold.co/500x200/bfdbfe/1e3a8a?text=圖片載入失敗';"> 
+             onerror="this.onerror=null; this.src='https://placehold.co/500x200/60a5fa/ffffff?text=圖片載入失敗';">
+
         <div id="gameInstructions">
             <h2>遊戲說明</h2>
             <p class="instruction-text">體驗前所未有的輕盈快感！手持你的 <strong>Galaxy S25 Edge</strong>，化身為「輕巧配重達人」，靈活操控手機左右移動，精準捕捉從天而降的輕量級配件，挑戰完美的 <strong>163 公克</strong>配重！</p>
@@ -601,9 +665,9 @@
             <div class="reward-section">
                 <p class="reward-title">🏆 光速排行榜獎勵</p>
                 <ul class="prize-list">
-                    <li><span class="prize-rank">冠軍：</span>三星雙向閃電快充行動電源 (20,000mAh)*1</li>
-                    <li><span class="prize-rank">亞軍：</span>深層震動筋膜按摩槍*1</li>
-                    <li><span class="prize-rank">季軍：</span>不鏽鋼保溫瓶*1</li>
+                    <li><span class="prize-rank">冠軍：</span><strong>三星雙向閃電快充行動電源 (20,000mAh)</strong>*1</li>
+                    <li><span class="prize-rank">亞軍：</span><strong>深層震動筋膜按摩槍</strong>*1</li>
+                    <li><span class="prize-rank">季軍：</span><strong>不鏽鋼保溫瓶</strong>*1</li>
                 </ul>
             </div>
             <div class="reward-section mt-3">
@@ -612,23 +676,24 @@
             </div>
         </div>
 
+
         <div id="gameAndFormContainer">
             <div id="gameContainer">
                 <div class="w-full mb-2 text-sky-800 p-1">
                     <div class="flex flex-wrap justify-around items-stretch gap-2">
-                        <div class="p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
-                            <span class="block text-xs sm:text-sm font-medium">目前重量</span>
+                        <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
+                            <span class="block text-xs sm:text-sm font-medium text-sky-700">目前重量</span>
                             <span class="block text-base sm:text-lg font-bold">
-                                <span id="currentWeight">0.0</span> g
+                                <span id="currentWeight" class="text-red-600">0.0</span> g
                             </span>
                         </div>
-                        <div class="p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
-                            <span class="block text-xs sm:text-sm font-medium">目標重量</span>
-                            <span id="targetWeightDisplay" class="block text-base sm:text-lg font-bold">163 g</span>
+                        <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
+                            <span class="block text-xs sm:text-sm font-medium text-sky-700">目標重量</span>
+                            <span id="targetWeightDisplay" class="block text-base sm:text-lg font-bold text-gray-900">163 g</span>
                         </div>
-                        <div class="p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
-                            <span class="block text-xs sm:text-sm font-medium">遊戲時間</span>
-                            <span class="block text-base sm:text-lg font-bold">
+                        <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
+                            <span class="block text-xs sm:text-sm font-medium text-sky-700">遊戲時間</span>
+                            <span class="block text-base sm:text-lg font-bold text-gray-900"> 
                                 <span id="timerDisplay">0.00</span> s
                             </span>
                         </div>
@@ -636,28 +701,26 @@
                 </div>
 
                 <canvas id="gameCanvas"></canvas>
-                <div id="statusMessage">
-                    <p class='text-center font-bold'>準備好挑戰了嗎？操控S25 Edge接住配件！</p>
-                </div>
+                <div id="statusMessage"></div>
                 <button id="startButton" class="game-button">開始遊戲</button>
             </div>
             <div id="scoreFormContainer" style="display: none;">
-                </div>
+            </div>
         </div>
 
-        <div id="gameStatsSectionToMove" class="w-full max-w-md mt-4 text-xs px-1">
+        <div id="gameStatsSectionToMove" class="w-full max-w-md mt-4 text-xs text-gray-600 px-1">
             <div id="gameStatsDisplay" class="flex flex-wrap justify-around items-center w-full gap-2">
-                <div class="p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
-                    <span class="block text-[10px] sm:text-xs font-medium">🏆 總成功</span>
-                    <span id="totalWins" class="block text-sm sm:text-base font-semibold">--</span>
+                <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
+                    <span class="block text-xs font-medium text-slate-700">🏆 總成功</span>
+                    <span id="totalWins" class="block text-sm sm:text-base font-semibold text-gray-900">--</span> 
                 </div>
-                <div class="p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
-                    <span class="block text-[10px] sm:text-xs font-medium">💔 總失敗</span>
-                    <span id="totalLosses" class="block text-sm sm:text-base font-semibold">--</span>
+                <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
+                    <span class="block text-xs font-medium text-slate-700">💔 總失敗</span>
+                    <span id="totalLosses" class="block text-sm sm:text-base font-semibold text-gray-900">--</span> 
                 </div>
-                <div class="p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
-                    <span class="block text-[10px] sm:text-xs font-medium">📈 過關率</span>
-                    <span class="block text-sm sm:text-base font-semibold"><span id="passRate">--</span>%</span>
+                <div class="bg-slate-100 p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
+                    <span class="block text-xs font-medium text-slate-700">📈 過關率</span>
+                    <span class="block text-sm sm:text-base font-semibold text-gray-900"><span id="passRate">--</span>%</span> 
                 </div>
             </div>
         </div>
@@ -665,22 +728,22 @@
         <div id="leaderboardContainer" style="display: none;">
             <h3>🏆 光速排行榜 🏆</h3>
             <ol id="leaderboardList">
-                </ol>
-            <p id="leaderboardStatus" class="text-sm text-center mt-2"></p>
+            </ol>
+            <p id="leaderboardStatus" class="text-sm text-center mt-2 text-gray-500"></p>
         </div>
     </div>
 
-    <div class="easter-egg-container-wrapper" id="newEasterEggOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(240, 249, 255, 0.97); z-index: 200; align-items: center; justify-content: center; display: none;">
+    <div class="easter-egg-container-wrapper" id="newEasterEggOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(17, 24, 39, 0.95); z-index: 200; align-items: center; justify-content: center;">
         <div class="easter-egg-container" id="easterEggContainerAnimate">
             <div class="phone-image-container">
-                <img src="https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png" alt="Galaxy S25 Edge 手機圖片" class="phone-image" id="phoneImage" onerror="this.onerror=null;this.src='https://placehold.co/150x300/bfdbfe/1e3a8a?text=S25+Edge';">
+                <img src="https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png" alt="Galaxy S25 Edge 手機圖片" class="phone-image" id="phoneImage" onerror="this.onerror=null;this.src='https://placehold.co/150x300/333/FFF?text=S25+Edge';">
                 <div class="shine-effect"></div>
             </div>
             <h1 class="phone-text">Galaxy S25 Edge</h1>
             <p class="common-celebration-message" id="commonCelebrationMessage">🎉 恭喜發現彩蛋！ 🎉</p>
             <div class="redemption-status-container" id="redemptionStatusContainer">
                 <div id="giftAvailableMessage" class="gift-available-message">
-                    <p>憑此畫面<br>可至微風南山三星旗艦館兌換特殊小禮！ (限量五名)</p>
+                    <p>憑此<strong class="text-yellow-300">彩蛋畫面截圖</strong><br>可至微風南山三星旗艦館兌換特殊小禮！ (限量五名)</p>
                     <p class="disclaimer-text">*兌換時需由店員核對並確認資格*</p>
                 </div>
                 <div id="giftClaimedMessage" class="gift-claimed-message">
@@ -689,9 +752,10 @@
                 </div>
             </div>
             <div class="particles-container" id="particlesContainerAnimate"></div>
-            <button id="closeNewEasterEggButton" class="game-button" style="margin-top: 20px;">關閉彩蛋</button>
+            <button id="closeNewEasterEggButton" class="game-button" style="margin-top: 20px; background-image: linear-gradient(to right, #4f46e5 0%, #6d28d9 50%, #7c3aed 100%);">關閉彩蛋</button>
         </div>
     </div>
+
 
     <div id="touchControls" class="controls">
         <button id="leftButton" class="control-button">⬅️</button>
@@ -735,7 +799,7 @@
         let nameToHighlightNext = null;
         let timeToHighlightNext = null;
 
-        const aspectRatio = 9 / 16; 
+        const aspectRatio = 9 / 16; // Canvas aspect ratio (width / height)
         let canvasWidth, canvasHeight;
 
         const player = {
@@ -743,30 +807,29 @@
             image: new Image(),
             imageLoaded: false
         };
-        
         player.image.src = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png';
         player.image.onload = () => {
             player.imageLoaded = true;
-            console.log("玩家圖片成功載入。");
+            console.log("Player image loaded successfully from GitHub.");
             if (!isGameRunning && canvas.width > 0) {
                 handleResize(); 
             }
         };
         player.image.onerror = () => {
-            console.error("玩家圖片載入失敗，使用預備圖片。");
+            console.error("Player image failed to load from GitHub. Using fallback placeholder.");
             player.imageLoaded = false; 
-            player.image.src = 'https://placehold.co/80x160/93c5fd/1e3a8a?text=S25&font=orbitron'; // Light theme placeholder
+            player.image.src = 'https://placehold.co/80x160/c7d2fe/1e3a8a?text=S25&font=noto-sans';
             player.image.onload = () => { 
                 player.imageLoaded = true; 
-                console.log("預備玩家圖片已載入。");
+                console.log("Fallback placeholder image loaded.");
                 if (!isGameRunning && canvas.width > 0) {
                     handleResize();
                 }
             };
             player.image.onerror = () => { 
-                console.error("預備玩家圖片也載入失敗。");
+                console.error("Fallback placeholder also failed to load.");
                 player.imageLoaded = false; 
-                if (!isGameRunning && canvas.width > 0) { 
+                 if (!isGameRunning && canvas.width > 0) { // Still call resize to set default player dimensions
                     handleResize();
                 }
             };
@@ -830,13 +893,14 @@
             easterEggItemDefinition.imageObj.src = easterEggItemDefinition.imageSrc;
             easterEggItemDefinition.imageObj.onload = () => {
                 easterEggItemDefinition.imageLoaded = true;
-                console.log("彩蛋掉落物件的S25圖片已載入。");
+                console.log("Easter egg falling item's S25 image loaded.");
             };
             easterEggItemDefinition.imageObj.onerror = () => {
-                console.error("彩蛋掉落物件的S25圖片載入失敗。");
+                console.error("Easter egg falling item's S25 image failed to load.");
                 easterEggItemDefinition.imageLoaded = false;
             };
         }
+
 
         const mysteryTransformableItemsMap = {
             'S Pen': itemTypes.find(it => it.name === 'S Pen'),
@@ -848,6 +912,7 @@
         };
         const mysteryTransformableItemKeys = Object.keys(mysteryTransformableItemsMap).filter(key => mysteryTransformableItemsMap[key]);
 
+
         let fallingObjects = [];
         let spawnTimer = 0;
         const SPAWN_INTERVAL = 72; 
@@ -857,15 +922,15 @@
 
         function initializeSounds() {
             if (typeof Tone === 'undefined') {
-                console.error("Tone.js 函式庫未載入。");
+                console.error("Tone.js library is not loaded.");
                 toneJsInitialized = false;
                 return;
             }
             if (Tone.context.state !== 'running') {
                 Tone.start().then(() => {
-                    console.log("Tone.js 音訊內容已由 initializeSounds 啟動。");
+                    console.log("Tone.js context started by initializeSounds.");
                 }).catch(e => {
-                    console.warn("在 initializeSounds 中 Tone.start() 失敗，可能需要使用者互動。", e);
+                    console.warn("Tone.start() failed in initializeSounds, user interaction might be needed.", e);
                 });
             }
             catchSound = new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.1 } }).toDestination();
@@ -878,7 +943,7 @@
             timeBonusSound = new Tone.Synth({ oscillator: { type: 'pulse', width: 0.3 }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.15 }, volume: -4 }).toDestination(); 
 
             toneJsInitialized = true;
-            console.log("Tone.js 音效已初始化。");
+            console.log("Tone.js sounds initialized.");
         }
 
         function displayGameInstructions() {
@@ -913,7 +978,7 @@
                         } else { 
                             const itemWeight = document.createElement('span');
                             itemWeight.className = 'item-weight';
-                            itemWeight.innerHTML = `<strong>${item.weight}</strong> g`;
+                            itemWeight.innerHTML = `<strong>${item.weight}</strong> 公克`;
                             itemCard.appendChild(itemWeight);
                         }
                         itemDisplayGrid.appendChild(itemCard);
@@ -927,37 +992,39 @@
             const currentY = player.y + bounceOffsetY;
 
             if (player.width <= 0 || player.height <= 0 || isNaN(player.x) || isNaN(currentY) || isNaN(player.width) || isNaN(player.height)) {
+                // console.warn("drawPlayer: Invalid player dimensions or position.", player);
                 return;
             }
 
             if (player.imageLoaded && player.image.complete && player.image.naturalHeight !== 0 && player.image.naturalWidth !== 0) {
                 ctx.drawImage(player.image, player.x, currentY, player.width, player.height);
             }
-            else if (player.image.src.includes('placehold.co')) { 
-                if (player.image.complete && player.image.naturalHeight !== 0 && player.image.naturalWidth !== 0) { 
+            else if (player.image.src.includes('placehold.co')) { // Fallback placeholder
+                if (player.image.complete && player.image.naturalHeight !== 0 && player.image.naturalWidth !== 0) { // Check if fallback itself is loaded
                     ctx.drawImage(player.image, player.x, currentY, player.width, player.height);
-                } else { 
-                    ctx.fillStyle = '#a5f3fc'; // Light cyan for placeholder background
+                } else { // Fallback is not yet loaded or failed
+                    ctx.fillStyle = '#a5b4fc'; // Default color for placeholder if it also fails
                     ctx.fillRect(player.x, currentY, player.width, player.height);
                 }
             }
-            else { 
-                ctx.fillStyle = '#e0f2fe'; // sky-100
+            else { // Primary image not loaded, and not yet switched to placeholder OR placeholder also failed
+                ctx.fillStyle = '#e0e7ff'; // Default color when no image is available
                 ctx.fillRect(player.x, currentY, player.width, player.height);
             }
         }
 
+
         function drawFallingObjects() {
             if (!ctx) return;
             fallingObjects.forEach(obj => {
-                const objFontSize = Math.max(18, canvas.width * 0.085); 
-                const weightFontSize = Math.max(10, canvas.width * 0.035);
+                const objFontSize = canvas.width * 0.095;
+                const weightFontSize = canvas.width * 0.04;
 
                 if (obj.type === 'easter_egg' && obj.imageLoaded && obj.imageObj && obj.imageObj.complete && obj.imageObj.naturalHeight !== 0 && obj.imageObj.naturalWidth !== 0) {
                     const aspectRatioItem = obj.imageObj.naturalWidth / obj.imageObj.naturalHeight;
-                    let imgWidth = obj.width * 1.1; 
+                    let imgWidth = obj.width * 1.2; 
                     let imgHeight = imgWidth / aspectRatioItem;
-                    const maxDimFactor = 1.4; 
+                    const maxDimFactor = 1.5; 
                     const minDim = 5;
 
                     if (imgHeight > obj.height * maxDimFactor) {
@@ -972,32 +1039,29 @@
                     if (imgWidth > minDim && imgHeight > minDim && isFinite(imgWidth) && isFinite(imgHeight)) {
                         ctx.drawImage(obj.imageObj, obj.x + (obj.width - imgWidth) / 2, obj.y + (obj.height - imgHeight) / 2, imgWidth, imgHeight);
                     } else {
-                        console.warn("彩蛋圖片計算尺寸無效，繪製預備表情符號。", imgWidth, imgHeight);
+                        console.warn("Easter egg image calculated dimensions invalid, drawing fallback emoji.", imgWidth, imgHeight);
                         ctx.font = `${objFontSize}px Arial`;
-                        ctx.fillStyle = '#000000'; // Black for emoji on light canvas
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'bottom';
                         ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height);
                     }
                 } else if (obj.type === 'easter_egg') { 
                     ctx.font = `${objFontSize}px Arial`;
-                    ctx.fillStyle = '#000000';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
                     ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height);
                 } else { 
                     ctx.font = `${objFontSize}px Arial`;
-                    ctx.fillStyle = '#000000'; // Black for emoji
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
                     ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
 
                     if (obj.type === 'item' && typeof obj.weight === 'number' && obj.weight > 0) {
-                        ctx.font = `bold ${weightFontSize}px 'Orbitron', Arial`; 
-                        ctx.fillStyle = '#b91c1c'; // Darker red for weight text
+                        ctx.font = `bold ${weightFontSize}px Arial`;
+                        ctx.fillStyle = '#FF0000'; 
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'top';
-                        ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.05));
+                        ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1));
                     }
                 }
             });
@@ -1037,7 +1101,7 @@
                             startButton.disabled = false;
                         }
                         if (statusMessage) {
-                                statusMessage.innerHTML = "<h3>✨ 彩蛋發現！ ✨</h3><p class='text-center'>太幸運了！準備迎接驚喜...</p>";
+                             statusMessage.innerHTML = "<p class='text-center font-bold'>✨ 彩蛋發現！ ✨</p>";
                         }
                         
                         showNewEasterEgg(); 
@@ -1058,7 +1122,7 @@
 
                             revealedItemName = actualItem.name;
 
-                            let revealedMsg = `<h3>神秘配件揭曉！</h3><p class='text-center font-bold text-purple-600'>變成了... <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
+                            let revealedMsg = `<p class='text-center font-bold text-blue-600'>神秘配件變成了... <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
                             if (actualItem.type === 'item') {
                                 revealedMsg += ` (+${actualItem.weight}g)`;
                                 accumulatedWeight += actualItem.weight;
@@ -1080,21 +1144,21 @@
                             revealedMsg += `!</p>`;
                             statusMessage.innerHTML = revealedMsg;
                             setTimeout(() => {
-                                if (isGameRunning) statusMessage.innerHTML = "<h3>遊戲進行中...</h3><p class='text-center'>繼續接住配件！</p>";
+                                if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>";
                             }, 2500);
                         } else {
-                                console.log("神秘道具沒有定義轉換，無效果。");
+                             console.log("Mystery item had no transformations defined, no effect.");
                         }
                     } else if (obj.type === 'weight_booster') {
                         if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
                         accumulatedWeight *= 2;
-                        statusMessage.innerHTML = "<h3>🚀 AI 加速！</h3><p class='text-center font-bold text-purple-600'>重量翻倍！</p>";
-                        setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<h3>遊戲進行中...</h3><p class='text-center'>繼續接住配件！</p>"; }, 1500);
+                        statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 AI 加速！重量翻倍！</p>";
+                        setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; }, 1500);
                         customGameOverMessageOnOverweight = `哎呀！重量翻倍後超過目標 ${TARGET_WEIGHT}g 了！`;
                     } else if (obj.type === 'item') { 
                         if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
                         accumulatedWeight += obj.weight;
-                            customGameOverMessageOnOverweight = `哎呀！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT}g 了！`;
+                         customGameOverMessageOnOverweight = `哎呀！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT}g 了！`;
                     }
 
                     accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
@@ -1135,18 +1199,18 @@
             }
 
             const typeTemplate = selectedType;
-            const objWidth = Math.max(25, canvas.width * 0.09);
-            const objHeight = Math.max(25, canvas.width * 0.09);
+            const objWidth = canvas.width * 0.1;
+            const objHeight = canvas.width * 0.1; 
             if (typeTemplate.type === 'easter_egg') { 
-                    fallingObjects.push({
-                        ...typeTemplate, 
-                        x: Math.random() * (canvas.width - objWidth),
-                        y: 0 - objHeight,
-                        width: objWidth,
-                        height: objHeight,
-                        imageObj: typeTemplate.imageObj, 
-                        imageLoaded: typeTemplate.imageLoaded 
-                    });
+                 fallingObjects.push({
+                    ...typeTemplate, 
+                    x: Math.random() * (canvas.width - objWidth),
+                    y: 0 - objHeight,
+                    width: objWidth,
+                    height: objHeight,
+                    imageObj: typeTemplate.imageObj, 
+                    imageLoaded: typeTemplate.imageLoaded 
+                });
             } else {
                 fallingObjects.push({ ...typeTemplate, x: Math.random() * (canvas.width - objWidth), y: 0 - objHeight, width: objWidth, height: objHeight });
             }
@@ -1162,7 +1226,7 @@
                 const elapsedTime = (performance.now() - gameStartTime) / 1000;
                 timerDisplay.textContent = Math.max(0, elapsedTime).toFixed(2); 
             } else if (!isGameRunning) {
-                timerDisplay.textContent = "0.00"; 
+                 timerDisplay.textContent = "0.00"; 
             }
         }
 
@@ -1191,13 +1255,13 @@
                 drawPlayer();
                 drawFallingObjects();
             } catch (error) {
-                console.error("gameLoop 錯誤: 名稱:", error.name, "訊息:", error.message, "堆疊:", error.stack);
-                console.error("完整錯誤物件:", error);
-                console.error("錯誤時遊戲狀態: isGameRunning=", isGameRunning, 
-                                "accumulatedWeight=", accumulatedWeight, 
-                                "fallingObjects.length=", fallingObjects.length, 
-                                "player.x=", player.x, "player.y=", player.y,
-                                "canvas.width=", canvas.width, "canvas.height=", canvas.height);
+                console.error("Error in gameLoop: Name:", error.name, "Message:", error.message, "Stack:", error.stack);
+                console.error("Full error object:", error);
+                console.error("Game state at error: isGameRunning=", isGameRunning, 
+                              "accumulatedWeight=", accumulatedWeight, 
+                              "fallingObjects.length=", fallingObjects.length, 
+                              "player.x=", player.x, "player.y=", player.y,
+                              "canvas.width=", canvas.width, "canvas.height=", canvas.height);
                 gameOver("遊戲運作時發生了未預期的錯誤，建議您重新整理頁面後再試一次。");
                 return; 
             }
@@ -1213,8 +1277,8 @@
                 return;
             }
 
-            const bounceFrequency = 1.3; 
-            const bounceAmplitude = Math.max(1, canvas.height * 0.004); 
+            const bounceFrequency = 1.5; 
+            const bounceAmplitude = Math.max(1, canvas.height * 0.0035); 
             const elapsedTime = performance.now() / 1000; 
             const bounceOffset = Math.sin(elapsedTime * bounceFrequency * 2 * Math.PI) * bounceAmplitude;
 
@@ -1243,6 +1307,7 @@
             }
         }
 
+
         function startGame() {
             if (isGameRunning) return;
             stopIdleAnimation(); 
@@ -1251,9 +1316,9 @@
                 initializeSounds();
             } else if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') { 
                 Tone.start().then(() => {
-                    console.log("Tone.js 音訊內容已由 startGame 啟動。");
+                    console.log("Tone.js context started by startGame.");
                 }).catch(e => {
-                    console.warn("在 startGame 中 Tone.start() 失敗，可能需要使用者互動。", e);
+                    console.warn("Tone.start() failed in startGame, user interaction might be needed.", e);
                 });
             }
 
@@ -1269,7 +1334,7 @@
                 player.y = canvas.height - (canvas.width * 0.12 / (player.image.naturalWidth / player.image.naturalHeight || 0.5)) - (canvas.height * 0.03);
             }
 
-            statusMessage.innerHTML = "<h3>遊戲進行中...</h3><p class='text-center'>操控S25 Edge接住配件！</p>";
+            statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>";
             startButton.textContent = "遊戲進行中";
             startButton.disabled = true;
             scoreFormContainer.style.display = 'none'; 
@@ -1304,7 +1369,7 @@
 
         async function recordGameOutcome(isSuccess) {
             const eventType = isSuccess ? "gameWinEvent" : "gameLossEvent";
-            console.log("記錄遊戲結果:", eventType);
+            console.log("Recording game outcome:", eventType);
             try {
                 await fetch(GOOGLE_APPS_SCRIPT_URL, {
                     method: 'POST',
@@ -1313,10 +1378,10 @@
                     headers: { 'Content-Type': 'application/json' }, 
                     body: JSON.stringify({ eventType: eventType })
                 });
-                console.log(`事件 ${eventType} 已傳送至後端。`);
+                console.log(`Event ${eventType} sent to backend.`);
                 fetchGameStats(); 
             } catch (error) {
-                console.error(`記錄 ${eventType} 錯誤:`, error);
+                console.error(`Error recording ${eventType}:`, error);
             }
         }
 
@@ -1329,9 +1394,9 @@
                 if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
                     Tone.start().then(() => {
                         if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
-                            loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05); 
+                           loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05); 
                         }
-                    }).catch(err => console.error("Tone.start 錯誤於 gameOver:", err));
+                    }).catch(err => console.error("Tone.start error in gameOver:", err));
                 } else if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
                     if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
                         loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05);
@@ -1340,25 +1405,26 @@
             }
             const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
             if (statusMessage) {
-                statusMessage.innerHTML = `<h3>挑戰失敗！</h3><p class='text-center font-bold text-red-600'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${elapsedTime}s</p>`;
+                statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${elapsedTime}s</p>`;
             }
             recordGameOutcome(false); 
         }
 
+
         async function gameWin() { 
             stopGame();
-            if (startButton) {
+             if (startButton) {
                 startButton.textContent = "再玩一局";
             }
             if (toneJsInitialized && winSound) {
-                if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
+                 if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
                     Tone.start().then(() => {
                         if (winSound && typeof winSound.triggerAttackRelease === 'function') {
                             winSound.triggerAttackRelease("C5", "2n", Tone.now());
                         }
-                    }).catch(err => console.error("Tone.start 錯誤於 gameWin:", err));
+                    }).catch(err => console.error("Tone.start error in gameWin:", err));
                 } else if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
-                    if (winSound && typeof winSound.triggerAttackRelease === 'function') {
+                     if (winSound && typeof winSound.triggerAttackRelease === 'function') {
                         winSound.triggerAttackRelease("C5", "2n", Tone.now());
                     }
                 }
@@ -1375,7 +1441,7 @@
                     <li>亞軍：深層震動筋膜按摩槍*1</li>
                     <li>季軍：不鏽鋼保溫瓶*1</li>
                 </ul>
-                <p class="text-xs text-gray-500 mb-2">排行榜結算至 2025/6/30 23:59，詳情與得獎名單請見微風南山三星粉專頁。</p>
+                <p class="text-xs text-gray-600 mb-2">排行榜結算至 2025/6/30 23:59，詳情與得獎名單請見微風南山三星粉專頁。</p>
                 <p><strong>🎁 【通關獎】：「Galaxy AI 帆布袋」*1，憑此遊戲成功畫面截圖,即可於活動期間(即日起- 2025/6/30) 至微風南山三星體驗館(台北市信義區松智路17號二樓)兌換</strong></p>
                 <p><strong>⚡ 加碼抽大獎：</strong></p>
                 <p class="text-sm">想再抽三星行動電源？快到微風南山三星粉專頁查看指定貼文，參與互動分享活動！</p>
@@ -1391,7 +1457,7 @@
             scoreFormContainer.style.display = 'block';
             scoreFormContainer.innerHTML = `
                 <div id="scoreForm">
-                    <h3 class="text-lg font-semibold text-center mb-3">🎉 S25 Edge 配重達人留名 🎉</h3>
+                    <h3 class="text-lg font-semibold text-center mb-3 text-sky-700">🎉 S25 Edge 配重達人留名 🎉</h3>
                     <div>
                         <label for="playerName">您的達人稱號 (顯示於排行榜)：</label>
                         <input type="text" id="playerName" name="playerName" maxlength="50" required placeholder="例如：輕巧神手小明">
@@ -1414,24 +1480,21 @@
                 const submitStatus = document.getElementById('submitStatus');
 
                 if (!playerName) {
-                    submitStatus.textContent = '請輸入您的達人稱號。';
-                    submitStatus.style.color = '#dc2626'; // red-600
+                    submitStatus.innerHTML = '<span class="text-red-600 font-medium">⚠️ 請輸入您的達人稱號。</span>';
                     playerNameInput.focus();
                     return;
                 }
 
                 const phoneRegex = /^\d{10}$/; 
                 if (playerPhone && !phoneRegex.test(playerPhone)) {
-                    submitStatus.textContent = '若要填寫手機號碼，請輸入有效的10位數字。';
-                    submitStatus.style.color = '#dc2626'; // red-600
+                    submitStatus.innerHTML = '<span class="text-red-600 font-medium">⚠️ 若要填寫手機號碼，請輸入有效的10位數字。</span>';
                     playerPhoneInput.focus();
                     return;
                 }
                 
                 if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
-                        submitStatus.textContent = '後端URL未配置或無效，無法提交。';
-                        submitStatus.style.color = '#f59e0b'; // amber-500
-                        return;
+                     submitStatus.innerHTML = '<span class="text-orange-500 font-medium">⚠️ 後端URL未配置或無效，無法提交。</span>';
+                     return;
                 }
 
                 const scoreData = {
@@ -1444,8 +1507,7 @@
                 };
 
                 document.getElementById('submitScoreButton').disabled = true;
-                submitStatus.textContent = '提交中...';
-                submitStatus.style.color = '#2563eb'; // blue-600
+                submitStatus.innerHTML = '<span class="text-blue-600 font-medium">⏳ 提交中...</span>';
 
                 try {
                     await fetch(GOOGLE_APPS_SCRIPT_URL, {
@@ -1453,8 +1515,7 @@
                         headers: { 'Content-Type': 'application/json' }, 
                         body: JSON.stringify(scoreData) 
                     });
-                    submitStatus.textContent = '成績已提交！感謝您的參與！';
-                    submitStatus.style.color = '#059669'; // green-600
+                    submitStatus.innerHTML = '<span class="text-green-600 font-medium">✔️ 成績已提交！感謝您的參與！</span>';
 
                     nameToHighlightNext = playerName; 
                     timeToHighlightNext = finalTime;
@@ -1469,9 +1530,8 @@
                     }
 
                 } catch (error) {
-                    console.error('提交分數錯誤:', error);
-                    submitStatus.textContent = '提交失敗，請稍後再試或檢查網路連線。';
-                    submitStatus.style.color = '#dc2626'; // red-600
+                    console.error('Error submitting score:', error);
+                    submitStatus.innerHTML = '<span class="text-red-600 font-medium">❌ 提交失敗，請稍後再試或檢查網路連線。</span>';
                     document.getElementById('submitScoreButton').disabled = false;
                     nameToHighlightNext = null; 
                     timeToHighlightNext = null;
@@ -1531,7 +1591,7 @@
                 for (let i = 0; i < numParticles; i++) {
                     const particle = document.createElement('div');
                     particle.classList.add('particle');
-                    const colors = ['#3b82f6', '#10b981', '#ef4444', '#f59e0b', '#8b5cf6', '#ec4899']; 
+                    const colors = ['#facc15', '#60a5fa', '#f87171', '#34d399', '#a78bfa'];
                     particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                     const size = Math.random() * 8 + 4;
                     particle.style.width = `${size}px`;
@@ -1580,7 +1640,7 @@
                 const particlesContainer = document.getElementById('particlesContainerAnimate');
                 if(particlesContainer) particlesContainer.innerHTML = ''; 
             }
-            if (!isGameRunning && canvas.width > 0 && player.width > 0) { 
+             if (!isGameRunning && canvas.width > 0 && player.width > 0) { 
                 startIdleAnimation();
             }
         }
@@ -1654,11 +1714,12 @@
             }
         }
 
+
         function keyDown(e) { 
             if (!isGameRunning && (e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left')) {
                 stopIdleAnimation(); 
                 if (player.speed === 0 && canvas.width > 0) { 
-                        player.speed = isTouchDevice() ? canvas.width * 0.018 : canvas.width * 0.024;
+                     player.speed = isTouchDevice() ? canvas.width * 0.018 : canvas.width * 0.024;
                 }
                 if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
                 else player.dx = -player.speed;
@@ -1693,6 +1754,7 @@
         canvas.addEventListener('touchmove', handleCanvasTouchMove, { passive: false });
         canvas.addEventListener('touchend', handleCanvasTouchEnd, { passive: false });
 
+
         function isTouchDevice() { 
             return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
         }
@@ -1706,7 +1768,7 @@
                 stopIdleAnimation();
                 player.speed = canvas.width * 0.018 || initialTouchSpeed; 
                 if(isGameRunning) player.dx = -player.speed;
-                else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { 
+                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { 
                     player.dx = -player.speed;
                     updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; 
                 }
@@ -1722,7 +1784,7 @@
                 stopIdleAnimation();
                 player.speed = canvas.width * 0.018 || initialTouchSpeed;
                 if(isGameRunning) player.dx = player.speed;
-                else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { 
+                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { 
                     player.dx = player.speed;
                     updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; 
                 }
@@ -1738,7 +1800,7 @@
 
         async function fetchGameStats() {
             if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
-                console.warn("遊戲統計後端 URL 未配置。");
+                console.warn("Game stats backend URL not configured.");
                 totalWinsDisplay.textContent = 'N/A';
                 totalLossesDisplay.textContent = 'N/A';
                 passRateDisplay.textContent = 'N/A';
@@ -1746,7 +1808,7 @@
             }
             try {
                 const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getGameStats'); 
-                if (!response.ok) throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const stats = await response.json();
                 totalWinsDisplay.textContent = stats.wins !== undefined ? stats.wins : '--';
                 totalLossesDisplay.textContent = stats.losses !== undefined ? stats.losses : '--';
@@ -1758,12 +1820,13 @@
                 }
 
             } catch (error) {
-                console.error('獲取遊戲統計錯誤:', error);
+                console.error('Error fetching game stats:', error);
                 totalWinsDisplay.textContent = '錯誤';
                 totalLossesDisplay.textContent = '錯誤';
                 passRateDisplay.textContent = '錯誤';
             }
         }
+
 
         async function fetchLeaderboardData() {
             if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
@@ -1773,17 +1836,17 @@
             try {
                 const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getLeaderboard'); 
                 if (!response.ok) {
-                    let errorMsg = `HTTP 錯誤！狀態: ${response.status}.`;
-                    try { const errorData = await response.json(); if (errorData && errorData.message) errorMsg += ` 訊息: ${errorData.message}`; }
-                    catch (jsonError) { errorMsg += ` 無法解析錯誤 JSON。`; }
+                    let errorMsg = `HTTP error! status: ${response.status}.`;
+                    try { const errorData = await response.json(); if (errorData && errorData.message) errorMsg += ` Message: ${errorData.message}`; }
+                    catch (jsonError) { errorMsg += ` Failed to parse error JSON.`; }
                     throw new Error(errorMsg);
                 }
                 const data = await response.json();
-                if (data.status === 'error' && data.message) throw new Error(`從 Apps Script 獲取排行榜錯誤: ${data.message}`);
+                if (data.status === 'error' && data.message) throw new Error(`Leaderboard fetch error from Apps Script: ${data.message}`);
                 displayLeaderboard(data.leaderboard || data); 
                 leaderboardStatus.textContent = ''; 
             } catch (error) {
-                console.error('獲取排行榜錯誤:', error);
+                console.error('Error fetching leaderboard:', error);
                 leaderboardStatus.textContent = '無法加載排行榜，請稍後再試。';
                 nameToHighlightNext = null; 
                 timeToHighlightNext = null;
@@ -1810,7 +1873,7 @@
                 let rankDisplay;
                 if (index === 0) rankDisplay = '🥇'; 
                 else if (index === 1) rankDisplay = '🥈'; 
-                else if (index === 2) rankDisplay = '�'; 
+                else if (index === 2) rankDisplay = '🥉'; 
                 else rankDisplay = `${index + 1}.`; 
 
                 listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="name">${escapeHTML(score.name || '匿名')}</span> <span class="time">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`;
@@ -1839,10 +1902,10 @@
 
         async function recordPageLoad() { 
             if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
-                console.warn("後端 URL 未配置。頁面載入未記錄。");
+                console.warn("Backend URL not configured. Page load not recorded.");
                 return;
             }
-            console.log("記錄頁面載入事件...");
+            console.log("Recording page load event...");
             try {
                 await fetch(GOOGLE_APPS_SCRIPT_URL, {
                     method: 'POST',
@@ -1851,19 +1914,20 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ eventType: "pageLoadEvent" }) 
                 });
-                console.log("頁面載入事件已傳送至後端。");
+                console.log("Page load event sent to backend.");
             } catch (error) {
-                console.error('記錄頁面載入事件錯誤:', error);
+                console.error('Error recording page load event:', error);
             }
         }
+
 
         function handleResize() {
             try {
                 stopIdleAnimation(); 
                 const gameArea = document.getElementById('gameContainer');
                 const paddingAndMargins = (parseFloat(getComputedStyle(gameArea).paddingLeft) || 0) + 
-                                        (parseFloat(getComputedStyle(gameArea).paddingRight) || 0) +
-                                        (parseFloat(getComputedStyle(document.body).paddingLeft) || 0) * 2;
+                                          (parseFloat(getComputedStyle(gameArea).paddingRight) || 0) +
+                                          (parseFloat(getComputedStyle(document.body).paddingLeft) || 0) * 2;
 
                 const availableWidth = gameArea ? Math.min(gameArea.clientWidth - ( (parseFloat(getComputedStyle(gameArea).paddingLeft) || 0) + (parseFloat(getComputedStyle(gameArea).paddingRight) || 0) ) , window.innerWidth - paddingAndMargins) : window.innerWidth * 0.9; 
 
@@ -1876,12 +1940,12 @@
                     phoneImageAspectRatio = player.image.naturalWidth / player.image.naturalHeight;
                 } else {
                     phoneImageAspectRatio = 80 / 160; 
-                    console.warn("玩家圖片尺寸不可用於長寬比，使用預設值 (80/160)。");
+                    console.warn("Player image dimensions not available for aspect ratio, using default for placeholder (80/160).");
                 }
 
                 if (!phoneImageAspectRatio || phoneImageAspectRatio <= 0 || !isFinite(phoneImageAspectRatio)) {
                     phoneImageAspectRatio = 0.5; 
-                    console.warn("無效的 phoneImageAspectRatio，重設為安全預設值 0.5。");
+                    console.warn("Invalid phoneImageAspectRatio, reset to safe default 0.5.");
                 }
 
                 player.width = canvasWidth * 0.12; 
@@ -1907,12 +1971,12 @@
                 if (!isFinite(player.width) || player.width <= 0) {
                     player.width = canvas.width * 0.12; 
                     player.width = Math.max(15, Math.round(player.width));
-                    console.warn("玩家寬度變為非有限值，重設為:", player.width);
+                    console.warn("Player width became non-finite, reset to:", player.width);
                 }
                 if (!isFinite(player.height) || player.height <= 0) {
                     player.height = player.width / (phoneImageAspectRatio || 0.5); 
                     player.height = Math.max(30, Math.round(player.height));
-                    console.warn("玩家高度變為非有限值，重設為:", player.height);
+                    console.warn("Player height became non-finite, reset to:", player.height);
                 }
                 
                 if (player.height > canvas.height * 0.25) {
@@ -1922,7 +1986,7 @@
                 
                 player.width = Math.max(15, Math.min(player.width, canvas.width * 0.3));
                 player.height = player.width / phoneImageAspectRatio;
-                if (!isFinite(player.height)) player.height = Math.max(30, player.width * 2); 
+                if (!isFinite(player.height)) player.height = Math.max(30, player.width * 2); // Final fallback for height
 
 
                 const infoBarElements = document.querySelectorAll('.info-bar div, #gameStatsDisplay div div'); 
@@ -1941,30 +2005,33 @@
                 });
 
             } catch (error) {
-                console.error("handleResize 錯誤:", error.name, error.message, error.stack);
+                console.error("Error during handleResize:", error.name, error.message, error.stack);
+                // Optionally, try to set some very safe defaults if resize fails catastrophically
+                // This is a last resort to prevent total breakage.
                 if (canvas) {
                     canvas.width = Math.min(window.innerWidth * 0.9, 300);
                     canvas.height = canvas.width / aspectRatio;
                 }
                 if (player) {
                     player.width = (canvas ? canvas.width : 300) * 0.1;
-                    player.height = player.width * 2; 
+                    player.height = player.width * 2; // Default aspect
                     player.x = ( (canvas ? canvas.width : 300) / 2) - (player.width / 2);
                     player.y = ( (canvas ? canvas.height : 450) ) - player.height - 10;
                 }
             } finally {
-                if (!isGameRunning) { 
+                 if (!isGameRunning) { 
                     clearCanvas();
                     if (player.imageLoaded || player.image.src.includes('placehold.co')) { 
-                        drawPlayer();
-                    } else if (canvas.width > 0 && player.width > 0) { 
-                        drawPlayer(); 
+                       drawPlayer();
+                    } else if (canvas.width > 0 && player.width > 0) { // Draw default if image not loaded but dimensions are set
+                       drawPlayer(); // Will draw placeholder rect
                     }
                     startIdleAnimation();
                     if(startButton) startButton.disabled = false; 
                 }
             }
         }
+
 
         window.addEventListener('load', async () => {
             handleResize(); 
@@ -1974,12 +2041,17 @@
             const checkPlayerImage = setInterval(() => {
                 if (player.imageLoaded) { 
                     clearInterval(checkPlayerImage);
-                    console.log("玩家圖片 (主要或預備) 確認已載入。啟用遊戲。");
+                    console.log("Player image (primary or fallback) confirmed loaded. Enabling game.");
                     if (canvas.width > 0) handleResize(); 
                     startButton.disabled = false;
                     if (!isGameRunning) startIdleAnimation();
                 } else if (player.image.complete && player.image.src.includes('placehold.co') && !player.imageLoaded) {
-                    console.warn("預備圖片載入嘗試完成，但 player.imageLoaded 仍為 false。繼續啟用遊戲。");
+                    // This case means the fallback image (placeholder) has attempted to load,
+                    // but our player.imageLoaded flag (which is set in the fallback's onload)
+                    // hasn't become true yet, or the fallback itself failed.
+                    // We should still proceed to enable the game to avoid getting stuck.
+                    // handleResize will use default dimensions if needed.
+                    console.warn("Fallback image loading attempt complete, but player.imageLoaded still false. Proceeding to enable game.");
                     clearInterval(checkPlayerImage);
                     if (canvas.width > 0) handleResize(); 
                     startButton.disabled = false;
@@ -1989,7 +2061,7 @@
 
 
             if (typeof Tone === 'undefined') {
-                console.warn("Tone.js 未於頁面載入時載入。音效功能可能受影響。");
+                console.warn("Tone.js not loaded on page load. Sound features might be affected.");
             } else {
                 initializeSounds();
             }
@@ -2008,9 +2080,9 @@
                 closeNewEasterEggButton.addEventListener('click', () => {
                     hideNewEasterEgg();
                     if (statusMessage) {
-                        statusMessage.innerHTML = "<h3>已關閉彩蛋</h3><p class='text-center'>點擊「重新開始」可再玩一次。</p>";
+                        statusMessage.innerHTML = "<p class='text-center font-bold'>已關閉彩蛋。點擊「重新開始」可再玩一次。</p>";
                     }
-                    if (startButton) { 
+                     if (startButton) { 
                         startButton.textContent = "重新開始";
                         startButton.disabled = false;
                     }
@@ -2026,4 +2098,3 @@
     </script>
 </body>
 </html>
-�
