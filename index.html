@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Galaxy S25 Edge 輕巧配重挑戰賽</title>
+    <title>Galaxy S25 Edge 配重挑戰賽</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
@@ -356,7 +356,7 @@
 
         /* 觸控按鈕 */
         #touchControls {
-            display: none;
+            display: none; /* **初始隱藏** */
             position: fixed;
             bottom: 0;
             left: 0;
@@ -905,7 +905,7 @@
             { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 16 },
             { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: (0.0058 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
             { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 }, // 重量加倍
-            { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
+            { name: '炸彈', emoji: '�', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
             {
                 name: '神秘配件',
                 emoji: '❓',
@@ -1447,6 +1447,11 @@
             if(animationFrameId) cancelAnimationFrame(animationFrameId); // 取消之前的遊戲迴圈幀
             animationFrameId = requestAnimationFrame(gameLoop); // 開始遊戲迴圈
             fetchGameStats(); // 每次開始遊戲時獲取統計數據
+
+            // **遊戲開始時顯示觸控按鈕 (如果適用)**
+            if (isTouchDevice()) {
+                touchControlsUI.style.display = 'flex';
+            }
         }
 
         // 停止遊戲 (通用停止邏輯，不處理遊戲結果)
@@ -1461,6 +1466,10 @@
             }
             if (canvas.width > 0 && player.width > 0) { // 確保畫布和玩家已初始化
                 startIdleAnimation(); // 遊戲停止後開始待機動畫
+            }
+            // **遊戲停止時隱藏觸控按鈕 (如果適用)**
+            if (isTouchDevice()) {
+                touchControlsUI.style.display = 'none';
             }
         }
 
@@ -1906,9 +1915,9 @@
             return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
         }
 
-        // 如果是觸控裝置，顯示觸控按鈕並設定事件
+        // 如果是觸控裝置，綁定觸控按鈕事件 (但不在此處直接顯示)
         if (isTouchDevice()) {
-            touchControlsUI.style.display = 'flex'; // 顯示觸控按鈕
+            // touchControlsUI.style.display = 'flex'; // **移除此行，改由 startGame/stopGame 控制**
             const initialTouchSpeed = canvas.width * 0.018 || 5; // 確保有預設速度
 
             // 左按鈕觸控事件
@@ -1944,9 +1953,9 @@
                 if(isGameRunning) player.dx = 0;
                 else if (!isGameRunning) startIdleAnimation();
             });
-        } else { // 非觸控裝置則隱藏觸控按鈕
-            touchControlsUI.style.display = 'none';
         }
+        // **移除 else 分支中設定 touchControlsUI.style.display = 'none'; 的部分，因為 CSS 已處理**
+
 
         // 獲取遊戲統計數據 (勝負次數、過關率)
         async function fetchGameStats() {
@@ -2284,3 +2293,4 @@
     </script>
 </body>
 </html>
+�
