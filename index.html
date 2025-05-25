@@ -716,7 +716,7 @@
                 </div>
 
             <p class="instruction-text mt-3"><strong>注意事項：</strong></p>
-            <p class="instruction-text"><strong class="text-red-600">� 超重警告：</strong>超過163公克，挑戰失敗！</p>
+            <p class="instruction-text"><strong class="text-red-600">🔴 超重警告：</strong>超過163公克，挑戰失敗！</p>
             <p class="instruction-text"><strong class="text-red-600">💣 炸彈注意：</strong>接到炸彈，遊戲結束！</p>
             <p class="instruction-text easter-egg-hint">據說，在極為罕見的情況下，當宇宙的粒子完美對齊時，Galaxy S25 Edge 會展現出超越輕巧的... 獨特光芒 ✨。但這只是個傳說，對吧？</p>
 
@@ -1666,7 +1666,7 @@
             scoreFormContainer.style.display = 'none';
             scoreFormContainer.innerHTML = '';
 
-            gameStartTime = 0; // Reset game start time for timer
+            gameStartTime = performance.now(); // Set game start time for timer
             lastFrameTime = performance.now(); // Set last frame time for delta time calculation
 
             const gameContainerElement = document.getElementById('gameContainer');
@@ -2409,4 +2409,3 @@
     </script>
 </body>
 </html>
-�
