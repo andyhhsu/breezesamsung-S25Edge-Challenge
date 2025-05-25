@@ -16,7 +16,6 @@
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            /* 恢復原始背景顏色 */
             background-color: #dbeafe; /* Tailwind blue-100 */
             display: flex;
             flex-direction: column;
@@ -25,10 +24,10 @@
             min-height: 100vh;
             height: -webkit-fill-available;
             margin: 0;
-            padding: 10px; /* 恢復原始 padding */
+            padding: 10px;
             overflow-x: hidden;
             overflow-y: auto;
-            color: #374151; /* 恢復預設深色文字，Tailwind gray-700 */
+            color: #374151; /* Tailwind gray-700 */
         }
 
         .font-orbitron {
@@ -47,96 +46,94 @@
         /* 標題 */
         #pageContainer > h1 {
             font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            /* 恢復原始標題顏色 */
             color: #1e3a8a; /* Tailwind sky-800 */
-            text-shadow: none; /* 移除之前為深色背景添加的陰影 */
+            text-shadow: none;
             margin-bottom: 1.25rem;
         }
 
         /* 遊戲主視覺圖 */
         .game-banner-image {
             width: 100%;
-            max-width: 500px; /* 恢復原始 max-width */
+            max-width: 500px;
             height: auto;
-            border-radius: 0.5rem; /* 恢復原始圓角 */
-            margin-bottom: 0.75rem; /* 恢復原始間距 */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 恢復原始陰影 */
-            border: none; /* 移除之前添加的邊框 */
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: none;
         }
 
         /* 遊戲說明區塊 */
         #gameInstructions {
-            /* 恢復原始背景與邊框 */
             background-color: #e0f2fe; /* Tailwind blue-100 / sky-100 */
             border: 1px solid #93c5fd; /* Tailwind blue-300 */
-            backdrop-filter: none; /* 移除毛玻璃效果 */
+            backdrop-filter: none;
             -webkit-backdrop-filter: none;
-            border-radius: 0.5rem; /* 恢復原始圓角 */
-            padding: 1rem; /* 恢復原始 padding */
+            border-radius: 0.5rem;
+            padding: 1rem;
             margin-bottom: 1rem;
             width: 100%;
             max-width: 500px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* 恢復原始陰影 */
-            color: #374151; /* 恢復預設深色文字 */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            color: #374151;
             animation: fadeIn 0.8s ease-out 0.2s forwards;
         }
 
         #gameInstructions h2 {
-            font-size: 1.25rem; /* 恢復原始大小 */
+            font-size: 1.25rem;
             font-weight: bold;
-            color: #1e3a8a; /* 恢復原始顏色 */
+            color: #1e3a8a;
             text-align: center;
             margin-bottom: 0.75rem;
         }
 
         #gameInstructions h3 {
-            font-size: 1.1rem; /* 恢復原始大小 */
+            font-size: 1.1rem;
             font-weight: bold;
-            color: #1d4ed8; /* 恢復原始顏色 */
+            color: #1d4ed8;
             text-align: center;
             margin-top: 1rem;
             margin-bottom: 0.5rem;
             padding-top: 0.75rem;
-            border-top: 1px dashed #93c5fd; /* 恢復原始虛線分隔線 */
+            border-top: 1px dashed #93c5fd;
         }
 
         /* 配件卡片 */
         .item-grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* 恢復原始配置 */
-            gap: 0.75rem; /* 恢復原始間隙 */
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.75rem;
             margin-top: 0.5rem;
             margin-bottom: 0.75rem;
         }
 
         .item-card {
-            background-color: #ffffff; /* 恢復原始背景 */
-            border: 1px solid #bfdbfe; /* 恢復原始邊框, Tailwind blue-200 */
-            border-radius: 0.5rem; /* 恢復原始圓角 */
-            padding: 0.75rem; /* 恢復原始 padding */
+            background-color: #ffffff;
+            border: 1px solid #bfdbfe; /* Tailwind blue-200 */
+            border-radius: 0.5rem;
+            padding: 0.75rem;
             text-align: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* 恢復原始陰影 */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-around;
             min-height: 110px;
-            color: #374151; /* 卡片內文字使用預設深色 */
+            color: #374151;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .item-card:hover { /* 保留懸停效果，因為它在淺色背景下也適用 */
+        .item-card:hover {
             transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1); /* 調整陰影以適應淺色背景 */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         }
 
         .item-card .item-emoji {
-            font-size: 2rem; /* 恢復原始大小 */
+            font-size: 2rem;
             margin-bottom: 0.25rem;
             line-height: 1;
         }
         .item-card .item-name {
-            font-size: 0.8rem; /* 恢復原始大小 */
-            color: #374151; /* 恢復原始顏色 */
+            font-size: 0.8rem;
+            color: #374151;
             margin-bottom: 0.25rem;
             min-height: 2.4em;
             display: flex;
@@ -144,46 +141,46 @@
             justify-content: center;
         }
         .item-card .item-weight {
-            font-size: 0.9rem; /* 恢復原始大小 */
+            font-size: 0.9rem;
             font-weight: bold;
-            color: #1e40af; /* 恢復原始顏色 */
+            color: #1e40af;
         }
         .item-card .item-effect {
-            font-size: 0.75rem; /* 恢復原始大小 */
+            font-size: 0.75rem;
             font-weight: bold;
-            color: #7c3aed; /* 恢復原始顏色 */
+            color: #7c3aed;
             margin-top: 0.2rem;
         }
         .item-card .item-mystery-effect {
-            font-size: 0.9rem; /* 恢復原始大小 */
+            font-size: 0.9rem;
             font-weight: bold;
-            color: #581c87; /* 恢復原始顏色 */
+            color: #581c87;
         }
 
         /* 遊戲說明內文 */
         #gameInstructions p, #gameInstructions .instruction-text {
-            font-size: 0.9rem; /* 恢復原始大小 */
-            color: #374151; /* 恢復原始顏色 */
+            font-size: 0.9rem;
+            color: #374151;
             line-height: 1.6;
             margin-bottom: 0.4rem;
         }
         #gameInstructions strong {
             font-weight: bold;
-            color: #1e40af; /* 恢復原始顏色 */
+            color: #1e40af;
         }
         #gameInstructions .text-green-600 {
-            color: #059669; /* 恢復原始 Tailwind green-600 */
+            color: #059669;
         }
         #gameInstructions .text-red-600 {
-            color: #dc2626; /* 恢復原始 Tailwind red-600 */
+            color: #dc2626;
         }
         #gameInstructions .easter-egg-hint {
             font-style: italic;
-            color: #581c87; /* 恢復原始顏色 */
+            color: #581c87;
             margin-top: 0.75rem;
             padding: 0.5rem;
-            background-color: #ede9fe; /* 恢復原始背景, Tailwind violet-50 */
-            border-left: 3px solid #7c3aed; /* 恢復原始邊框 */
+            background-color: #ede9fe; /* Tailwind violet-50 */
+            border-left: 3px solid #7c3aed;
             font-size: 0.85rem;
             border-radius: 0.25rem;
         }
@@ -192,7 +189,7 @@
         }
         #gameInstructions .reward-title {
             font-weight: bold;
-            color: #1e40af; /* 恢復原始顏色 */
+            color: #1e40af;
             font-size: 0.95rem;
             margin-bottom: 0.3rem;
         }
@@ -200,7 +197,7 @@
             list-style: none;
             padding-left: 0.5rem;
             font-size: 0.85rem;
-            color: #374151; /* 恢復原始顏色 */
+            color: #374151;
         }
         #gameInstructions .prize-list li {
             margin-bottom: 0.2rem;
@@ -209,56 +206,56 @@
         }
         #gameInstructions .prize-rank {
             font-weight: 500;
-            color: #1d4ed8; /* 恢復原始顏色 */
+            color: #1d4ed8;
             margin-right: 0.25rem;
             min-width: 40px;
         }
         #gameInstructions .reward-detail {
             font-size: 0.85rem;
-            color: #374151; /* 恢復原始顏色 */
+            color: #374151;
             padding-left: 0.5rem;
             line-height: 1.5;
         }
         #gameInstructions .reward-detail .text-xs {
             display: block;
             margin-top: 0.15rem;
-            color: #6b7280; /* 恢復原始顏色 */
+            color: #6b7280;
         }
 
         /* 遊戲與表單容器 */
         #gameAndFormContainer {
             width: 100%;
-            max-width: 500px; /* 恢復原始 max-width */
+            max-width: 500px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 70px; /* 恢復原始間距 */
+            margin-bottom: 70px;
             animation: fadeIn 0.8s ease-out 0.4s forwards;
         }
 
         /* 遊戲容器 */
         #gameContainer {
-            background-color: #ffffff; /* 恢復原始背景 */
-            border-radius: 0.75rem; /* 恢復原始圓角 */
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); /* 恢復原始陰影 */
-            padding: 0.75rem; /* 恢復原始 padding */
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+            padding: 0.75rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
             position: relative;
-            color: #1e3a8a; /* 遊戲容器內文字顏色保持深色 */
+            color: #1e3a8a;
         }
 
         canvas {
-            background-color: #eff6ff; /* 恢復原始畫布背景, Tailwind blue-50 */
-            border-radius: 0.5rem; /* 恢復原始圓角 */
+            background-color: #eff6ff; /* Tailwind blue-50 */
+            border-radius: 0.5rem;
             display: block;
             max-width: 100%;
             height: auto;
             touch-action: none;
             cursor: grab;
-            border: none; /* 移除之前添加的邊框 */
+            border: none;
         }
         canvas:active {
             cursor: grabbing;
@@ -266,61 +263,61 @@
 
         /* 狀態訊息 */
         #statusMessage {
-            margin-top: 1rem; /* 恢復原始間距 */
-            padding: 0.75rem; /* 恢復原始 padding */
-            background-color: #e0f2fe; /* 恢復原始背景 */
-            border-radius: 0.5rem; /* 恢復原始圓角 */
-            border: 1px solid #93c5fd; /* 恢復原始邊框 */
-            font-size: 0.9rem; /* 恢復原始大小 */
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background-color: #e0f2fe;
+            border-radius: 0.5rem;
+            border: 1px solid #93c5fd;
+            font-size: 0.9rem;
             font-weight: normal;
-            color: #1e3a8a; /* 文字顏色保持深色 */
-            min-height: 80px; /* 恢復原始高度 */
-            max-height: 30vh; /* 恢復原始高度 */
+            color: #1e3a8a;
+            min-height: 80px;
+            max-height: 30vh;
             overflow-y: auto;
             text-align: left;
             width: 100%;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); /* 恢復原始陰影 */
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
         }
         #statusMessage h3 {
-            font-size: 1.1rem; /* 恢復原始大小 */
+            font-size: 1.1rem;
             font-weight: bold;
-            color: #1d4ed8; /* 恢復原始顏色 */
+            color: #1d4ed8;
             margin-bottom: 0.4rem;
             text-align: center;
         }
         #statusMessage h4 {
-            font-size: 1rem; /* 恢復原始大小 */
+            font-size: 1rem;
             font-weight: bold;
-            color: #1e40af; /* 恢復原始顏色 */
+            color: #1e40af;
             margin-top: 0.6rem;
             margin-bottom: 0.4rem;
             text-align: center;
-            border-top: 1px solid #93c5fd; /* 恢復原始邊框 */
+            border-top: 1px solid #93c5fd;
             padding-top: 0.6rem;
         }
         #statusMessage p {
             margin-bottom: 0.4rem;
             line-height: 1.5;
-            font-size: 0.85rem; /* 恢復原始大小 */
+            font-size: 0.85rem;
         }
         #statusMessage strong {
             font-weight: bold;
-            color: #1e40af; /* 恢復原始顏色 */
+            color: #1e40af;
         }
         #statusMessage ul {
             list-style: disc;
-            padding-left: 1.2rem; /* 恢復原始 padding */
+            padding-left: 1.2rem;
             margin-bottom: 0.4rem;
-            font-size: 0.8rem; /* 恢復原始大小 */
+            font-size: 0.8rem;
         }
         #statusMessage .text-xs {
-            font-size: 0.7rem; /* 恢復原始大小 */
+            font-size: 0.7rem;
         }
         #statusMessage .promotion-highlight {
-            padding: 0.6rem; /* 恢復原始 padding */
+            padding: 0.6rem;
         }
 
-        /* 遊戲按鈕 - 保留優化後的膠囊按鈕樣式，因為它在淺色背景下也適用且更現代 */
+        /* 遊戲按鈕 */
         .game-button {
             background-image: linear-gradient(to right, #2563eb 0%, #3b82f6 50%, #1d4ed8 100%);
             color: white;
@@ -349,7 +346,7 @@
             background-image: none;
             background-color: #6b7280; /* Tailwind gray-500 for disabled */
             cursor: not-allowed;
-            opacity: 0.6; /* 調整透明度 */
+            opacity: 0.6;
             transform: translateY(0);
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
         }
@@ -362,28 +359,27 @@
             left: 0;
             right: 0;
             width: 100%;
-            padding: 10px 8px; /* 恢復原始 padding */
+            padding: 10px 8px;
             box-sizing: border-box;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            /* 恢復原始背景與邊框 */
             background-color: rgba(224, 242, 254, 0.75); /* Tailwind blue-100 with opacity */
             border-top: 1px solid rgba(191, 219, 254, 0.6); /* Tailwind blue-200 with opacity */
-            backdrop-filter: none; /* 移除毛玻璃效果 */
+            backdrop-filter: none;
             -webkit-backdrop-filter: none;
             pointer-events: none;
         }
         .control-button {
-            background-color: rgba(59, 130, 246, 0.8); /* 恢復原始背景 */
+            background-color: rgba(59, 130, 246, 0.8);
             color: white;
-            padding: 10px 0; /* 恢復原始 padding */
-            border-radius: 8px; /* 恢復原始圓角 */
-            font-size: 1.7rem; /* 恢復原始大小 */
+            padding: 10px 0;
+            border-radius: 8px;
+            font-size: 1.7rem;
             border: none;
             cursor: pointer;
             user-select: none;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.15); /* 恢復原始陰影 */
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
             pointer-events: auto;
             flex-basis: 44%;
             max-width: 160px;
@@ -392,56 +388,56 @@
             transition: background-color 0.2s ease;
         }
         .control-button:active {
-            background-color: rgba(29, 78, 216, 0.85); /* 恢復原始 active 狀態 */
+            background-color: rgba(29, 78, 216, 0.85);
         }
 
         /* 分數表單與排行榜 */
         #scoreFormContainer, #leaderboardContainer {
-            margin-top: 1.5rem; /* 恢復原始間距 */
-            padding: 1rem; /* 恢復原始 padding */
-            background-color: #f8fafc; /* 恢復原始背景, Tailwind slate-50 */
-            border-radius: 0.5rem; /* 恢復原始圓角 */
-            border: 1px solid #e2e8f0; /* 恢復原始邊框, Tailwind slate-200 */
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: #f8fafc; /* Tailwind slate-50 */
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0; /* Tailwind slate-200 */
             width: 100%;
-            max-width: 450px; /* 恢復原始 max-width */
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07); /* 恢復原始陰影 */
-            color: #374151; /* 內部文字顏色恢復 */
+            max-width: 450px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            color: #374151;
             animation: fadeIn 0.8s ease-out 0.2s forwards;
         }
         #scoreForm label, #leaderboardContainer h3 {
             display: block;
             margin-bottom: 0.25rem;
-            font-size: 0.875rem; /* 恢復原始大小 */
+            font-size: 0.875rem;
             font-weight: 500;
-            color: #374151; /* 恢復原始顏色 */
+            color: #374151;
         }
         #scoreForm .form-field-description {
-            font-size: 0.75rem; /* 恢復原始大小 */
-            color: #6b7280; /* 恢復原始顏色 */
+            font-size: 0.75rem;
+            color: #6b7280;
             margin-bottom: 0.5rem;
             margin-top: -0.15rem;
         }
         #leaderboardContainer h3 {
-            font-size: 1.25rem; /* 恢復原始大小 */
+            font-size: 1.25rem;
             text-align: center;
-            color: #1e3a8a; /* 恢復原始顏色 */
+            color: #1e3a8a;
             margin-bottom: 0.75rem;
         }
         #scoreForm input[type="text"], #scoreForm input[type="tel"] {
             width: 100%;
-            padding: 0.5rem; /* 恢復原始 padding */
-            border: 1px solid #d1d5db; /* 恢復原始邊框, Tailwind gray-300 */
-            border-radius: 0.375rem; /* 恢復原始圓角 */
+            padding: 0.5rem;
+            border: 1px solid #d1d5db; /* Tailwind gray-300 */
+            border-radius: 0.375rem;
             margin-bottom: 0.75rem;
-            font-size: 0.875rem; /* 恢復原始大小 */
+            font-size: 0.875rem;
             background-color: #ffffff;
-            color: #374151; /* 輸入文字顏色 */
+            color: #374151;
             transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
         #scoreForm input[type="text"]:focus,
         #scoreForm input[type="tel"]:focus {
             border-color: #2563eb; /* Tailwind blue-600 */
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* 恢復原始 focus 陰影 */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
             outline: none;
         }
         #scoreForm button {
@@ -455,32 +451,32 @@
         #leaderboardList li {
             display: flex;
             justify-content: space-between;
-            padding: 0.5rem 0.25rem; /* 恢復原始 padding */
-            border-bottom: 1px solid #f3f4f6; /* 恢復原始分隔線, Tailwind gray-100 */
-            font-size: 0.9rem; /* 恢復原始大小 */
+            padding: 0.5rem 0.25rem;
+            border-bottom: 1px solid #f3f4f6; /* Tailwind gray-100 */
+            font-size: 0.9rem;
             transition: background-color 0.3s ease;
         }
         #leaderboardList li:last-child {
             border-bottom: none;
         }
         #leaderboardList li:hover {
-            background-color: #e5e7eb; /* 調整懸停背景色, Tailwind gray-200 */
+            background-color: #e5e7eb; /* Tailwind gray-200 */
         }
         #leaderboardList .rank {
             font-weight: bold;
-            color: #4b5563; /* 恢復原始顏色, Tailwind gray-600 */
+            color: #4b5563; /* Tailwind gray-600 */
             min-width: 35px;
             text-align: left;
         }
         #leaderboardList .name {
-            color: #1f2937; /* 恢復原始顏色, Tailwind gray-800 */
+            color: #1f2937; /* Tailwind gray-800 */
             flex-grow: 1;
             padding-left: 0.5rem;
             word-break: break-all;
         }
         #leaderboardList .time {
             font-weight: 500;
-            color: #1e40af; /* 恢復原始顏色 */
+            color: #1e40af;
         }
         .currentUserScoreHighlight {
             background-color: #fef9c3; /* Tailwind yellow-100 */
@@ -498,24 +494,24 @@
             animation: fadeIn 0.8s ease-out 0.6s forwards;
         }
         #gameStatsDisplay div {
-            background-color: #f1f5f9; /* 恢復原始背景, Tailwind slate-100 */
-            backdrop-filter: none; /* 移除毛玻璃效果 */
+            background-color: #f1f5f9; /* Tailwind slate-100 */
+            backdrop-filter: none;
             -webkit-backdrop-filter: none;
-            border: none; /* 移除之前添加的邊框，依賴陰影 */
-            color: #374151; /* 文字顏色恢復 */
+            border: none;
+            color: #374151;
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* Tailwind shadow-sm */
-            border-radius: 0.375rem; /* 保持圓角 */
+            border-radius: 0.375rem;
         }
          #gameStatsDisplay div span:first-child { /* 統計標題 */
-            color: #475569; /* 恢復原始顏色, Tailwind slate-600 */
+            color: #475569; /* Tailwind slate-600 */
          }
          #gameStatsDisplay div span:last-child { /* 統計數值 */
-            color: #1e293b; /* 恢復原始顏色, Tailwind slate-800 */
-            font-weight: 600; /* 恢復原始 font-semibold */
+            color: #1e293b; /* Tailwind slate-800 */
+            font-weight: 600; /* Tailwind font-semibold */
          }
 
 
-        /* 彩蛋 Overlay - 保持深色背景，因為它是獨立的覆蓋層 */
+        /* 彩蛋 Overlay */
         .easter-egg-container-wrapper {
             color: white;
             background: radial-gradient(circle, rgba(29,78,216,0.9) 0%, rgba(17,24,39,0.98) 100%);
@@ -636,56 +632,56 @@
         }
 
 
-        /* 響應式調整 - 大部分保持不變，因為原始的響應式設計在淺色背景下也適用 */
+        /* 響應式調整 */
         @media (max-width: 600px) {
             body { padding: 10px; }
             #pageContainer > h1 {
-                font-size: 1.5rem; /* 恢復原始行動裝置標題大小 */
+                font-size: 1.5rem;
                 line-height: 1.3;
             }
             .game-banner-image, #gameInstructions, #gameAndFormContainer {
-                max-width: 95%; /* 恢復原始行動裝置寬度 */
+                max-width: 95%;
             }
             #gameInstructions {
-                padding: 0.6rem; /* 恢復原始 padding */
+                padding: 0.6rem;
             }
-            #gameInstructions h2 { font-size: 1rem; } /* 恢復原始大小 */
-            #gameInstructions h3 { font-size: 0.9rem; } /* 恢復原始大小 */
+            #gameInstructions h2 { font-size: 1rem; }
+            #gameInstructions h3 { font-size: 0.9rem; }
             .item-grid-container {
-                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); /* 恢復原始配置 */
-                gap: 0.5rem; /* 恢復原始間隙 */
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+                gap: 0.5rem;
             }
             .item-card {
-                padding: 0.5rem; /* 恢復原始 padding */
-                min-height: 100px; /* 恢復原始高度 */
+                padding: 0.5rem;
+                min-height: 100px;
             }
-            .item-card .item-emoji { font-size: 1.8rem; } /* 恢復原始大小 */
-            .item-card .item-name { font-size: 0.75rem; min-height: 2.2em; } /* 恢復原始大小 */
-            .item-card .item-weight, .item-card .item-effect, .item-card .item-mystery-effect { font-size: 0.8rem; } /* 恢復原始大小 */
+            .item-card .item-emoji { font-size: 1.8rem; }
+            .item-card .item-name { font-size: 0.75rem; min-height: 2.2em; }
+            .item-card .item-weight, .item-card .item-effect, .item-card .item-mystery-effect { font-size: 0.8rem; }
 
-            #gameInstructions p, #gameInstructions .instruction-text { font-size: 0.8rem; } /* 恢復原始大小 */
-            #gameInstructions .reward-title { font-size: 0.9rem; } /* 恢復原始大小 */
-            #gameInstructions .prize-list, #gameInstructions .reward-detail { font-size: 0.75rem; } /* 恢復原始大小 */
+            #gameInstructions p, #gameInstructions .instruction-text { font-size: 0.8rem; }
+            #gameInstructions .reward-title { font-size: 0.9rem; }
+            #gameInstructions .prize-list, #gameInstructions .reward-detail { font-size: 0.75rem; }
 
             #statusMessage {
-                font-size: 0.85rem; /* 恢復原始大小 */
-                min-height: 60px; /* 恢復原始高度 */
-                padding: 0.6rem; /* 恢復原始 padding */
+                font-size: 0.85rem;
+                min-height: 60px;
+                padding: 0.6rem;
             }
-            #statusMessage h3 { font-size: 1rem; } /* 恢復原始大小 */
-            #statusMessage h4 { font-size: 0.9rem; } /* 恢復原始大小 */
-            #statusMessage p, #statusMessage ul { font-size: 0.8rem; } /* 恢復原始大小 */
+            #statusMessage h3 { font-size: 1rem; }
+            #statusMessage h4 { font-size: 0.9rem; }
+            #statusMessage p, #statusMessage ul { font-size: 0.8rem; }
 
             #leaderboardContainer, #scoreFormContainer {
-                max-width: 95%; /* 恢復原始寬度 */
-                padding: 1rem; /* 恢復原始 padding */
+                max-width: 95%;
+                padding: 1rem;
             }
             .control-button {
-                padding: 8px 0; /* 恢復原始 padding */
-                font-size: 1.6rem; /* 恢復原始大小 */
+                padding: 8px 0;
+                font-size: 1.6rem;
             }
             #gameAndFormContainer {
-                margin-bottom: 70px; /* 恢復原始間距 */
+                margin-bottom: 70px;
             }
 
             .easter-egg-container { padding: 15px; }
@@ -701,7 +697,8 @@
         <img src="https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/S25%20Edge%20Main%20KV_cmyk_%E6%A9%AB%E5%BC%8F(%E5%A3%93%E7%B8%AE).png"
              alt="Galaxy S25 Edge 遊戲主視覺"
              class="game-banner-image"
-             onerror="this.onerror=null; this.src='https://placehold.co/500x200/60a5fa/ffffff?text=圖片載入失敗';"> <div id="gameInstructions">
+             onerror="this.onerror=null; this.src='https://placehold.co/500x200/60a5fa/ffffff?text=圖片載入失敗';">
+        <div id="gameInstructions">
             <h2>遊戲說明</h2>
             <p class="instruction-text">體驗前所未有的輕盈快感！手持你的 <strong>Galaxy S25 Edge</strong>，化身為「輕巧配重達人」，靈活操控手機左右移動，精準捕捉從天而降的輕量級配件，挑戰完美的 <strong>163 公克</strong>配重！</p>
             <p class="instruction-text mt-3"><strong>配件與重量：</strong></p>
@@ -733,15 +730,18 @@
             <div id="gameContainer">
                 <div class="w-full mb-2 p-1">
                     <div class="flex flex-wrap justify-around items-stretch gap-2">
-                        <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]"> <span class="block text-xs sm:text-sm font-medium text-sky-700">目前重量</span>
+                        <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
+                            <span class="block text-xs sm:text-sm font-medium text-sky-700">目前重量</span>
                             <span class="block text-base sm:text-lg font-bold">
                                 <span id="currentWeight" class="text-red-600">0.0</span> g
                             </span>
                         </div>
-                        <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]"> <span class="block text-xs sm:text-sm font-medium text-sky-700">目標重量</span>
+                        <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
+                            <span class="block text-xs sm:text-sm font-medium text-sky-700">目標重量</span>
                             <span id="targetWeightDisplay" class="block text-base sm:text-lg font-bold text-gray-900">163 g</span>
                         </div>
-                        <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]"> <span class="block text-xs sm:text-sm font-medium text-sky-700">遊戲時間</span>
+                        <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
+                            <span class="block text-xs sm:text-sm font-medium text-sky-700">遊戲時間</span>
                             <span class="block text-base sm:text-lg font-bold text-gray-900">
                                 <span id="timerDisplay">0.00</span> s
                             </span>
@@ -749,7 +749,10 @@
                     </div>
                 </div>
 
-                <canvas id="gameCanvas" aria-label="遊戲進行區域"></canvas> <div id="statusMessage" aria-live="polite"></div> <button id="startButton" class="game-button">開始遊戲</button> </div>
+                <canvas id="gameCanvas" aria-label="遊戲進行區域"></canvas>
+                <div id="statusMessage" aria-live="polite"></div>
+                <button id="startButton" class="game-button">開始遊戲</button>
+            </div>
             <div id="scoreFormContainer" style="display: none;">
                 </div>
         </div>
@@ -775,7 +778,8 @@
             <h3>🏆 光速排行榜 🏆</h3>
             <ol id="leaderboardList">
                 </ol>
-            <p id="leaderboardStatus" class="text-sm text-center mt-2 text-gray-500" aria-live="polite"></p> </div>
+            <p id="leaderboardLastUpdated" class="text-xs text-center mt-1 text-gray-400"></p> <p id="leaderboardStatus" class="text-sm text-center mt-2 text-gray-500" aria-live="polite"></p>
+        </div>
     </div>
 
     <div class="easter-egg-container-wrapper" id="newEasterEggOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 200; align-items: center; justify-content: center;">
@@ -824,6 +828,7 @@
         const leaderboardContainer = document.getElementById('leaderboardContainer');
         const leaderboardList = document.getElementById('leaderboardList');
         const leaderboardStatus = document.getElementById('leaderboardStatus');
+        const leaderboardLastUpdated = document.getElementById('leaderboardLastUpdated');
         const itemDisplayGrid = document.getElementById('itemDisplayGrid');
         const totalWinsDisplay = document.getElementById('totalWins');
         const totalLossesDisplay = document.getElementById('totalLosses');
@@ -831,86 +836,84 @@
 
         const newEasterEggOverlay = document.getElementById('newEasterEggOverlay');
 
-        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX02kYMbTl9v1TZVTm9AJ8ICIZmnaQd_W0kcl8LFYhmM-n-GP_ua-i5SqjHeOsnqJh/exec'; // Google Apps Script URL for leaderboard and stats
+        // *** 更新 Google Apps Script URL ***
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0rGkwSQUckopQyfj4PzqJqeRwHZSD1dlNM3koEDQJCKL0-7XaQehZD1Txr5TA_jiv/exec';
 
-        const TARGET_WEIGHT = 163; // 目標重量
-        let accumulatedWeight = 0; // 目前累積重量
-        let isGameRunning = false; // 遊戲是否進行中
-        let gameStartTime = 0; // 遊戲開始時間
-        let animationFrameId = null; // 動畫幀 ID
-        let leaderboardPollIntervalId = null; // 排行榜輪詢 ID
-        let lastFrameTime = 0; // 上一幀時間
+        const TARGET_WEIGHT = 163;
+        let accumulatedWeight = 0;
+        let isGameRunning = false;
+        let gameStartTime = 0;
+        let animationFrameId = null;
+        let leaderboardPollIntervalId = null;
+        let lastFrameTime = 0;
 
-        let nameToHighlightNext = null; // 下次排行榜更新時要高亮的名字
-        let timeToHighlightNext = null; // 下次排行榜更新時要高亮的時間
+        let nameToHighlightNext = null;
+        let timeToHighlightNext = null;
 
-        const aspectRatio = 9 / 16; // Canvas aspect ratio (width / height)
-        let canvasWidth, canvasHeight; // 畫布寬高
+        const aspectRatio = 9 / 16;
+        let canvasWidth, canvasHeight;
 
-        // 玩家物件
         const player = {
-            width: 0, height: 0, x: 0, y: 0, speed: 0, dx: 0, // 玩家尺寸、位置、速度、水平移動量
-            image: new Image(), // 玩家圖片
-            imageLoaded: false // 圖片是否載入完成
+            width: 0, height: 0, x: 0, y: 0, speed: 0, dx: 0,
+            image: new Image(),
+            imageLoaded: false
         };
-        player.image.src = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png'; // 玩家圖片路徑
-        player.image.onload = () => { // 圖片載入成功
+        player.image.src = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png';
+        player.image.onload = () => {
             player.imageLoaded = true;
             console.log("玩家圖片已成功載入 (GitHub)。");
-            if (!isGameRunning && canvas.width > 0) { // 如果遊戲未開始且畫布已初始化
-                handleResize(); // 重新調整大小以正確顯示玩家
+            if (!isGameRunning && canvas.width > 0) {
+                handleResize();
             }
         };
-        player.image.onerror = () => { // 圖片載入失敗
+        player.image.onerror = () => {
             console.error("玩家圖片載入失敗 (GitHub)，將使用備用圖片。");
             player.imageLoaded = false;
-            player.image.src = 'https://placehold.co/80x160/c7d2fe/1e3a8a?text=S25&font=noto-sans'; // 備用圖片
-            player.image.onload = () => { // 備用圖片載入成功
+            player.image.src = 'https://placehold.co/80x160/c7d2fe/1e3a8a?text=S25&font=noto-sans';
+            player.image.onload = () => {
                 player.imageLoaded = true;
                 console.log("備用玩家圖片已載入。");
                 if (!isGameRunning && canvas.width > 0) {
                     handleResize();
                 }
             };
-            player.image.onerror = () => { // 備用圖片也載入失敗
+            player.image.onerror = () => {
                 console.error("備用玩家圖片也載入失敗。");
                 player.imageLoaded = false;
-                if (!isGameRunning && canvas.width > 0) { // 即使圖片失敗，仍呼叫 resize 設定預設玩家尺寸
+                if (!isGameRunning && canvas.width > 0) {
                     handleResize();
                 }
             };
         };
 
-        let isIdleAnimating = false; // 是否正在播放待機動畫
-        let idleAnimationFrameId = null; // 待機動畫幀 ID
+        let isIdleAnimating = false;
+        let idleAnimationFrameId = null;
 
-        // 觸控相關變數
-        let touchStartTime = 0; // 觸控開始時間
-        let touchStartCanvasX = 0; // 觸控開始時相對於畫布的 X 座標
-        let touchStartCanvasY = 0; // 觸控開始時相對於畫布的 Y 座標
-        let touchStartPlayerX = 0; // 觸控開始時玩家的 X 座標
-        const MAX_TAP_DURATION = 250; // 輕觸的最大持續時間 (ms)
-        const MAX_TAP_MOVEMENT_FOR_START = 15; // 輕觸開始遊戲的最大移動距離 (px)
+        let touchStartTime = 0;
+        let touchStartCanvasX = 0;
+        let touchStartCanvasY = 0;
+        let touchStartPlayerX = 0;
+        const MAX_TAP_DURATION = 250;
+        const MAX_TAP_MOVEMENT_FOR_START = 15;
 
 
-        const BASE_SPEED_MULTIPLIER = (((((2.7 * 0.9) * 1.2) * 1.2) * 1.2) * 1.1) * 1.1; // 基礎速度倍率
-        const TARGET_FPS_FOR_CONVERSION = 60.0; // 用於速度轉換的目標 FPS
+        const BASE_SPEED_MULTIPLIER = (((((2.7 * 0.9) * 1.2) * 1.2) * 1.2) * 1.1) * 1.1;
+        const TARGET_FPS_FOR_CONVERSION = 60.0;
 
-        const S25_IMAGE_URL = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png'; // S25 Edge 圖片 URL (用於彩蛋掉落物)
+        const S25_IMAGE_URL = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png';
 
-        // 掉落物類型定義
         const itemTypes = [
             { name: 'S Pen', emoji: '✏️', weight: 3, type: 'item', base_ch_per_sec: 0.0025 * TARGET_FPS_FOR_CONVERSION, spawnChance: 23 },
             { name: 'Galaxy Buds3 (單耳)', emoji: '🎧', weight: 5, type: 'item', base_ch_per_sec: 0.0030 * TARGET_FPS_FOR_CONVERSION, spawnChance: 23 },
             { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 16 },
             { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: (0.0058 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
-            { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 }, // 重量加倍
+            { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 },
             { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
             {
                 name: '神秘配件',
                 emoji: '❓',
-                weight: '???', // 重量未知
-                type: 'mystery', // 神秘道具
+                weight: '???',
+                type: 'mystery',
                 base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION,
                 spawnChance: 8
             },
@@ -918,25 +921,24 @@
                 name: '時光沙漏',
                 emoji: '⏳',
                 weight: 0,
-                type: 'time_bonus', // 時間獎勵
-                timeEffect: -2, // 減少時間 (秒)
+                type: 'time_bonus',
+                timeEffect: -2,
                 base_ch_per_sec: 0.0020 * TARGET_FPS_FOR_CONVERSION,
-                spawnChance: 0 // 暫時移除，或調整機率
+                spawnChance: 0
             },
             {
                 name: 'Galaxy S25 Edge 彩蛋',
-                emoji: '✨', // 備用 emoji
-                imageSrc: S25_IMAGE_URL, // 彩蛋圖片路徑
-                imageObj: new Image(), // 彩蛋圖片物件
-                imageLoaded: false, // 彩蛋圖片是否載入
-                type: 'easter_egg', // 彩蛋類型
+                emoji: '✨',
+                imageSrc: S25_IMAGE_URL,
+                imageObj: new Image(),
+                imageLoaded: false,
+                type: 'easter_egg',
                 base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION,
-                spawnChance: 0.1 // 極低機率
+                spawnChance: 0.1
             }
         ];
-        itemTypes.forEach(item => item.speedPixelsPerSecond = 0); // 初始化掉落速度 (將在 resize 中計算)
+        itemTypes.forEach(item => item.speedPixelsPerSecond = 0);
 
-        // 預載彩蛋掉落物圖片
         const easterEggItemDefinition = itemTypes.find(item => item.type === 'easter_egg');
         if (easterEggItemDefinition && easterEggItemDefinition.imageObj) {
             easterEggItemDefinition.imageObj.src = easterEggItemDefinition.imageSrc;
@@ -950,8 +952,6 @@
             };
         }
 
-
-        // 神秘道具可能變成的物品列表
         const mysteryTransformableItemsMap = {
             'S Pen': itemTypes.find(it => it.name === 'S Pen'),
             'Galaxy Buds3 (單耳)': itemTypes.find(it => it.name === 'Galaxy Buds3 (單耳)'),
@@ -963,22 +963,21 @@
         const mysteryTransformableItemKeys = Object.keys(mysteryTransformableItemsMap).filter(key => mysteryTransformableItemsMap[key]);
 
 
-        let fallingObjects = []; // 儲存掉落物的陣列
-        let spawnTimer = 0; // 掉落物生成計時器
-        const SPAWN_INTERVAL = 55; // ** 掉落物生成間隔 (幀) - 已調整為 55 **
+        let fallingObjects = [];
+        let spawnTimer = 0;
+        const SPAWN_INTERVAL = 55;
 
-        // 音效變數
-        let catchSound, bombSound, winSound, loseSound, boosterSound, mysteryRevealSound, easterEggSound, timeBonusSound;
-        let toneJsInitialized = false; // Tone.js 是否已初始化
+        let catchSound, hazardHitSound, winSound, loseSound, boosterSound, mysteryRevealSound, easterEggSound, timeBonusSound; // Renamed sparkSound to hazardHitSound
+        let toneJsInitialized = false;
 
-        // 初始化音效
+        let activeEffects = [];
+
         function initializeSounds() {
             if (typeof Tone === 'undefined') {
                 console.error("Tone.js 音效庫未載入。");
                 toneJsInitialized = false;
                 return;
             }
-            // 啟動 Tone.js 的 AudioContext (通常需要使用者互動)
             if (Tone.context.state !== 'running') {
                 Tone.start().then(() => {
                     console.log("Tone.js context 已由 initializeSounds 啟動。");
@@ -986,9 +985,32 @@
                     console.warn("Tone.start() 在 initializeSounds 中啟動失敗，可能需要使用者互動。", e);
                 });
             }
-            // 定義各種音效
             catchSound = new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.1 } }).toDestination();
-            bombSound = new Tone.Synth({ oscillator: { type: 'square' }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.2 }, volume: -6 }).toDestination();
+
+            // *** 更新：危險物品（炸彈）音效 ***
+            hazardHitSound = new Tone.MembraneSynth({ // 使用 MembraneSynth 模擬撞擊或短促爆裂聲
+                pitchDecay: 0.03, // 音高衰減速度
+                octaves: 3,       // 音高範圍
+                oscillator: {
+                    type: "sine"  // 可以嘗試 "triangle" 或 "sawtooth"
+                },
+                envelope: {
+                    attack: 0.001, // 極短的起音
+                    decay: 0.1,   // 快速衰減
+                    sustain: 0.01,
+                    release: 0.2  // 較短的釋放
+                },
+                volume: -8 // 調整音量
+            }).toDestination();
+            // 可以再加上一個短促的 NoiseSynth 來增加"嘶嘶"聲
+            const hazardNoise = new Tone.NoiseSynth({
+                noise: { type: "white", playbackRate: 2 },
+                envelope: { attack: 0.001, decay: 0.03, sustain: 0, release: 0.05 },
+                volume: -15
+            }).toDestination();
+            // 若要混合，可以在播放時同時觸發 hazardHitSound 和 hazardNoise
+
+
             winSound = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.01, decay: 0.3, sustain: 0.2, release: 0.5 } }).toDestination();
             loseSound = new Tone.FMSynth({ harmonicity: 3, modulationIndex: 10, detune: 0, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 }, modulation: { type: "square" }, modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 } }).toDestination();
             boosterSound = new Tone.Synth({ oscillator: { type: 'sawtooth' }, envelope: { attack: 0.01, decay: 0.15, sustain: 0.08, release: 0.2 }, volume: -3 }).toDestination();
@@ -1000,41 +1022,35 @@
             console.log("Tone.js 音效已初始化。");
         }
 
-        // 顯示遊戲說明中的配件列表
         function displayGameInstructions() {
             if (itemDisplayGrid) {
-                itemDisplayGrid.innerHTML = ''; // 清空現有內容
+                itemDisplayGrid.innerHTML = '';
                 itemTypes.forEach(item => {
-                    // 只顯示一般物品、增重火箭和神秘配件
                     if (item.type === 'item' || item.type === 'weight_booster' || item.type === 'mystery') {
                         const itemCard = document.createElement('div');
                         itemCard.className = 'item-card';
-
                         const itemEmoji = document.createElement('span');
                         itemEmoji.className = 'item-emoji';
                         itemEmoji.textContent = item.emoji;
-
                         const itemName = document.createElement('span');
                         itemName.className = 'item-name';
                         itemName.textContent = item.name;
-
                         itemCard.appendChild(itemEmoji);
                         itemCard.appendChild(itemName);
-
                         if (item.type === 'mystery') {
                             const itemMysteryEffect = document.createElement('span');
                             itemMysteryEffect.className = 'item-mystery-effect';
-                            itemMysteryEffect.innerHTML = `<strong>???</strong>`; // 神秘效果
+                            itemMysteryEffect.innerHTML = `<strong>???</strong>`;
                             itemCard.appendChild(itemMysteryEffect);
                         } else if (item.type === 'weight_booster') {
                             const itemEffect = document.createElement('span');
                             itemEffect.className = 'item-effect';
-                            itemEffect.textContent = '當前重量x2'; // 增重效果說明
+                            itemEffect.textContent = '當前重量x2';
                             itemCard.appendChild(itemEffect);
                         } else {
                             const itemWeight = document.createElement('span');
                             itemWeight.className = 'item-weight';
-                            itemWeight.innerHTML = `<strong>${item.weight}</strong> 公克`; // 重量說明
+                            itemWeight.innerHTML = `<strong>${item.weight}</strong> 公克`;
                             itemCard.appendChild(itemWeight);
                         }
                         itemDisplayGrid.appendChild(itemCard);
@@ -1043,52 +1059,40 @@
             }
         }
 
-        // 繪製玩家
-        function drawPlayer(bounceOffsetY = 0) { // bounceOffsetY 用於待機動畫的上下浮動
+        function drawPlayer(bounceOffsetY = 0) {
             if (!ctx) return;
-            const currentY = player.y + bounceOffsetY; // 計算實際 Y 座標
-
-            // 檢查玩家尺寸和位置是否有效
+            const currentY = player.y + bounceOffsetY;
             if (player.width <= 0 || player.height <= 0 || isNaN(player.x) || isNaN(currentY) || isNaN(player.width) || isNaN(player.height)) {
-                // console.warn("drawPlayer: 無效的玩家尺寸或位置。", player);
                 return;
             }
-
             if (player.imageLoaded && player.image.complete && player.image.naturalHeight !== 0 && player.image.naturalWidth !== 0) {
-                // 如果主要圖片已載入且有效
                 ctx.drawImage(player.image, player.x, currentY, player.width, player.height);
             }
-            else if (player.image.src.includes('placehold.co')) { // 如果是備用圖片
-                if (player.image.complete && player.image.naturalHeight !== 0 && player.image.naturalWidth !== 0) { // 檢查備用圖片是否已載入
+            else if (player.image.src.includes('placehold.co')) {
+                if (player.image.complete && player.image.naturalHeight !== 0 && player.image.naturalWidth !== 0) {
                     ctx.drawImage(player.image, player.x, currentY, player.width, player.height);
-                } else { // 備用圖片尚未載入或載入失敗
-                    ctx.fillStyle = '#a5b4fc'; // 若備用圖片也失敗，使用預設顏色
+                } else {
+                    ctx.fillStyle = '#a5b4fc';
                     ctx.fillRect(player.x, currentY, player.width, player.height);
                 }
             }
-            else { // 主要圖片未載入，且尚未切換至備用圖片，或備用圖片也失敗
-                ctx.fillStyle = '#e0e7ff'; // 無可用圖片時的預設顏色
+            else {
+                ctx.fillStyle = '#e0e7ff';
                 ctx.fillRect(player.x, currentY, player.width, player.height);
             }
         }
 
-
-        // 繪製掉落物
         function drawFallingObjects() {
             if (!ctx) return;
             fallingObjects.forEach(obj => {
-                const objFontSize = canvas.width * 0.095; // Emoji 字體大小
-                const weightFontSize = canvas.width * 0.04; // 重量文字字體大小
-
+                const objFontSize = canvas.width * 0.095;
+                const weightFontSize = canvas.width * 0.04;
                 if (obj.type === 'easter_egg' && obj.imageLoaded && obj.imageObj && obj.imageObj.complete && obj.imageObj.naturalHeight !== 0 && obj.imageObj.naturalWidth !== 0) {
-                    // 如果是彩蛋且圖片已載入
                     const aspectRatioItem = obj.imageObj.naturalWidth / obj.imageObj.naturalHeight;
-                    let imgWidth = obj.width * 1.2; // 稍微放大一點
+                    let imgWidth = obj.width * 1.2;
                     let imgHeight = imgWidth / aspectRatioItem;
-                    const maxDimFactor = 1.5; // 最大尺寸因子
-                    const minDim = 5; // 最小尺寸
-
-                    // 限制圖片尺寸，避免過大
+                    const maxDimFactor = 1.5;
+                    const minDim = 5;
                     if (imgHeight > obj.height * maxDimFactor) {
                         imgHeight = obj.height * maxDimFactor;
                         imgWidth = imgHeight * aspectRatioItem;
@@ -1097,7 +1101,6 @@
                         imgWidth = obj.width * maxDimFactor;
                         imgHeight = imgWidth / aspectRatioItem;
                     }
-
                     if (imgWidth > minDim && imgHeight > minDim && isFinite(imgWidth) && isFinite(imgHeight)) {
                         ctx.drawImage(obj.imageObj, obj.x + (obj.width - imgWidth) / 2, obj.y + (obj.height - imgHeight) / 2, imgWidth, imgHeight);
                     } else {
@@ -1107,21 +1110,19 @@
                         ctx.textBaseline = 'bottom';
                         ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height);
                     }
-                } else if (obj.type === 'easter_egg') { // 彩蛋圖片未載入，繪製 emoji
+                } else if (obj.type === 'easter_egg') {
                     ctx.font = `${objFontSize}px Arial`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
                     ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height);
-                } else { // 其他類型掉落物，繪製 emoji
+                } else {
                     ctx.font = `${objFontSize}px Arial`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
                     ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
-
-                    // 如果是一般物品且有重量，顯示重量
                     if (obj.type === 'item' && typeof obj.weight === 'number' && obj.weight > 0) {
                         ctx.font = `bold ${weightFontSize}px Arial`;
-                        ctx.fillStyle = '#FF0000'; // 紅色顯示重量
+                        ctx.fillStyle = '#FF0000';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'top';
                         ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1));
@@ -1130,61 +1131,53 @@
             });
         }
 
-        // 更新玩家位置
         function updatePlayerPosition() {
-            player.x += player.dx; // 根據水平移動量更新 X 座標
-            // 邊界檢測
+            player.x += player.dx;
             if (player.x < 0) player.x = 0;
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
         }
 
-        // 更新掉落物位置及碰撞檢測 (已修改錯誤處理邏輯)
         function updateFallingObjects(deltaTime) {
-            let gameEndedThisFrame = false; // 標記此幀內遊戲是否已結束
-
+            let gameEndedThisFrame = false;
             for (let i = fallingObjects.length - 1; i >= 0; i--) {
-                if (gameEndedThisFrame && isGameRunning === false) { // 如果遊戲已在本幀結束，則不再處理後續物件
+                if (gameEndedThisFrame && !isGameRunning) {
                     break;
                 }
-
                 const obj = fallingObjects[i];
-                if (!obj) continue; // 防禦性檢查，理論上不應發生
-
+                if (!obj) continue;
                 obj.y += obj.speedPixelsPerSecond * deltaTime;
-                obj.markedForRemoval = obj.markedForRemoval || false; // 初始化標記
-
-                // 碰撞檢測
-                if (!obj.markedForRemoval && // 只處理未被標記刪除的物件
+                obj.markedForRemoval = obj.markedForRemoval || false;
+                if (!obj.markedForRemoval &&
                     obj.x < player.x + player.width &&
                     obj.x + obj.width > player.x &&
                     obj.y < player.y + player.height &&
                     obj.y + obj.height > player.y) {
-
-                    obj.markedForRemoval = true; // 接觸後標記待刪除
-
+                    obj.markedForRemoval = true;
                     if (obj.type === 'bomb') {
-                        if (toneJsInitialized && bombSound && Tone.context.state === 'running') bombSound.triggerAttackRelease("C2", "8n", Tone.now());
-                        gameOver("哎呀！接到炸彈了！"); // gameOver 會設定 isGameRunning = false
-                        gameEndedThisFrame = true; // 標記遊戲已在本幀結束
-                        // 不再需要 continue 或 break，讓迴圈結束後統一處理 markedForRemoval
+                        // *** 播放新的危險物品音效 ***
+                        if (toneJsInitialized && hazardHitSound && Tone.context.state === 'running') {
+                             hazardHitSound.triggerAttackRelease("C2", "8n", Tone.now()); // 播放低沉的撞擊聲
+                             // 可以選擇性地同時播放雜訊
+                             // const hazardNoise = Tone.context.createBufferSource() ... (較複雜，暫不加入)
+                        }
+                        triggerVisualEffect('bomb', player.x + player.width / 2, player.y + player.height / 2);
+                        gameOver("哎呀！接到炸彈了！");
+                        gameEndedThisFrame = true;
                     } else if (obj.type === 'easter_egg') {
                         if (toneJsInitialized && easterEggSound && Tone.context.state === 'running') easterEggSound.triggerAttack("A4", Tone.now());
-                        stopGame(); // 明確停止遊戲邏輯
-                        showNewEasterEgg(); // 顯示彩蛋畫面
-                        gameEndedThisFrame = true; // 標記遊戲已在本幀結束
-                    } else { // 一般物品、神秘道具、增重火箭
+                        stopGame();
+                        showNewEasterEgg();
+                        gameEndedThisFrame = true;
+                    } else {
                         let customGameOverMessageOnOverweight = null;
-                        // let revealedItemName = obj.name; // 已在 obj 中
-
                         if (obj.type === 'mystery') {
                             if (toneJsInitialized && mysteryRevealSound && Tone.context.state === 'running') mysteryRevealSound.triggerAttackRelease("8n", Tone.now());
+                            triggerVisualEffect('mystery', player.x + player.width / 2, player.y + player.height / 2);
                             if (mysteryTransformableItemKeys.length > 0) {
                                 const randomKeyIndex = Math.floor(Math.random() * mysteryTransformableItemKeys.length);
                                 const revealedItemKey = mysteryTransformableItemKeys[randomKeyIndex];
                                 const actualItem = { ...mysteryTransformableItemsMap[revealedItemKey] };
-                                // revealedItemName = actualItem.name; // obj.name 已經是 "?"
                                 let revealedMsg = `<p class='text-center font-bold text-blue-600'>神秘配件變成了... <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
-
                                 if (actualItem.type === 'item') {
                                     revealedMsg += ` (+${actualItem.weight}g)`;
                                     accumulatedWeight += actualItem.weight;
@@ -1194,6 +1187,7 @@
                                     revealedMsg += ` (重量x2!)`;
                                     accumulatedWeight *= 2;
                                     if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
+                                    triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
                                     customGameOverMessageOnOverweight = `哎呀！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT}g 了！`;
                                 } else if (actualItem.type === 'time_bonus') {
                                     revealedMsg += ` (時間 ${actualItem.timeEffect}秒!)`;
@@ -1207,6 +1201,7 @@
                             }
                         } else if (obj.type === 'weight_booster') {
                             if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
+                            triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
                             accumulatedWeight *= 2;
                             statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 AI 加速！重量翻倍！</p>";
                             setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; }, 1500);
@@ -1216,14 +1211,11 @@
                             accumulatedWeight += obj.weight;
                             customGameOverMessageOnOverweight = `哎呀！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT}g 了！`;
                         }
-
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
                         currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
-
-                        // 只有在遊戲尚未於本幀結束，且仍在運行時，才檢查勝利/失敗條件
                         if (!gameEndedThisFrame && isGameRunning) {
                             if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) {
-                                gameWin(); // gameWin 會設定 isGameRunning = false
+                                gameWin();
                                 gameEndedThisFrame = true;
                             } else if (accumulatedWeight > TARGET_WEIGHT) {
                                 gameOver(customGameOverMessageOnOverweight || `哎呀！超過目標 ${TARGET_WEIGHT}g 了！`);
@@ -1231,26 +1223,19 @@
                             }
                         }
                     }
-                } else if (obj.y > canvas.height + obj.height + 20) { // 物件掉出畫面底部
-                    obj.markedForRemoval = true; // 標記待刪除
+                } else if (obj.y > canvas.height + obj.height + 20) {
+                    obj.markedForRemoval = true;
                 }
             }
-
-            // 在迴圈結束後，統一移除被標記的物件
             fallingObjects = fallingObjects.filter(obj => !obj.markedForRemoval);
         }
 
-
-        // 生成掉落物
         function spawnObject() {
-            const spawnableItems = itemTypes.filter(item => item.spawnChance > 0); // 過濾出可生成的物品
-            if (spawnableItems.length === 0) return; // 如果沒有可生成的物品，則返回
-
-            // 根據權重隨機選擇一個物品類型
+            const spawnableItems = itemTypes.filter(item => item.spawnChance > 0);
+            if (spawnableItems.length === 0) return;
             const totalChance = spawnableItems.reduce((sum, item) => sum + item.spawnChance, 0);
             let randomRoll = Math.random() * totalChance;
             let selectedType = null;
-
             for (const item of spawnableItems) {
                 if (randomRoll < item.spawnChance) {
                     selectedType = item;
@@ -1258,87 +1243,256 @@
                 }
                 randomRoll -= item.spawnChance;
             }
-
-            if (!selectedType) { // 如果沒有選中 (理論上不應發生，除非 spawnChance 總和為0或極小)
-                selectedType = spawnableItems.find(it => it.type === 'item') || spawnableItems[0]; // 備援選擇
+            if (!selectedType) {
+                selectedType = spawnableItems.find(it => it.type === 'item') || spawnableItems[0];
             }
-
             const typeTemplate = selectedType;
-            const objWidth = canvas.width * 0.1; // 物件寬度
-            const objHeight = canvas.width * 0.1; // 物件高度 (保持正方形)
-            if (typeTemplate.type === 'easter_egg') { // 如果是彩蛋
-                fallingObjects.push({
-                    ...typeTemplate, // 複製模板屬性
-                    x: Math.random() * (canvas.width - objWidth), // 隨機 X 座標
-                    y: 0 - objHeight, // 從畫布頂部上方開始
-                    width: objWidth,
-                    height: objHeight,
-                    imageObj: typeTemplate.imageObj, // 傳遞圖片物件
-                    imageLoaded: typeTemplate.imageLoaded, // 傳遞圖片載入狀態
-                    markedForRemoval: false // 初始化標記
-                });
-            } else { // 其他類型物品
+            const objWidth = canvas.width * 0.1;
+            const objHeight = canvas.width * 0.1;
+            if (typeTemplate.type === 'easter_egg') {
                 fallingObjects.push({
                     ...typeTemplate,
                     x: Math.random() * (canvas.width - objWidth),
                     y: 0 - objHeight,
                     width: objWidth,
                     height: objHeight,
-                    markedForRemoval: false // 初始化標記
+                    imageObj: typeTemplate.imageObj,
+                    imageLoaded: typeTemplate.imageLoaded,
+                    markedForRemoval: false
+                });
+            } else {
+                fallingObjects.push({
+                    ...typeTemplate,
+                    x: Math.random() * (canvas.width - objWidth),
+                    y: 0 - objHeight,
+                    width: objWidth,
+                    height: objHeight,
+                    markedForRemoval: false
                 });
             }
         }
 
-        // 清除畫布
         function clearCanvas() {
             if (!ctx) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
-        // 更新計時器顯示
         function updateTimerDisplay() {
             if (isGameRunning && gameStartTime > 0) {
                 const elapsedTime = (performance.now() - gameStartTime) / 1000;
-                timerDisplay.textContent = Math.max(0, elapsedTime).toFixed(2); // 確保時間不為負
-            } else if (!isGameRunning) { // 遊戲未開始或結束時，重置為 0.00
+                timerDisplay.textContent = Math.max(0, elapsedTime).toFixed(2);
+            } else if (!isGameRunning) {
                 timerDisplay.textContent = "0.00";
             }
         }
 
-        // 遊戲主迴圈
-        function gameLoop(currentTime) { // currentTime 由 requestAnimationFrame 提供
-            if (!isGameRunning && animationFrameId) { // 如果遊戲已停止但迴圈仍在請求，則取消
+        function triggerVisualEffect(type, x, y) {
+            const effect = {
+                type: type,
+                x: x,
+                y: y,
+                startTime: performance.now(),
+                particles: []
+            };
+            let particleCount, duration, colors;
+
+            switch (type) {
+                case 'bomb': // *** 更新為新的"危險物品"特效 (閃光 + 短促粒子) ***
+                    particleCount = 15 + Math.floor(Math.random() * 8); // 減少粒子數量
+                    duration = 600; // 特效總持續時間 (0.6秒)
+                    colors = ['#FF6347', '#FF4500', '#FF0000', '#DC143C']; // 番茄紅, 橙紅, 紅, 深紅 (更強烈的顏色)
+
+                    // 1. 中央閃光效果
+                    effect.flash = {
+                        radius: player.width * 0.6, // 閃光半徑基於玩家寬度
+                        maxAlpha: 0.8,
+                        duration: 200 // 閃光持續時間 (0.2秒)
+                    };
+
+                    // 2. 短促粒子效果
+                    for (let i = 0; i < particleCount; i++) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const speed = Math.random() * 2.5 + 1.5; // 粒子射出速度
+                        effect.particles.push({
+                            x: 0, y: 0,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            radius: Math.random() * 3 + 1.5, // 粒子大小
+                            color: colors[Math.floor(Math.random() * colors.length)],
+                            alpha: 1,
+                            life: 300 + Math.random() * 200 // 粒子存活時間 (0.3-0.5秒)
+                        });
+                    }
+                    break;
+                case 'booster':
+                    particleCount = 20 + Math.floor(Math.random() * 8);
+                    duration = 500;
+                    colors = ['#FFFFE0', '#FFFACD', '#FFD700'];
+                    for (let i = 0; i < particleCount; i++) {
+                        const angle = -Math.PI / 2 + (Math.random() - 0.5) * (Math.PI / 3);
+                        const speed = Math.random() * 2.5 + 1.5;
+                        effect.particles.push({
+                            x: (Math.random() - 0.5) * 10, y: 0,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            radius: Math.random() * 3 + 1.5,
+                            color: colors[Math.floor(Math.random() * colors.length)],
+                            alpha: 1
+                        });
+                    }
+                    break;
+                case 'mystery':
+                    particleCount = 25 + Math.floor(Math.random() * 10);
+                    duration = 700;
+                    colors = ['#DA70D6', '#BA55D3', '#9370DB', '#8A2BE2'];
+                    for (let i = 0; i < particleCount; i++) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const speed = Math.random() * 1.5 + 0.5;
+                        const orbitRadius = Math.random() * 20 + 10;
+                        effect.particles.push({
+                            angle: angle,
+                            orbitSpeed: (Math.random() - 0.5) * 0.1 + 0.05,
+                            orbitRadius: orbitRadius,
+                            initialOrbitRadius: orbitRadius,
+                            x: Math.cos(angle) * orbitRadius,
+                            y: Math.sin(angle) * orbitRadius,
+                            radius: Math.random() * 2.5 + 1,
+                            color: colors[Math.floor(Math.random() * colors.length)],
+                            alpha: 1
+                        });
+                    }
+                    break;
+            }
+            effect.duration = duration;
+            activeEffects.push(effect);
+        }
+
+        function drawVisualEffects(deltaTime) {
+            if (!ctx) return;
+            const now = performance.now();
+            for (let i = activeEffects.length - 1; i >= 0; i--) {
+                const effect = activeEffects[i];
+                const elapsedTime = now - effect.startTime;
+                let effectProgress = elapsedTime / effect.duration;
+                if (effect.type === 'bomb' && effect.flash) { // 如果是炸彈特效且有閃光定義
+                     effectProgress = elapsedTime / effect.flash.duration; // 閃光進度基於閃光持續時間
+                }
+
+
+                if (elapsedTime >= effect.duration) { // 特效總時間結束
+                    activeEffects.splice(i, 1);
+                    continue;
+                }
+
+                ctx.save();
+                ctx.translate(effect.x, effect.y);
+
+                // *** 繪製新的"危險物品"特效 (閃光 + 粒子) ***
+                if (effect.type === 'bomb') {
+                    // 1. 繪製閃光
+                    if (effect.flash && elapsedTime < effect.flash.duration) {
+                        const flashProgress = elapsedTime / effect.flash.duration;
+                        const currentAlpha = effect.flash.maxAlpha * (1 - flashProgress); // 閃光淡出
+                        const currentRadius = effect.flash.radius * (0.5 + flashProgress * 0.5); // 閃光稍微擴大
+
+                        ctx.beginPath();
+                        ctx.arc(0, 0, currentRadius, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 100, 100, ${currentAlpha})`; // 淡紅色閃光
+                        ctx.fill();
+                    }
+
+                    // 2. 繪製粒子 (在閃光之後或同時)
+                    effect.particles.forEach(p => {
+                        const particleElapsedTime = now - (effect.startTime + (effect.flash ? effect.flash.duration * 0.2 : 0)); // 粒子在閃光開始後一點點才出現
+                        if (particleElapsedTime < 0 || particleElapsedTime > p.life) return; // 如果粒子尚未開始或已結束
+
+                        const particleProgress = particleElapsedTime / p.life;
+                        const particleAlpha = p.alpha * (1 - particleProgress);
+                        if (particleAlpha <= 0) return;
+
+                        ctx.beginPath();
+                        ctx.globalAlpha = particleAlpha;
+                        ctx.fillStyle = p.color;
+
+                        const dtFrames = deltaTime * TARGET_FPS_FOR_CONVERSION;
+                        p.x += p.vx * dtFrames * (1 - particleProgress * 0.5); // 粒子減速
+                        p.y += p.vy * dtFrames * (1 - particleProgress * 0.5);
+                        p.vy += 0.08 * dtFrames; // 粒子受重力影響更明顯
+
+                        ctx.arc(p.x, p.y, p.radius * (1 - particleProgress * 0.7), 0, Math.PI * 2); // 粒子縮小
+                        ctx.fill();
+                    });
+
+
+                } else if (effect.type === 'mystery') { // 神秘道具特效
+                    effect.particles.forEach(p => {
+                        const particleAlpha = p.alpha * (1 - effectProgress);
+                        if (particleAlpha <= 0) return;
+                        ctx.beginPath();
+                        ctx.globalAlpha = particleAlpha;
+                        ctx.fillStyle = p.color;
+                        const dtFrames = deltaTime * TARGET_FPS_FOR_CONVERSION;
+                        p.angle += p.orbitSpeed * dtFrames * 0.2;
+                        p.orbitRadius = p.initialOrbitRadius * (1 + effectProgress * 0.5);
+                        p.x = Math.cos(p.angle) * p.orbitRadius;
+                        p.y = Math.sin(p.angle) * p.orbitRadius;
+                        ctx.arc(p.x, p.y, p.radius * (1 - effectProgress * 0.5), 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                } else { // 其他特效 (例如 'booster')
+                     effect.particles.forEach(p => {
+                        const particleAlpha = p.alpha * (1 - effectProgress);
+                        if (particleAlpha <= 0) return;
+
+                        ctx.beginPath();
+                        ctx.globalAlpha = particleAlpha;
+                        ctx.fillStyle = p.color;
+
+                        const dtFrames = deltaTime * TARGET_FPS_FOR_CONVERSION;
+                        p.x += p.vx * dtFrames;
+                        p.y += p.vy * dtFrames;
+                        if (effect.type === 'booster') {
+                            p.vy += 0.03 * dtFrames;
+                        }
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                }
+                ctx.restore();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+
+        function gameLoop(currentTime) {
+            if (!isGameRunning && animationFrameId) {
                  cancelAnimationFrame(animationFrameId);
                  animationFrameId = null;
                  return;
             }
             if (!isGameRunning) return;
-
-
-            if (gameStartTime === 0) { // 如果遊戲剛開始，記錄開始時間
+            if (gameStartTime === 0) {
                 gameStartTime = currentTime;
             }
-            const deltaTime = (currentTime - lastFrameTime) / 1000.0; // 計算距離上一幀的時間 (秒)
-            lastFrameTime = currentTime; // 更新上一幀時間
-
-            const clampedDeltaTime = Math.min(deltaTime, 1/15); // 限制 deltaTime 最大值，避免卡頓時物件跳躍過大 (相當於最低 15 FPS)
-
-            updateTimerDisplay(); // 更新計時器
-
+            const deltaTime = (currentTime - lastFrameTime) / 1000.0;
+            lastFrameTime = currentTime;
+            const clampedDeltaTime = Math.min(deltaTime, 1/15);
+            updateTimerDisplay();
             try {
-                clearCanvas(); // 清除畫布
-                spawnTimer++; // 增加掉落物生成計時器
-                if (spawnTimer > SPAWN_INTERVAL) { // 如果達到生成間隔
-                    spawnObject(); // 生成新物件
-                    spawnTimer = 0; // 重置計時器
+                clearCanvas();
+                spawnTimer++;
+                if (spawnTimer > SPAWN_INTERVAL) {
+                    spawnObject();
+                    spawnTimer = 0;
                 }
-                updatePlayerPosition(); // 更新玩家位置
-                if (isGameRunning) { // 只有在遊戲進行中才更新掉落物
+                updatePlayerPosition();
+                if (isGameRunning) {
                     updateFallingObjects(clampedDeltaTime);
                 }
-                drawPlayer(); // 繪製玩家
-                drawFallingObjects(); // 繪製掉落物
-            } catch (error) { // 捕獲遊戲迴圈中的錯誤
+                drawPlayer();
+                drawFallingObjects();
+                drawVisualEffects(clampedDeltaTime);
+            } catch (error) {
                 console.error("gameLoop 中發生錯誤: 名稱:", error.name, "訊息:", error.message, "堆疊:", error.stack);
                 console.error("完整錯誤物件:", error);
                 console.error("錯誤時的遊戲狀態: isGameRunning=", isGameRunning,
@@ -1347,65 +1501,50 @@
                                 "player.x=", player.x, "player.y=", player.y,
                                 "canvas.width=", canvas.width, "canvas.height=", canvas.height);
                 gameOver("遊戲運作時發生了未預期的錯誤，建議您重新整理頁面後再試一次。");
-                return; // 發生錯誤後停止遊戲迴圈
+                return;
             }
-
-            if (isGameRunning) { // 只有在遊戲運行中才繼續請求下一幀
+            if (isGameRunning) {
                 animationFrameId = requestAnimationFrame(gameLoop);
             }
         }
 
-        // 待機動畫迴圈
         function idleAnimationLoop() {
-            if (!isIdleAnimating) return; // 如果未處於待機動畫狀態，則返回
-
-            // 確保畫布和玩家圖片已初始化
+            if (!isIdleAnimating) return;
             if (!canvas.width || !player.width || !player.imageLoaded) {
-                idleAnimationFrameId = requestAnimationFrame(idleAnimationLoop); // 繼續請求下一幀，直到初始化完成
+                idleAnimationFrameId = requestAnimationFrame(idleAnimationLoop);
                 return;
             }
-
-            // 計算玩家上下浮動效果
-            const bounceFrequency = 1.5; // 浮動頻率
-            const bounceAmplitude = Math.max(1, canvas.height * 0.0035); // 浮動幅度
-            const elapsedTime = performance.now() / 1000; // 經過時間 (秒)
-            const bounceOffset = Math.sin(elapsedTime * bounceFrequency * 2 * Math.PI) * bounceAmplitude; // 計算 Y 軸偏移量
-
-            clearCanvas(); // 清除畫布
-            drawPlayer(bounceOffset); // 繪製帶有浮動效果的玩家
-
-            idleAnimationFrameId = requestAnimationFrame(idleAnimationLoop); // 請求下一幀待機動畫
+            const bounceFrequency = 1.5;
+            const bounceAmplitude = Math.max(1, canvas.height * 0.0035);
+            const elapsedTime = performance.now() / 1000;
+            const bounceOffset = Math.sin(elapsedTime * bounceFrequency * 2 * Math.PI) * bounceAmplitude;
+            clearCanvas();
+            drawPlayer(bounceOffset);
+            idleAnimationFrameId = requestAnimationFrame(idleAnimationLoop);
         }
 
-        // 開始待機動畫
         function startIdleAnimation() {
-            if (isIdleAnimating) return; // 如果已在播放，則返回
+            if (isIdleAnimating) return;
             isIdleAnimating = true;
-            if(idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId); // 取消之前的待機動畫幀
-            idleAnimationLoop(); // 開始新的待機動畫迴圈
+            if(idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId);
+            idleAnimationLoop();
         }
 
-        // 停止待機動畫
         function stopIdleAnimation() {
             isIdleAnimating = false;
             if (idleAnimationFrameId) {
                 cancelAnimationFrame(idleAnimationFrameId);
                 idleAnimationFrameId = null;
             }
-            // 停止後，如果畫布和玩家已初始化，重繪一次玩家在靜止位置
             if (canvas.width > 0 && player.width > 0 && player.imageLoaded) {
                 clearCanvas();
                 drawPlayer();
             }
         }
 
-
-        // 開始遊戲
         function startGame() {
-            if (isGameRunning) return; // 如果遊戲已在運行，則返回
-            stopIdleAnimation(); // 停止待機動畫
-
-            // 初始化或重新啟動音效上下文
+            if (isGameRunning) return;
+            stopIdleAnimation();
             if (!toneJsInitialized) {
                 initializeSounds();
             } else if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
@@ -1415,98 +1554,82 @@
                     console.warn("Tone.start() 在 startGame 中啟動失敗，可能需要使用者互動。", e);
                 });
             }
-
-            isGameRunning = true; // 設定遊戲運行狀態
-            accumulatedWeight = 0; // 重置累積重量
-            currentWeightDisplay.textContent = accumulatedWeight.toFixed(1); // 更新顯示的重量
-            fallingObjects = []; // 清空掉落物陣列
-            // 設定玩家初始位置 (確保圖片已載入或有備用圖)
+            isGameRunning = true;
+            accumulatedWeight = 0;
+            currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
+            fallingObjects = [];
+            activeEffects = [];
             if (player.imageLoaded || player.image.src.includes('placehold.co')) {
                 player.x = canvas.width / 2 - player.width / 2;
-                player.y = canvas.height - player.height - (canvas.height * 0.03); // 底部留一些空間
-            } else { // 備援：如果圖片未載入，提供一個預設位置
-                player.x = canvas.width / 2 - (canvas.width * 0.12) / 2; // 假設寬度
+                player.y = canvas.height - player.height - (canvas.height * 0.03);
+            } else {
+                player.x = canvas.width / 2 - (canvas.width * 0.12) / 2;
                 player.y = canvas.height - (canvas.width * 0.12 / (player.image.naturalWidth / player.image.naturalHeight || 0.5)) - (canvas.height * 0.03);
             }
-
-            statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; // 更新狀態訊息
-            startButton.textContent = "遊戲進行中"; // 更新按鈕文字
-            startButton.disabled = true; // 禁用開始按鈕
-            scoreFormContainer.style.display = 'none'; // 隱藏分數表單
-            scoreFormContainer.innerHTML = ''; // 清空分數表單內容
-
-            gameStartTime = 0; // 重置遊戲開始時間，將在 gameLoop 中設定
-            lastFrameTime = performance.now(); // 重置上一幀時間
-
-            // 將遊戲容器滾動到視野內
+            statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>";
+            startButton.textContent = "遊戲進行中";
+            startButton.disabled = true;
+            scoreFormContainer.style.display = 'none';
+            scoreFormContainer.innerHTML = '';
+            gameStartTime = 0;
+            lastFrameTime = performance.now();
             const gameContainerElement = document.getElementById('gameContainer');
             if (gameContainerElement) {
                 gameContainerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-
-            if(animationFrameId) cancelAnimationFrame(animationFrameId); // 取消之前的遊戲迴圈幀
-            animationFrameId = requestAnimationFrame(gameLoop); // 開始遊戲迴圈
-            fetchGameStats(); // 每次開始遊戲時獲取統計數據
-
-            // **遊戲開始時顯示觸控按鈕 (如果適用)**
-            if (isTouchDevice() && touchControlsUI) { // 新增 touchControlsUI 存在性檢查
+            if(animationFrameId) cancelAnimationFrame(animationFrameId);
+            animationFrameId = requestAnimationFrame(gameLoop);
+            fetchGameStats();
+            if (isTouchDevice() && touchControlsUI) {
                 touchControlsUI.style.display = 'flex';
             }
         }
 
-        // 停止遊戲 (通用停止邏輯，不處理遊戲結果)
         function stopGame() {
-            isGameRunning = false; // ** 核心：設定遊戲運行狀態為 false **
+            isGameRunning = false;
             if(animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
             }
-            if (startButton) { // 啟用開始按鈕
+            if (startButton) {
                 startButton.disabled = false;
             }
-
-            // **遊戲停止時隱藏觸控按鈕 (如果適用)**
-            if (touchControlsUI) { // 檢查 touchControlsUI 是否存在
-                 touchControlsUI.style.display = 'none'; // 直接隱藏，不再檢查 isTouchDevice()
+            if (touchControlsUI) {
+                 touchControlsUI.style.display = 'none';
             }
-
-
-            if (canvas.width > 0 && player.width > 0) { // 確保畫布和玩家已初始化
-                startIdleAnimation(); // 遊戲停止後開始待機動畫
+            if (canvas.width > 0 && player.width > 0) {
+                startIdleAnimation();
             }
         }
 
-        // 記錄遊戲結果到後端 (Google Apps Script)
         async function recordGameOutcome(isSuccess) {
-            const eventType = isSuccess ? "gameWinEvent" : "gameLossEvent"; // 事件類型
+            const eventType = isSuccess ? "gameWinEvent" : "gameLossEvent";
             console.log("記錄遊戲結果:", eventType);
             try {
                 await fetch(GOOGLE_APPS_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // 注意: no-cors 模式下無法讀取回應
+                    mode: 'no-cors',
                     cache: 'no-cache',
-                    headers: { 'Content-Type': 'application/json' }, // 即使是 no-cors，也建議設定
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ eventType: eventType })
                 });
                 console.log(`事件 ${eventType} 已傳送至後端。`);
-                fetchGameStats(); // 更新統計數據
+                fetchGameStats();
             } catch (error) {
                 console.error(`記錄 ${eventType} 時發生錯誤:`, error);
             }
         }
 
-        // 遊戲結束 (失敗)
         function gameOver(message) {
-            stopGame(); // **首先調用 stopGame 來停止遊戲迴圈和更新 isGameRunning**
+            stopGame();
             if (startButton) {
-                startButton.textContent = "再試一次"; // 更新按鈕文字
+                startButton.textContent = "再試一次";
             }
-            // 播放失敗音效 (檢查 Tone.js 上下文狀態)
             if (toneJsInitialized && loseSound) {
                 if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
-                    Tone.start().then(() => { // 嘗試啟動上下文
+                    Tone.start().then(() => {
                         if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
-                           loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05); // 延遲一點播放
+                           loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05);
                         }
                     }).catch(err => console.error("Tone.start 在 gameOver 中發生錯誤:", err));
                 } else if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
@@ -1515,24 +1638,21 @@
                     }
                 }
             }
-            const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00"; // 計算遊戲時間
-            if (statusMessage) { // 更新狀態訊息
+            const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
+            if (statusMessage) {
                 statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${elapsedTime}s</p>`;
             }
-            recordGameOutcome(false); // 記錄遊戲失敗
+            recordGameOutcome(false);
         }
 
-
-        // 遊戲勝利
         async function gameWin() {
-            stopGame(); // **首先調用 stopGame 來停止遊戲迴圈和更新 isGameRunning**
+            stopGame();
             if (startButton) {
-                startButton.textContent = "再玩一局"; // 更新按鈕文字
+                startButton.textContent = "再玩一局";
             }
-            // 播放勝利音效 (檢查 Tone.js 上下文狀態)
             if (toneJsInitialized && winSound) {
                 if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
-                    Tone.start().then(() => { // 嘗試啟動上下文
+                    Tone.start().then(() => {
                         if (winSound && typeof winSound.triggerAttackRelease === 'function') {
                             winSound.triggerAttackRelease("C5", "2n", Tone.now());
                         }
@@ -1543,9 +1663,8 @@
                     }
                 }
             }
-            const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00"; // 計算遊戲時間
-            const finalDisplayTime = Math.max(0, parseFloat(elapsedTime)).toFixed(2); // 確保時間不為負
-            // 勝利訊息彈窗內容
+            const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
+            const finalDisplayTime = Math.max(0, parseFloat(elapsedTime)).toFixed(2);
             const winPopupMessage = `
                 <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
                 <p class="text-center mb-3">您的成績：<strong>${finalDisplayTime} 秒</strong></p>
@@ -1561,17 +1680,15 @@
                 <p><strong>⚡ 加碼抽大獎：</strong></p>
                 <p class="text-sm">想再抽三星行動電源？快到微風南山三星粉專頁查看指定貼文，參與互動分享活動！</p>
             `;
-            if (statusMessage) { // 更新狀態訊息
+            if (statusMessage) {
                 statusMessage.innerHTML = winPopupMessage;
             }
-            showScoreForm(parseFloat(finalDisplayTime)); // 顯示分數提交表單
-            recordGameOutcome(true); // 記錄遊戲成功
+            showScoreForm(parseFloat(finalDisplayTime));
+            recordGameOutcome(true);
         }
 
-        // 顯示分數提交表單
         function showScoreForm(finalTime) {
-            scoreFormContainer.style.display = 'block'; // 顯示表單容器
-            // 表單 HTML 結構
+            scoreFormContainer.style.display = 'block';
             scoreFormContainer.innerHTML = `
                 <div id="scoreForm">
                     <h3 class="text-lg font-semibold text-center mb-3 text-sky-700">🎉 S25 Edge 配重達人留名 🎉</h3>
@@ -1588,82 +1705,65 @@
                     <p id="submitStatus" class="text-sm text-center mt-2"></p>
                 </div>
             `;
-
-            // 提交按鈕事件監聽
             document.getElementById('submitScoreButton').addEventListener('click', async () => {
                 const playerNameInput = document.getElementById('playerName');
                 const playerPhoneInput = document.getElementById('playerPhone');
                 const playerName = playerNameInput.value.trim();
                 const playerPhone = playerPhoneInput.value.trim();
                 const submitStatus = document.getElementById('submitStatus');
-
-                if (!playerName) { // 檢查是否輸入名稱
+                if (!playerName) {
                     submitStatus.innerHTML = '<span class="text-red-600 font-medium">⚠️ 請輸入您的達人稱號。</span>';
                     playerNameInput.focus();
                     return;
                 }
-
-                const phoneRegex = /^\d{10}$/; // 簡單的10位數字驗證
-                if (playerPhone && !phoneRegex.test(playerPhone)) { // 檢查手機號碼格式 (如果已填寫)
+                const phoneRegex = /^\d{10}$/;
+                if (playerPhone && !phoneRegex.test(playerPhone)) {
                     submitStatus.innerHTML = '<span class="text-red-600 font-medium">⚠️ 若要填寫手機號碼，請輸入有效的10位數字。</span>';
                     playerPhoneInput.focus();
                     return;
                 }
-
-                // 檢查後端 URL 是否已配置
                 if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
                     submitStatus.innerHTML = '<span class="text-orange-500 font-medium">⚠️ 後端URL未配置或無效，無法提交。</span>';
                     return;
                 }
-
-                // 準備提交的數據
                 const scoreData = {
-                    timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }), // 提交時間 (台灣時區)
+                    timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
                     name: playerName,
                     phone: playerPhone,
                     time: finalTime,
                     weight: accumulatedWeight.toFixed(1),
-                    eventType: "scoreSubmit" // 標記事件類型
+                    eventType: "scoreSubmit"
                 };
-
-                document.getElementById('submitScoreButton').disabled = true; // 禁用提交按鈕
-                submitStatus.innerHTML = '<span class="text-blue-600 font-medium">⏳ 提交中...</span>'; // 更新提交狀態
-
+                document.getElementById('submitScoreButton').disabled = true;
+                submitStatus.innerHTML = '<span class="text-blue-600 font-medium">⏳ 提交中...</span>';
                 try {
-                    // 發送 POST 請求到 Google Apps Script
                     await fetch(GOOGLE_APPS_SCRIPT_URL, {
-                        method: 'POST', mode: 'no-cors', cache: 'no-cache', // mode: 'no-cors' for simple POST
-                        headers: { 'Content-Type': 'application/json' }, // Still good practice to set
-                        body: JSON.stringify(scoreData) // Data is sent
+                        method: 'POST', mode: 'no-cors', cache: 'no-cache',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(scoreData)
                     });
                     submitStatus.innerHTML = '<span class="text-green-600 font-medium">✔️ 成績已提交！感謝您的參與！</span>';
-
-                    nameToHighlightNext = playerName; // 準備高亮此玩家的成績
+                    nameToHighlightNext = playerName;
                     timeToHighlightNext = finalTime;
-                    await fetchLeaderboardData(); // 重新獲取並顯示排行榜
-
-                    leaderboardContainer.style.display = 'block'; // 顯示排行榜容器
-                    // 滾動到高亮的條目或排行榜頂部
+                    await fetchLeaderboardData();
+                    leaderboardContainer.style.display = 'block';
                     const highlightedItem = leaderboardList.querySelector('.currentUserScoreHighlight');
                     if (highlightedItem) {
                         highlightedItem.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
                     } else {
                         leaderboardContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
-
                 } catch (error) {
                     console.error('提交分數時發生錯誤:', error);
                     submitStatus.innerHTML = '<span class="text-red-600 font-medium">❌ 提交失敗，請稍後再試或檢查網路連線。</span>';
-                    document.getElementById('submitScoreButton').disabled = false; // 重新啟用提交按鈕
-                    nameToHighlightNext = null; // 提交失敗則不安裝高亮
+                    document.getElementById('submitScoreButton').disabled = false;
+                    nameToHighlightNext = null;
                     timeToHighlightNext = null;
                 }
             });
         }
 
-        // 顯示新的彩蛋畫面
         function showNewEasterEgg() {
-            // stopGame(); // 已在 updateFallingObjects 中呼叫
             const overlay = document.getElementById('newEasterEggOverlay');
             const container = document.getElementById('easterEggContainerAnimate');
             const particlesContainer = document.getElementById('particlesContainerAnimate');
@@ -1672,23 +1772,17 @@
             const commonMessage = container.querySelector('.common-celebration-message');
             const redemptionStatus = container.querySelector('.redemption-status-container');
             const shineEffect = container.querySelector('.shine-effect');
-
             if (!overlay || !container || !particlesContainer || !phoneImage || !phoneText || !commonMessage || !redemptionStatus || !shineEffect) {
                 console.error("一個或多個新的彩蛋元素未找到。");
                 return;
             }
-
-            // 重置動畫屬性以確保重新觸發
             container.style.animation = 'none';
             phoneImage.style.animation = 'none';
             shineEffect.style.animation = 'none';
             phoneText.style.animation = 'none';
             commonMessage.style.animation = 'none';
             redemptionStatus.style.animation = 'none';
-
-            void container.offsetWidth; // 強制瀏覽器重繪 (reflow)
-
-            // 初始化狀態 (動畫開始前的狀態)
+            void container.offsetWidth;
             container.style.visibility = 'hidden';
             container.style.opacity = '0';
             phoneImage.style.opacity = '0';
@@ -1699,12 +1793,8 @@
             phoneText.style.transform = 'translateY(30px)';
             commonMessage.style.opacity = '0';
             redemptionStatus.style.opacity = '0';
-
-            particlesContainer.innerHTML = ''; // 清空粒子效果
-
-            overlay.style.display = 'flex'; // 顯示 overlay
-
-            // 更新狀態訊息和按鈕 (因為 stopGame 已被呼叫)
+            particlesContainer.innerHTML = '';
+            overlay.style.display = 'flex';
             if (statusMessage) {
                 statusMessage.innerHTML = "<p class='text-center font-bold'>✨ 彩蛋發現！ ✨</p>";
             }
@@ -1712,9 +1802,6 @@
                 startButton.textContent = "重新開始";
                 startButton.disabled = false;
             }
-
-
-            // 延遲啟動動畫 (確保重置生效)
             setTimeout(() => {
                 container.style.animation = 'fadeInContainer 0.5s ease-out forwards';
                 phoneImage.style.animation = 'popInPhone 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.5s forwards';
@@ -1722,32 +1809,27 @@
                 phoneText.style.animation = 'slideInText 1s ease-out 1.8s forwards';
                 commonMessage.style.animation = 'fadeInMessage 1s ease-out 3.5s forwards';
                 redemptionStatus.style.animation = 'fadeInStatus 1s ease-out 4.0s forwards';
-
-                // 創建粒子效果
                 const numParticles = 30;
                 for (let i = 0; i < numParticles; i++) {
                     const particle = document.createElement('div');
                     particle.classList.add('particle');
-                    const colors = ['#facc15', '#60a5fa', '#f87171', '#34d399', '#a78bfa']; // 粒子顏色
+                    const colors = ['#facc15', '#60a5fa', '#f87171', '#34d399', '#a78bfa'];
                     particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    const size = Math.random() * 8 + 4; // 粒子大小
+                    const size = Math.random() * 8 + 4;
                     particle.style.width = `${size}px`;
                     particle.style.height = `${size}px`;
-                    const angle = Math.random() * 360; // 粒子散開角度
-                    const distance = Math.random() * 150 + 100; // 粒子散開距離
+                    const angle = Math.random() * 360;
+                    const distance = Math.random() * 150 + 100;
                     const x = Math.cos(angle * Math.PI / 180) * distance;
                     const y = Math.sin(angle * Math.PI / 180) * distance;
-                    particle.style.setProperty('--transform-end', `translate(${x}px, ${y}px)`); // CSS 變數用於動畫
-                    particle.style.animation = `burst 1.5s ease-out ${1.5 + Math.random() * 0.5}s forwards`; // 粒子爆發動畫
+                    particle.style.setProperty('--transform-end', `translate(${x}px, ${y}px)`);
+                    particle.style.animation = `burst 1.5s ease-out ${1.5 + Math.random() * 0.5}s forwards`;
                     particlesContainer.appendChild(particle);
                 }
-            }, 50); // 短暫延遲
-
-            // 處理兌換訊息顯示邏輯 (此處為範例，真實情況可能需要後端判斷)
+            }, 50);
             const giftAvailableMessageDiv = document.getElementById('giftAvailableMessage');
             const giftClaimedMessageDiv = document.getElementById('giftClaimedMessage');
             if (giftAvailableMessageDiv && giftClaimedMessageDiv) {
-                // 假設禮物總是可用的 (前端範例)
                 giftAvailableMessageDiv.style.display = 'block';
                 giftClaimedMessageDiv.style.display = 'none';
                 const disclaimerTextElement = giftAvailableMessageDiv.querySelector('.disclaimer-text');
@@ -1757,17 +1839,15 @@
             }
         }
 
-        // 隱藏新的彩蛋畫面
         function hideNewEasterEgg() {
             const overlay = document.getElementById('newEasterEggOverlay');
             if (overlay) {
-                overlay.style.display = 'none'; // 隱藏 overlay
+                overlay.style.display = 'none';
             }
             const container = document.getElementById('easterEggContainerAnimate');
             if (container) {
-                container.style.opacity = '0'; // 隱藏容器
+                container.style.opacity = '0';
                 container.style.visibility = 'hidden';
-                // 重置動畫相關元素的樣式，以便下次能正確觸發
                 const elementsToReset = [
                     container.querySelector('.phone-image'),
                     container.querySelector('.shine-effect'),
@@ -1779,173 +1859,136 @@
                     if (el) el.style.animation = 'none';
                 });
                 const particlesContainer = document.getElementById('particlesContainerAnimate');
-                if(particlesContainer) particlesContainer.innerHTML = ''; // 清空粒子
+                if(particlesContainer) particlesContainer.innerHTML = '';
             }
-            if (!isGameRunning && canvas.width > 0 && player.width > 0) { // 如果遊戲未進行，則恢復待機動畫
+            if (!isGameRunning && canvas.width > 0 && player.width > 0) {
                 startIdleAnimation();
             }
         }
 
-        // 處理畫布觸控開始事件 (用於拖曳玩家或點擊開始)
         function handleCanvasTouchStart(e) {
-            // 只有在遊戲進行中，或遊戲未開始但按鈕可用且玩家圖片已載入時才處理
             if (isGameRunning || (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co')))) {
-                e.preventDefault(); // 防止頁面滾動
-                stopIdleAnimation(); // 停止待機動畫
-                const touch = e.touches[0]; // 獲取第一個觸控點
-
-                touchStartTime = performance.now(); // 記錄觸控開始時間
-                const rect = canvas.getBoundingClientRect(); // 獲取畫布位置
-                touchStartCanvasX = touch.clientX - rect.left; // 相對於 canvas 的觸摸點 X
-                touchStartCanvasY = touch.clientY - rect.top; // 相對於 canvas 的觸摸點 Y
-                touchStartPlayerX = player.x; // 記錄觸摸開始時玩家的 X 位置
-
-                movePlayerToTouch(touch); // 立即移動玩家到觸控點
-                player.dx = 0; // 清除鍵盤移動的 delta，避免衝突
+                e.preventDefault();
+                stopIdleAnimation();
+                const touch = e.touches[0];
+                touchStartTime = performance.now();
+                const rect = canvas.getBoundingClientRect();
+                touchStartCanvasX = touch.clientX - rect.left;
+                touchStartCanvasY = touch.clientY - rect.top;
+                touchStartPlayerX = player.x;
+                movePlayerToTouch(touch);
+                player.dx = 0;
             }
         }
 
-        // 處理畫布觸控移動事件 (用於拖曳玩家)
         function handleCanvasTouchMove(e) {
             if (isGameRunning || (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co')))) {
                 e.preventDefault();
                 const touch = e.touches[0];
-                movePlayerToTouch(touch); // 移動玩家到觸控點
+                movePlayerToTouch(touch);
             }
         }
 
-        // 處理畫布觸控結束事件 (用於判斷是否為輕觸開始遊戲)
         function handleCanvasTouchEnd(e) {
-            // 處理輕觸畫布上的玩家以開始遊戲的邏輯
             if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                const touchDuration = performance.now() - touchStartTime; // 計算觸控持續時間
-
-                // 判斷觸摸是否在玩家初始位置上
+                const touchDuration = performance.now() - touchStartTime;
                 const initialPlayerRect = {
-                    x: touchStartPlayerX, // 使用觸摸開始時的玩家 X
-                    y: player.y,      // Y 通常不變
+                    x: touchStartPlayerX,
+                    y: player.y,
                     width: player.width,
                     height: player.height
                 };
-
                 const wasTouchOnPlayerInitially = (
                     touchStartCanvasX >= initialPlayerRect.x &&
                     touchStartCanvasX <= initialPlayerRect.x + initialPlayerRect.width &&
                     touchStartCanvasY >= initialPlayerRect.y &&
                     touchStartCanvasY <= initialPlayerRect.y + initialPlayerRect.height
                 );
-
-                // 計算玩家在觸摸過程中的移動距離
                 const playerMovedDistance = Math.abs(player.x - touchStartPlayerX);
-
-                // 如果是短時間輕觸且在玩家身上，且移動距離很小，則開始遊戲
                 if (wasTouchOnPlayerInitially && touchDuration < MAX_TAP_DURATION && playerMovedDistance < MAX_TAP_MOVEMENT_FOR_START) {
                     startGame();
                 } else {
-                    startIdleAnimation(); // 如果不是有效點擊，則恢復待機動畫
+                    startIdleAnimation();
                 }
             }
         }
 
-        // 移動玩家到觸控點
         function movePlayerToTouch(touch) {
             const rect = canvas.getBoundingClientRect();
-            const touchX = touch.clientX - rect.left; // 獲取觸控點相對於畫布的 X 座標
-            let newPlayerX = touchX - player.width / 2; // 使觸摸點位於玩家中心
-
-            // 邊界檢測
+            const touchX = touch.clientX - rect.left;
+            let newPlayerX = touchX - player.width / 2;
             if (newPlayerX < 0) newPlayerX = 0;
             if (newPlayerX + player.width > canvas.width) newPlayerX = canvas.width - player.width;
-
-            player.x = newPlayerX; // 更新玩家 X 座標
-
-            // 如果遊戲未開始，立即重繪玩家位置 (用於拖曳預覽)
+            player.x = newPlayerX;
             if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                 clearCanvas();
                 drawPlayer();
             }
         }
 
-
-        // 鍵盤按下事件
         function keyDown(e) {
-            // 遊戲未開始時的鍵盤移動預覽
             if (!isGameRunning && (e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left')) {
-                stopIdleAnimation(); // 停止待機動畫
-                if (player.speed === 0 && canvas.width > 0) { // 初始化速度 (如果尚未設定)
+                stopIdleAnimation();
+                if (player.speed === 0 && canvas.width > 0) {
                     player.speed = isTouchDevice() ? canvas.width * 0.018 : canvas.width * 0.024;
                 }
                 if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
                 else player.dx = -player.speed;
-
-                // 立即更新並重繪玩家位置
                 if (player.dx !== 0 && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                     updatePlayerPosition();
                     clearCanvas();
                     drawPlayer();
                 }
-                return; // 阻止進一步處理
+                return;
             }
-            if (!isGameRunning) return; // 如果遊戲未運行，不處理遊戲中的按鍵
-            // 遊戲進行中的鍵盤控制
+            if (!isGameRunning) return;
             if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
             else if (e.key === 'ArrowLeft' || e.key === 'Left') player.dx = -player.speed;
         }
-        // 鍵盤鬆開事件
         function keyUp(e) {
             if ( e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left' ) {
-                player.dx = 0; // 停止移動
+                player.dx = 0;
                 if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                    clearCanvas(); // 清除移動後的殘影
-                    drawPlayer();  // 確保玩家在最終位置
-                    startIdleAnimation(); // 恢復待機動畫
+                    clearCanvas();
+                    drawPlayer();
+                    startIdleAnimation();
                 }
             }
         }
 
-        document.addEventListener('keydown', keyDown); // 監聽鍵盤按下
-        document.addEventListener('keyup', keyUp);     // 監聽鍵盤鬆開
-        startButton.addEventListener('click', startGame); // 開始按鈕點擊事件
-
-        // Canvas 觸控事件 (用於拖曳玩家)
-        canvas.addEventListener('touchstart', handleCanvasTouchStart, { passive: false }); // passive: false 允許 preventDefault
+        document.addEventListener('keydown', keyDown);
+        document.addEventListener('keyup', keyUp);
+        startButton.addEventListener('click', startGame);
+        canvas.addEventListener('touchstart', handleCanvasTouchStart, { passive: false });
         canvas.addEventListener('touchmove', handleCanvasTouchMove, { passive: false });
         canvas.addEventListener('touchend', handleCanvasTouchEnd, { passive: false });
 
-
-        // 判斷是否為觸控裝置
         function isTouchDevice() {
             return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
         }
 
-        // 如果是觸控裝置，綁定觸控按鈕事件 (但不在此處直接顯示)
         if (isTouchDevice()) {
-            // touchControlsUI.style.display = 'flex'; // **移除此行，改由 startGame/stopGame 控制**
-            const initialTouchSpeed = canvas.width * 0.018 || 5; // 確保有預設速度
-
-            // 左按鈕觸控事件
+            const initialTouchSpeed = canvas.width * 0.018 || 5;
             leftButton.addEventListener('touchstart', (e) => {
-                e.preventDefault(); // 防止預設行為 (如縮放)
-                stopIdleAnimation(); // 停止待機動畫
-                player.speed = canvas.width * 0.018 || initialTouchSpeed; // 確保速度被設定
-                if(isGameRunning) player.dx = -player.speed; // 遊戲中向左移動
-                else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) { // 遊戲未開始時的預覽移動
+                e.preventDefault();
+                stopIdleAnimation();
+                player.speed = canvas.width * 0.018 || initialTouchSpeed;
+                if(isGameRunning) player.dx = -player.speed;
+                else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                     player.dx = -player.speed;
-                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; // 立即移動並停止
+                    updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0;
                 }
             });
-            leftButton.addEventListener('touchend', (e) => { // 觸控結束
+            leftButton.addEventListener('touchend', (e) => {
                 e.preventDefault();
-                if(isGameRunning) player.dx = 0; // 遊戲中停止移動
-                else if (!isGameRunning) startIdleAnimation(); // 遊戲未開始則恢復待機動畫
+                if(isGameRunning) player.dx = 0;
+                else if (!isGameRunning) startIdleAnimation();
             });
-
-            // 右按鈕觸控事件
             rightButton.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 stopIdleAnimation();
                 player.speed = canvas.width * 0.018 || initialTouchSpeed;
-                if(isGameRunning) player.dx = player.speed; // 遊戲中向右移動
+                if(isGameRunning) player.dx = player.speed;
                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                     player.dx = player.speed;
                     updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0;
@@ -1957,10 +2000,7 @@
                 else if (!isGameRunning) startIdleAnimation();
             });
         }
-        // **移除 else 分支中設定 touchControlsUI.style.display = 'none'; 的部分，因為 CSS 已處理**
 
-
-        // 獲取遊戲統計數據 (勝負次數、過關率)
         async function fetchGameStats() {
             if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
                 console.warn("遊戲統計後端 URL 未配置。");
@@ -1970,18 +2010,16 @@
                 return;
             }
             try {
-                const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getGameStats'); // GET request
+                const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getGameStats');
                 if (!response.ok) throw new Error(`HTTP 錯誤! status: ${response.status}`);
                 const stats = await response.json();
                 totalWinsDisplay.textContent = stats.wins !== undefined ? stats.wins : '--';
                 totalLossesDisplay.textContent = stats.losses !== undefined ? stats.losses : '--';
-
                 if (stats.passRate !== undefined && !isNaN(parseFloat(stats.passRate))) {
                     passRateDisplay.textContent = parseFloat(stats.passRate).toFixed(1);
                 } else {
-                    passRateDisplay.textContent = '--'; // 或 'N/A'
+                    passRateDisplay.textContent = '--';
                 }
-
             } catch (error) {
                 console.error('獲取遊戲統計時發生錯誤:', error);
                 totalWinsDisplay.textContent = '錯誤';
@@ -1990,98 +2028,97 @@
             }
         }
 
-
-        // 獲取排行榜數據
         async function fetchLeaderboardData() {
             if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
-                leaderboardStatus.textContent = '排行榜後端未配置。'; leaderboardContainer.style.display = 'block'; return;
+                leaderboardStatus.textContent = '排行榜後端未配置。';
+                leaderboardLastUpdated.textContent = '最後更新時間：無法取得';
+                leaderboardContainer.style.display = 'block'; return;
             }
-            leaderboardStatus.textContent = '排行榜加載中...'; leaderboardContainer.style.display = 'block'; // 先顯示容器和加載訊息
+            leaderboardStatus.textContent = '排行榜加載中...';
+            leaderboardLastUpdated.textContent = '最後更新時間：讀取中...';
+            leaderboardContainer.style.display = 'block';
             try {
-                const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getLeaderboard'); // GET request
-                if (!response.ok) { // 處理 HTTP 錯誤
+                const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getLeaderboard');
+                if (!response.ok) {
                     let errorMsg = `HTTP 錯誤! status: ${response.status}.`;
                     try { const errorData = await response.json(); if (errorData && errorData.message) errorMsg += ` 訊息: ${errorData.message}`; }
                     catch (jsonError) { errorMsg += ` 無法解析錯誤 JSON。`; }
                     throw new Error(errorMsg);
                 }
-                const data = await response.json(); // 解析 JSON 回應
-                if (data.status === 'error' && data.message) throw new Error(`從 Apps Script 獲取排行榜錯誤: ${data.message}`); // 處理 Apps Script 返回的錯誤
-                displayLeaderboard(data.leaderboard || data); // Apps Script 可能直接返回陣列或包裝在物件中
-                leaderboardStatus.textContent = ''; // 清除加載訊息
+                const data = await response.json();
+                if (data.status === 'error' && data.message) throw new Error(`從 Apps Script 獲取排行榜錯誤: ${data.message}`);
+                const currentTimestamp = new Date().toLocaleString('zh-TW', {
+                    year: 'numeric', month: 'numeric', day: 'numeric',
+                    hour: '2-digit', minute: '2-digit', second: '2-digit',
+                    hour12: false,
+                    timeZone: 'Asia/Taipei'
+                });
+                leaderboardLastUpdated.textContent = `最後更新於：${currentTimestamp}`;
+                displayLeaderboard(data.leaderboard || data);
+                leaderboardStatus.textContent = '';
             } catch (error) {
                 console.error('獲取排行榜時發生錯誤:', error);
                 leaderboardStatus.textContent = '無法加載排行榜，請稍後再試。';
-                nameToHighlightNext = null; // 獲取失敗則不安裝高亮
-                timeToHighlightNext = null;
-            }
-        }
-
-        // 顯示排行榜
-        function displayLeaderboard(scores) {
-            leaderboardList.innerHTML = ''; // 清空現有列表
-            if (!scores || !Array.isArray(scores) || scores.length === 0) { // 如果沒有分數或格式錯誤
-                const noRecordLi = document.createElement('li');
-                noRecordLi.textContent = '目前尚無紀錄或資料格式錯誤。';
-                noRecordLi.style.textAlign = 'center';
-                noRecordLi.style.color = '#6b7280'; // 灰色文字
-                leaderboardList.appendChild(noRecordLi);
-                nameToHighlightNext = null; // 無紀錄則不安裝高亮
-                timeToHighlightNext = null;
-                return;
-            }
-
-            let highlightAppliedThisCall = false; // 追蹤此輪呼叫是否已套用高亮
-
-            scores.forEach((score, index) => { // 遍歷分數
-                const listItem = document.createElement('li');
-                let rankDisplay; // 名次顯示
-                let nameClass = 'name';
-                let timeClass = 'time';
-
-                if (index === 0) {
-                    rankDisplay = '🥇'; // **金牌圖示已修正**
-                    nameClass += ' rank-1-text';
-                    timeClass += ' rank-1-text';
-                } else if (index === 1) {
-                    rankDisplay = '🥈'; // 銀牌
-                    nameClass += ' rank-2-text';
-                    timeClass += ' rank-2-text';
-                } else if (index === 2) {
-                    rankDisplay = '🥉'; // 銅牌
-                    nameClass += ' rank-3-text';
-                    timeClass += ' rank-3-text';
-                } else {
-                    rankDisplay = `${index + 1}.`; // 其他名次
-                }
-
-                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="${nameClass}">${escapeHTML(score.name || '匿名')}</span> <span class="${timeClass}">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`;
-
-                // 檢查是否需要高亮此條目 (用於剛提交成績後)
-                if (!highlightAppliedThisCall && nameToHighlightNext && timeToHighlightNext &&
-                    score.name === nameToHighlightNext &&
-                    Math.abs(parseFloat(score.time) - timeToHighlightNext) < 0.01) { // 比較浮點數時使用容差
-
-                    listItem.classList.add('currentUserScoreHighlight'); // 添加高亮樣式
-                    highlightAppliedThisCall = true; // 標記已套用高亮
-                }
-                leaderboardList.appendChild(listItem);
-            });
-
-            if (highlightAppliedThisCall) { // 如果已高亮，則清除待高亮標記
+                leaderboardLastUpdated.textContent = '最後更新時間：無法取得';
                 nameToHighlightNext = null;
                 timeToHighlightNext = null;
             }
         }
 
-        // HTML 特殊字符轉義，防止 XSS
+        function displayLeaderboard(scores) {
+            leaderboardList.innerHTML = '';
+            if (!scores || !Array.isArray(scores) || scores.length === 0) {
+                const noRecordLi = document.createElement('li');
+                noRecordLi.textContent = '目前尚無紀錄或資料格式錯誤。';
+                noRecordLi.style.textAlign = 'center';
+                noRecordLi.style.color = '#6b7280';
+                leaderboardList.appendChild(noRecordLi);
+                nameToHighlightNext = null;
+                timeToHighlightNext = null;
+                return;
+            }
+            let highlightAppliedThisCall = false;
+            scores.forEach((score, index) => {
+                const listItem = document.createElement('li');
+                let rankDisplay;
+                let nameClass = 'name';
+                let timeClass = 'time';
+                if (index === 0) {
+                    rankDisplay = '�';
+                    nameClass += ' rank-1-text';
+                    timeClass += ' rank-1-text';
+                } else if (index === 1) {
+                    rankDisplay = '🥈';
+                    nameClass += ' rank-2-text';
+                    timeClass += ' rank-2-text';
+                } else if (index === 2) {
+                    rankDisplay = '🥉';
+                    nameClass += ' rank-3-text';
+                    timeClass += ' rank-3-text';
+                } else {
+                    rankDisplay = `${index + 1}.`;
+                }
+                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="${nameClass}">${escapeHTML(score.name || '匿名')}</span> <span class="${timeClass}">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`;
+                if (!highlightAppliedThisCall && nameToHighlightNext && timeToHighlightNext &&
+                    score.name === nameToHighlightNext &&
+                    Math.abs(parseFloat(score.time) - timeToHighlightNext) < 0.01) {
+                    listItem.classList.add('currentUserScoreHighlight');
+                    highlightAppliedThisCall = true;
+                }
+                leaderboardList.appendChild(listItem);
+            });
+            if (highlightAppliedThisCall) {
+                nameToHighlightNext = null;
+                timeToHighlightNext = null;
+            }
+        }
+
         function escapeHTML(str) {
             return String(str).replace(/[&<>"']/g, function (match) {
                 return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[match];
             });
         }
 
-        // 記錄頁面載入事件
         async function recordPageLoad() {
             if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL")) {
                 console.warn("後端 URL 未配置。頁面載入事件未記錄。");
@@ -2094,7 +2131,7 @@
                     mode: 'no-cors',
                     cache: 'no-cache',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ eventType: "pageLoadEvent" }) // 標記事件類型
+                    body: JSON.stringify({ eventType: "pageLoadEvent" })
                 });
                 console.log("頁面載入事件已傳送至後端。");
             } catch (error) {
@@ -2102,197 +2139,147 @@
             }
         }
 
-
-        // 處理視窗大小調整
         function handleResize() {
             try {
-                stopIdleAnimation(); // 調整大小時先停止待機動畫
-                const gameArea = document.getElementById('gameContainer'); // 遊戲容器
-                // 計算畫布可用寬度，考慮到父容器的 padding 和 body 的 padding
+                stopIdleAnimation();
+                const gameArea = document.getElementById('gameContainer');
                 const paddingAndMargins = (parseFloat(getComputedStyle(gameArea).paddingLeft) || 0) +
-                                          (parseFloat(getComputedStyle(gameArea).paddingRight) || 0) +
-                                          (parseFloat(getComputedStyle(document.body).paddingLeft) || 0) * 2; // body padding 左右都有
-
-                // 可用寬度為遊戲容器寬度減去其 padding，或視窗寬度減去整體 padding，取較小者
-                const availableWidth = gameArea ? Math.min(gameArea.clientWidth - ( (parseFloat(getComputedStyle(gameArea).paddingLeft) || 0) + (parseFloat(getComputedStyle(gameArea).paddingRight) || 0) ) , window.innerWidth - paddingAndMargins) : window.innerWidth * 0.9; // 備援寬度
-
-                canvasWidth = Math.min(480, availableWidth); // 限制最大寬度，同時確保不超過可用寬度
-
-                // 計算手機圖片的長寬比
+                                        (parseFloat(getComputedStyle(gameArea).paddingRight) || 0) +
+                                        (parseFloat(getComputedStyle(document.body).paddingLeft) || 0) * 2;
+                const availableWidth = gameArea ? Math.min(gameArea.clientWidth - ( (parseFloat(getComputedStyle(gameArea).paddingLeft) || 0) + (parseFloat(getComputedStyle(gameArea).paddingRight) || 0) ) , window.innerWidth - paddingAndMargins) : window.innerWidth * 0.9;
+                canvasWidth = Math.min(480, availableWidth);
                 let phoneImageAspectRatio;
                 if (player.imageLoaded && player.image.naturalWidth > 0 && player.image.naturalHeight > 0) {
                     phoneImageAspectRatio = player.image.naturalWidth / player.image.naturalHeight;
-                } else if (player.image.complete && player.image.naturalWidth > 0 && player.image.naturalHeight > 0) { // 備用圖片的長寬比
+                } else if (player.image.complete && player.image.naturalWidth > 0 && player.image.naturalHeight > 0) {
                     phoneImageAspectRatio = player.image.naturalWidth / player.image.naturalHeight;
                 } else {
-                    phoneImageAspectRatio = 80 / 160; // 預設備用圖片的長寬比 (寬/高)
+                    phoneImageAspectRatio = 80 / 160;
                     console.warn("玩家圖片尺寸不可用，使用預設長寬比 (80/160)。");
                 }
-
-                // 確保長寬比有效
                 if (!phoneImageAspectRatio || phoneImageAspectRatio <= 0 || !isFinite(phoneImageAspectRatio)) {
-                    phoneImageAspectRatio = 0.5; // 安全的預設值 (寬/高)
+                    phoneImageAspectRatio = 0.5;
                     console.warn("無效的 phoneImageAspectRatio，重設為安全預設值 0.5。");
                 }
-
-                player.width = canvasWidth * 0.12; // 玩家寬度為畫布寬度的百分比
-                player.height = player.width / phoneImageAspectRatio; // 根據長寬比計算高度
-
-                canvasHeight = canvasWidth / aspectRatio; // 根據畫布長寬比計算畫布高度
-
-                // 限制畫布最大高度，避免在窄長螢幕上過高
+                player.width = canvasWidth * 0.12;
+                player.height = player.width / phoneImageAspectRatio;
+                canvasHeight = canvasWidth / aspectRatio;
                 const maxHeight = window.innerHeight * 0.48;
                 if (canvasHeight > maxHeight) {
                     canvasHeight = maxHeight;
-                    canvasWidth = canvasHeight * aspectRatio; // 重新計算寬度以保持比例
-                    // 重新計算玩家尺寸
+                    canvasWidth = canvasHeight * aspectRatio;
                     player.width = canvasWidth * 0.12;
                     player.height = player.width / phoneImageAspectRatio;
                 }
-
-                canvas.width = Math.max(150, Math.round(canvasWidth)); // 設定畫布尺寸，並確保有最小值
+                canvas.width = Math.max(150, Math.round(canvasWidth));
                 canvas.height = Math.max(200, Math.round(canvasHeight));
-
-                player.width = Math.max(15, Math.round(player.width)); // 設定玩家尺寸，並確保有最小值
+                player.width = Math.max(15, Math.round(player.width));
                 player.height = Math.max(30, Math.round(player.height));
-
-
-                // 再次檢查並修正玩家尺寸，防止因計算誤差導致過小或過大
                 if (!isFinite(player.width) || player.width <= 0) {
-                    player.width = canvas.width * 0.12; // 如果寬度無效，重新計算
+                    player.width = canvas.width * 0.12;
                     player.width = Math.max(15, Math.round(player.width));
                     console.warn("玩家寬度變為非有限值，已重設為:", player.width);
                 }
                 if (!isFinite(player.height) || player.height <= 0) {
-                    player.height = player.width / (phoneImageAspectRatio || 0.5); // 如果高度無效，重新計算
+                    player.height = player.width / (phoneImageAspectRatio || 0.5);
                     player.height = Math.max(30, Math.round(player.height));
                     console.warn("玩家高度變為非有限值，已重設為:", player.height);
                 }
-
-                // 限制玩家高度，避免過大 (例如，不超過畫布高度的 1/4)
                 if (player.height > canvas.height * 0.25) {
                     player.height = canvas.height * 0.25;
-                    player.width = player.height * phoneImageAspectRatio; // 根據新高度調整寬度
+                    player.width = player.height * phoneImageAspectRatio;
                 }
-
-                // 最終限制玩家寬度，避免過寬 (例如，不超過畫布寬度的 30%)
                 player.width = Math.max(15, Math.min(player.width, canvas.width * 0.3));
-                player.height = player.width / phoneImageAspectRatio; // 再次根據寬度和長寬比計算高度
-                if (!isFinite(player.height)) player.height = Math.max(30, player.width * 2); // 高度的最終備援
-
-
-                // 調整資訊欄最大寬度 (如果需要)
-                const infoBarElements = document.querySelectorAll('.info-bar div, #gameStatsDisplay div div'); // 假設 info-bar 是存在的類別
+                player.height = player.width / phoneImageAspectRatio;
+                if (!isFinite(player.height)) player.height = Math.max(30, player.width * 2);
+                const infoBarElements = document.querySelectorAll('.info-bar div, #gameStatsDisplay div div');
                 infoBarElements.forEach(el => {
                     if (el) el.style.maxWidth = `${canvas.width}px`;
                 });
-
-
-                // 設定玩家初始位置
                 player.x = canvas.width / 2 - player.width / 2;
-                player.y = canvas.height - player.height - (canvas.height * 0.03); // 底部留一些空間
-
-                // 設定玩家速度 (基於畫布寬度)
+                player.y = canvas.height - player.height - (canvas.height * 0.03);
                 if (isTouchDevice()) player.speed = canvas.width * 0.018; else player.speed = canvas.width * 0.024;
-
-                // 更新掉落物件速度 (基於畫布高度和基礎速度倍率)
                 itemTypes.forEach(it => {
                     it.speedPixelsPerSecond = canvas.height * it.base_ch_per_sec * BASE_SPEED_MULTIPLIER;
                 });
-
-            } catch (error) { // 捕獲 resize 過程中的錯誤
+            } catch (error) {
                 console.error("handleResize 中發生錯誤:", error.name, error.message, error.stack);
-                // 可選：如果 resize 發生嚴重錯誤，嘗試設定一些非常安全的預設值
                 if (canvas) {
                     canvas.width = Math.min(window.innerWidth * 0.9, 300);
                     canvas.height = canvas.width / aspectRatio;
                 }
                 if (player) {
                     player.width = (canvas ? canvas.width : 300) * 0.1;
-                    player.height = player.width * 2; // 預設長寬比
+                    player.height = player.width * 2;
                     player.x = ( (canvas ? canvas.width : 300) / 2) - (player.width / 2);
                     player.y = ( (canvas ? canvas.height : 450) ) - player.height - 10;
                 }
-            } finally { // 無論成功或失敗，都執行
-                if (!isGameRunning) { // 如果遊戲未運行，重繪並啟動待機動畫
+            } finally {
+                if (!isGameRunning) {
                     clearCanvas();
-                    if (player.imageLoaded || player.image.src.includes('placehold.co')) { // 確保圖片已載入或有備用圖才繪製
+                    if (player.imageLoaded || player.image.src.includes('placehold.co')) {
                        drawPlayer();
-                    } else if (canvas.width > 0 && player.width > 0) { // 即使圖片未載入但尺寸已設定，也繪製預設矩形
+                    } else if (canvas.width > 0 && player.width > 0) {
                        drawPlayer();
                     }
                     startIdleAnimation();
-                    if(startButton) startButton.disabled = false; // 確保按鈕可用
+                    if(startButton) startButton.disabled = false;
                 }
             }
         }
 
-
-        // 頁面載入完成後執行的初始化操作
         window.addEventListener('load', async () => {
-            handleResize(); // 初始調整大小
-            displayGameInstructions(); // 顯示遊戲說明中的配件
-            startButton.disabled = true; // 初始禁用開始按鈕，直到圖片載入
-
-            // 檢查玩家圖片是否載入完成 (主要或備用)
+            handleResize();
+            displayGameInstructions();
+            startButton.disabled = true;
             const checkPlayerImage = setInterval(() => {
-                if (player.imageLoaded) { // player.imageLoaded 會在圖片的 onload 事件中設為 true
+                if (player.imageLoaded) {
                     clearInterval(checkPlayerImage);
                     console.log("玩家圖片 (主要或備用) 已確認載入。啟用遊戲。");
-                    if (canvas.width > 0) handleResize(); // 再次調整以確保尺寸正確
-                    startButton.disabled = false; // 啟用開始按鈕
-                    if (!isGameRunning) startIdleAnimation(); // 開始待機動畫
+                    if (canvas.width > 0) handleResize();
+                    startButton.disabled = false;
+                    if (!isGameRunning) startIdleAnimation();
                 } else if (player.image.complete && player.image.src.includes('placehold.co') && !player.imageLoaded) {
-                    // 此情況表示備用圖片 (placeholder) 已嘗試載入，
-                    // 但我們的 player.imageLoaded 標記 (在備用圖片的 onload 中設定) 尚未變為 true，或備用圖片本身載入失敗。
-                    // 仍應繼續啟用遊戲以避免卡住。handleResize 會在需要時使用預設尺寸。
                     console.warn("備用圖片載入嘗試完成，但 player.imageLoaded 仍為 false。繼續啟用遊戲。");
                     clearInterval(checkPlayerImage);
                     if (canvas.width > 0) handleResize();
                     startButton.disabled = false;
                     if (!isGameRunning) startIdleAnimation();
                 }
-            }, 100); // 每 100ms 檢查一次
-
-
-            if (typeof Tone === 'undefined') { // 檢查 Tone.js 是否載入
+            }, 100);
+            if (typeof Tone === 'undefined') {
                 console.warn("Tone.js 未在頁面載入時載入。音效功能可能受影響。");
             } else {
-                initializeSounds(); // 初始化音效
+                initializeSounds();
             }
-            await recordPageLoad(); // 記錄頁面載入事件
-            await fetchLeaderboardData(); // 獲取排行榜數據
-            await fetchGameStats(); // 獲取遊戲統計數據
-
-            // 定期輪詢排行榜數據 (例如每 60 秒)
+            await recordPageLoad();
+            await fetchLeaderboardData();
+            await fetchGameStats();
             leaderboardPollIntervalId = setInterval(async () => {
-                nameToHighlightNext = null; // 清除高亮標記，避免重複高亮
+                nameToHighlightNext = null;
                 timeToHighlightNext = null;
                 await fetchLeaderboardData();
-            }, 60000); // 每60秒
-
-            // 彩蛋關閉按鈕事件
+            }, 60000);
             const closeNewEasterEggButton = document.getElementById('closeNewEasterEggButton');
             if (closeNewEasterEggButton) {
                 closeNewEasterEggButton.addEventListener('click', () => {
-                    hideNewEasterEgg(); // 隱藏彩蛋畫面
-                    if (statusMessage) { // 更新狀態訊息
+                    hideNewEasterEgg();
+                    if (statusMessage) {
                         statusMessage.innerHTML = "<p class='text-center font-bold'>已關閉彩蛋。點擊「重新開始」可再玩一次。</p>";
                     }
-                    if (startButton) { // 確保開始按鈕在關閉彩蛋後可用
+                    if (startButton) {
                         startButton.textContent = "重新開始";
                         startButton.disabled = false;
                     }
                 });
             }
         });
-        window.addEventListener('resize', handleResize); // 監聽視窗大小調整事件
-
-        // 頁面卸載前清除輪詢
+        window.addEventListener('resize', handleResize);
         window.addEventListener('beforeunload', () => {
-            clearInterval(leaderboardPollIntervalId); // 清除輪詢
+            clearInterval(leaderboardPollIntervalId);
         });
 
     </script>
 </body>
 </html>
+�
