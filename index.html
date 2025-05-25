@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Galaxy S25 Edge 配重挑戰賽</title>
+    <title>Galaxy S25 Edge 輕巧配重挑戰賽</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-18NNG1LTZF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-18NNG1LTZF');
+    </script>
+
     <style>
         /* 基本設定與動畫 */
         @keyframes fadeIn {
@@ -706,7 +716,7 @@
                 </div>
 
             <p class="instruction-text mt-3"><strong>注意事項：</strong></p>
-            <p class="instruction-text"><strong class="text-red-600">🔴 超重警告：</strong>超過163公克，挑戰失敗！</p>
+            <p class="instruction-text"><strong class="text-red-600">� 超重警告：</strong>超過163公克，挑戰失敗！</p>
             <p class="instruction-text"><strong class="text-red-600">💣 炸彈注意：</strong>接到炸彈，遊戲結束！</p>
             <p class="instruction-text easter-egg-hint">據說，在極為罕見的情況下，當宇宙的粒子完美對齊時，Galaxy S25 Edge 會展現出超越輕巧的... 獨特光芒 ✨。但這只是個傳說，對吧？</p>
 
@@ -1417,10 +1427,10 @@
                         const currentRadius = effect.flash.radius * (0.3 + flashProgress * 0.7); // Flash expands
 
                         const gradient = ctx.createRadialGradient(0, 0, currentRadius * 0.1, 0, 0, currentRadius);
-                        gradient.addColorStop(0, `rgba(255, 230, 200, ${currentAlpha})`);      // Hot white/yellow center
+                        gradient.addColorStop(0, `rgba(255, 230, 200, ${currentAlpha})`);     // Hot white/yellow center
                         gradient.addColorStop(0.4, `rgba(255, 150, 50, ${currentAlpha * 0.8})`); // Orange
                         gradient.addColorStop(0.8, `rgba(255, 60, 0, ${currentAlpha * 0.5})`);   // Reddish
-                        gradient.addColorStop(1, `rgba(200, 0, 0, ${currentAlpha * 0.2})`);    // Darker red, fading out
+                        gradient.addColorStop(1, `rgba(200, 0, 0, ${currentAlpha * 0.2})`);     // Darker red, fading out
                         ctx.fillStyle = gradient;
 
                         ctx.beginPath();
@@ -1676,8 +1686,8 @@
         // Stop the game logic
         function stopGame() {
             isGameRunning = false; // Signal the gameLoop to stop game logic updates
-                                 // The gameLoop will continue running if activeEffects exist.
-                                 // It will then transition to idle animation when effects are done.
+                                    // The gameLoop will continue running if activeEffects exist.
+                                    // It will then transition to idle animation when effects are done.
             if (startButton) {
                 startButton.disabled = false;
             }
@@ -1722,7 +1732,7 @@
                     }).catch(err => console.error("Tone.start 在 gameOver 中發生錯誤:", err));
                 } else if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
                      if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
-                        loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05);
+                         loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05);
                      }
                 }
             }
@@ -2046,7 +2056,7 @@
                         updatePlayerPosition();
                         clearCanvas();
                         drawPlayer();
-                    }
+                     }
                 }
                 return;
             }
@@ -2104,7 +2114,7 @@
                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                      if (activeEffects.length === 0) {
                         player.dx = player.speed; updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0;
-                    }
+                     }
                 }
             });
             rightButton.addEventListener('touchend', (e) => {
@@ -2399,3 +2409,4 @@
     </script>
 </body>
 </html>
+�
