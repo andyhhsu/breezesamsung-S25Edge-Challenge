@@ -1099,7 +1099,7 @@
             if (!ctx) return;
             fallingObjects.forEach(obj => {
                 const objFontSize = canvas.width * 0.095;
-                const weightFontSize = canvas.width * 0.08; // Increased font size for weight
+                const weightFontSize = canvas.width * 0.06; // Increased font size for weight
 
                 if (obj.type === 'easter_egg' && obj.imageLoaded && obj.imageObj && obj.imageObj.complete && obj.imageObj.naturalHeight !== 0 && obj.imageObj.naturalWidth !== 0) {
                     const aspectRatioItem = obj.imageObj.naturalWidth / obj.imageObj.naturalHeight;
