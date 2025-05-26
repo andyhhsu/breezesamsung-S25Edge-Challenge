@@ -514,11 +514,11 @@
         }
          #gameStatsDisplay div span:first-child { /* 統計標題 */
             color: #475569; /* Tailwind slate-600 */
-         }
+        }
          #gameStatsDisplay div span:last-child { /* 統計數值 */
             color: #1e293b; /* Tailwind slate-800 */
             font-weight: 600; /* Tailwind font-semibold */
-         }
+        }
 
 
         /* 彩蛋 Overlay */
@@ -710,19 +710,19 @@
              onerror="this.onerror=null; this.src='https://placehold.co/500x200/60a5fa/ffffff?text=圖片載入失敗';">
         <div id="gameInstructions">
             <h2>遊戲說明</h2>
-            <p class="instruction-text">體驗 Galaxy S25 Edge 的極致輕盈！化身「輕巧配重達人」，靈活操控手機，接住從天而降的配件，一起挑戰完美的 <strong>163 克</strong>吧！</p>
+            <p class="instruction-text">體驗 Galaxy S25 Edge 的極致輕盈！化身「輕巧配重達人」，靈活操控手機，接住從天而降的配件，一起挑戰完美的 <strong>163 g</strong>吧！</p>
             <p class="instruction-text mt-3"><strong>配件與重量：</strong></p>
             <div id="itemDisplayGrid" class="item-grid-container">
                 </div>
 
             <p class="instruction-text mt-3"><strong>注意事項：</strong></p>
-            <p class="instruction-text"><strong class="text-red-600">🔴 超重警告：</strong>超過163克，挑戰失敗！</p>
+            <p class="instruction-text"><strong class="text-red-600">🔴 超重警告：</strong>超過163g，挑戰失敗！</p>
             <p class="instruction-text"><strong class="text-red-600">💣 炸彈注意：</strong>接到炸彈，遊戲結束！</p>
             <p class="instruction-text easter-egg-hint">據說，在極為罕見的情況下，當宇宙的粒子完美對齊時，Galaxy S25 Edge 會展現出超越輕巧的... 獨特光芒 ✨。但這只是個傳說，對吧？</p>
 
             <h3>🎁 挑戰好康 🎁</h3>
             <div class="reward-section">
-                <p class="reward-title">🏆 光速排行榜獎勵</p>
+                <p class="reward-title">� 光速排行榜獎勵</p>
                 <ul class="prize-list">
                     <li><span class="prize-rank">冠軍：</span><strong>三星雙向閃電快充行動電源 (20,000mAh)</strong> *1</li>
                     <li><span class="prize-rank">亞軍：</span><strong>深層震動筋膜按摩槍</strong> *1</li>
@@ -743,17 +743,17 @@
                         <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
                             <span class="block text-xs sm:text-sm font-medium text-sky-700">目前重量</span>
                             <span class="block text-base sm:text-lg font-bold">
-                                <span id="currentWeight" class="text-red-600">0.0</span> 克
+                                <span id="currentWeight" class="text-red-600">0.0</span> g
                             </span>
                         </div>
                         <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
                             <span class="block text-xs sm:text-sm font-medium text-sky-700">目標重量</span>
-                            <span id="targetWeightDisplay" class="block text-base sm:text-lg font-bold text-gray-900">163 克</span>
+                            <span id="targetWeightDisplay" class="block text-base sm:text-lg font-bold text-gray-900">163 g</span>
                         </div>
                         <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
                             <span class="block text-xs sm:text-sm font-medium text-sky-700">遊戲時間</span>
                             <span class="block text-base sm:text-lg font-bold text-gray-900">
-                                <span id="timerDisplay">0.00</span> 秒
+                                <span id="timerDisplay">0.00</span> s
                             </span>
                         </div>
                     </div>
@@ -1059,7 +1059,7 @@
                         } else {
                             const itemWeight = document.createElement('span');
                             itemWeight.className = 'item-weight';
-                            itemWeight.innerHTML = `<strong>${item.weight}</strong> 克`; // 優化：統一單位
+                            itemWeight.innerHTML = `<strong>${item.weight}</strong> g`; // Changed from 克
                             itemCard.appendChild(itemWeight);
                         }
                         itemDisplayGrid.appendChild(itemCard);
@@ -1099,7 +1099,7 @@
             if (!ctx) return;
             fallingObjects.forEach(obj => {
                 const objFontSize = canvas.width * 0.095;
-                const weightFontSize = canvas.width * 0.04;
+                const weightFontSize = canvas.width * 0.08; // Increased font size for weight
 
                 if (obj.type === 'easter_egg' && obj.imageLoaded && obj.imageObj && obj.imageObj.complete && obj.imageObj.naturalHeight !== 0 && obj.imageObj.naturalWidth !== 0) {
                     const aspectRatioItem = obj.imageObj.naturalWidth / obj.imageObj.naturalHeight;
@@ -1132,7 +1132,7 @@
                         ctx.fillStyle = '#FF0000';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'top';
-                        ctx.fillText(`${obj.weight}克`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1)); // 優化：統一單位
+                        ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1)); // Changed from 克
                     }
                 }
             });
@@ -1171,7 +1171,7 @@
                              hazardHitSound.triggerAttackRelease("C2", "8n", Tone.now());
                         }
                         triggerVisualEffect('bomb', player.x + player.width / 2, player.y + player.height / 2);
-                        gameOver("砰！是炸彈！別灰心，再挑戰一次吧！"); // 優化文字
+                        gameOver("砰！是炸彈！別灰心，再挑戰一次吧！");
                         gameEndedThisFrame = true;
                     } else if (obj.type === 'easter_egg') {
                         if (toneJsInitialized && easterEggSound && Tone.context.state === 'running') easterEggSound.triggerAttack("A4", Tone.now());
@@ -1190,38 +1190,38 @@
                                 const revealedItemKey = mysteryTransformableItemKeys[randomKeyIndex];
                                 const actualItem = { ...mysteryTransformableItemsMap[revealedItemKey] };
 
-                                let revealedMsg = `<p class='text-center font-bold text-blue-600'>哇！神秘配件變身！是 <strong>${actualItem.emoji} ${actualItem.name}</strong>`; // 優化文字
+                                let revealedMsg = `<p class='text-center font-bold text-blue-600'>哇！神秘配件變身！是 <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
                                 if (actualItem.type === 'item') {
-                                    revealedMsg += `，重量 ${actualItem.weight} 克！</p>`; // 優化文字
+                                    revealedMsg += `，重量 ${actualItem.weight} g！</p>`; // Changed from 克
                                     accumulatedWeight += actualItem.weight;
                                     if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
-                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT} 克了！`; // 優化文字
+                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT} g 了！`; // Changed from 克
                                 } else if (actualItem.type === 'weight_booster') {
-                                    revealedMsg += `，重量翻倍！</p>`; // 優化文字
+                                    revealedMsg += `，重量翻倍！</p>`;
                                     accumulatedWeight *= 2;
                                     if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
                                     triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
-                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT} 克了！`; // 優化文字
+                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT} g 了！`; // Changed from 克
                                 } else if (actualItem.type === 'time_bonus') {
-                                    revealedMsg += `，時間 ${actualItem.timeEffect} 秒！</p>`; // 優化文字
+                                    revealedMsg += `，時間 ${actualItem.timeEffect} s！</p>`; // Changed from 秒
                                     gameStartTime -= actualItem.timeEffect * 1000;
                                     if (gameStartTime > performance.now()) gameStartTime = performance.now();
                                     if (toneJsInitialized && timeBonusSound && Tone.context.state === 'running') timeBonusSound.triggerAttackRelease("E5", "8n", Tone.now());
                                 }
                                 statusMessage.innerHTML = revealedMsg;
-                                setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 2500); // 優化文字
+                                setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 2500);
                             }
                         } else if (obj.type === 'weight_booster') {
                             if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
                             triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
                             accumulatedWeight *= 2;
                             statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 AI 加速！重量翻倍！</p>";
-                            setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 1500); // 優化文字
-                            customGameOverMessageOnOverweight = `噢不！重量翻倍後超過目標 ${TARGET_WEIGHT} 克了！`; // 優化文字
+                            setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 1500);
+                            customGameOverMessageOnOverweight = `噢不！重量翻倍後超過目標 ${TARGET_WEIGHT} g 了！`; // Changed from 克
                         } else if (obj.type === 'item') {
                             if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
                             accumulatedWeight += obj.weight;
-                            customGameOverMessageOnOverweight = `噢不！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT} 克了！`; // 優化文字
+                            customGameOverMessageOnOverweight = `噢不！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT} g 了！`; // Changed from 克
                         }
 
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
@@ -1232,7 +1232,7 @@
                                 gameWin();
                                 gameEndedThisFrame = true;
                             } else if (accumulatedWeight > TARGET_WEIGHT) {
-                                gameOver(customGameOverMessageOnOverweight || `噢不！超過目標 ${TARGET_WEIGHT} 克了！差一點點，再接再厲！`); // 優化文字
+                                gameOver(customGameOverMessageOnOverweight || `噢不！超過目標 ${TARGET_WEIGHT} g 了！差一點點，再接再厲！`); // Changed from 克
                                 gameEndedThisFrame = true;
                             }
                         }
@@ -1512,7 +1512,7 @@
                 if (idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId);
                 isIdleAnimating = false;
                 idleAnimationFrameId = null;
-                if (startButton) { startButton.textContent = "糟糕，出錯了！點我重整"; startButton.disabled = false; } // 優化文字
+                if (startButton) { startButton.textContent = "糟糕，出錯了！點我重整"; startButton.disabled = false; }
                 statusMessage.innerHTML = "<p class='text-red-600 font-bold'>遊戲發生嚴重錯誤，請重新整理頁面。</p>";
                 return;
             }
@@ -1604,7 +1604,7 @@
                 player.y = canvas.height - (canvas.width * 0.12 / (player.image.naturalWidth / player.image.naturalHeight || 0.5)) - (canvas.height * 0.03);
             }
 
-            statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; // 優化文字
+            statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>";
             startButton.textContent = "遊戲進行中";
             startButton.disabled = true;
             scoreFormContainer.style.display = 'none';
@@ -1676,7 +1676,7 @@
             }
             const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
             if (statusMessage) {
-                statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終成績：${accumulatedWeight.toFixed(1)} 克 / ${elapsedTime} 秒</p>`; // 優化文字
+                statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終成績：${accumulatedWeight.toFixed(1)} g / ${elapsedTime} s</p>`; // Changed from 克 and 秒
             }
             recordGameOutcome(false);
         }
@@ -1704,8 +1704,8 @@
             const finalDisplayTime = Math.max(0, parseFloat(elapsedTime)).toFixed(2);
 
             const winPopupMessage = `
-                <h3>� 太棒了！成功達成 ${TARGET_WEIGHT} 克！ 🎉</h3>
-                <p class="text-center mb-3">您的完美成績：<strong>${finalDisplayTime} 秒</strong></p>
+                <h3> 太棒了！成功達成 ${TARGET_WEIGHT} g！ 🎉</h3>
+                <p class="text-center mb-3">您的完美成績：<strong>${finalDisplayTime} s</strong></p>
                 <h4>🎁 挑戰成功好康 & 活動辦法 🎁</h4>
                 <p class="mt-2"><strong>🏆 光速排行榜獎勵：</strong></p>
                 <ul class="text-sm">
@@ -1717,7 +1717,7 @@
                 <p><strong>🎁 通關好禮：請將此成功畫面截圖，即可於活動期間 (即日起至 2025/6/30)，親臨微風南山三星體驗館 (台北市信義區松智路17號二樓) 兌換「Galaxy AI 帆布袋」乙個！數量有限，換完為止喔！</strong></p>
                 <p><strong>⚡ 加碼抽大獎：</strong></p>
                 <p class="text-sm">還想抽三星行動電源嗎？立刻前往「微風南山三星粉絲專頁」看置頂貼文，參與互動分享就有機會！</p>
-            `; // 優化文字
+            `; // Changed from 克 and 秒
             if (statusMessage) {
                 statusMessage.innerHTML = winPopupMessage;
             }
@@ -1743,7 +1743,7 @@
                     <button id="submitScoreButton" class="game-button">送出成績，登上排行榜！</button>
                     <p id="submitStatus" class="text-sm text-center mt-2"></p>
                 </div>
-            `; // 優化文字
+            `;
             document.getElementById('submitScoreButton').addEventListener('click', async () => {
                 const playerNameInput = document.getElementById('playerName');
                 const playerPhoneInput = document.getElementById('playerPhone');
@@ -1785,7 +1785,7 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(scoreData)
                     });
-                    submitStatus.innerHTML = '<span class="text-green-600 font-medium">✔️ 成功提交！感謝您的精彩挑戰！</span>'; // 優化文字
+                    submitStatus.innerHTML = '<span class="text-green-600 font-medium">✔️ 成功提交！感謝您的精彩挑戰！</span>';
                     nameToHighlightNext = playerName;
                     timeToHighlightNext = finalTime;
                     await fetchLeaderboardData();
@@ -1798,7 +1798,7 @@
                     }
                 } catch (error) {
                     console.error('提交分數時發生錯誤:', error);
-                    submitStatus.innerHTML = '<span class="text-red-600 font-medium">❌ 提交失敗，請檢查網路連線後再試一次。</span>'; // 優化文字
+                    submitStatus.innerHTML = '<span class="text-red-600 font-medium">❌ 提交失敗，請檢查網路連線後再試一次。</span>';
                     document.getElementById('submitScoreButton').disabled = false;
                     nameToHighlightNext = null;
                     timeToHighlightNext = null;
@@ -1840,7 +1840,7 @@
 
             overlay.style.display = 'flex';
 
-            if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>✨ 恭喜！你發現了隱藏彩蛋！ ✨</p>"; // 優化文字
+            if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>✨ 恭喜！你發現了隱藏彩蛋！ ✨</p>";
             if (startButton) {
                 startButton.textContent = "重新開始";
                 startButton.disabled = false;
@@ -2087,7 +2087,7 @@
                 leaderboardLastUpdated.textContent = '最後更新時間：無法取得';
                 leaderboardContainer.style.display = 'block'; return;
             }
-            leaderboardStatus.textContent = '排行榜努力更新中，請稍候...'; // 優化文字
+            leaderboardStatus.textContent = '排行榜努力更新中，請稍候...';
             leaderboardLastUpdated.textContent = '最後更新時間：讀取中...';
             leaderboardContainer.style.display = 'block';
 
@@ -2123,7 +2123,7 @@
             leaderboardList.innerHTML = '';
             if (!scores || !Array.isArray(scores) || scores.length === 0) {
                 const noRecordLi = document.createElement('li');
-                noRecordLi.textContent = '目前排行榜上還沒有挑戰者紀錄，快來搶頭香！'; // 優化文字
+                noRecordLi.textContent = '目前排行榜上還沒有挑戰者紀錄，快來搶頭香！';
                 noRecordLi.style.textAlign = 'center'; noRecordLi.style.color = '#6b7280';
                 leaderboardList.appendChild(noRecordLi);
                 nameToHighlightNext = null;
@@ -2141,7 +2141,7 @@
                 else if (index === 2) { rankDisplay = '🥉'; nameClass += ' rank-3-text'; timeClass += ' rank-3-text'; }
                 else { rankDisplay = `${index + 1}.`; }
 
-                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="${nameClass}">${escapeHTML(score.name || '匿名')}</span> <span class="${timeClass}">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} 秒</span>`;
+                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="${nameClass}">${escapeHTML(score.name || '匿名')}</span> <span class="${timeClass}">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} s</span>`; // Changed from 秒
 
                 if (!highlightAppliedThisCall && nameToHighlightNext && timeToHighlightNext &&
                     score.name === nameToHighlightNext &&
@@ -2274,8 +2274,8 @@
         window.addEventListener('load', async () => {
             handleResize();
             displayGameInstructions();
-            startButton.disabled = true; // 優化：初始載入時可顯示 "遊戲資源載入中..."
-            // statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲資源載入中...</p>"; // 範例
+            startButton.disabled = true;
+            // statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲資源載入中...</p>";
 
             const checkPlayerImage = setInterval(() => {
                 if (player.imageLoaded) {
@@ -2283,14 +2283,14 @@
                     console.log("玩家圖片 (主要或備用) 已確認載入。啟用遊戲。");
                     if (canvas.width > 0) handleResize();
                     startButton.disabled = false;
-                    // statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」挑戰！</p>"; // 範例
+                    // statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」挑戰！</p>";
                     if (!isGameRunning && activeEffects.length === 0) startIdleAnimation();
                 } else if (player.image.complete && player.image.src.includes('placehold.co') && !player.imageLoaded) {
                     console.warn("備用圖片載入嘗試完成，但 player.imageLoaded 仍為 false。繼續啟用遊戲。");
                     clearInterval(checkPlayerImage);
                     if (canvas.width > 0) handleResize();
                     startButton.disabled = false;
-                    // statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」挑戰！</p>"; // 範例
+                    // statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」挑戰！</p>";
                     if (!isGameRunning && activeEffects.length === 0) startIdleAnimation();
                 }
             }, 100);
@@ -2312,7 +2312,7 @@
                 closeNewEasterEggButton.addEventListener('click', () => {
                     hideNewEasterEgg();
                     if (statusMessage) {
-                        statusMessage.innerHTML = "<p class='text-center font-bold'>彩蛋畫面已關閉。想再次挑戰嗎？點擊「重新開始」吧！</p>"; // 優化文字
+                        statusMessage.innerHTML = "<p class='text-center font-bold'>彩蛋畫面已關閉。想再次挑戰嗎？點擊「重新開始」吧！</p>";
                     }
                     if (startButton) {
                         startButton.textContent = "重新開始";
@@ -2330,4 +2330,3 @@
     </script>
 </body>
 </html>
-�
