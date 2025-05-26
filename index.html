@@ -710,13 +710,13 @@
              onerror="this.onerror=null; this.src='https://placehold.co/500x200/60a5fa/ffffff?text=圖片載入失敗';">
         <div id="gameInstructions">
             <h2>遊戲說明</h2>
-            <p class="instruction-text">體驗前所未有的輕盈快感！手持你的 <strong>Galaxy S25 Edge</strong>，化身為「輕巧配重達人」，靈活操控手機左右移動，精準捕捉從天而降的輕量級配件，挑戰完美的 <strong>163 公克</strong>配重！</p>
+            <p class="instruction-text">體驗 Galaxy S25 Edge 的極致輕盈！化身「輕巧配重達人」，靈活操控手機，接住從天而降的配件，一起挑戰完美的 <strong>163 克</strong>吧！</p>
             <p class="instruction-text mt-3"><strong>配件與重量：</strong></p>
             <div id="itemDisplayGrid" class="item-grid-container">
                 </div>
 
             <p class="instruction-text mt-3"><strong>注意事項：</strong></p>
-            <p class="instruction-text"><strong class="text-red-600">🔴 超重警告：</strong>超過163公克，挑戰失敗！</p>
+            <p class="instruction-text"><strong class="text-red-600">🔴 超重警告：</strong>超過163克，挑戰失敗！</p>
             <p class="instruction-text"><strong class="text-red-600">💣 炸彈注意：</strong>接到炸彈，遊戲結束！</p>
             <p class="instruction-text easter-egg-hint">據說，在極為罕見的情況下，當宇宙的粒子完美對齊時，Galaxy S25 Edge 會展現出超越輕巧的... 獨特光芒 ✨。但這只是個傳說，對吧？</p>
 
@@ -724,14 +724,14 @@
             <div class="reward-section">
                 <p class="reward-title">🏆 光速排行榜獎勵</p>
                 <ul class="prize-list">
-                    <li><span class="prize-rank">冠軍：</span><strong>三星雙向閃電快充行動電源 (20,000mAh)</strong>*1</li>
-                    <li><span class="prize-rank">亞軍：</span><strong>深層震動筋膜按摩槍</strong>*1</li>
-                    <li><span class="prize-rank">季軍：</span><strong>不鏽鋼保溫瓶</strong>*1</li>
+                    <li><span class="prize-rank">冠軍：</span><strong>三星雙向閃電快充行動電源 (20,000mAh)</strong> *1</li>
+                    <li><span class="prize-rank">亞軍：</span><strong>深層震動筋膜按摩槍</strong> *1</li>
+                    <li><span class="prize-rank">季軍：</span><strong>不鏽鋼保溫瓶</strong> *1</li>
                 </ul>
             </div>
             <div class="reward-section mt-3">
                 <p class="reward-title">🎁 微風南山三星體驗館限定</p>
-                <p class="reward-detail">「Galaxy AI 帆布袋」*1，憑遊戲成功截圖兌換好禮!</p>
+                <p class="reward-detail">成功通關並截圖，即可兌換「Galaxy AI 帆布袋」*1！</p>
             </div>
         </div>
 
@@ -743,17 +743,17 @@
                         <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
                             <span class="block text-xs sm:text-sm font-medium text-sky-700">目前重量</span>
                             <span class="block text-base sm:text-lg font-bold">
-                                <span id="currentWeight" class="text-red-600">0.0</span> g
+                                <span id="currentWeight" class="text-red-600">0.0</span> 克
                             </span>
                         </div>
                         <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
                             <span class="block text-xs sm:text-sm font-medium text-sky-700">目標重量</span>
-                            <span id="targetWeightDisplay" class="block text-base sm:text-lg font-bold text-gray-900">163 g</span>
+                            <span id="targetWeightDisplay" class="block text-base sm:text-lg font-bold text-gray-900">163 克</span>
                         </div>
                         <div class="bg-sky-50 p-2 rounded-lg shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[100px]">
                             <span class="block text-xs sm:text-sm font-medium text-sky-700">遊戲時間</span>
                             <span class="block text-base sm:text-lg font-bold text-gray-900">
-                                <span id="timerDisplay">0.00</span> s
+                                <span id="timerDisplay">0.00</span> 秒
                             </span>
                         </div>
                     </div>
@@ -800,19 +800,19 @@
                 <div class="shine-effect"></div>
             </div>
             <h1 class="phone-text">Galaxy S25 Edge</h1>
-            <p class="common-celebration-message" id="commonCelebrationMessage">🎉 恭喜發現彩蛋！ 🎉</p>
+            <p class="common-celebration-message" id="commonCelebrationMessage">🎉 恭喜！你發現了隱藏彩蛋！ 🎉</p>
             <div class="redemption-status-container" id="redemptionStatusContainer">
                 <div id="giftAvailableMessage" class="gift-available-message">
-                    <p>憑此<strong class="text-yellow-300">彩蛋畫面截圖</strong><br>可至微風南山三星旗艦館兌換特殊小禮！ (限量五名)</p>
-                    <p class="disclaimer-text">*兌換時需由店員核對並確認資格*</p>
+                    <p>太幸運了！憑此<strong class="text-yellow-300">彩蛋畫面完整截圖</strong>，<br>即可至微風南山三星旗艦體驗館兌換神秘小禮物乙份！<br>(限量五名，先到先得！)</p>
+                    <p class="disclaimer-text">*兌換時請出示截圖，並由現場工作人員協助確認資格*</p>
                 </div>
                 <div id="giftClaimedMessage" class="gift-claimed-message">
-                    <p class="highlight-text text-xl">所有特別版小禮物已被兌換完畢！</p>
+                    <p class="highlight-text text-xl">真可惜！彩蛋限定小禮物已經全數兌換完畢囉！</p>
                     <p class="mt-2">感謝您的參與，希望您依然喜歡這段驚喜動畫！</p>
                 </div>
             </div>
             <div class="particles-container" id="particlesContainerAnimate"></div>
-            <button id="closeNewEasterEggButton" class="game-button" style="margin-top: 25px;">關閉彩蛋</button>
+            <button id="closeNewEasterEggButton" class="game-button" style="margin-top: 25px;">關閉驚喜畫面</button>
         </div>
     </div>
 
@@ -1014,9 +1014,6 @@
                 envelope: { attack: 0.001, decay: 0.1, sustain: 0.01, release: 0.2 },
                 volume: -8
             }).toDestination();
-            // Optional: Add noise for a more "explosive" feel to the bomb
-            // const hazardNoise = new Tone.NoiseSynth({ noise: { type: "white", playbackRate: 2 }, envelope: { attack: 0.001, decay: 0.03, sustain: 0, release: 0.05 }, volume: -15 }).toDestination();
-            // To use: hazardNoise.triggerAttackRelease("8n", Tone.now()); along with hazardHitSound
 
             winSound = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.01, decay: 0.3, sustain: 0.2, release: 0.5 } }).toDestination();
             loseSound = new Tone.FMSynth({ harmonicity: 3, modulationIndex: 10, detune: 0, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 }, modulation: { type: "square" }, modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 } }).toDestination();
@@ -1034,7 +1031,6 @@
             if (itemDisplayGrid) {
                 itemDisplayGrid.innerHTML = ''; // Clear existing items
                 itemTypes.forEach(item => {
-                    // Only display items relevant to the instructions (normal items, boosters, mystery)
                     if (item.type === 'item' || item.type === 'weight_booster' || item.type === 'mystery') {
                         const itemCard = document.createElement('div');
                         itemCard.className = 'item-card';
@@ -1058,12 +1054,12 @@
                         } else if (item.type === 'weight_booster') {
                             const itemEffect = document.createElement('span');
                             itemEffect.className = 'item-effect';
-                            itemEffect.textContent = '當前重量x2';
+                            itemEffect.textContent = '目前重量x2';
                             itemCard.appendChild(itemEffect);
-                        } else { // Regular item
+                        } else {
                             const itemWeight = document.createElement('span');
                             itemWeight.className = 'item-weight';
-                            itemWeight.innerHTML = `<strong>${item.weight}</strong> 公克`;
+                            itemWeight.innerHTML = `<strong>${item.weight}</strong> 克`; // 優化：統一單位
                             itemCard.appendChild(itemWeight);
                         }
                         itemDisplayGrid.appendChild(itemCard);
@@ -1077,27 +1073,23 @@
             if (!ctx) return;
             const currentY = player.y + bounceOffsetY;
 
-            // Basic validation for player properties before drawing
             if (player.width <= 0 || player.height <= 0 || isNaN(player.x) || isNaN(currentY) || isNaN(player.width) || isNaN(player.height)) {
-                // console.warn("Invalid player dimensions or position, skipping drawPlayer.", player);
                 return;
             }
 
             if (player.imageLoaded && player.image.complete && player.image.naturalHeight !== 0 && player.image.naturalWidth !== 0) {
                 ctx.drawImage(player.image, player.x, currentY, player.width, player.height);
             }
-            // Check if the current image source is the placeholder from placehold.co
             else if (player.image.src.includes('placehold.co')) {
-                 // If placeholder image is loaded and has dimensions, draw it
                 if (player.image.complete && player.image.naturalHeight !== 0 && player.image.naturalWidth !== 0) {
                     ctx.drawImage(player.image, player.x, currentY, player.width, player.height);
-                } else { // Fallback if even placeholder image is not ready (e.g. network issue)
-                    ctx.fillStyle = '#a5b4fc'; // A light indigo color
+                } else {
+                    ctx.fillStyle = '#a5b4fc';
                     ctx.fillRect(player.x, currentY, player.width, player.height);
                 }
             }
-            else { // Fallback drawing if image not loaded (e.g., initial load or error)
-                ctx.fillStyle = '#e0e7ff'; // A very light indigo color
+            else {
+                ctx.fillStyle = '#e0e7ff';
                 ctx.fillRect(player.x, currentY, player.width, player.height);
             }
         }
@@ -1106,45 +1098,41 @@
         function drawFallingObjects() {
             if (!ctx) return;
             fallingObjects.forEach(obj => {
-                const objFontSize = canvas.width * 0.095; // Emoji size
-                const weightFontSize = canvas.width * 0.04; // Weight text size
+                const objFontSize = canvas.width * 0.095;
+                const weightFontSize = canvas.width * 0.04;
 
                 if (obj.type === 'easter_egg' && obj.imageLoaded && obj.imageObj && obj.imageObj.complete && obj.imageObj.naturalHeight !== 0 && obj.imageObj.naturalWidth !== 0) {
-                    // Draw Easter Egg image if loaded
                     const aspectRatioItem = obj.imageObj.naturalWidth / obj.imageObj.naturalHeight;
-                    let imgWidth = obj.width * 1.2; // Slightly larger than collision box
+                    let imgWidth = obj.width * 1.2;
                     let imgHeight = imgWidth / aspectRatioItem;
-
-                    // Constrain image size to prevent it from being overly large or small
                     const maxDimFactor = 1.5; const minDim = 5;
                     if (imgHeight > obj.height * maxDimFactor) { imgHeight = obj.height * maxDimFactor; imgWidth = imgHeight * aspectRatioItem; }
                     if (imgWidth > obj.width * maxDimFactor) { imgWidth = obj.width * maxDimFactor; imgHeight = imgWidth / aspectRatioItem; }
 
                     if (imgWidth > minDim && imgHeight > minDim && isFinite(imgWidth) && isFinite(imgHeight)) {
                         ctx.drawImage(obj.imageObj, obj.x + (obj.width - imgWidth) / 2, obj.y + (obj.height - imgHeight) / 2, imgWidth, imgHeight);
-                    } else { // Fallback to emoji if image dimensions are problematic
+                    } else {
                         console.warn("彩蛋圖片計算尺寸無效，繪製備用 emoji。", imgWidth, imgHeight);
                         ctx.font = `${objFontSize}px Arial`;
                         ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
                         ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height);
                     }
-                } else if (obj.type === 'easter_egg') { // Fallback for Easter Egg if image not loaded
+                } else if (obj.type === 'easter_egg') {
                     ctx.font = `${objFontSize}px Arial`;
                     ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
                     ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height);
-                } else { // For all other items (non-Easter Egg)
+                } else {
                     ctx.font = `${objFontSize}px Arial`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
                     ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
 
-                    // Display weight for regular items
                     if (obj.type === 'item' && typeof obj.weight === 'number' && obj.weight > 0) {
                         ctx.font = `bold ${weightFontSize}px Arial`;
-                        ctx.fillStyle = '#FF0000'; // Red color for weight text
+                        ctx.fillStyle = '#FF0000';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'top';
-                        ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1));
+                        ctx.fillText(`${obj.weight}克`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1)); // 優化：統一單位
                     }
                 }
             });
@@ -1153,47 +1141,45 @@
         // Update player's horizontal position based on dx
         function updatePlayerPosition() {
             player.x += player.dx;
-            // Keep player within canvas bounds
             if (player.x < 0) player.x = 0;
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
         }
 
         // Update positions of falling objects and handle collisions
         function updateFallingObjects(deltaTime) {
-            let gameEndedThisFrame = false; // Flag to prevent multiple game over/win calls in one frame
+            let gameEndedThisFrame = false;
             for (let i = fallingObjects.length - 1; i >= 0; i--) {
-                if (gameEndedThisFrame && !isGameRunning) { // If game ended, stop processing more collisions
+                if (gameEndedThisFrame && !isGameRunning) {
                     break;
                 }
                 const obj = fallingObjects[i];
                 if (!obj) continue;
 
-                obj.y += obj.speedPixelsPerSecond * deltaTime; // Move object down
-                obj.markedForRemoval = obj.markedForRemoval || false; // Initialize if not set
+                obj.y += obj.speedPixelsPerSecond * deltaTime;
+                obj.markedForRemoval = obj.markedForRemoval || false;
 
-                // Collision detection with player
                 if (!obj.markedForRemoval &&
                     obj.x < player.x + player.width &&
                     obj.x + obj.width > player.x &&
                     obj.y < player.y + player.height &&
                     obj.y + obj.height > player.y) {
 
-                    obj.markedForRemoval = true; // Mark for removal after collision
+                    obj.markedForRemoval = true;
 
                     if (obj.type === 'bomb') {
                         if (toneJsInitialized && hazardHitSound && Tone.context.state === 'running') {
                              hazardHitSound.triggerAttackRelease("C2", "8n", Tone.now());
                         }
                         triggerVisualEffect('bomb', player.x + player.width / 2, player.y + player.height / 2);
-                        gameOver("哎呀！接到炸彈了！");
+                        gameOver("砰！是炸彈！別灰心，再挑戰一次吧！"); // 優化文字
                         gameEndedThisFrame = true;
                     } else if (obj.type === 'easter_egg') {
                         if (toneJsInitialized && easterEggSound && Tone.context.state === 'running') easterEggSound.triggerAttack("A4", Tone.now());
-                        stopGame(); // Stop game logic
-                        showNewEasterEgg(); // Show the special Easter Egg overlay
+                        stopGame();
+                        showNewEasterEgg();
                         gameEndedThisFrame = true;
-                    } else { // Item, mystery, or booster
-                        let customGameOverMessageOnOverweight = null; // For specific overweight messages
+                    } else {
+                        let customGameOverMessageOnOverweight = null;
 
                         if (obj.type === 'mystery') {
                             if (toneJsInitialized && mysteryRevealSound && Tone.context.state === 'running') mysteryRevealSound.triggerAttackRelease("8n", Tone.now());
@@ -1202,70 +1188,67 @@
                             if (mysteryTransformableItemKeys.length > 0) {
                                 const randomKeyIndex = Math.floor(Math.random() * mysteryTransformableItemKeys.length);
                                 const revealedItemKey = mysteryTransformableItemKeys[randomKeyIndex];
-                                const actualItem = { ...mysteryTransformableItemsMap[revealedItemKey] }; // Create a copy to avoid modifying template
+                                const actualItem = { ...mysteryTransformableItemsMap[revealedItemKey] };
 
-                                let revealedMsg = `<p class='text-center font-bold text-blue-600'>神秘配件變成了... <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
+                                let revealedMsg = `<p class='text-center font-bold text-blue-600'>哇！神秘配件變身！是 <strong>${actualItem.emoji} ${actualItem.name}</strong>`; // 優化文字
                                 if (actualItem.type === 'item') {
-                                    revealedMsg += ` (+${actualItem.weight}g)`;
+                                    revealedMsg += `，重量 ${actualItem.weight} 克！</p>`; // 優化文字
                                     accumulatedWeight += actualItem.weight;
                                     if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
-                                    customGameOverMessageOnOverweight = `哎呀！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT}g 了！`;
+                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT} 克了！`; // 優化文字
                                 } else if (actualItem.type === 'weight_booster') {
-                                    revealedMsg += ` (重量x2!)`;
+                                    revealedMsg += `，重量翻倍！</p>`; // 優化文字
                                     accumulatedWeight *= 2;
                                     if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
                                     triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
-                                    customGameOverMessageOnOverweight = `哎呀！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT}g 了！`;
+                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT} 克了！`; // 優化文字
                                 } else if (actualItem.type === 'time_bonus') {
-                                    revealedMsg += ` (時間 ${actualItem.timeEffect}秒!)`;
-                                    gameStartTime -= actualItem.timeEffect * 1000; // Subtract time
-                                    if (gameStartTime > performance.now()) gameStartTime = performance.now(); // Cap at current time
+                                    revealedMsg += `，時間 ${actualItem.timeEffect} 秒！</p>`; // 優化文字
+                                    gameStartTime -= actualItem.timeEffect * 1000;
+                                    if (gameStartTime > performance.now()) gameStartTime = performance.now();
                                     if (toneJsInitialized && timeBonusSound && Tone.context.state === 'running') timeBonusSound.triggerAttackRelease("E5", "8n", Tone.now());
                                 }
-                                revealedMsg += `!</p>`;
                                 statusMessage.innerHTML = revealedMsg;
-                                setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; }, 2500);
+                                setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 2500); // 優化文字
                             }
                         } else if (obj.type === 'weight_booster') {
                             if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
                             triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
                             accumulatedWeight *= 2;
                             statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 AI 加速！重量翻倍！</p>";
-                            setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>"; }, 1500);
-                            customGameOverMessageOnOverweight = `哎呀！重量翻倍後超過目標 ${TARGET_WEIGHT}g 了！`;
+                            setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 1500); // 優化文字
+                            customGameOverMessageOnOverweight = `噢不！重量翻倍後超過目標 ${TARGET_WEIGHT} 克了！`; // 優化文字
                         } else if (obj.type === 'item') {
                             if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
                             accumulatedWeight += obj.weight;
-                            customGameOverMessageOnOverweight = `哎呀！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT}g 了！`;
+                            customGameOverMessageOnOverweight = `噢不！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT} 克了！`; // 優化文字
                         }
 
-                        accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1)); // Round to one decimal place
+                        accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
                         currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
 
-                        if (!gameEndedThisFrame && isGameRunning) { // Check game state after weight update
-                            if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { // Target met
+                        if (!gameEndedThisFrame && isGameRunning) {
+                            if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) {
                                 gameWin();
                                 gameEndedThisFrame = true;
-                            } else if (accumulatedWeight > TARGET_WEIGHT) { // Overweight
-                                gameOver(customGameOverMessageOnOverweight || `哎呀！超過目標 ${TARGET_WEIGHT}g 了！`);
+                            } else if (accumulatedWeight > TARGET_WEIGHT) {
+                                gameOver(customGameOverMessageOnOverweight || `噢不！超過目標 ${TARGET_WEIGHT} 克了！差一點點，再接再厲！`); // 優化文字
                                 gameEndedThisFrame = true;
                             }
                         }
                     }
-                } else if (obj.y > canvas.height + obj.height + 20) { // Object fell off screen
+                } else if (obj.y > canvas.height + obj.height + 20) {
                     obj.markedForRemoval = true;
                 }
             }
-            // Remove objects marked for removal
             fallingObjects = fallingObjects.filter(obj => !obj.markedForRemoval);
         }
 
         // Spawn a new falling object
         function spawnObject() {
             const spawnableItems = itemTypes.filter(item => item.spawnChance > 0);
-            if (spawnableItems.length === 0) return; // No items to spawn
+            if (spawnableItems.length === 0) return;
 
-            // Weighted random selection based on spawnChance
             const totalChance = spawnableItems.reduce((sum, item) => sum + item.spawnChance, 0);
             let randomRoll = Math.random() * totalChance;
             let selectedType = null;
@@ -1276,22 +1259,22 @@
                 }
                 randomRoll -= item.spawnChance;
             }
-            if (!selectedType) { // Fallback if selection fails (should not happen with valid chances)
+            if (!selectedType) {
                 selectedType = spawnableItems.find(it => it.type === 'item') || spawnableItems[0];
             }
 
             const typeTemplate = selectedType;
-            const objWidth = canvas.width * 0.1; // Object width relative to canvas
-            const objHeight = canvas.width * 0.1; // Object height relative to canvas (square collision box)
+            const objWidth = canvas.width * 0.1;
+            const objHeight = canvas.width * 0.1;
 
             if (typeTemplate.type === 'easter_egg') {
                 fallingObjects.push({
-                    ...typeTemplate, // Spread properties from template
-                    x: Math.random() * (canvas.width - objWidth), // Random horizontal position
-                    y: 0 - objHeight, // Start above canvas
+                    ...typeTemplate,
+                    x: Math.random() * (canvas.width - objWidth),
+                    y: 0 - objHeight,
                     width: objWidth,
                     height: objHeight,
-                    imageObj: typeTemplate.imageObj, // Already preloaded
+                    imageObj: typeTemplate.imageObj,
                     imageLoaded: typeTemplate.imageLoaded,
                     markedForRemoval: false
                 });
@@ -1317,9 +1300,9 @@
         function updateTimerDisplay() {
             if (isGameRunning && gameStartTime > 0) {
                 const elapsedTime = (performance.now() - gameStartTime) / 1000;
-                timerDisplay.textContent = Math.max(0, elapsedTime).toFixed(2); // Ensure non-negative time
+                timerDisplay.textContent = Math.max(0, elapsedTime).toFixed(2);
             } else if (!isGameRunning) {
-                timerDisplay.textContent = "0.00"; // Reset timer display when game not running
+                timerDisplay.textContent = "0.00";
             }
         }
 
@@ -1334,37 +1317,35 @@
             let particleCount, duration, colors;
 
             switch (type) {
-                case 'bomb': // Enhanced bomb effect
+                case 'bomb':
                     particleCount = 35 + Math.floor(Math.random() * 15);
-                    duration = 1200; // Increased total effect duration
-                    colors = ['#FF4500', '#FF0000', '#DC143C', '#B22222', '#8B0000', '#FFA500', '#FF6347', '#CD5C5C']; // More intense and varied reds/oranges
-
-                    effect.flash = { // Central flash properties
-                        radius: player.width * 1.0, // Significantly larger flash based on player width
+                    duration = 1200;
+                    colors = ['#FF4500', '#FF0000', '#DC143C', '#B22222', '#8B0000', '#FFA500', '#FF6347', '#CD5C5C'];
+                    effect.flash = {
+                        radius: player.width * 1.0,
                         maxAlpha: 0.95,
-                        duration: 350 // Longer flash duration
+                        duration: 350
                     };
-
                     for (let i = 0; i < particleCount; i++) {
                         const angle = Math.random() * Math.PI * 2;
-                        const speed = Math.random() * 4 + 2.5; // Faster, more variation
+                        const speed = Math.random() * 4 + 2.5;
                         effect.particles.push({
-                            x: 0, y: 0, // Relative to effect.x, effect.y
+                            x: 0, y: 0,
                             vx: Math.cos(angle) * speed,
                             vy: Math.sin(angle) * speed,
-                            radius: Math.random() * 5 + 2.5, // Larger particles
+                            radius: Math.random() * 5 + 2.5,
                             color: colors[Math.floor(Math.random() * colors.length)],
                             alpha: 1,
-                            life: 500 + Math.random() * 400 // Longer particle life
+                            life: 500 + Math.random() * 400
                         });
                     }
                     break;
                 case 'booster':
                     particleCount = 20 + Math.floor(Math.random() * 8);
                     duration = 500;
-                    colors = ['#FFFFE0', '#FFFACD', '#FFD700']; // Yellowish colors for booster
+                    colors = ['#FFFFE0', '#FFFACD', '#FFD700'];
                     for (let i = 0; i < particleCount; i++) {
-                        const angle = -Math.PI / 2 + (Math.random() - 0.5) * (Math.PI / 3); // Upward spread
+                        const angle = -Math.PI / 2 + (Math.random() - 0.5) * (Math.PI / 3);
                         const speed = Math.random() * 2.5 + 1.5;
                         effect.particles.push({
                             x: (Math.random() - 0.5) * 10, y: 0,
@@ -1379,7 +1360,7 @@
                 case 'mystery':
                     particleCount = 25 + Math.floor(Math.random() * 10);
                     duration = 700;
-                    colors = ['#DA70D6', '#BA55D3', '#9370DB', '#8A2BE2']; // Purplish colors for mystery
+                    colors = ['#DA70D6', '#BA55D3', '#9370DB', '#8A2BE2'];
                     for (let i = 0; i < particleCount; i++) {
                         const angle = Math.random() * Math.PI * 2;
                         const orbitRadius = Math.random() * 20 + 10;
@@ -1410,60 +1391,50 @@
                 const elapsedTime = now - effect.startTime;
                 let effectProgress = elapsedTime / effect.duration;
 
-                if (elapsedTime >= effect.duration) { // Effect finished
+                if (elapsedTime >= effect.duration) {
                     activeEffects.splice(i, 1);
                     continue;
                 }
 
                 ctx.save();
-                ctx.translate(effect.x, effect.y); // Translate to effect origin
+                ctx.translate(effect.x, effect.y);
 
                 if (effect.type === 'bomb') {
-                    // 1. Draw Flash for bomb
                     if (effect.flash && elapsedTime < effect.flash.duration) {
                         const flashProgress = elapsedTime / effect.flash.duration;
-                        const easedFlashProgress = 1 - Math.pow(1 - flashProgress, 3); // Ease-out cubic for alpha fade
+                        const easedFlashProgress = 1 - Math.pow(1 - flashProgress, 3);
                         const currentAlpha = effect.flash.maxAlpha * (1 - easedFlashProgress);
-                        const currentRadius = effect.flash.radius * (0.3 + flashProgress * 0.7); // Flash expands
-
+                        const currentRadius = effect.flash.radius * (0.3 + flashProgress * 0.7);
                         const gradient = ctx.createRadialGradient(0, 0, currentRadius * 0.1, 0, 0, currentRadius);
-                        gradient.addColorStop(0, `rgba(255, 230, 200, ${currentAlpha})`);     // Hot white/yellow center
-                        gradient.addColorStop(0.4, `rgba(255, 150, 50, ${currentAlpha * 0.8})`); // Orange
-                        gradient.addColorStop(0.8, `rgba(255, 60, 0, ${currentAlpha * 0.5})`);   // Reddish
-                        gradient.addColorStop(1, `rgba(200, 0, 0, ${currentAlpha * 0.2})`);     // Darker red, fading out
+                        gradient.addColorStop(0, `rgba(255, 230, 200, ${currentAlpha})`);
+                        gradient.addColorStop(0.4, `rgba(255, 150, 50, ${currentAlpha * 0.8})`);
+                        gradient.addColorStop(0.8, `rgba(255, 60, 0, ${currentAlpha * 0.5})`);
+                        gradient.addColorStop(1, `rgba(200, 0, 0, ${currentAlpha * 0.2})`);
                         ctx.fillStyle = gradient;
-
                         ctx.beginPath();
                         ctx.arc(0, 0, currentRadius, 0, Math.PI * 2);
                         ctx.fill();
                     }
-
-                    // 2. Draw Particles for bomb (start slightly after flash begins)
                     const particleStartTimeOffset = effect.flash ? effect.flash.duration * 0.1 : 0;
                     effect.particles.forEach(p => {
                         const particleElapsedTime = now - (effect.startTime + particleStartTimeOffset);
                         if (particleElapsedTime < 0 || particleElapsedTime > p.life) return;
-
                         const particleProgress = particleElapsedTime / p.life;
                         const particleAlpha = p.alpha * (1 - particleProgress);
                         if (particleAlpha <= 0) return;
-
                         ctx.beginPath();
                         ctx.globalAlpha = particleAlpha;
                         ctx.fillStyle = p.color;
-
                         const dtFrames = deltaTime * TARGET_FPS_FOR_CONVERSION;
-                        p.x += p.vx * dtFrames * (1 - particleProgress * 0.5); // Particles slow down
+                        p.x += p.vx * dtFrames * (1 - particleProgress * 0.5);
                         p.y += p.vy * dtFrames * (1 - particleProgress * 0.5);
-                        p.vy += 0.12 * dtFrames; // Stronger gravity for bomb particles
-
-                        const currentParticleRadius = p.radius * Math.max(0, (1 - particleProgress * 0.8)); // Particles shrink
+                        p.vy += 0.12 * dtFrames;
+                        const currentParticleRadius = p.radius * Math.max(0, (1 - particleProgress * 0.8));
                         if (currentParticleRadius > 0) {
                              ctx.arc(p.x, p.y, currentParticleRadius, 0, Math.PI * 2);
                              ctx.fill();
                         }
                     });
-
                 } else if (effect.type === 'mystery') {
                     effect.particles.forEach(p => {
                         const particleAlpha = p.alpha * (1 - effectProgress);
@@ -1472,8 +1443,8 @@
                         ctx.globalAlpha = particleAlpha;
                         ctx.fillStyle = p.color;
                         const dtFrames = deltaTime * TARGET_FPS_FOR_CONVERSION;
-                        p.angle += p.orbitSpeed * dtFrames * 0.2; // Slower orbit for mystery
-                        p.orbitRadius = p.initialOrbitRadius * (1 + effectProgress * 0.5); // Orbit expands
+                        p.angle += p.orbitSpeed * dtFrames * 0.2;
+                        p.orbitRadius = p.initialOrbitRadius * (1 + effectProgress * 0.5);
                         p.x = Math.cos(p.angle) * p.orbitRadius;
                         p.y = Math.sin(p.angle) * p.orbitRadius;
                         const currentParticleRadius = p.radius * (1 - effectProgress * 0.5);
@@ -1482,7 +1453,7 @@
                             ctx.fill();
                         }
                     });
-                } else { // Booster or other effects
+                } else {
                      effect.particles.forEach(p => {
                         const particleAlpha = p.alpha * (1 - effectProgress);
                         if (particleAlpha <= 0) return;
@@ -1493,7 +1464,7 @@
                         p.x += p.vx * dtFrames;
                         p.y += p.vy * dtFrames;
                         if (effect.type === 'booster') {
-                            p.vy += 0.03 * dtFrames; // Slight upward gravity for booster
+                            p.vy += 0.03 * dtFrames;
                         }
                         if(p.radius > 0){
                            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -1503,22 +1474,18 @@
                 }
                 ctx.restore();
             }
-            ctx.globalAlpha = 1; // Reset global alpha
+            ctx.globalAlpha = 1;
         }
-
 
         // Main game loop
         function gameLoop(currentTime) {
-            // Calculate deltaTime
-            if (!lastFrameTime) lastFrameTime = currentTime; // Initialize on first call
+            if (!lastFrameTime) lastFrameTime = currentTime;
             const deltaTime = (currentTime - lastFrameTime) / 1000.0;
             lastFrameTime = currentTime;
-            const clampedDeltaTime = Math.min(deltaTime, 1/15); // Clamp to prevent large jumps if tab was inactive
+            const clampedDeltaTime = Math.min(deltaTime, 1/15);
 
             try {
                 clearCanvas();
-
-                // --- Game Logic (only if isGameRunning) ---
                 if (isGameRunning) {
                     updateTimerDisplay();
                     spawnTimer++;
@@ -1527,77 +1494,64 @@
                         spawnTimer = 0;
                     }
                     updatePlayerPosition();
-                    updateFallingObjects(clampedDeltaTime); // This can set isGameRunning to false (e.g., on bomb or win)
+                    updateFallingObjects(clampedDeltaTime);
                 }
-
-                // --- Drawing ---
-                if (isGameRunning) { // If game is actively running, draw player and objects
+                if (isGameRunning) {
                     drawPlayer();
                     drawFallingObjects();
                 }
-                // Always draw active effects, regardless of isGameRunning state, so they can finish
                 if (activeEffects.length > 0) {
                     drawVisualEffects(clampedDeltaTime);
                 }
-
             } catch (error) {
                 console.error("gameLoop 中發生錯誤:", error.name, error.message, error.stack);
-                isGameRunning = false; // Stop game on critical error
-                activeEffects = []; // Clear effects
+                isGameRunning = false;
+                activeEffects = [];
                 if (animationFrameId) cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
                 if (idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId);
                 isIdleAnimating = false;
                 idleAnimationFrameId = null;
-                if (startButton) { startButton.textContent = "錯誤-重整"; startButton.disabled = false; }
+                if (startButton) { startButton.textContent = "糟糕，出錯了！點我重整"; startButton.disabled = false; } // 優化文字
                 statusMessage.innerHTML = "<p class='text-red-600 font-bold'>遊戲發生嚴重錯誤，請重新整理頁面。</p>";
-                return; // Stop the loop
+                return;
             }
 
-            // --- Loop Control ---
             if (isGameRunning || activeEffects.length > 0) {
-                // Continue animation if game is running OR there are still effects to animate
                 animationFrameId = requestAnimationFrame(gameLoop);
             } else {
-                // Game is not running AND no active effects are left
-                animationFrameId = null; // Ensure main game loop ID is cleared
-                // Transition to idle animation if not already doing so and canvas/player are ready
+                animationFrameId = null;
                 if (!isIdleAnimating && canvas.width > 0 && player.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                     startIdleAnimation();
                 }
             }
         }
 
-
         // Idle animation for the player when game is not running
         function idleAnimationLoop() {
-            if (!isIdleAnimating) return; // Stop if not supposed to be idle animating
-            // Ensure player and canvas are ready for idle animation
+            if (!isIdleAnimating) return;
             if (!canvas.width || !player.width || !(player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                idleAnimationFrameId = requestAnimationFrame(idleAnimationLoop); // Retry if not ready
+                idleAnimationFrameId = requestAnimationFrame(idleAnimationLoop);
                 return;
             }
-
-            const bounceFrequency = 1.5; // How fast the bounce is
-            const bounceAmplitude = Math.max(1, canvas.height * 0.0035); // How high the bounce is
-            const elapsedTime = performance.now() / 1000; // Time in seconds
+            const bounceFrequency = 1.5;
+            const bounceAmplitude = Math.max(1, canvas.height * 0.0035);
+            const elapsedTime = performance.now() / 1000;
             const bounceOffset = Math.sin(elapsedTime * bounceFrequency * 2 * Math.PI) * bounceAmplitude;
-
             clearCanvas();
-            drawPlayer(bounceOffset); // Draw player with vertical offset
+            drawPlayer(bounceOffset);
             idleAnimationFrameId = requestAnimationFrame(idleAnimationLoop);
         }
 
         function startIdleAnimation() {
-            if (isIdleAnimating) return; // Already idle animating
-            // If the main game loop was somehow still scheduled, cancel it
+            if (isIdleAnimating) return;
             if (animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
             }
             isIdleAnimating = true;
-            if(idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId); // Clear previous idle loop if any
-            lastFrameTime = 0; // Reset lastFrameTime for idle loop's potential timing needs (though not strictly used by current idle)
+            if(idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId);
+            lastFrameTime = 0;
             idleAnimationLoop();
         }
 
@@ -1607,33 +1561,25 @@
                 cancelAnimationFrame(idleAnimationFrameId);
                 idleAnimationFrameId = null;
             }
-            // Redraw player in static position after stopping idle animation,
-            // but only if the main game isn't about to start and no effects are playing.
             if (!isGameRunning && activeEffects.length === 0 && canvas.width > 0 && player.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                 clearCanvas();
                 drawPlayer();
             }
         }
 
-
         // Start the game
         function startGame() {
             if (isGameRunning) return;
-
-            // Stop idle animation if it's running
             if(isIdleAnimating) {
                 cancelAnimationFrame(idleAnimationFrameId);
                 isIdleAnimating = false;
                 idleAnimationFrameId = null;
             }
-            // Clear any existing main game loop animation frame
             if(animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
             }
 
-
-            // Initialize or resume Tone.js context
             if (!toneJsInitialized) {
                 initializeSounds();
             } else if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
@@ -1648,9 +1594,8 @@
             accumulatedWeight = 0;
             currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
             fallingObjects = [];
-            activeEffects = []; // Clear any active visual effects from previous game over state
+            activeEffects = [];
 
-            // Position player
             if (player.imageLoaded || player.image.src.includes('placehold.co')) {
                 player.x = canvas.width / 2 - player.width / 2;
                 player.y = canvas.height - player.height - (canvas.height * 0.03);
@@ -1659,25 +1604,22 @@
                 player.y = canvas.height - (canvas.width * 0.12 / (player.image.naturalWidth / player.image.naturalHeight || 0.5)) - (canvas.height * 0.03);
             }
 
-
-            statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲進行中...</p>";
+            statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; // 優化文字
             startButton.textContent = "遊戲進行中";
             startButton.disabled = true;
             scoreFormContainer.style.display = 'none';
             scoreFormContainer.innerHTML = '';
 
-            gameStartTime = performance.now(); // Set game start time for timer
-            lastFrameTime = performance.now(); // Set last frame time for delta time calculation
+            gameStartTime = performance.now();
+            lastFrameTime = performance.now();
 
             const gameContainerElement = document.getElementById('gameContainer');
             if (gameContainerElement) {
                 gameContainerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
 
-            animationFrameId = requestAnimationFrame(gameLoop); // Start new game loop
-
+            animationFrameId = requestAnimationFrame(gameLoop);
             fetchGameStats();
-
             if (isTouchDevice() && touchControlsUI) {
                 touchControlsUI.style.display = 'flex';
             }
@@ -1685,18 +1627,14 @@
 
         // Stop the game logic
         function stopGame() {
-            isGameRunning = false; // Signal the gameLoop to stop game logic updates
-                                    // The gameLoop will continue running if activeEffects exist.
-                                    // It will then transition to idle animation when effects are done.
+            isGameRunning = false;
             if (startButton) {
                 startButton.disabled = false;
             }
             if (touchControlsUI) {
                 touchControlsUI.style.display = 'none';
             }
-            // No need to call startIdleAnimation() here; gameLoop will handle it.
         }
-
 
         // Record game outcome (win/loss) to backend
         async function recordGameOutcome(isSuccess) {
@@ -1719,7 +1657,7 @@
 
         // Handle game over state
         function gameOver(message) {
-            stopGame(); // Sets isGameRunning to false; effects will continue via gameLoop
+            stopGame();
             if (startButton) {
                 startButton.textContent = "再試一次";
             }
@@ -1738,14 +1676,14 @@
             }
             const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
             if (statusMessage) {
-                statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終重量: ${accumulatedWeight.toFixed(1)}g，時間: ${elapsedTime}s</p>`;
+                statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終成績：${accumulatedWeight.toFixed(1)} 克 / ${elapsedTime} 秒</p>`; // 優化文字
             }
             recordGameOutcome(false);
         }
 
         // Handle game win state
         async function gameWin() {
-            stopGame(); // Sets isGameRunning to false; effects will continue via gameLoop
+            stopGame();
             if (startButton) {
                 startButton.textContent = "再玩一局";
             }
@@ -1766,20 +1704,20 @@
             const finalDisplayTime = Math.max(0, parseFloat(elapsedTime)).toFixed(2);
 
             const winPopupMessage = `
-                <h3>🎉 恭喜！精準達成 ${TARGET_WEIGHT}g！ 🎉</h3>
-                <p class="text-center mb-3">您的成績：<strong>${finalDisplayTime} 秒</strong></p>
+                <h3>� 太棒了！成功達成 ${TARGET_WEIGHT} 克！ 🎉</h3>
+                <p class="text-center mb-3">您的完美成績：<strong>${finalDisplayTime} 秒</strong></p>
                 <h4>🎁 挑戰成功好康 & 活動辦法 🎁</h4>
                 <p class="mt-2"><strong>🏆 光速排行榜獎勵：</strong></p>
                 <ul class="text-sm">
-                    <li>冠軍：三星雙向閃電快充行動電源 (20,000mAh)*1</li>
-                    <li>亞軍：深層震動筋膜按摩槍*1</li>
-                    <li>季軍：不鏽鋼保溫瓶*1</li>
+                    <li>冠軍：三星雙向閃電快充行動電源 (20,000mAh) *1</li>
+                    <li>亞軍：深層震動筋膜按摩槍 *1</li>
+                    <li>季軍：不鏽鋼保溫瓶 *1</li>
                 </ul>
                 <p class="text-xs text-gray-600 mb-2">排行榜結算至 2025/6/30 23:59，詳情與得獎名單請見微風南山三星粉專頁。</p>
-                <p><strong>🎁 【通關獎】：「Galaxy AI 帆布袋」*1，憑此遊戲成功畫面截圖,即可於活動期間(即日起- 2025/6/30) 至微風南山三星體驗館(台北市信義區松智路17號二樓)兌換</strong></p>
+                <p><strong>🎁 通關好禮：請將此成功畫面截圖，即可於活動期間 (即日起至 2025/6/30)，親臨微風南山三星體驗館 (台北市信義區松智路17號二樓) 兌換「Galaxy AI 帆布袋」乙個！數量有限，換完為止喔！</strong></p>
                 <p><strong>⚡ 加碼抽大獎：</strong></p>
-                <p class="text-sm">想再抽三星行動電源？快到微風南山三星粉專頁查看指定貼文，參與互動分享活動！</p>
-            `;
+                <p class="text-sm">還想抽三星行動電源嗎？立刻前往「微風南山三星粉絲專頁」看置頂貼文，參與互動分享就有機會！</p>
+            `; // 優化文字
             if (statusMessage) {
                 statusMessage.innerHTML = winPopupMessage;
             }
@@ -1794,18 +1732,18 @@
                 <div id="scoreForm">
                     <h3 class="text-lg font-semibold text-center mb-3 text-sky-700">🎉 S25 Edge 配重達人留名 🎉</h3>
                     <div>
-                        <label for="playerName">您的達人稱號 (顯示於排行榜)：</label>
+                        <label for="playerName">取個響亮的達人稱號吧！ (將顯示於排行榜)：</label>
                         <input type="text" id="playerName" name="playerName" maxlength="50" required placeholder="例如：輕巧神手小明">
                     </div>
                     <div>
-                        <label for="playerPhone">您的手機號碼 (選填)：</label>
-                        <p class="form-field-description">若想參加「光速排行榜」和「抽獎活動」，請務必填寫，以便中獎時與您聯繫。</p>
+                        <label for="playerPhone">您的手機號碼 (選填，僅供中獎聯絡使用。)：</label>
+                        <p class="form-field-description">填寫手機號碼才能參加排行榜獎勵喔！</p>
                         <input type="tel" id="playerPhone" name="playerPhone" maxlength="10" placeholder="例如：0912345678">
                     </div>
-                    <button id="submitScoreButton" class="game-button">提交成績並加入排行榜</button>
+                    <button id="submitScoreButton" class="game-button">送出成績，登上排行榜！</button>
                     <p id="submitStatus" class="text-sm text-center mt-2"></p>
                 </div>
-            `;
+            `; // 優化文字
             document.getElementById('submitScoreButton').addEventListener('click', async () => {
                 const playerNameInput = document.getElementById('playerName');
                 const playerPhoneInput = document.getElementById('playerPhone');
@@ -1847,7 +1785,7 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(scoreData)
                     });
-                    submitStatus.innerHTML = '<span class="text-green-600 font-medium">✔️ 成績已提交！感謝您的參與！</span>';
+                    submitStatus.innerHTML = '<span class="text-green-600 font-medium">✔️ 成功提交！感謝您的精彩挑戰！</span>'; // 優化文字
                     nameToHighlightNext = playerName;
                     timeToHighlightNext = finalTime;
                     await fetchLeaderboardData();
@@ -1860,7 +1798,7 @@
                     }
                 } catch (error) {
                     console.error('提交分數時發生錯誤:', error);
-                    submitStatus.innerHTML = '<span class="text-red-600 font-medium">❌ 提交失敗，請稍後再試或檢查網路連線。</span>';
+                    submitStatus.innerHTML = '<span class="text-red-600 font-medium">❌ 提交失敗，請檢查網路連線後再試一次。</span>'; // 優化文字
                     document.getElementById('submitScoreButton').disabled = false;
                     nameToHighlightNext = null;
                     timeToHighlightNext = null;
@@ -1902,7 +1840,7 @@
 
             overlay.style.display = 'flex';
 
-            if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>✨ 彩蛋發現！ ✨</p>";
+            if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>✨ 恭喜！你發現了隱藏彩蛋！ ✨</p>"; // 優化文字
             if (startButton) {
                 startButton.textContent = "重新開始";
                 startButton.disabled = false;
@@ -1941,7 +1879,7 @@
                 giftClaimedMessageDiv.style.display = 'none';
                 const disclaimerTextElement = giftAvailableMessageDiv.querySelector('.disclaimer-text');
                 if (disclaimerTextElement) {
-                     disclaimerTextElement.textContent = '*兌換時需由店員核對並確認資格*';
+                     disclaimerTextElement.textContent = '*兌換時請出示截圖，並由現場工作人員協助確認資格*';
                 }
             }
         }
@@ -1964,7 +1902,6 @@
                 if(particlesContainer) particlesContainer.innerHTML = '';
             }
             if (!isGameRunning && canvas.width > 0 && player.width > 0) {
-                 // Check if idle animation should start (it will be handled by gameLoop transition)
                 if (activeEffects.length === 0 && !isIdleAnimating) {
                     startIdleAnimation();
                 }
@@ -1976,7 +1913,7 @@
         function handleCanvasTouchStart(e) {
             if (isGameRunning || (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co')))) {
                 e.preventDefault();
-                if(isIdleAnimating) stopIdleAnimation(); // Stop idle if touched
+                if(isIdleAnimating) stopIdleAnimation();
                 const touch = e.touches[0];
                 touchStartTime = performance.now();
                 const rect = canvas.getBoundingClientRect();
@@ -2014,7 +1951,6 @@
                 if (wasTouchOnPlayerInitially && touchDuration < MAX_TAP_DURATION && playerMovedDistance < MAX_TAP_MOVEMENT_FOR_START) {
                     startGame();
                 } else {
-                    // If not starting game, and no effects are playing, restart idle
                     if (activeEffects.length === 0 && !isIdleAnimating) {
                         startIdleAnimation();
                     }
@@ -2032,7 +1968,6 @@
             player.x = newPlayerX;
 
             if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                // Only redraw if not in game and no active effects that might be cleared prematurely
                 if (activeEffects.length === 0) {
                     clearCanvas();
                     drawPlayer();
@@ -2052,7 +1987,7 @@
                 else player.dx = -player.speed;
 
                 if (player.dx !== 0 && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                     if (activeEffects.length === 0) { // Only redraw if no effects are playing
+                     if (activeEffects.length === 0) {
                         updatePlayerPosition();
                         clearCanvas();
                         drawPlayer();
@@ -2070,9 +2005,9 @@
             if ( e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left' ) {
                 player.dx = 0;
                 if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                    if (activeEffects.length === 0 && !isIdleAnimating) { // Only start idle if no effects and not already idle
-                        clearCanvas(); // Clear previous position
-                        drawPlayer();  // Draw at new static position
+                    if (activeEffects.length === 0 && !isIdleAnimating) {
+                        clearCanvas();
+                        drawPlayer();
                         startIdleAnimation();
                     }
                 }
@@ -2152,7 +2087,7 @@
                 leaderboardLastUpdated.textContent = '最後更新時間：無法取得';
                 leaderboardContainer.style.display = 'block'; return;
             }
-            leaderboardStatus.textContent = '排行榜加載中...';
+            leaderboardStatus.textContent = '排行榜努力更新中，請稍候...'; // 優化文字
             leaderboardLastUpdated.textContent = '最後更新時間：讀取中...';
             leaderboardContainer.style.display = 'block';
 
@@ -2188,7 +2123,7 @@
             leaderboardList.innerHTML = '';
             if (!scores || !Array.isArray(scores) || scores.length === 0) {
                 const noRecordLi = document.createElement('li');
-                noRecordLi.textContent = '目前尚無紀錄或資料格式錯誤。';
+                noRecordLi.textContent = '目前排行榜上還沒有挑戰者紀錄，快來搶頭香！'; // 優化文字
                 noRecordLi.style.textAlign = 'center'; noRecordLi.style.color = '#6b7280';
                 leaderboardList.appendChild(noRecordLi);
                 nameToHighlightNext = null;
@@ -2249,20 +2184,14 @@
 
         function handleResize() {
             try {
-                // Stop idle animation if it's running, as canvas size change will affect it
                 if(isIdleAnimating) stopIdleAnimation();
-                // If main game loop is running, it will adapt. If effects are playing, they will adapt.
-
                 const gameArea = document.getElementById('gameContainer');
                 const gameAreaPaddingLeft = gameArea ? parseFloat(getComputedStyle(gameArea).paddingLeft) || 0 : 0;
                 const gameAreaPaddingRight = gameArea ? parseFloat(getComputedStyle(gameArea).paddingRight) || 0 : 0;
                 const bodyPaddingHorizontal = (parseFloat(getComputedStyle(document.body).paddingLeft) || 0) * 2;
-
                 const availableWidthInGameArea = gameArea ? gameArea.clientWidth - (gameAreaPaddingLeft + gameAreaPaddingRight) : window.innerWidth * 0.9;
                 const availableWidthInWindow = window.innerWidth - bodyPaddingHorizontal;
-
                 canvasWidth = Math.min(480, availableWidthInGameArea, availableWidthInWindow);
-
                 let phoneImageAspectRatio;
                 if (player.imageLoaded && player.image.naturalWidth > 0 && player.image.naturalHeight > 0) {
                     phoneImageAspectRatio = player.image.naturalWidth / player.image.naturalHeight;
@@ -2274,7 +2203,6 @@
                 if (!phoneImageAspectRatio || phoneImageAspectRatio <= 0 || !isFinite(phoneImageAspectRatio)) {
                     phoneImageAspectRatio = 0.5;
                 }
-
                 player.width = canvasWidth * 0.12;
                 player.height = player.width / phoneImageAspectRatio;
                 canvasHeight = canvasWidth / aspectRatio;
@@ -2285,12 +2213,10 @@
                     player.width = canvasWidth * 0.12;
                     player.height = player.width / phoneImageAspectRatio;
                 }
-
                 canvas.width = Math.max(150, Math.round(canvasWidth));
                 canvas.height = Math.max(200, Math.round(canvasHeight));
                 player.width = Math.max(15, Math.round(player.width));
                 player.height = Math.max(30, Math.round(player.height));
-
                 if (!isFinite(player.width) || player.width <= 0) {
                     player.width = canvas.width * 0.12; player.width = Math.max(15, Math.round(player.width));
                 }
@@ -2304,18 +2230,14 @@
                 player.width = Math.max(15, Math.min(player.width, canvas.width * 0.3));
                 player.height = player.width / phoneImageAspectRatio;
                 if (!isFinite(player.height)) player.height = Math.max(30, player.width * 2);
-
                 const infoBarElements = document.querySelectorAll('.info-bar div, #gameStatsDisplay div div');
                 infoBarElements.forEach(el => { if (el) el.style.maxWidth = `${canvas.width}px`; });
-
                 player.x = canvas.width / 2 - player.width / 2;
                 player.y = canvas.height - player.height - (canvas.height * 0.03);
                 if (isTouchDevice()) player.speed = canvas.width * 0.018; else player.speed = canvas.width * 0.024;
-
                 itemTypes.forEach(it => {
                     it.speedPixelsPerSecond = canvas.height * it.base_ch_per_sec * BASE_SPEED_MULTIPLIER;
                 });
-
             } catch (error) {
                 console.error("handleResize 中發生錯誤:", error.name, error.message, error.stack);
                 if (canvas) {
@@ -2329,25 +2251,20 @@
                     player.y = ( (canvas ? canvas.height : 450) ) - player.height - 10;
                 }
             } finally {
-                // If game is not running and no effects are playing, restart idle animation
                 if (!isGameRunning && activeEffects.length === 0) {
-                    clearCanvas(); // Clear before starting idle to avoid old frame
+                    clearCanvas();
                     if (player.imageLoaded || player.image.src.includes('placehold.co')) {
-                       drawPlayer(); // Draw player at new position
+                       drawPlayer();
                     }
                     startIdleAnimation();
                 } else if (isGameRunning || activeEffects.length > 0) {
-                    // If game or effects are running, the main gameLoop will handle redrawing.
-                    // We might need to redraw player immediately if game is running.
                     clearCanvas();
                     if(isGameRunning) {
                         drawPlayer();
-                        drawFallingObjects(); // Also redraw objects if game is running
+                        drawFallingObjects();
                     }
                     if(activeEffects.length > 0) {
-                        // For effects, we might need to pass a small deltaTime if we want them to update positionally
-                        // For now, just let the main loop handle their next tick.
-                        // drawVisualEffects(0.016); // Or just let the main loop draw them
+                        // drawVisualEffects(0.016);
                     }
                 }
                  if(startButton) startButton.disabled = isGameRunning || !(player.imageLoaded || (player.image.complete && player.image.src.includes('placehold.co')));
@@ -2357,19 +2274,23 @@
         window.addEventListener('load', async () => {
             handleResize();
             displayGameInstructions();
-            startButton.disabled = true;
+            startButton.disabled = true; // 優化：初始載入時可顯示 "遊戲資源載入中..."
+            // statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲資源載入中...</p>"; // 範例
+
             const checkPlayerImage = setInterval(() => {
                 if (player.imageLoaded) {
                     clearInterval(checkPlayerImage);
                     console.log("玩家圖片 (主要或備用) 已確認載入。啟用遊戲。");
                     if (canvas.width > 0) handleResize();
                     startButton.disabled = false;
+                    // statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」挑戰！</p>"; // 範例
                     if (!isGameRunning && activeEffects.length === 0) startIdleAnimation();
                 } else if (player.image.complete && player.image.src.includes('placehold.co') && !player.imageLoaded) {
                     console.warn("備用圖片載入嘗試完成，但 player.imageLoaded 仍為 false。繼續啟用遊戲。");
                     clearInterval(checkPlayerImage);
                     if (canvas.width > 0) handleResize();
                     startButton.disabled = false;
+                    // statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」挑戰！</p>"; // 範例
                     if (!isGameRunning && activeEffects.length === 0) startIdleAnimation();
                 }
             }, 100);
@@ -2391,7 +2312,7 @@
                 closeNewEasterEggButton.addEventListener('click', () => {
                     hideNewEasterEgg();
                     if (statusMessage) {
-                        statusMessage.innerHTML = "<p class='text-center font-bold'>已關閉彩蛋。點擊「重新開始」可再玩一次。</p>";
+                        statusMessage.innerHTML = "<p class='text-center font-bold'>彩蛋畫面已關閉。想再次挑戰嗎？點擊「重新開始」吧！</p>"; // 優化文字
                     }
                     if (startButton) {
                         startButton.textContent = "重新開始";
@@ -2409,3 +2330,4 @@
     </script>
 </body>
 </html>
+�
