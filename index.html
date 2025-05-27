@@ -17,7 +17,7 @@
     </script>
 
     <style>
-        /* 基本設定與動畫 */
+        /* Basic settings and animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
@@ -53,7 +53,7 @@
             animation: fadeIn 0.8s ease-out forwards;
         }
 
-        /* 標題 */
+        /* Title */
         #pageContainer > h1 {
             font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
             color: #1e3a8a; /* Tailwind sky-800 */
@@ -61,7 +61,7 @@
             margin-bottom: 1.25rem;
         }
 
-        /* 遊戲主視覺圖 */
+        /* Game banner image */
         .game-banner-image {
             width: 100%;
             max-width: 500px;
@@ -72,7 +72,7 @@
             border: none;
         }
 
-        /* 遊戲說明區塊 */
+        /* Game instructions block */
         #gameInstructions {
             background-color: #e0f2fe; /* Tailwind blue-100 / sky-100 */
             border: 1px solid #93c5fd; /* Tailwind blue-300 */
@@ -108,7 +108,7 @@
             border-top: 1px dashed #93c5fd;
         }
 
-        /* 配件卡片 */
+        /* Accessory cards */
         .item-grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -168,7 +168,7 @@
             color: #581c87;
         }
 
-        /* 遊戲說明內文 */
+        /* Game instruction text */
         #gameInstructions p, #gameInstructions .instruction-text {
             font-size: 0.9rem;
             color: #374151;
@@ -233,7 +233,7 @@
             color: #6b7280;
         }
 
-        /* 遊戲與表單容器 */
+        /* Game and Form Container */
         #gameAndFormContainer {
             width: 100%;
             max-width: 500px;
@@ -245,7 +245,7 @@
             opacity: 0; /* Initially hidden for animation */
         }
 
-        /* 遊戲容器 */
+        /* Game Container */
         #gameContainer {
             background-color: #ffffff;
             border-radius: 0.75rem;
@@ -273,7 +273,7 @@
             cursor: grabbing;
         }
 
-        /* 狀態訊息 */
+        /* Status Message */
         #statusMessage {
             margin-top: 1rem;
             padding: 0.75rem;
@@ -329,7 +329,7 @@
             padding: 0.6rem;
         }
 
-        /* 遊戲按鈕 */
+        /* Game Button */
         .game-button {
             background-image: linear-gradient(to right, #2563eb 0%, #3b82f6 50%, #1d4ed8 100%);
             color: white;
@@ -363,7 +363,7 @@
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
         }
         
-        /* 快速開始按鈕容器 */
+        /* Quick Start Button Container */
         #quickStartButtonContainer {
             position: fixed;
             bottom: 0;
@@ -374,7 +374,7 @@
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             z-index: 150;
-            display: flex;
+            display: flex; /* Default to flex, JS will hide/show */
             justify-content: center;
             align-items: center;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
@@ -387,9 +387,9 @@
         }
 
 
-        /* 觸控按鈕 */
+        /* Touch Controls */
         #touchControls {
-            display: none; /* **初始隱藏** */
+            display: none; /* **Initially hidden** */
             position: fixed;
             bottom: 0;
             left: 0;
@@ -427,7 +427,7 @@
             background-color: rgba(29, 78, 216, 0.85);
         }
 
-        /* 分數表單與排行榜 */
+        /* Score Form & Leaderboard */
         #scoreFormContainer, #leaderboardContainer {
             margin-top: 1.5rem;
             padding: 1rem;
@@ -520,14 +520,14 @@
             border-left: 4px solid #f59e0b; /* Tailwind amber-500 */
             padding-left: 0.5rem !important;
         }
-        /* 新增前三名顏色 */
-        .rank-1-text { color: #FFD700 !important; font-weight: bold; } /* 金色 */
-        .rank-2-text { color: #C0C0C0 !important; font-weight: bold; } /* 銀色 */
-        .rank-3-text { color: #CD7F32 !important; font-weight: bold; } /* 銅色 */
+        /* Top 3 rank colors */
+        .rank-1-text { color: #FFD700 !important; font-weight: bold; } /* Gold */
+        .rank-2-text { color: #C0C0C0 !important; font-weight: bold; } /* Silver */
+        .rank-3-text { color: #CD7F32 !important; font-weight: bold; } /* Bronze */
 
 
-        /* 遊戲統計數據 */
-        #gameStatsSectionToMove {
+        /* Game Statistics */
+        #gameStatsSectionToMove { /* Retains its original class for max-width, but margin adjusted in HTML */
             animation: fadeIn 0.8s ease-out 0.6s forwards;
             opacity: 0; /* Initially hidden for animation */
         }
@@ -540,16 +540,16 @@
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* Tailwind shadow-sm */
             border-radius: 0.375rem;
         }
-         #gameStatsDisplay div span:first-child { /* 統計標題 */
+         #gameStatsDisplay div span:first-child { /* Stat title */
             color: #475569; /* Tailwind slate-600 */
         }
-         #gameStatsDisplay div span:last-child { /* 統計數值 */
+         #gameStatsDisplay div span:last-child { /* Stat value */
             color: #1e293b; /* Tailwind slate-800 */
             font-weight: 600; /* Tailwind font-semibold */
         }
 
 
-        /* 彩蛋 Overlay */
+        /* Easter Egg Overlay */
         .easter-egg-container-wrapper {
             color: white;
             background: radial-gradient(circle, rgba(29,78,216,0.9) 0%, rgba(17,24,39,0.98) 100%);
@@ -670,7 +670,7 @@
         }
 
 
-        /* 響應式調整 */
+        /* Responsive adjustments */
         @media (max-width: 600px) {
             body { padding: 10px; padding-bottom: 90px; /* Adjust for quick start button */ }
             #pageContainer > h1 {
@@ -750,7 +750,7 @@
 
             <p class="instruction-text mt-3"><strong>注意事項：</strong></p>
             <p class="instruction-text"><strong class="text-red-600">🔴 超重警告：</strong>超過163g，挑戰失敗！</p>
-            <p class="instruction-text"><strong class="text-red-600">💣 炸彈注意：</strong>接到炸彈，遊戲結束！</p>
+            <p class="instruction-text"><strong class="text-red-600">� 炸彈注意：</strong>接到炸彈，遊戲結束！</p>
             <p class="instruction-text easter-egg-hint">據說，在極為罕見的情況下，當宇宙的粒子完美對齊時，Galaxy S25 Edge 會展現出超越輕巧的... 獨特光芒 ✨。但這只是個傳說，對吧？</p>
 
             <h3>🎁 挑戰好康 🎁</h3>
@@ -800,7 +800,7 @@
                 </div>
         </div>
 
-        <div id="gameStatsSectionToMove" class="w-full max-w-md mt-4 text-xs px-1">
+        <div id="gameStatsSectionToMove" class="w-full max-w-md mt-1 text-xs px-1">
             <div id="gameStatsDisplay" class="flex flex-wrap justify-around items-center w-full gap-2">
                 <div class="p-1.5 rounded-md shadow-sm text-center flex-1 min-w-[calc(33.33%-0.5rem)] sm:min-w-[85px]">
                     <span class="block text-xs font-medium">🏆 總成功</span>
@@ -867,8 +867,8 @@
         const timerDisplay = document.getElementById('timerDisplay');
         const statusMessage = document.getElementById('statusMessage');
         const startButton = document.getElementById('startButton');
-        const quickStartButton = document.getElementById('quickStartButton'); // New button
-        const quickStartButtonContainer = document.getElementById('quickStartButtonContainer'); // New button container
+        const quickStartButton = document.getElementById('quickStartButton');
+        const quickStartButtonContainer = document.getElementById('quickStartButtonContainer');
 
         const touchControlsUI = document.getElementById('touchControls');
         const leftButton = document.getElementById('leftButton');
@@ -886,7 +886,7 @@
 
         const newEasterEggOverlay = document.getElementById('newEasterEggOverlay');
 
-        // *** 更新 Google Apps Script URL ***
+        // *** Google Apps Script URL ***
         const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0rGkwSQUckopQyfj4PzqJqeRwHZSD1dlNM3koEDQJCKL0-7XaQehZD1Txr5TA_jiv/exec';
 
         const TARGET_WEIGHT = 163;
@@ -909,30 +909,30 @@
             image: new Image(),
             imageLoaded: false
         };
-        player.image.src = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png'; // Player image URL
+        player.image.src = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png';
         player.image.onload = () => {
             player.imageLoaded = true;
             console.log("玩家圖片已成功載入 (GitHub)。");
-            if (!isGameRunning && canvas.width > 0) { // Ensure canvas is sized before drawing
-                handleResize(); // Redraw player in idle state if needed
+            if (!isGameRunning && canvas.width > 0) {
+                handleResize();
             }
         };
         player.image.onerror = () => {
             console.error("玩家圖片載入失敗 (GitHub)，將使用備用圖片。");
-            player.imageLoaded = false; // Explicitly set to false before trying fallback
-            player.image.src = 'https://placehold.co/80x160/c7d2fe/1e3a8a?text=S25&font=noto-sans'; // Fallback image
-            player.image.onload = () => { // onload for fallback
+            player.imageLoaded = false;
+            player.image.src = 'https://placehold.co/80x160/c7d2fe/1e3a8a?text=S25&font=noto-sans';
+            player.image.onload = () => {
                 player.imageLoaded = true;
                 console.log("備用玩家圖片已載入。");
                 if (!isGameRunning && canvas.width > 0) {
                     handleResize();
                 }
             };
-            player.image.onerror = () => { // onerror for fallback
+            player.image.onerror = () => {
                  console.error("備用玩家圖片也載入失敗。");
-                 player.imageLoaded = false; // Still false
+                 player.imageLoaded = false;
                  if (!isGameRunning && canvas.width > 0) {
-                    handleResize(); // Attempt to draw placeholder color if image fails
+                     handleResize();
                  }
             };
         };
@@ -950,10 +950,10 @@
 
 
         // Game balance constants
-        const BASE_SPEED_MULTIPLIER = (((((2.7 * 0.9) * 1.2) * 1.2) * 1.2) * 1.1) * 1.1; // Base speed factor for items
-        const TARGET_FPS_FOR_CONVERSION = 60.0; // Used to convert speed units
+        const BASE_SPEED_MULTIPLIER = (((((2.7 * 0.9) * 1.2) * 1.2) * 1.2) * 1.1) * 1.1;
+        const TARGET_FPS_FOR_CONVERSION = 60.0;
 
-        const S25_IMAGE_URL = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png'; // Easter egg item image
+        const S25_IMAGE_URL = 'https://raw.githubusercontent.com/andyhhsu/breezesamsung-S25Edge-Challenge/main/164369.png';
 
         // Item definitions
         const itemTypes = [
@@ -966,34 +966,33 @@
             {
                 name: '神秘配件',
                 emoji: '❓',
-                weight: '???', // Display weight, actual weight determined on reveal
+                weight: '???',
                 type: 'mystery',
                 base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION,
                 spawnChance: 8
             },
-            { // This item is currently not spawned (spawnChance: 0) but defined for mystery item transformation
+            {
                 name: '時光沙漏',
                 emoji: '⏳',
                 weight: 0,
                 type: 'time_bonus',
-                timeEffect: -2, // Seconds to subtract from timer
+                timeEffect: -2,
                 base_ch_per_sec: 0.0020 * TARGET_FPS_FOR_CONVERSION,
-                spawnChance: 0 // Can be revealed by mystery item
+                spawnChance: 0
             },
-            { // Easter Egg Item
+            {
                 name: 'Galaxy S25 Edge 彩蛋',
-                emoji: '✨', // Fallback emoji if image fails
+                emoji: '✨',
                 imageSrc: S25_IMAGE_URL,
-                imageObj: new Image(), // Preload image object
+                imageObj: new Image(),
                 imageLoaded: false,
                 type: 'easter_egg',
-                base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION, // Slowest item
-                spawnChance: 0.1 // Very rare
+                base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION,
+                spawnChance: 0.1
             }
         ];
-        itemTypes.forEach(item => item.speedPixelsPerSecond = 0); // Will be calculated in handleResize
+        itemTypes.forEach(item => item.speedPixelsPerSecond = 0);
 
-        // Preload Easter Egg item image
         const easterEggItemDefinition = itemTypes.find(item => item.type === 'easter_egg');
         if (easterEggItemDefinition && easterEggItemDefinition.imageObj) {
             easterEggItemDefinition.imageObj.src = easterEggItemDefinition.imageSrc;
@@ -1007,7 +1006,6 @@
             };
         }
 
-        // Map for mystery item transformations
         const mysteryTransformableItemsMap = {
             'S Pen': itemTypes.find(it => it.name === 'S Pen'),
             'Galaxy Buds3 (單耳)': itemTypes.find(it => it.name === 'Galaxy Buds3 (單耳)'),
@@ -1020,23 +1018,20 @@
 
 
         let fallingObjects = [];
-        let spawnTimer = 0; // Counter for spawning objects
-        const SPAWN_INTERVAL = 55; // Frames between spawns (approx)
+        let spawnTimer = 0;
+        const SPAWN_INTERVAL = 55;
 
-        // Sound effects (Tone.js objects)
         let catchSound, hazardHitSound, winSound, loseSound, boosterSound, mysteryRevealSound, easterEggSound, timeBonusSound;
         let toneJsInitialized = false;
 
-        let activeEffects = []; // For visual effects like explosions
+        let activeEffects = [];
 
-        // Initialize Tone.js sounds
         function initializeSounds() {
             if (typeof Tone === 'undefined') {
                 console.error("Tone.js 音效庫未載入。");
                 toneJsInitialized = false;
                 return;
             }
-            // Attempt to start Tone.js audio context if not already running
             if (Tone.context.state !== 'running') {
                 Tone.start().then(() => {
                     console.log("Tone.js context 已由 initializeSounds 啟動。");
@@ -1044,47 +1039,38 @@
                     console.warn("Tone.start() 在 initializeSounds 中啟動失敗，可能需要使用者互動。", e);
                 });
             }
-            // Define sound synthesizers
             catchSound = new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.1 } }).toDestination();
-
             hazardHitSound = new Tone.MembraneSynth({
                 pitchDecay: 0.03, octaves: 3,
                 oscillator: { type: "sine" },
                 envelope: { attack: 0.001, decay: 0.1, sustain: 0.01, release: 0.2 },
                 volume: -8
             }).toDestination();
-
             winSound = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.01, decay: 0.3, sustain: 0.2, release: 0.5 } }).toDestination();
             loseSound = new Tone.FMSynth({ harmonicity: 3, modulationIndex: 10, detune: 0, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 }, modulation: { type: "square" }, modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 } }).toDestination();
             boosterSound = new Tone.Synth({ oscillator: { type: 'sawtooth' }, envelope: { attack: 0.01, decay: 0.15, sustain: 0.08, release: 0.2 }, volume: -3 }).toDestination();
             mysteryRevealSound = new Tone.NoiseSynth({ noise: { type: 'pink' }, envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.1 }, volume: -10 }).toDestination();
             easterEggSound = new Tone.PluckSynth({ attackNoise: 0.5, dampening: 4000, resonance: 0.9, volume: -3 }).toDestination();
             timeBonusSound = new Tone.Synth({ oscillator: { type: 'pulse', width: 0.3 }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.15 }, volume: -4 }).toDestination();
-
             toneJsInitialized = true;
             console.log("Tone.js 音效已初始化。");
         }
 
-        // Display item cards in the instructions section
         function displayGameInstructions() {
             if (itemDisplayGrid) {
-                itemDisplayGrid.innerHTML = ''; // Clear existing items
+                itemDisplayGrid.innerHTML = '';
                 itemTypes.forEach(item => {
                     if (item.type === 'item' || item.type === 'weight_booster' || item.type === 'mystery') {
                         const itemCard = document.createElement('div');
                         itemCard.className = 'item-card';
-
                         const itemEmoji = document.createElement('span');
                         itemEmoji.className = 'item-emoji';
                         itemEmoji.textContent = item.emoji;
-
                         const itemName = document.createElement('span');
                         itemName.className = 'item-name';
                         itemName.textContent = item.name;
-
                         itemCard.appendChild(itemEmoji);
                         itemCard.appendChild(itemName);
-
                         if (item.type === 'mystery') {
                             const itemMysteryEffect = document.createElement('span');
                             itemMysteryEffect.className = 'item-mystery-effect';
@@ -1098,7 +1084,7 @@
                         } else {
                             const itemWeight = document.createElement('span');
                             itemWeight.className = 'item-weight';
-                            itemWeight.innerHTML = `<strong>${item.weight}</strong> g`; // Changed from 克
+                            itemWeight.innerHTML = `<strong>${item.weight}</strong> g`;
                             itemCard.appendChild(itemWeight);
                         }
                         itemDisplayGrid.appendChild(itemCard);
@@ -1107,15 +1093,12 @@
             }
         }
 
-        // Draw the player on the canvas
         function drawPlayer(bounceOffsetY = 0) {
             if (!ctx) return;
             const currentY = player.y + bounceOffsetY;
-
             if (player.width <= 0 || player.height <= 0 || isNaN(player.x) || isNaN(currentY) || isNaN(player.width) || isNaN(player.height)) {
                 return;
             }
-
             if (player.imageLoaded && player.image.complete && player.image.naturalHeight !== 0 && player.image.naturalWidth !== 0) {
                 ctx.drawImage(player.image, player.x, currentY, player.width, player.height);
             }
@@ -1133,13 +1116,11 @@
             }
         }
 
-        // Draw all falling objects
         function drawFallingObjects() {
             if (!ctx) return;
             fallingObjects.forEach(obj => {
                 const objFontSize = canvas.width * 0.095;
-                const weightFontSize = canvas.width * 0.06; // Increased font size for weight
-
+                const weightFontSize = canvas.width * 0.06;
                 if (obj.type === 'easter_egg' && obj.imageLoaded && obj.imageObj && obj.imageObj.complete && obj.imageObj.naturalHeight !== 0 && obj.imageObj.naturalWidth !== 0) {
                     const aspectRatioItem = obj.imageObj.naturalWidth / obj.imageObj.naturalHeight;
                     let imgWidth = obj.width * 1.2;
@@ -1147,7 +1128,6 @@
                     const maxDimFactor = 1.5; const minDim = 5;
                     if (imgHeight > obj.height * maxDimFactor) { imgHeight = obj.height * maxDimFactor; imgWidth = imgHeight * aspectRatioItem; }
                     if (imgWidth > obj.width * maxDimFactor) { imgWidth = obj.width * maxDimFactor; imgHeight = imgWidth / aspectRatioItem; }
-
                     if (imgWidth > minDim && imgHeight > minDim && isFinite(imgWidth) && isFinite(imgHeight)) {
                         ctx.drawImage(obj.imageObj, obj.x + (obj.width - imgWidth) / 2, obj.y + (obj.height - imgHeight) / 2, imgWidth, imgHeight);
                     } else {
@@ -1165,26 +1145,23 @@
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
                     ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
-
                     if (obj.type === 'item' && typeof obj.weight === 'number' && obj.weight > 0) {
                         ctx.font = `bold ${weightFontSize}px Arial`;
                         ctx.fillStyle = '#FF0000';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'top';
-                        ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1)); // Changed from 克
+                        ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1));
                     }
                 }
             });
         }
 
-        // Update player's horizontal position based on dx
         function updatePlayerPosition() {
             player.x += player.dx;
             if (player.x < 0) player.x = 0;
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
         }
 
-        // Update positions of falling objects and handle collisions
         function updateFallingObjects(deltaTime) {
             let gameEndedThisFrame = false;
             for (let i = fallingObjects.length - 1; i >= 0; i--) {
@@ -1193,18 +1170,14 @@
                 }
                 const obj = fallingObjects[i];
                 if (!obj) continue;
-
                 obj.y += obj.speedPixelsPerSecond * deltaTime;
                 obj.markedForRemoval = obj.markedForRemoval || false;
-
                 if (!obj.markedForRemoval &&
                     obj.x < player.x + player.width &&
                     obj.x + obj.width > player.x &&
                     obj.y < player.y + player.height &&
                     obj.y + obj.height > player.y) {
-
                     obj.markedForRemoval = true;
-
                     if (obj.type === 'bomb') {
                         if (toneJsInitialized && hazardHitSound && Tone.context.state === 'running') {
                              hazardHitSound.triggerAttackRelease("C2", "8n", Tone.now());
@@ -1219,30 +1192,27 @@
                         gameEndedThisFrame = true;
                     } else {
                         let customGameOverMessageOnOverweight = null;
-
                         if (obj.type === 'mystery') {
                             if (toneJsInitialized && mysteryRevealSound && Tone.context.state === 'running') mysteryRevealSound.triggerAttackRelease("8n", Tone.now());
                             triggerVisualEffect('mystery', player.x + player.width / 2, player.y + player.height / 2);
-
                             if (mysteryTransformableItemKeys.length > 0) {
                                 const randomKeyIndex = Math.floor(Math.random() * mysteryTransformableItemKeys.length);
                                 const revealedItemKey = mysteryTransformableItemKeys[randomKeyIndex];
                                 const actualItem = { ...mysteryTransformableItemsMap[revealedItemKey] };
-
                                 let revealedMsg = `<p class='text-center font-bold text-blue-600'>哇！神秘配件變身！是 <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
                                 if (actualItem.type === 'item') {
-                                    revealedMsg += `，重量 ${actualItem.weight} g！</p>`; // Changed from 克
+                                    revealedMsg += `，重量 ${actualItem.weight} g！</p>`;
                                     accumulatedWeight += actualItem.weight;
                                     if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
-                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT} g 了！`; // Changed from 克
+                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT} g 了！`;
                                 } else if (actualItem.type === 'weight_booster') {
                                     revealedMsg += `，重量翻倍！</p>`;
                                     accumulatedWeight *= 2;
                                     if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
                                     triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
-                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT} g 了！`; // Changed from 克
+                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT} g 了！`;
                                 } else if (actualItem.type === 'time_bonus') {
-                                    revealedMsg += `，時間 ${actualItem.timeEffect} s！</p>`; // Changed from 秒
+                                    revealedMsg += `，時間 ${actualItem.timeEffect} s！</p>`;
                                     gameStartTime -= actualItem.timeEffect * 1000;
                                     if (gameStartTime > performance.now()) gameStartTime = performance.now();
                                     if (toneJsInitialized && timeBonusSound && Tone.context.state === 'running') timeBonusSound.triggerAttackRelease("E5", "8n", Tone.now());
@@ -1256,22 +1226,20 @@
                             accumulatedWeight *= 2;
                             statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 AI 加速！重量翻倍！</p>";
                             setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 1500);
-                            customGameOverMessageOnOverweight = `噢不！重量翻倍後超過目標 ${TARGET_WEIGHT} g 了！`; // Changed from 克
+                            customGameOverMessageOnOverweight = `噢不！重量翻倍後超過目標 ${TARGET_WEIGHT} g 了！`;
                         } else if (obj.type === 'item') {
                             if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
                             accumulatedWeight += obj.weight;
-                            customGameOverMessageOnOverweight = `噢不！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT} g 了！`; // Changed from 克
+                            customGameOverMessageOnOverweight = `噢不！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT} g 了！`;
                         }
-
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
                         currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
-
                         if (!gameEndedThisFrame && isGameRunning) {
                             if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) {
                                 gameWin();
                                 gameEndedThisFrame = true;
                             } else if (accumulatedWeight > TARGET_WEIGHT) {
-                                gameOver(customGameOverMessageOnOverweight || `噢不！超過目標 ${TARGET_WEIGHT} g 了！差一點點，再接再厲！`); // Changed from 克
+                                gameOver(customGameOverMessageOnOverweight || `噢不！超過目標 ${TARGET_WEIGHT} g 了！差一點點，再接再厲！`);
                                 gameEndedThisFrame = true;
                             }
                         }
@@ -1283,11 +1251,9 @@
             fallingObjects = fallingObjects.filter(obj => !obj.markedForRemoval);
         }
 
-        // Spawn a new falling object
         function spawnObject() {
             const spawnableItems = itemTypes.filter(item => item.spawnChance > 0);
             if (spawnableItems.length === 0) return;
-
             const totalChance = spawnableItems.reduce((sum, item) => sum + item.spawnChance, 0);
             let randomRoll = Math.random() * totalChance;
             let selectedType = null;
@@ -1301,11 +1267,9 @@
             if (!selectedType) {
                 selectedType = spawnableItems.find(it => it.type === 'item') || spawnableItems[0];
             }
-
             const typeTemplate = selectedType;
             const objWidth = canvas.width * 0.1;
             const objHeight = canvas.width * 0.1;
-
             if (typeTemplate.type === 'easter_egg') {
                 fallingObjects.push({
                     ...typeTemplate,
@@ -1329,13 +1293,11 @@
             }
         }
 
-        // Clear the canvas
         function clearCanvas() {
             if (!ctx) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
-        // Update the game timer display
         function updateTimerDisplay() {
             if (isGameRunning && gameStartTime > 0) {
                 const elapsedTime = (performance.now() - gameStartTime) / 1000;
@@ -1345,7 +1307,6 @@
             }
         }
 
-        // Trigger visual effects (e.g., explosions)
         function triggerVisualEffect(type, x, y) {
             const effect = {
                 type: type,
@@ -1354,7 +1315,6 @@
                 particles: []
             };
             let particleCount, duration, colors;
-
             switch (type) {
                 case 'bomb':
                     particleCount = 35 + Math.floor(Math.random() * 15);
@@ -1421,7 +1381,6 @@
             activeEffects.push(effect);
         }
 
-        // Draw active visual effects
         function drawVisualEffects(deltaTime) {
             if (!ctx) return;
             const now = performance.now();
@@ -1429,15 +1388,12 @@
                 const effect = activeEffects[i];
                 const elapsedTime = now - effect.startTime;
                 let effectProgress = elapsedTime / effect.duration;
-
                 if (elapsedTime >= effect.duration) {
                     activeEffects.splice(i, 1);
                     continue;
                 }
-
                 ctx.save();
                 ctx.translate(effect.x, effect.y);
-
                 if (effect.type === 'bomb') {
                     if (effect.flash && elapsedTime < effect.flash.duration) {
                         const flashProgress = elapsedTime / effect.flash.duration;
@@ -1516,13 +1472,11 @@
             ctx.globalAlpha = 1;
         }
 
-        // Main game loop
         function gameLoop(currentTime) {
             if (!lastFrameTime) lastFrameTime = currentTime;
             const deltaTime = (currentTime - lastFrameTime) / 1000.0;
             lastFrameTime = currentTime;
-            const clampedDeltaTime = Math.min(deltaTime, 1/15);
-
+            const clampedDeltaTime = Math.min(deltaTime, 1/15); // Clamp delta time to avoid large jumps
             try {
                 clearCanvas();
                 if (isGameRunning) {
@@ -1535,17 +1489,17 @@
                     updatePlayerPosition();
                     updateFallingObjects(clampedDeltaTime);
                 }
-                if (isGameRunning) {
+                if (isGameRunning) { // Draw player and objects only if game is running
                     drawPlayer();
                     drawFallingObjects();
                 }
-                if (activeEffects.length > 0) {
+                if (activeEffects.length > 0) { // Always draw effects if any exist
                     drawVisualEffects(clampedDeltaTime);
                 }
             } catch (error) {
                 console.error("gameLoop 中發生錯誤:", error.name, error.message, error.stack);
                 isGameRunning = false;
-                activeEffects = [];
+                activeEffects = []; // Clear effects on critical error
                 if (animationFrameId) cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
                 if (idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId);
@@ -1554,30 +1508,31 @@
                 if (startButton) { startButton.textContent = "糟糕，出錯了！點我重整"; startButton.disabled = false; }
                 if (quickStartButton) { quickStartButton.textContent = "出錯！重整"; quickStartButton.disabled = false; }
                 statusMessage.innerHTML = "<p class='text-red-600 font-bold'>遊戲發生嚴重錯誤，請重新整理頁面。</p>";
-                if (quickStartButtonContainer) quickStartButtonContainer.style.display = 'flex'; // Show quick start on error
-                return;
+                if (quickStartButtonContainer) quickStartButtonContainer.style.display = 'flex';
+                checkQuickStartButtonVisibility(); // Update quick start button visibility on error
+                return; // Stop the loop
             }
 
             if (isGameRunning || activeEffects.length > 0) {
                 animationFrameId = requestAnimationFrame(gameLoop);
             } else {
-                animationFrameId = null;
+                animationFrameId = null; // Ensure it's null if loop stops
+                // If game not running and no effects, and player image is ready, start idle animation
                 if (!isIdleAnimating && canvas.width > 0 && player.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                     startIdleAnimation();
                 }
             }
         }
 
-        // Idle animation for the player when game is not running
         function idleAnimationLoop() {
             if (!isIdleAnimating) return;
             if (!canvas.width || !player.width || !(player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                idleAnimationFrameId = requestAnimationFrame(idleAnimationLoop);
+                idleAnimationFrameId = requestAnimationFrame(idleAnimationLoop); // Keep trying if resources not ready
                 return;
             }
             const bounceFrequency = 1.5;
             const bounceAmplitude = Math.max(1, canvas.height * 0.0035);
-            const elapsedTime = performance.now() / 1000;
+            const elapsedTime = performance.now() / 1000; // Use performance.now for smoother animation
             const bounceOffset = Math.sin(elapsedTime * bounceFrequency * 2 * Math.PI) * bounceAmplitude;
             clearCanvas();
             drawPlayer(bounceOffset);
@@ -1586,13 +1541,13 @@
 
         function startIdleAnimation() {
             if (isIdleAnimating) return;
-            if (animationFrameId) {
+            if (animationFrameId) { // Cancel main game loop if it's somehow running
                 cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
             }
             isIdleAnimating = true;
-            if(idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId);
-            lastFrameTime = 0;
+            if(idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId); // Clear previous idle animation
+            lastFrameTime = 0; // Reset for idle animation timing if needed, though performance.now is better
             idleAnimationLoop();
         }
 
@@ -1602,27 +1557,24 @@
                 cancelAnimationFrame(idleAnimationFrameId);
                 idleAnimationFrameId = null;
             }
+            // Redraw player in static position if game is not running and no effects
             if (!isGameRunning && activeEffects.length === 0 && canvas.width > 0 && player.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                 clearCanvas();
                 drawPlayer();
             }
         }
 
-        // Start the game
         function startGame() {
             if (isGameRunning) return;
 
-            // Hide quick start button container if it's visible
-            if (quickStartButtonContainer) {
+            if (quickStartButtonContainer) { // Always hide quick start when game starts
                 quickStartButtonContainer.style.display = 'none';
             }
 
-            if(isIdleAnimating) {
-                cancelAnimationFrame(idleAnimationFrameId);
-                isIdleAnimating = false;
-                idleAnimationFrameId = null;
+            if(isIdleAnimating) { // Stop idle animation before starting game
+                stopIdleAnimation();
             }
-            if(animationFrameId) {
+            if(animationFrameId) { // Cancel any existing game loop (e.g., from a previous error state)
                 cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
             }
@@ -1641,73 +1593,78 @@
             accumulatedWeight = 0;
             currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
             fallingObjects = [];
-            activeEffects = [];
+            activeEffects = []; // Clear any lingering visual effects
 
+            // Ensure player position is set correctly based on current canvas size
             if (player.imageLoaded || player.image.src.includes('placehold.co')) {
-                player.x = canvas.width / 2 - player.width / 2;
-                player.y = canvas.height - player.height - (canvas.height * 0.03);
-            } else {
-                player.x = canvas.width / 2 - (canvas.width * 0.12) / 2;
-                player.y = canvas.height - (canvas.width * 0.12 / (player.image.naturalWidth / player.image.naturalHeight || 0.5)) - (canvas.height * 0.03);
+                 player.x = canvas.width / 2 - player.width / 2;
+                 player.y = canvas.height - player.height - (canvas.height * 0.03);
+            } else { // Fallback if image somehow not ready (should be handled by button disable logic)
+                 player.x = canvas.width / 2 - (canvas.width * 0.12) / 2;
+                 player.y = canvas.height - (canvas.width * 0.12 / (player.image.naturalWidth / player.image.naturalHeight || 0.5)) - (canvas.height * 0.03);
             }
+
 
             statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>";
             startButton.textContent = "遊戲進行中";
             startButton.disabled = true;
-            if (quickStartButton) quickStartButton.disabled = true; // Disable quick start button as well
+            if (quickStartButton) quickStartButton.disabled = true;
 
             scoreFormContainer.style.display = 'none';
             scoreFormContainer.innerHTML = '';
 
             gameStartTime = performance.now();
-            lastFrameTime = performance.now();
+            lastFrameTime = performance.now(); // Reset lastFrameTime for the new game loop
 
             const gameContainerElement = document.getElementById('gameContainer');
             if (gameContainerElement) {
                 gameContainerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
 
-            animationFrameId = requestAnimationFrame(gameLoop);
-            fetchGameStats();
+            animationFrameId = requestAnimationFrame(gameLoop); // Start the game loop
+            fetchGameStats(); // Update stats when game starts
             if (isTouchDevice() && touchControlsUI) {
                 touchControlsUI.style.display = 'flex';
             }
+            checkQuickStartButtonVisibility(); // Ensure quick start is hidden
         }
 
-        // Stop the game logic
         function stopGame() {
             isGameRunning = false;
             if (startButton) {
-                startButton.disabled = false;
+                startButton.disabled = false; // Enable start button
             }
-            // Do not re-enable or show quickStartButton here, its purpose is initial launch
+            // Quick start button's disabled state will be handled by handleResize/checkQuickStartButtonVisibility
             if (touchControlsUI) {
                 touchControlsUI.style.display = 'none';
             }
+             // If no active effects, try to start idle animation
+            if (activeEffects.length === 0 && !isIdleAnimating && canvas.width > 0 && player.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
+                startIdleAnimation();
+            }
+            checkQuickStartButtonVisibility(); // Update quick start button visibility
         }
 
-        // Record game outcome (win/loss) to backend
         async function recordGameOutcome(isSuccess) {
             const eventType = isSuccess ? "gameWinEvent" : "gameLossEvent";
             console.log("記錄遊戲結果:", eventType);
             try {
                 await fetch(GOOGLE_APPS_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
+                    mode: 'no-cors', // Important for Apps Script when not handling preflight
                     cache: 'no-cache',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json' }, // Still good practice
                     body: JSON.stringify({ eventType: eventType })
                 });
                 console.log(`事件 ${eventType} 已傳送至後端。`);
-                fetchGameStats();
+                fetchGameStats(); // Refresh stats after recording outcome
             } catch (error) {
                 console.error(`記錄 ${eventType} 時發生錯誤:`, error);
             }
         }
 
-        // Handle game over state
         function gameOver(message) {
-            stopGame();
+            stopGame(); // This will also call checkQuickStartButtonVisibility via handleResize
             if (startButton) {
                 startButton.textContent = "再試一次";
             }
@@ -1719,26 +1676,25 @@
                         }
                     }).catch(err => console.error("Tone.start 在 gameOver 中發生錯誤:", err));
                 } else if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
-                       if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
-                           loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05);
-                       }
+                     if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
+                        loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05);
+                     }
                 }
             }
             const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
             if (statusMessage) {
-                statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終成績：${accumulatedWeight.toFixed(1)} g / ${elapsedTime} s</p>`; // Changed from 克 and 秒
+                statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終成績：${accumulatedWeight.toFixed(1)} g / ${elapsedTime} s</p>`;
             }
             recordGameOutcome(false);
         }
 
-        // Handle game win state
         async function gameWin() {
-            stopGame();
+            stopGame(); // This will also call checkQuickStartButtonVisibility via handleResize
             if (startButton) {
                 startButton.textContent = "再玩一局";
             }
-            if (toneJsInitialized && winSound) {
-                 if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
+             if (toneJsInitialized && winSound) {
+                if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
                     Tone.start().then(() => {
                         if (winSound && typeof winSound.triggerAttackRelease === 'function') {
                             winSound.triggerAttackRelease("C5", "2n", Tone.now());
@@ -1746,7 +1702,7 @@
                     }).catch(err => console.error("Tone.start 在 gameWin 中發生錯誤:", err));
                 } else if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
                     if (winSound && typeof winSound.triggerAttackRelease === 'function') {
-                        winSound.triggerAttackRelease("C5", "2n", Tone.now());
+                         winSound.triggerAttackRelease("C5", "2n", Tone.now());
                     }
                 }
             }
@@ -1767,7 +1723,7 @@
                 <p><strong>🎁 通關好禮：請將此成功畫面截圖，即可於活動期間 (即日起至 2025/6/30)，親臨微風南山三星體驗館 (台北市信義區松智路17號二樓) 兌換「Galaxy AI 帆布袋」乙個！數量有限，換完為止喔！</strong></p>
                 <p><strong>⚡ 加碼抽大獎：</strong></p>
                 <p class="text-sm">還想抽三星行動電源嗎？立刻前往「微風南山三星粉絲專頁」看置頂貼文，參與互動分享就有機會！</p>
-            `; // Changed from 克 and 秒
+            `;
             if (statusMessage) {
                 statusMessage.innerHTML = winPopupMessage;
             }
@@ -1775,7 +1731,6 @@
             recordGameOutcome(true);
         }
 
-        // Show the score submission form
         function showScoreForm(finalTime) {
             scoreFormContainer.style.display = 'block';
             scoreFormContainer.innerHTML = `
@@ -1856,7 +1811,6 @@
             });
         }
 
-        // Show the new Easter Egg overlay with animations
         function showNewEasterEgg() {
             const overlay = document.getElementById('newEasterEggOverlay');
             const container = document.getElementById('easterEggContainerAnimate');
@@ -1878,7 +1832,7 @@
             phoneText.style.animation = 'none';
             commonMessage.style.animation = 'none';
             redemptionStatus.style.animation = 'none';
-            void container.offsetWidth;
+            void container.offsetWidth; // Trigger reflow
 
             container.style.visibility = 'hidden'; container.style.opacity = '0';
             phoneImage.style.opacity = '0'; phoneImage.style.transform = 'scale(0.5) rotate(-15deg)';
@@ -1895,8 +1849,7 @@
                 startButton.textContent = "重新開始";
                 startButton.disabled = false;
             }
-             // Ensure quick start button remains hidden
-            if (quickStartButtonContainer) {
+            if (quickStartButtonContainer) { // Ensure quick start button is hidden during easter egg
                 quickStartButtonContainer.style.display = 'none';
             }
 
@@ -1930,7 +1883,7 @@
             const giftAvailableMessageDiv = document.getElementById('giftAvailableMessage');
             const giftClaimedMessageDiv = document.getElementById('giftClaimedMessage');
             if (giftAvailableMessageDiv && giftClaimedMessageDiv) {
-                giftAvailableMessageDiv.style.display = 'block';
+                giftAvailableMessageDiv.style.display = 'block'; // Default to available
                 giftClaimedMessageDiv.style.display = 'none';
                 const disclaimerTextElement = giftAvailableMessageDiv.querySelector('.disclaimer-text');
                 if (disclaimerTextElement) {
@@ -1944,7 +1897,7 @@
             if (overlay) overlay.style.display = 'none';
 
             const container = document.getElementById('easterEggContainerAnimate');
-            if (container) {
+            if (container) { // Reset animations and visibility
                 container.style.opacity = '0';
                 container.style.visibility = 'hidden';
                 const elementsToReset = [
@@ -1956,15 +1909,15 @@
                 const particlesContainer = document.getElementById('particlesContainerAnimate');
                 if(particlesContainer) particlesContainer.innerHTML = '';
             }
-            if (!isGameRunning && canvas.width > 0 && player.width > 0) {
+            if (!isGameRunning && canvas.width > 0 && player.width > 0) { // If game isn't running, restore idle animation
                 if (activeEffects.length === 0 && !isIdleAnimating) {
                     startIdleAnimation();
                 }
             }
+            checkQuickStartButtonVisibility(); // Update quick start button visibility
         }
 
 
-        // Touch event handlers for canvas (drag to move player, tap on player to start)
         function handleCanvasTouchStart(e) {
             if (isGameRunning || (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co')))) {
                 e.preventDefault();
@@ -1975,8 +1928,8 @@
                 touchStartCanvasX = touch.clientX - rect.left;
                 touchStartCanvasY = touch.clientY - rect.top;
                 touchStartPlayerX = player.x;
-                movePlayerToTouch(touch);
-                player.dx = 0;
+                movePlayerToTouch(touch); // Move player immediately on touch start
+                player.dx = 0; // Stop any keyboard-induced movement
             }
         }
 
@@ -1991,8 +1944,9 @@
         function handleCanvasTouchEnd(e) {
             if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                 const touchDuration = performance.now() - touchStartTime;
+                // Check if the touch was primarily on the player's initial position and was a tap
                 const initialPlayerRect = {
-                    x: touchStartPlayerX, y: player.y,
+                    x: touchStartPlayerX, y: player.y, // Use current player.y as it doesn't change with horizontal drag
                     width: player.width, height: player.height
                 };
                 const wasTouchOnPlayerInitially = (
@@ -2001,11 +1955,11 @@
                     touchStartCanvasY >= initialPlayerRect.y &&
                     touchStartCanvasY <= initialPlayerRect.y + initialPlayerRect.height
                 );
-                const playerMovedDistance = Math.abs(player.x - touchStartPlayerX);
+                const playerMovedDistance = Math.abs(player.x - touchStartPlayerX); // Check how much player moved during this touch
 
                 if (wasTouchOnPlayerInitially && touchDuration < MAX_TAP_DURATION && playerMovedDistance < MAX_TAP_MOVEMENT_FOR_START) {
                     startGame();
-                } else {
+                } else { // If not a tap-to-start, or drag ended, resume idle animation if appropriate
                     if (activeEffects.length === 0 && !isIdleAnimating) {
                         startIdleAnimation();
                     }
@@ -2013,7 +1967,6 @@
             }
         }
 
-        // Helper to move player based on touch coordinates
         function movePlayerToTouch(touch) {
             const rect = canvas.getBoundingClientRect();
             const touchX = touch.clientX - rect.left;
@@ -2022,8 +1975,9 @@
             if (newPlayerX + player.width > canvas.width) newPlayerX = canvas.width - player.width;
             player.x = newPlayerX;
 
+            // If game is not running, and we are dragging the player, redraw them statically
             if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                if (activeEffects.length === 0) {
+                if (activeEffects.length === 0) { // Only redraw if no effects are playing (to avoid flicker)
                     clearCanvas();
                     drawPlayer();
                 }
@@ -2031,38 +1985,41 @@
         }
 
 
-        // Keyboard event handlers
         function keyDown(e) {
-            if (!isGameRunning && (e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left')) {
-                if(isIdleAnimating) stopIdleAnimation();
-                if (player.speed === 0 && canvas.width > 0) {
+            // Allow keyboard control for player movement even when game is not running (for idle state)
+            if ((!isGameRunning && !startButton.disabled) || isGameRunning) {
+                if(isIdleAnimating && (e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left')) {
+                    stopIdleAnimation(); // Stop idle bounce if keyboard is used
+                }
+
+                if (player.speed === 0 && canvas.width > 0) { // Initialize speed if not set
                     player.speed = isTouchDevice() ? canvas.width * 0.018 : canvas.width * 0.024;
                 }
-                if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
-                else player.dx = -player.speed;
 
-                if (player.dx !== 0 && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                     if (activeEffects.length === 0) {
-                        updatePlayerPosition();
+                if (e.key === 'ArrowRight' || e.key === 'Right') {
+                    player.dx = player.speed;
+                } else if (e.key === 'ArrowLeft' || e.key === 'Left') {
+                    player.dx = -player.speed;
+                }
+
+                // If not running game, but moving player, update and draw statically
+                if (!isGameRunning && player.dx !== 0 && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
+                    if (activeEffects.length === 0) {
+                        updatePlayerPosition(); // Apply movement
                         clearCanvas();
                         drawPlayer();
-                     }
+                        // player.dx = 0; // Don't reset dx here, allow continuous movement if key held
+                    }
                 }
-                return;
             }
-
-            if (!isGameRunning) return;
-
-            if (e.key === 'ArrowRight' || e.key === 'Right') player.dx = player.speed;
-            else if (e.key === 'ArrowLeft' || e.key === 'Left') player.dx = -player.speed;
         }
         function keyUp(e) {
             if ( e.key === 'ArrowRight' || e.key === 'Right' || e.key === 'ArrowLeft' || e.key === 'Left' ) {
                 player.dx = 0;
+                // If game not running, and no effects, and idle animation isn't already running, start it
                 if (!isGameRunning && canvas.width > 0 && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                     if (activeEffects.length === 0 && !isIdleAnimating) {
-                        clearCanvas();
-                        drawPlayer();
+                        // clearCanvas(); drawPlayer(); // Draw one last time in current position
                         startIdleAnimation();
                     }
                 }
@@ -2073,7 +2030,6 @@
         document.addEventListener('keyup', keyUp);
         startButton.addEventListener('click', startGame);
 
-        // Event listener for the new Quick Start button
         if (quickStartButton) {
             quickStartButton.addEventListener('click', () => {
                 if (quickStartButtonContainer) {
@@ -2081,6 +2037,7 @@
                 }
                 const gameContainerElement = document.getElementById('gameContainer');
                 if (gameContainerElement) {
+                    // Scroll to the top of the game container for better view
                     gameContainerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
                 startGame();
@@ -2089,7 +2046,7 @@
 
         canvas.addEventListener('touchstart', handleCanvasTouchStart, { passive: false });
         canvas.addEventListener('touchmove', handleCanvasTouchMove, { passive: false });
-        canvas.addEventListener('touchend', handleCanvasTouchEnd, { passive: false });
+        canvas.addEventListener('touchend', handleCanvasTouchEnd, { passive: false }); // Removed passive: false as it's default
 
 
         function isTouchDevice() {
@@ -2097,35 +2054,35 @@
         }
 
         if (isTouchDevice()) {
-            const initialTouchSpeed = canvas.width * 0.018 || 5;
+            const initialTouchSpeed = canvas.width * 0.018 || 5; // Fallback speed
             leftButton.addEventListener('touchstart', (e) => {
                 e.preventDefault(); if(isIdleAnimating) stopIdleAnimation();
-                player.speed = canvas.width * 0.018 || initialTouchSpeed;
+                player.speed = canvas.width * 0.018 || initialTouchSpeed; // Recalculate speed based on current canvas width
                 if(isGameRunning) player.dx = -player.speed;
                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
-                    if (activeEffects.length === 0) {
-                        player.dx = -player.speed; updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0;
-                    }
+                     if (activeEffects.length === 0) { // Only move if no effects
+                        player.dx = -player.speed; updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; // Move once
+                     }
                 }
-            });
+            }, { passive: false }); // Ensure passive is false for preventDefault
             leftButton.addEventListener('touchend', (e) => {
                 e.preventDefault(); if(isGameRunning) player.dx = 0;
                 else if (!isGameRunning && activeEffects.length === 0 && !isIdleAnimating) startIdleAnimation();
-            });
+            }, { passive: false });
             rightButton.addEventListener('touchstart', (e) => {
                 e.preventDefault(); if(isIdleAnimating) stopIdleAnimation();
                 player.speed = canvas.width * 0.018 || initialTouchSpeed;
                 if(isGameRunning) player.dx = player.speed;
                 else if (!isGameRunning && !startButton.disabled && (player.imageLoaded || player.image.src.includes('placehold.co'))) {
                      if (activeEffects.length === 0) {
-                         player.dx = player.speed; updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0;
+                        player.dx = player.speed; updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0; // Move once
                      }
                 }
-            });
+            }, { passive: false });
             rightButton.addEventListener('touchend', (e) => {
                 e.preventDefault(); if(isGameRunning) player.dx = 0;
                 else if (!isGameRunning && activeEffects.length === 0 && !isIdleAnimating) startIdleAnimation();
-            });
+            }, { passive: false });
         }
 
         async function fetchGameStats() {
@@ -2178,13 +2135,13 @@
                     hour12: false, timeZone: 'Asia/Taipei'
                 });
                 leaderboardLastUpdated.textContent = `最後更新於：${currentTimestamp}`;
-                displayLeaderboard(data.leaderboard || data);
-                leaderboardStatus.textContent = '';
+                displayLeaderboard(data.leaderboard || data); // Handle if data is directly the array or nested
+                leaderboardStatus.textContent = ''; // Clear loading message
             } catch (error) {
                 console.error('獲取排行榜時發生錯誤:', error);
                 leaderboardStatus.textContent = '無法加載排行榜，請稍後再試。';
                 leaderboardLastUpdated.textContent = '最後更新時間：無法取得';
-                nameToHighlightNext = null;
+                nameToHighlightNext = null; // Clear highlight on error
                 timeToHighlightNext = null;
             }
         }
@@ -2196,7 +2153,7 @@
                 noRecordLi.textContent = '目前排行榜上還沒有挑戰者紀錄，快來搶頭香！';
                 noRecordLi.style.textAlign = 'center'; noRecordLi.style.color = '#6b7280';
                 leaderboardList.appendChild(noRecordLi);
-                nameToHighlightNext = null;
+                nameToHighlightNext = null; // Clear highlight if no scores
                 timeToHighlightNext = null;
                 return;
             }
@@ -2205,13 +2162,13 @@
             scores.forEach((score, index) => {
                 const listItem = document.createElement('li');
                 let rankDisplay;
-                let nameClass = 'name'; let timeClass = 'time';
-                if (index === 0) { rankDisplay = '🥇'; nameClass += ' rank-1-text'; timeClass += ' rank-1-text'; }
-                else if (index === 1) { rankDisplay = '🥈'; nameClass += ' rank-2-text'; timeClass += ' rank-2-text'; }
-                else if (index === 2) { rankDisplay = '🥉'; nameClass += ' rank-3-text'; timeClass += ' rank-3-text'; }
+                let nameClass = 'name'; let timeClass = 'time'; // Default classes
+                if (index === 0) { rankDisplay = '🥇'; nameClass += ' rank-1-text'; timeClass += ' rank-1-text';}
+                else if (index === 1) { rankDisplay = '🥈'; nameClass += ' rank-2-text'; timeClass += ' rank-2-text';}
+                else if (index === 2) { rankDisplay = '🥉'; nameClass += ' rank-3-text'; timeClass += ' rank-3-text';}
                 else { rankDisplay = `${index + 1}.`; }
 
-                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="${nameClass}">${escapeHTML(score.name || '匿名')}</span> <span class="${timeClass}">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} s</span>`; // Changed from 秒
+                listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="${nameClass}">${escapeHTML(score.name || '匿名')}</span> <span class="${timeClass}">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} s</span>`;
 
                 if (!highlightAppliedThisCall && nameToHighlightNext && timeToHighlightNext &&
                     score.name === nameToHighlightNext &&
@@ -2222,7 +2179,7 @@
                 leaderboardList.appendChild(listItem);
             });
 
-            if (highlightAppliedThisCall) {
+            if (highlightAppliedThisCall) { // Clear highlight flags after applying
                 nameToHighlightNext = null;
                 timeToHighlightNext = null;
             }
@@ -2251,48 +2208,81 @@
                 console.error('記錄頁面載入事件時發生錯誤:', error);
             }
         }
+        
+        // NEW: Function to check and manage Quick Start Button visibility
+        function checkQuickStartButtonVisibility() {
+            if (!startButton || !quickStartButtonContainer || !quickStartButton) return;
+
+            // If game is running OR quick start button is disabled (game not fully ready), hide it
+            if (isGameRunning || quickStartButton.disabled) {
+                quickStartButtonContainer.style.display = 'none';
+                return;
+            }
+
+            // Game is not running and quick start button is enabled (game is ready to be started)
+            const rect = startButton.getBoundingClientRect();
+            const isStartButtonVisible = (
+                rect.top < window.innerHeight && rect.bottom >= 0 // Check if any part of startButton is in viewport
+            );
+
+            if (isStartButtonVisible) {
+                quickStartButtonContainer.style.display = 'none';
+            } else {
+                quickStartButtonContainer.style.display = 'flex';
+            }
+        }
+
 
         function handleResize() {
             try {
-                if(isIdleAnimating) stopIdleAnimation();
+                if(isIdleAnimating) stopIdleAnimation(); // Stop idle animation during resize to prevent glitches
+
                 const gameArea = document.getElementById('gameContainer');
                 const gameAreaPaddingLeft = gameArea ? parseFloat(getComputedStyle(gameArea).paddingLeft) || 0 : 0;
                 const gameAreaPaddingRight = gameArea ? parseFloat(getComputedStyle(gameArea).paddingRight) || 0 : 0;
                 const bodyPaddingHorizontal = (parseFloat(getComputedStyle(document.body).paddingLeft) || 0) * 2;
+
                 const availableWidthInGameArea = gameArea ? gameArea.clientWidth - (gameAreaPaddingLeft + gameAreaPaddingRight) : window.innerWidth * 0.9;
                 const availableWidthInWindow = window.innerWidth - bodyPaddingHorizontal;
+
                 canvasWidth = Math.min(480, availableWidthInGameArea, availableWidthInWindow);
+
                 let phoneImageAspectRatio;
                 if (player.imageLoaded && player.image.naturalWidth > 0 && player.image.naturalHeight > 0) {
                     phoneImageAspectRatio = player.image.naturalWidth / player.image.naturalHeight;
-                } else if (player.image.complete && player.image.naturalWidth > 0 && player.image.naturalHeight > 0) { // Check for placeholder if loaded
+                } else if (player.image.complete && player.image.naturalWidth > 0 && player.image.naturalHeight > 0) {
                     phoneImageAspectRatio = player.image.naturalWidth / player.image.naturalHeight;
                 } else {
                     phoneImageAspectRatio = 80 / 160; // Default placeholder aspect ratio
                 }
+
                 if (!phoneImageAspectRatio || phoneImageAspectRatio <= 0 || !isFinite(phoneImageAspectRatio)) {
-                    phoneImageAspectRatio = 0.5; // Fallback aspect ratio
+                    phoneImageAspectRatio = 0.5; // Robust fallback
                 }
+
                 player.width = canvasWidth * 0.12;
                 player.height = player.width / phoneImageAspectRatio;
                 canvasHeight = canvasWidth / aspectRatio;
-                const maxHeight = window.innerHeight * 0.48;
+
+                const maxHeight = window.innerHeight * 0.48; // Max 48% of viewport height for canvas
                 if (canvasHeight > maxHeight) {
                     canvasHeight = maxHeight;
                     canvasWidth = canvasHeight * aspectRatio;
-                    player.width = canvasWidth * 0.12;
+                    player.width = canvasWidth * 0.12; // Recalculate player width based on new canvas width
                     player.height = player.width / phoneImageAspectRatio;
                 }
+
                 canvas.width = Math.max(150, Math.round(canvasWidth));
                 canvas.height = Math.max(200, Math.round(canvasHeight));
+
                 player.width = Math.max(15, Math.round(player.width));
                 player.height = Math.max(30, Math.round(player.height));
-                if (!isFinite(player.width) || player.width <= 0) {
-                    player.width = canvas.width * 0.12; player.width = Math.max(15, Math.round(player.width));
-                }
-                if (!isFinite(player.height) || player.height <= 0) {
-                    player.height = player.width / (phoneImageAspectRatio || 0.5); player.height = Math.max(30, Math.round(player.height));
-                }
+
+                // Final safety checks for player dimensions
+                if (!isFinite(player.width) || player.width <= 0) { player.width = Math.max(15, Math.round(canvas.width * 0.12)); }
+                if (!isFinite(player.height) || player.height <= 0) { player.height = Math.max(30, Math.round(player.width / (phoneImageAspectRatio || 0.5)));}
+
+                // Ensure player is not excessively large
                 if (player.height > canvas.height * 0.25) {
                     player.height = canvas.height * 0.25;
                     player.width = player.height * phoneImageAspectRatio;
@@ -2301,18 +2291,21 @@
                 player.height = player.width / phoneImageAspectRatio;
                 if (!isFinite(player.height)) player.height = Math.max(30, player.width * 2);
 
+
                 const infoBarElements = document.querySelectorAll('.info-bar div, #gameStatsDisplay div div');
                 infoBarElements.forEach(el => { if (el) el.style.maxWidth = `${canvas.width}px`; });
 
                 player.x = canvas.width / 2 - player.width / 2;
-                player.y = canvas.height - player.height - (canvas.height * 0.03);
+                player.y = canvas.height - player.height - (canvas.height * 0.03); // Position player at bottom
                 if (isTouchDevice()) player.speed = canvas.width * 0.018; else player.speed = canvas.width * 0.024;
 
                 itemTypes.forEach(it => {
                     it.speedPixelsPerSecond = canvas.height * it.base_ch_per_sec * BASE_SPEED_MULTIPLIER;
                 });
+
             } catch (error) {
                 console.error("handleResize 中發生錯誤:", error.name, error.message, error.stack);
+                // Fallback dimensions if error occurs
                 if (canvas) {
                     canvas.width = Math.min(window.innerWidth * 0.9, 300);
                     canvas.height = canvas.width / aspectRatio;
@@ -2324,32 +2317,36 @@
                     player.y = ( (canvas ? canvas.height : 450) ) - player.height - 10;
                 }
             } finally {
+                // Enable/disable buttons based on game readiness
                 const enableButtons = !isGameRunning && (player.imageLoaded || (player.image.complete && player.image.src.includes('placehold.co') && player.image.naturalWidth > 0));
                 if(startButton) startButton.disabled = !enableButtons;
                 if(quickStartButton) quickStartButton.disabled = !enableButtons;
 
+                // Redraw or start idle animation
                 if (!isGameRunning && activeEffects.length === 0) {
-                    clearCanvas();
+                    clearCanvas(); // Clear before drawing player or starting idle
                     if (player.imageLoaded || (player.image.complete && player.image.src.includes('placehold.co') && player.image.naturalWidth > 0)) {
-                       drawPlayer();
+                       // drawPlayer(); // Draw player in new position before starting idle
                     }
                     startIdleAnimation();
                 } else if (isGameRunning || activeEffects.length > 0) {
-                    clearCanvas();
+                    // If game is running or effects are active, the gameLoop will handle drawing
+                    clearCanvas(); // Clear first
                     if(isGameRunning) {
                         drawPlayer();
                         drawFallingObjects();
                     }
-                    // Visual effects are drawn in gameLoop
+                    // Visual effects are drawn in gameLoop if activeEffects.length > 0
                 }
+                checkQuickStartButtonVisibility(); // Update quick start button after resize and state changes
             }
         }
 
         window.addEventListener('load', async () => {
-            handleResize();
+            handleResize(); // Initial resize
             displayGameInstructions();
-            if (startButton) startButton.disabled = true;
-            if (quickStartButton) quickStartButton.disabled = true;
+            if (startButton) startButton.disabled = true; // Initially disabled
+            if (quickStartButton) quickStartButton.disabled = true; // Initially disabled
             if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲資源載入中...</p>";
 
             const checkPlayerImage = setInterval(() => {
@@ -2358,13 +2355,14 @@
                     clearInterval(checkPlayerImage);
                     console.log("玩家圖片 (主要或備用) 已確認載入。啟用遊戲。");
                     if (canvas.width > 0) handleResize(); // Ensure sizes are correct after image load
-                    
+
                     const enableButtons = !isGameRunning && imageReady;
                     if (startButton) startButton.disabled = !enableButtons;
                     if (quickStartButton) quickStartButton.disabled = !enableButtons;
 
-                    if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」或「快速開始遊戲」挑戰！</p>";
+                    if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「S25 Edge」或「開始遊戲」挑戰！</p>";
                     if (!isGameRunning && activeEffects.length === 0) startIdleAnimation();
+                    checkQuickStartButtonVisibility(); // Initial check for quick start button
                 }
             }, 100);
 
@@ -2377,10 +2375,11 @@
             await fetchLeaderboardData();
             await fetchGameStats();
             leaderboardPollIntervalId = setInterval(async () => {
-                nameToHighlightNext = null;
+                nameToHighlightNext = null; // Don't highlight on periodic refresh
                 timeToHighlightNext = null;
                 await fetchLeaderboardData();
-            }, 60000);
+            }, 60000); // Poll every 60 seconds
+
             const closeNewEasterEggButton = document.getElementById('closeNewEasterEggButton');
             if (closeNewEasterEggButton) {
                 closeNewEasterEggButton.addEventListener('click', () => {
@@ -2388,15 +2387,21 @@
                     if (statusMessage) {
                         statusMessage.innerHTML = "<p class='text-center font-bold'>彩蛋畫面已關閉。想再次挑戰嗎？點擊「重新開始」吧！</p>";
                     }
-                    if (startButton) {
+                    if (startButton) { // Ensure start button is correctly set after closing easter egg
                         startButton.textContent = "重新開始";
-                        startButton.disabled = false; // Re-enable main start button
+                        startButton.disabled = false;
                     }
+                    checkQuickStartButtonVisibility(); // Check visibility after closing
                 });
             }
+            
+            // Add scroll and resize listeners for quick start button visibility
+            window.addEventListener('scroll', checkQuickStartButtonVisibility);
+            window.addEventListener('resize', () => {
+                handleResize(); // handleResize now also calls checkQuickStartButtonVisibility
+            });
         });
 
-        window.addEventListener('resize', handleResize);
         window.addEventListener('beforeunload', () => {
             clearInterval(leaderboardPollIntervalId);
         });
@@ -2404,3 +2409,4 @@
     </script>
 </body>
 </html>
+�
