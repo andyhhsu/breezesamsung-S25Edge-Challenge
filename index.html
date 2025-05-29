@@ -233,6 +233,20 @@
             color: #6b7280;
         }
 
+        /* 瀏覽器建議提示 */
+        #browserRecommendation {
+            padding: 0.5rem;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem; /* Added margin for spacing */
+            background-color: #fffbeb; /* amber-50 */
+            border: 1px solid #fef3c7; /* amber-200 */
+            border-radius: 0.375rem;
+            color: #b45309; /* amber-700 */
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+
         /* 遊戲與表單容器 */
         #gameAndFormContainer {
             width: 100%;
@@ -747,6 +761,9 @@
             <p class="instruction-text mt-3"><strong>配件與重量：</strong></p>
             <div id="itemDisplayGrid" class="item-grid-container">
                 </div>
+            <div id="browserRecommendation" style="display: none;">
+                <p><strong>溫馨提醒：</strong>為獲得最佳遊戲體驗，建議使用 Chrome 瀏覽器遊玩本遊戲。</p>
+            </div>
 
             <p class="instruction-text mt-3"><strong>注意事項：</strong></p>
             <p class="instruction-text"><strong class="text-red-600">🔴 超重警告：</strong>超過163g，挑戰失敗！</p>
@@ -885,6 +902,7 @@
         const passRateDisplay = document.getElementById('passRate');
 
         const newEasterEggOverlay = document.getElementById('newEasterEggOverlay');
+        const browserRecommendationDiv = document.getElementById('browserRecommendation'); // Added
 
         // *** Google Apps Script URL ***
         const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzJi3oCz4ZWz0AzeY91PBbyJJU5DbwIT_nkrr4ZBmaSPq7iaxkTuMICRIwAQC1lETE6/exec';
@@ -1643,19 +1661,20 @@
                 if (isGameRunning) {
                     startButton.textContent = "遊戲進行中";
                 } else if (canGameBeStarted && startButton.textContent === "遊戲進行中") { 
-                    // Reset text if game was running and now stopped, and image is ready
-                    startButton.textContent = "開始遊戲"; // Or "再試一次" / "再玩一局" as appropriate from gameOver/gameWin
+                    startButton.textContent = "開始遊戲"; 
+                } else if (canGameBeStarted && (startButton.textContent === "再試一次" || startButton.textContent === "再玩一局" || startButton.textContent === "重新開始")) {
+                    // Keep the "再試一次" or "再玩一局" text if game ended and is ready to restart
+                } else if (canGameBeStarted) {
+                    startButton.textContent = "開始遊戲";
                 }
-                // startButton.style.display is managed by its presence in HTML
             }
 
             // Quick Start Button Container and Button
             if (quickStartButtonContainer && quickStartButton) {
-                if (isGameRunning || (startButton && isStartButtonIntersecting)) { // Hide if game running OR main start button is visible
+                if (isGameRunning || (startButton && isStartButtonIntersecting)) { 
                     quickStartButtonContainer.style.display = 'none';
                     quickStartButton.disabled = true;
                 } else {
-                    // Game not running AND main start button is NOT intersecting (or doesn't exist)
                     quickStartButtonContainer.style.display = 'flex';
                     quickStartButton.disabled = !canGameBeStarted;
                 }
@@ -1709,7 +1728,7 @@
                 gameContainerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
             
-            updateAllButtonStates(); // Update buttons for game running state
+            updateAllButtonStates(); 
             animationFrameId = requestAnimationFrame(gameLoop);
             fetchGameStats(); 
             if (isTouchDevice() && touchControlsUI) {
@@ -1719,7 +1738,7 @@
 
         function stopGame() {
             isGameRunning = false;
-            updateAllButtonStates(); // Update buttons for game stopped state
+            updateAllButtonStates(); 
 
             if (touchControlsUI) {
                 touchControlsUI.style.display = 'none';
@@ -1749,6 +1768,7 @@
             if (startButton) {
                 startButton.textContent = "再試一次";
             }
+            updateAllButtonStates(); // Ensure button states are correct after text change
             if (toneJsInitialized && loseSound) {
                 if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
                     Tone.start().then(() => {
@@ -1774,6 +1794,7 @@
             if (startButton) {
                 startButton.textContent = "再玩一局";
             }
+            updateAllButtonStates(); // Ensure button states are correct after text change
             if (toneJsInitialized && winSound) {
                  if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
                     Tone.start().then(() => {
@@ -1930,6 +1951,7 @@
             if (startButton) { 
                 startButton.textContent = "重新開始";
             }
+             updateAllButtonStates();
 
 
             setTimeout(() => {
@@ -1988,7 +2010,9 @@
                 if(particlesContainer) particlesContainer.innerHTML = '';
             }
             
-            // Game is already stopped, updateAllButtonStates will handle visibility
+            if (startButton) {
+                startButton.textContent = "重新開始";
+            }
             updateAllButtonStates();
 
 
@@ -2114,11 +2138,11 @@
 
         document.addEventListener('keydown', keyDown);
         document.addEventListener('keyup', keyUp);
-        if(startButton) startButton.addEventListener('click', startGame); // Check if startButton exists
+        if(startButton) startButton.addEventListener('click', startGame); 
 
         if (quickStartButton) {
             quickStartButton.addEventListener('click', () => {
-                startGame(); // startGame now handles hiding quickStartButtonContainer
+                startGame(); 
             });
         }
 
@@ -2397,8 +2421,18 @@
             handleResize(); 
             displayGameInstructions();
             
-            // Initial button states
-            updateAllButtonStates(); // Call this early to set initial states
+            // Browser recommendation logic
+            if (browserRecommendationDiv) {
+                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                const isSamsungBrowser = /SamsungBrowser/i.test(userAgent);
+                // Also check for other potentially problematic mobile browsers if needed in the future
+                // const isProblematicBrowser = isSamsungBrowser || /AnotherBrowser/i.test(userAgent);
+                if (isSamsungBrowser) { // Show only for Samsung Browser for now
+                    browserRecommendationDiv.style.display = 'block';
+                }
+            }
+            
+            updateAllButtonStates(); 
 
             if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲資源載入中...</p>";
 
@@ -2410,8 +2444,10 @@
             };
             const observerCallback = (entries) => {
                 entries.forEach(entry => {
-                    isStartButtonIntersecting = entry.isIntersecting;
-                    updateAllButtonStates();
+                    if (entry.target === startButton) { // Ensure we are reacting to the correct element
+                        isStartButtonIntersecting = entry.isIntersecting;
+                        updateAllButtonStates();
+                    }
                 });
             };
             intersectionObserver = new IntersectionObserver(observerCallback, observerOptions);
@@ -2426,11 +2462,11 @@
                 if (player.imageLoaded && imageDecodedAndReady) {
                     clearInterval(checkPlayerImage);
                     console.log("Player image (main or fallback) confirmed loaded and ready. Enabling game.");
-                    if (canvas.width > 0) handleResize(); // Recalculate sizes with image dimensions
+                    if (canvas.width > 0) handleResize(); 
                     
-                    updateAllButtonStates(); // Update buttons now that images are ready
+                    updateAllButtonStates(); 
 
-                    if (statusMessage && !isGameRunning) { // Only update status if game hasn't somehow started
+                    if (statusMessage && !isGameRunning) { 
                          if (startButton && !startButton.disabled) {
                             statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」挑戰！</p>";
                          } else if (quickStartButton && !quickStartButton.disabled) {
@@ -2443,7 +2479,7 @@
                     clearInterval(checkPlayerImage);
                     console.warn("Player image loading timed out after 10 seconds. Buttons might remain disabled or rely on drawing fallback.");
                     
-                    updateAllButtonStates(); // Still update, will reflect !imageReady
+                    updateAllButtonStates(); 
 
                     if (statusMessage && !isGameRunning) {
                         statusMessage.innerHTML = "<p class='text-center font-bold text-orange-600'>圖片載入可能較慢。若按鈕未啟用，請稍候或嘗試重整。</p>";
