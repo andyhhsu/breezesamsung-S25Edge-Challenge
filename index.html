@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Galaxy S25 Edge 輕巧配重挑戰賽</title>
+    <title>Galaxy S25 Edge 輕巧配重挑戰賽 v2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
@@ -631,7 +631,7 @@
             width: 1px; height: 1px;
             z-index: -1;
         }
-        .particle { /* This class is for the Easter Egg overlay particles */
+        .particle {
             position: absolute;
             width: 8px; height: 8px;
             background-color: #facc15;
@@ -902,7 +902,7 @@
         const passRateDisplay = document.getElementById('passRate');
 
         const newEasterEggOverlay = document.getElementById('newEasterEggOverlay');
-        const browserRecommendationDiv = document.getElementById('browserRecommendation');
+        const browserRecommendationDiv = document.getElementById('browserRecommendation'); 
 
         // *** Google Apps Script URL ***
         const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzJi3oCz4ZWz0AzeY91PBbyJJU5DbwIT_nkrr4ZBmaSPq7iaxkTuMICRIwAQC1lETE6/exec';
@@ -921,8 +921,6 @@
 
         const aspectRatio = 9 / 16; 
         let canvasWidth, canvasHeight;
-
-        let isSamsungBrowser = false; // 新增：用於偵測三星瀏覽器
 
         // Player object
         const player = {
@@ -978,7 +976,7 @@
             {
                 name: '神秘配件',
                 emoji: '❓',
-                weight: '???', // 字串，特殊處理
+                weight: '???',
                 type: 'mystery',
                 base_ch_per_sec: 0.0018 * TARGET_FPS_FOR_CONVERSION,
                 spawnChance: 8
@@ -990,7 +988,7 @@
                 type: 'time_bonus',
                 timeEffect: -2, 
                 base_ch_per_sec: 0.0020 * TARGET_FPS_FOR_CONVERSION,
-                spawnChance: 0 // 保持為0，除非要啟用
+                spawnChance: 0 
             },
             { 
                 name: 'Galaxy S25 Edge 彩蛋',
@@ -1003,7 +1001,7 @@
                 spawnChance: 0.1 
             }
         ];
-        itemTypes.forEach(item => item.speedPixelsPerSecond = 0); // 將在 handleResize 中設定
+        itemTypes.forEach(item => item.speedPixelsPerSecond = 0);
 
         const easterEggItemDefinition = itemTypes.find(item => item.type === 'easter_egg');
         if (easterEggItemDefinition && easterEggItemDefinition.imageObj) {
@@ -1028,79 +1026,15 @@
         };
         const mysteryTransformableItemKeys = Object.keys(mysteryTransformableItemsMap).filter(key => mysteryTransformableItemsMap[key]);
 
-        // --- Object Pooling for Falling Objects ---
-        const MAX_FALLING_OBJECTS_POOL_SIZE = 30; // 可調整的物件池大小
-        const fallingObjectPool = [];
-        let activeFallingObjects = [];
 
-        function initializeFallingObjectPool() {
-            for (let i = 0; i < MAX_FALLING_OBJECTS_POOL_SIZE; i++) {
-                fallingObjectPool.push({
-                    active: false,
-                    x: 0, y: 0, width: 0, height: 0,
-                    emoji: '', type: '', weight: 0,
-                    speedPixelsPerSecond: 0,
-                    imageObj: null, imageLoaded: false,
-                    markedForRemoval: false 
-                });
-            }
-        }
-
-        function getFallingObjectFromPool() {
-            for (let i = 0; i < fallingObjectPool.length; i++) {
-                if (!fallingObjectPool[i].active) {
-                    fallingObjectPool[i].active = true;
-                    fallingObjectPool[i].markedForRemoval = false;
-                    fallingObjectPool[i].imageObj = null; 
-                    fallingObjectPool[i].imageLoaded = false; 
-                    return fallingObjectPool[i];
-                }
-            }
-            console.warn("掉落物件池已滿或沒有可用的非活動物件。");
-            return null; 
-        }
-        
-        // --- Particle Pooling for Visual Effects ---
-        const MAX_VISUAL_EFFECT_PARTICLES_POOL_SIZE = 200; 
-        const visualEffectParticlePool = [];
-
-        function initializeVisualEffectParticlePool() {
-            for (let i = 0; i < MAX_VISUAL_EFFECT_PARTICLES_POOL_SIZE; i++) {
-                visualEffectParticlePool.push({
-                    active: false,
-                    x: 0, y: 0, vx: 0, vy: 0,
-                    radius: 0, color: '', alpha: 0, life: 0,
-                    angle: 0, orbitSpeed: 0, orbitRadius: 0, initialOrbitRadius: 0,
-                    creationTime: 0 
-                });
-            }
-        }
-
-        function getParticleFromPool() {
-            for (let i = 0; i < visualEffectParticlePool.length; i++) {
-                if (!visualEffectParticlePool[i].active) {
-                    visualEffectParticlePool[i].active = true;
-                    visualEffectParticlePool[i].creationTime = performance.now(); 
-                    return visualEffectParticlePool[i];
-                }
-            }
-            return null; 
-        }
-
-        function returnParticleToPool(particle) {
-            if (particle) { 
-                 particle.active = false;
-            }
-        }
-
-
+        let fallingObjects = [];
         let spawnTimer = 0;
         const SPAWN_INTERVAL = 55; 
 
         let catchSound, hazardHitSound, winSound, loseSound, boosterSound, mysteryRevealSound, easterEggSound, timeBonusSound;
         let toneJsInitialized = false;
 
-        let activeEffects = []; 
+        let activeEffects = [];
 
         // --- Helper function for fetch with timeout and retries ---
         async function fetchWithRetry(url, options = {}, retries = 3, timeout = 8000) {
@@ -1123,24 +1057,47 @@
                     if (!response.ok) {
                         let errorMsg = `HTTP 錯誤! 狀態碼: ${response.status}.`;
                         try {
-                            if (response.type !== 'opaque') { 
+                            if (response.type !== 'opaque') { // 'opaque' for no-cors
                                 const errorData = await response.json();
                                 if (errorData && errorData.message) errorMsg += ` 訊息: ${errorData.message}`;
                             }
                         } catch (jsonError) {
-                            // Ignored
+                            // If parsing errorData fails or it's opaque, the initial errorMsg is used.
                         }
                         throw new Error(errorMsg);
                     }
+                    // For 'no-cors', we can't read the body, so assume success if no error thrown
                     if (options.mode === 'no-cors') {
-                        return response; 
+                        return response; // Or just return true, as body is unusable
                     }
-                    return await response.json(); 
+                    return await response.json(); // Attempt to parse JSON for standard requests
                 } catch (error) {
                     console.warn(`Fetch 請求失敗 (第 ${i + 1} 次嘗試): ${error.message} (URL: ${url.substring(0,100)})`);
-                    if (i === retries - 1) throw error; 
-                    await new Promise(resolve => setTimeout(resolve, (i + 1) * 1000 + Math.random() * 500)); 
+                    if (i === retries - 1) throw error; // Throw error after last retry
+                    await new Promise(resolve => setTimeout(resolve, (i + 1) * 1000 + Math.random() * 500)); // Exponential backoff with jitter
                 }
+            }
+        }
+
+        // Function to safely play a Tone.js sound
+        function playToneSound(soundObject, note, duration, time = Tone.now(), soundName = "Unknown") {
+            try {
+                if (toneJsInitialized && soundObject && typeof soundObject.triggerAttackRelease === 'function' && Tone.context.state === 'running') {
+                    soundObject.triggerAttackRelease(note, duration, time);
+                } else if (toneJsInitialized && Tone.context.state !== 'running') {
+                    console.warn(`AudioContext not running when trying to play ${soundName}. State: ${Tone.context.state}`);
+                    // Optionally, try to restart Tone.js context, but be careful with frequent attempts
+                    // Tone.start().then(() => {
+                    //     if (soundObject && typeof soundObject.triggerAttackRelease === 'function') {
+                    //        soundObject.triggerAttackRelease(note, duration, time);
+                    //        console.log(`AudioContext restarted and ${soundName} played.`);
+                    //     }
+                    // }).catch(e => console.error(`Error restarting Tone context for ${soundName}`, e));
+                } else if (!toneJsInitialized) {
+                     console.warn(`Tone.js not initialized. Cannot play ${soundName}.`);
+                }
+            } catch (e) {
+                console.error(`Error playing ${soundName} sound:`, e.name, e.message, e.stack ? e.stack.substring(0, 300) : "No stack");
             }
         }
 
@@ -1164,7 +1121,7 @@
             loseSound = new Tone.FMSynth({ harmonicity: 3, modulationIndex: 10, detune: 0, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 }, modulation: { type: "square" }, modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.01, release: 0.5 } }).toDestination();
             boosterSound = new Tone.Synth({ oscillator: { type: 'sawtooth' }, envelope: { attack: 0.01, decay: 0.15, sustain: 0.08, release: 0.2 }, volume: -3 }).toDestination();
             mysteryRevealSound = new Tone.NoiseSynth({ noise: { type: 'pink' }, envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.1 }, volume: -10 }).toDestination();
-            easterEggSound = new Tone.PluckSynth({ attackNoise: 0.5, dampening: 4000, resonance: 0.9, volume: -3 }).toDestination();
+            easterEggSound = new Tone.PluckSynth({ attackNoise: 0.5, dampening: 4000, resonance: 0.9, volume: -3 }).toDestination(); // PluckSynth uses triggerAttack
             timeBonusSound = new Tone.Synth({ oscillator: { type: 'pulse', width: 0.3 }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.15 }, volume: -4 }).toDestination();
             toneJsInitialized = true;
             console.log("Tone.js 音效已初始化。");
@@ -1195,11 +1152,10 @@
                             itemEffect.className = 'item-effect';
                             itemEffect.textContent = '目前重量x2';
                             itemCard.appendChild(itemEffect);
-                        } else { 
+                        } else {
                             const itemWeight = document.createElement('span');
                             itemWeight.className = 'item-weight';
-                            const weightText = (typeof item.weight === 'number') ? item.weight.toFixed(item.weight % 1 === 0 ? 0 : 1) : item.weight;
-                            itemWeight.innerHTML = `<strong>${weightText}</strong> g`;
+                            itemWeight.innerHTML = `<strong>${item.weight}</strong> g`;
                             itemCard.appendChild(itemWeight);
                         }
                         itemDisplayGrid.appendChild(itemCard);
@@ -1213,24 +1169,22 @@
             const currentY = player.y + bounceOffsetY;
 
             if (player.width <= 0 || player.height <= 0 || isNaN(player.x) || isNaN(currentY) || isNaN(player.width) || isNaN(player.height)) {
-                console.warn("drawPlayer: 無效的玩家尺寸或位置。", player);
                 return;
             }
             if (player.imageLoaded && player.image.complete && player.image.naturalWidth > 0 && player.image.naturalHeight > 0) {
-                ctx.drawImage(player.image, Math.round(player.x), Math.round(currentY), Math.round(player.width), Math.round(player.height));
+                ctx.drawImage(player.image, player.x, currentY, player.width, player.height);
             } else {
                 ctx.fillStyle = '#a5b4fc'; 
-                ctx.fillRect(Math.round(player.x), Math.round(currentY), Math.round(player.width), Math.round(player.height));
+                ctx.fillRect(player.x, currentY, player.width, player.height);
             }
         }
 
         function drawFallingObjects() {
             if (!ctx) return;
-            activeFallingObjects.forEach(obj => {
-                if (!obj || !obj.active) return; 
-
-                const objFontSize = Math.round(canvas.width * 0.095);
-                const weightFontSize = Math.round(canvas.width * 0.06);
+            fallingObjects.forEach(obj => {
+                const objFontSize = canvas.width * 0.095;
+                const weightFontSize = canvas.width * 0.06;
+                // Set font for emojis on canvas, attempting to use Noto Sans TC first
                 ctx.font = `${objFontSize}px "Noto Sans TC", Arial`;
 
 
@@ -1243,26 +1197,26 @@
                     if (imgWidth > obj.width * maxDimFactor) { imgWidth = obj.width * maxDimFactor; imgHeight = imgWidth / aspectRatioItem; }
 
                     if (imgWidth > minDim && imgHeight > minDim && isFinite(imgWidth) && isFinite(imgHeight)) {
-                        ctx.drawImage(obj.imageObj, Math.round(obj.x + (obj.width - imgWidth) / 2), Math.round(obj.y + (obj.height - imgHeight) / 2), Math.round(imgWidth), Math.round(imgHeight));
+                        ctx.drawImage(obj.imageObj, obj.x + (obj.width - imgWidth) / 2, obj.y + (obj.height - imgHeight) / 2, imgWidth, imgHeight);
                     } else {
+                        // Fallback to emoji if image drawing params are invalid
                         ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
-                        ctx.fillText(obj.emoji || '✨', Math.round(obj.x + obj.width / 2), Math.round(obj.y + obj.height));
+                        ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height);
                     }
-                } else if (obj.type === 'easter_egg') { 
+                } else if (obj.type === 'easter_egg') { // Easter egg but image not loaded/ready
                     ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
-                    ctx.fillText(obj.emoji || '✨', Math.round(obj.x + obj.width / 2), Math.round(obj.y + obj.height));
-                } else { 
+                    ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height);
+                } else { // All other items (including rocket)
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
-                    ctx.fillText(obj.emoji, Math.round(obj.x + obj.width / 2), Math.round(obj.y + obj.height));
+                    ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
 
                     if (obj.type === 'item' && typeof obj.weight === 'number' && obj.weight > 0) {
-                        ctx.font = `bold ${weightFontSize}px "Noto Sans TC", Arial`;
+                        ctx.font = `bold ${weightFontSize}px "Noto Sans TC", Arial`; // Also apply font here
                         ctx.fillStyle = '#FF0000';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'top';
-                        const weightText = obj.weight.toFixed(obj.weight % 1 === 0 ? 0 : 1);
-                        ctx.fillText(`${weightText}g`, Math.round(obj.x + obj.width / 2), Math.round(obj.y + obj.height + (objFontSize * 0.1)));
+                        ctx.fillText(`${obj.weight}g`, obj.x + obj.width / 2, obj.y + obj.height + (objFontSize * 0.1));
                     }
                 }
             });
@@ -1276,36 +1230,39 @@
 
         function updateFallingObjects(deltaTime) {
             let gameEndedThisFrame = false;
-            for (let i = activeFallingObjects.length - 1; i >= 0; i--) {
-                if (gameEndedThisFrame && !isGameRunning) {
+            for (let i = fallingObjects.length - 1; i >= 0; i--) {
+                if (gameEndedThisFrame && !isGameRunning) { // If game ended in this frame's loop, stop processing more collisions
                     break; 
                 }
-                const obj = activeFallingObjects[i];
-                if (!obj || !obj.active) { 
-                    if (obj) obj.active = false; 
-                    activeFallingObjects.splice(i, 1); 
-                    continue;
-                }
-
+                const obj = fallingObjects[i];
+                if (!obj) continue;
 
                 obj.y += obj.speedPixelsPerSecond * deltaTime;
+                obj.markedForRemoval = obj.markedForRemoval || false;
 
-                if (obj.x < player.x + player.width &&
+                if (!obj.markedForRemoval &&
+                    obj.x < player.x + player.width &&
                     obj.x + obj.width > player.x &&
                     obj.y < player.y + player.height &&
                     obj.y + obj.height > player.y) {
 
-                    obj.active = false; 
+                    obj.markedForRemoval = true;
 
                     if (obj.type === 'bomb') {
-                        if (toneJsInitialized && hazardHitSound && Tone.context.state === 'running') {
-                             hazardHitSound.triggerAttackRelease("C2", "8n", Tone.now());
-                        }
+                        playToneSound(hazardHitSound, "C2", "8n", Tone.now(), "HazardHit");
                         triggerVisualEffect('bomb', player.x + player.width / 2, player.y + player.height / 2);
                         gameOver("砰！是炸彈！別灰心，再挑戰一次吧！");
                         gameEndedThisFrame = true;
                     } else if (obj.type === 'easter_egg') {
-                        if (toneJsInitialized && easterEggSound && Tone.context.state === 'running') easterEggSound.triggerAttack("A4", Tone.now());
+                        try { // Specifically for PluckSynth which uses triggerAttack
+                           if (toneJsInitialized && easterEggSound && Tone.context.state === 'running') {
+                               easterEggSound.triggerAttack("A4", Tone.now());
+                           } else if (toneJsInitialized && Tone.context.state !== 'running') {
+                               console.warn(`AudioContext not running for EasterEggSound. State: ${Tone.context.state}`);
+                           }
+                        } catch (e) {
+                           console.error("Error playing EasterEgg sound:", e.name, e.message, e.stack ? e.stack.substring(0,300) : "No stack");
+                        }
                         stopGame();
                         showNewEasterEgg();
                         gameEndedThisFrame = true;
@@ -1313,65 +1270,50 @@
                         let customGameOverMessageOnOverweight = null;
                         let itemWeightEffect = 0;
                         let isBooster = false;
-                        let currentAccumulatedWeightNum = Number(accumulatedWeight);
-                        if (isNaN(currentAccumulatedWeightNum)) {
-                            console.error("CRITICAL: accumulatedWeight 在碰撞前已為 NaN。重置為 0。");
-                            currentAccumulatedWeightNum = 0;
-                        }
-
+                        let currentAccumulatedWeightNum = Number(accumulatedWeight) || 0;
 
                         if (obj.type === 'mystery') {
-                            if (toneJsInitialized && mysteryRevealSound && Tone.context.state === 'running') mysteryRevealSound.triggerAttackRelease("8n", Tone.now());
+                            playToneSound(mysteryRevealSound, null, "8n", Tone.now(), "MysteryReveal"); // NoiseSynth doesn't need a note
                             triggerVisualEffect('mystery', player.x + player.width / 2, player.y + player.height / 2);
                             
                             let actualItemDefinition = mysteryTransformableItemsMap[mysteryTransformableItemKeys[Math.floor(Math.random() * mysteryTransformableItemKeys.length)]];
                             if (!actualItemDefinition) { 
                                 console.error(`神秘道具揭示了一個未定義的道具。將使用安全的備用道具。`);
-                                actualItemDefinition = { name: '安全備用道具', emoji: '🛡️', weight: 1, type: 'item' }; 
+                                actualItemDefinition = { name: '安全備用道具', emoji: '🛡️', weight: 1, type: 'item' }; // Safe fallback
                             }
-                            const actualItem = { ...actualItemDefinition }; 
-
+                            const actualItem = { ...actualItemDefinition };
 
                             let revealedMsg = `<p class='text-center font-bold text-blue-600'>哇！神秘配件變身！是 <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
                             if (actualItem.type === 'item') {
-                                itemWeightEffect = Number(actualItem.weight);
-                                if (isNaN(itemWeightEffect)) {
-                                    console.warn(`神秘道具 '${actualItem.name}' 的重量無效 (${actualItem.weight})，視為 0。`);
-                                    itemWeightEffect = 0;
-                                }
-                                revealedMsg += `，重量 ${itemWeightEffect % 1 === 0 ? itemWeightEffect : itemWeightEffect.toFixed(1)} g！</p>`;
+                                revealedMsg += `，重量 ${actualItem.weight} g！</p>`;
+                                itemWeightEffect = Number(actualItem.weight) || 0;
                                 currentAccumulatedWeightNum += itemWeightEffect;
-                                if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
+                                playToneSound(catchSound, "C4", "16n", Tone.now(), "Catch (Mystery Item)");
                                 customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT} g 了！`;
                             } else if (actualItem.type === 'weight_booster') {
                                 revealedMsg += `，重量翻倍！</p>`;
                                 isBooster = true; 
-                                if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
+                                playToneSound(boosterSound, "G4", "8n", Tone.now(), "Booster (Mystery Item)");
                                 triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
                                 customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT} g 了！`;
                             } else if (actualItem.type === 'time_bonus') {
-                                const timeBonusAmount = Number(actualItem.timeEffect) || 0;
-                                revealedMsg += `，時間 ${timeBonusAmount} s！</p>`;
-                                gameStartTime -= timeBonusAmount * 1000;
+                                revealedMsg += `，時間 ${actualItem.timeEffect} s！</p>`;
+                                gameStartTime -= (Number(actualItem.timeEffect) || 0) * 1000;
                                 if (gameStartTime > performance.now()) gameStartTime = performance.now(); 
-                                if (toneJsInitialized && timeBonusSound && Tone.context.state === 'running') timeBonusSound.triggerAttackRelease("E5", "8n", Tone.now());
+                                playToneSound(timeBonusSound, "E5", "8n", Tone.now(), "TimeBonus (Mystery Item)");
                             }
                             statusMessage.innerHTML = revealedMsg;
                             setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 2500);
                         } else if (obj.type === 'weight_booster') {
-                            if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
+                            playToneSound(boosterSound, "G4", "8n", Tone.now(), "Booster");
                             triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
                             isBooster = true; 
                             statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 AI 加速！重量翻倍！</p>";
                             setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 1500);
                             customGameOverMessageOnOverweight = `噢不！重量翻倍後超過目標 ${TARGET_WEIGHT} g 了！`;
                         } else if (obj.type === 'item') {
-                            if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
-                            itemWeightEffect = Number(obj.weight);
-                             if (isNaN(itemWeightEffect)) {
-                                console.warn(`道具 '${obj.name}' 的重量無效 (${obj.weight})，視為 0。`);
-                                itemWeightEffect = 0;
-                            }
+                            playToneSound(catchSound, "C4", "16n", Tone.now(), "Catch (Item)");
+                            itemWeightEffect = Number(obj.weight) || 0;
                             currentAccumulatedWeightNum += itemWeightEffect;
                             customGameOverMessageOnOverweight = `噢不！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT} g 了！`;
                         }
@@ -1383,14 +1325,13 @@
                         accumulatedWeight = parseFloat(currentAccumulatedWeightNum.toFixed(1)); 
 
                         if (isNaN(accumulatedWeight)) {
-                            console.error("CRITICAL: accumulatedWeight 在更新後變為 NaN。重置為 0。問題物件:", JSON.stringify(obj), "toFixed 前的值:", currentAccumulatedWeightNum);
+                            console.error("CRITICAL: accumulatedWeight became NaN after update. Resetting to 0. Object causing issue:", JSON.stringify(obj), "Value before toFixed:", currentAccumulatedWeightNum);
                             accumulatedWeight = 0; 
                         }
                         currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
 
-
                         if (!gameEndedThisFrame && isGameRunning) { 
-                            if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) { 
+                            if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) {
                                 gameWin();
                                 gameEndedThisFrame = true;
                             } else if (accumulatedWeight > TARGET_WEIGHT) {
@@ -1399,14 +1340,12 @@
                             }
                         }
                     }
-                    activeFallingObjects.splice(i, 1); 
                 } else if (obj.y > canvas.height + obj.height + 20) { 
-                    obj.active = false; 
-                    activeFallingObjects.splice(i, 1); 
+                    obj.markedForRemoval = true;
                 }
             }
+            fallingObjects = fallingObjects.filter(obj => !obj.markedForRemoval);
         }
-
 
         function spawnObject() {
             const spawnableItems = itemTypes.filter(item => item.spawnChance > 0);
@@ -1414,46 +1353,43 @@
 
             const totalChance = spawnableItems.reduce((sum, item) => sum + item.spawnChance, 0);
             let randomRoll = Math.random() * totalChance;
-            let selectedTypeTemplate = null;
+            let selectedType = null;
             for (const item of spawnableItems) {
                 if (randomRoll < item.spawnChance) {
-                    selectedTypeTemplate = item;
+                    selectedType = item;
                     break;
                 }
                 randomRoll -= item.spawnChance;
             }
-            if (!selectedTypeTemplate) { 
-                selectedTypeTemplate = spawnableItems.find(it => it.type === 'item') || spawnableItems[0];
+            if (!selectedType) { 
+                selectedType = spawnableItems.find(it => it.type === 'item') || spawnableItems[0];
             }
             
-            const newObj = getFallingObjectFromPool();
-            if (!newObj) return; 
-
+            const typeTemplate = selectedType;
             const objWidth = canvas.width * 0.1;
             const objHeight = canvas.width * 0.1; 
 
-            newObj.name = selectedTypeTemplate.name;
-            newObj.emoji = selectedTypeTemplate.emoji;
-            newObj.weight = (typeof selectedTypeTemplate.weight === 'number') ? selectedTypeTemplate.weight : 0; 
-            if (selectedTypeTemplate.type === 'mystery' && typeof selectedTypeTemplate.weight === 'string') { 
-                 newObj.weightString = selectedTypeTemplate.weight; 
+            if (typeTemplate.type === 'easter_egg') {
+                 fallingObjects.push({
+                    ...typeTemplate, 
+                    x: Math.random() * (canvas.width - objWidth),
+                    y: 0 - objHeight,
+                    width: objWidth,
+                    height: objHeight,
+                    imageObj: typeTemplate.imageObj, 
+                    imageLoaded: typeTemplate.imageLoaded, 
+                    markedForRemoval: false
+                });
             } else {
-                 newObj.weightString = null;
+                 fallingObjects.push({
+                    ...typeTemplate,
+                    x: Math.random() * (canvas.width - objWidth),
+                    y: 0 - objHeight,
+                    width: objWidth,
+                    height: objHeight,
+                    markedForRemoval: false
+                });
             }
-            newObj.type = selectedTypeTemplate.type;
-            newObj.speedPixelsPerSecond = selectedTypeTemplate.speedPixelsPerSecond; 
-            
-            newObj.x = Math.random() * (canvas.width - objWidth);
-            newObj.y = 0 - objHeight;
-            newObj.width = objWidth;
-            newObj.height = objHeight;
-
-            if (selectedTypeTemplate.type === 'easter_egg') {
-                newObj.imageObj = selectedTypeTemplate.imageObj; 
-                newObj.imageLoaded = selectedTypeTemplate.imageLoaded; 
-            }
-            
-            activeFallingObjects.push(newObj);
         }
 
         function clearCanvas() {
@@ -1475,88 +1411,73 @@
                 type: type,
                 x: x, y: y,
                 startTime: performance.now(),
-                duration: 0, 
-                particles: [], 
-                flash: null 
+                particles: []
             };
-            
-            // 根據瀏覽器類型調整特效參數
-            let particleCountFactor = isSamsungBrowser ? 0.75 : 1.0; // 三星瀏覽器粒子數量減少25%
-            let durationFactor = isSamsungBrowser ? 0.85 : 1.0;    // 三星瀏覽器持續時間減少15%
-            let speedFactor = isSamsungBrowser ? 0.9 : 1.0;
-            let radiusFactor = isSamsungBrowser ? 0.85 : 1.0;
-
-
-            let particleCount;
-            let colors;
+            let particleCount, duration, colors;
 
             switch (type) {
                 case 'bomb':
-                    particleCount = Math.round((isSamsungBrowser ? (30 + Math.floor(Math.random() * 10)) : (35 + Math.floor(Math.random() * 15))) * particleCountFactor);
-                    effect.duration = (isSamsungBrowser ? 1000 : 1200) * durationFactor;
-                    colors = ['#FF4500', '#FF0000', '#DC143C', '#B22222', '#FFA500', '#FF6347'];
+                    particleCount = 35 + Math.floor(Math.random() * 15);
+                    duration = 1200;
+                    colors = ['#FF4500', '#FF0000', '#DC143C', '#B22222', '#8B0000', '#FFA500', '#FF6347', '#CD5C5C'];
                     effect.flash = {
-                        radius: player.width * (isSamsungBrowser ? 0.9 : 1.0),
-                        maxAlpha: 0.9,
-                        duration: (isSamsungBrowser ? 300 : 350) * durationFactor
+                        radius: player.width * 1.0,
+                        maxAlpha: 0.95,
+                        duration: 350 
                     };
                     for (let i = 0; i < particleCount; i++) {
-                        const p = getParticleFromPool();
-                        if (!p) continue;
                         const angle = Math.random() * Math.PI * 2;
-                        const speed = (Math.random() * (isSamsungBrowser ? 3.5 : 4.0) + (isSamsungBrowser ? 2.0 : 2.5)) * speedFactor;
-                        p.x = 0; p.y = 0;
-                        p.vx = Math.cos(angle) * speed;
-                        p.vy = Math.sin(angle) * speed;
-                        p.radius = (Math.random() * (isSamsungBrowser ? 4.0 : 5.0) + (isSamsungBrowser ? 2.0 : 2.5)) * radiusFactor;
-                        p.color = colors[Math.floor(Math.random() * colors.length)];
-                        p.alpha = 1;
-                        p.life = ((isSamsungBrowser ? 400 : 500) + Math.random() * (isSamsungBrowser ? 300 : 400)) * durationFactor;
-                        effect.particles.push(p);
+                        const speed = Math.random() * 4 + 2.5;
+                        effect.particles.push({
+                            x: 0, y: 0,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            radius: Math.random() * 5 + 2.5,
+                            color: colors[Math.floor(Math.random() * colors.length)],
+                            alpha: 1,
+                            life: 500 + Math.random() * 400 
+                        });
                     }
                     break;
                 case 'booster':
-                    particleCount = Math.round(((isSamsungBrowser ? 18 : 20) + Math.floor(Math.random() * (isSamsungBrowser ? 7 : 8))) * particleCountFactor);
-                    effect.duration = (isSamsungBrowser ? 450 : 500) * durationFactor;
+                    particleCount = 20 + Math.floor(Math.random() * 8);
+                    duration = 500;
                     colors = ['#FFFFE0', '#FFFACD', '#FFD700'];
                     for (let i = 0; i < particleCount; i++) {
-                        const p = getParticleFromPool();
-                        if (!p) continue;
-                        const angle = -Math.PI / 2 + (Math.random() - 0.5) * (Math.PI / (isSamsungBrowser ? 3.5 : 3.0)); 
-                        const speed = (Math.random() * (isSamsungBrowser ? 2.0 : 2.5) + (isSamsungBrowser ? 1.2 : 1.5)) * speedFactor;
-                        p.x = (Math.random() - 0.5) * (isSamsungBrowser ? 8 : 10); p.y = 0;
-                        p.vx = Math.cos(angle) * speed;
-                        p.vy = Math.sin(angle) * speed;
-                        p.radius = (Math.random() * (isSamsungBrowser ? 2.5 : 3.0) + (isSamsungBrowser ? 1.2 : 1.5)) * radiusFactor;
-                        p.color = colors[Math.floor(Math.random() * colors.length)];
-                        p.alpha = 1;
-                        p.life = effect.duration * (0.8 + Math.random() * 0.2);
-                        effect.particles.push(p);
+                        const angle = -Math.PI / 2 + (Math.random() - 0.5) * (Math.PI / 3); 
+                        const speed = Math.random() * 2.5 + 1.5;
+                        effect.particles.push({
+                            x: (Math.random() - 0.5) * 10, y: 0,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            radius: Math.random() * 3 + 1.5,
+                            color: colors[Math.floor(Math.random() * colors.length)],
+                            alpha: 1
+                        });
                     }
                     break;
                 case 'mystery':
-                    particleCount = Math.round(((isSamsungBrowser ? 22 : 25) + Math.floor(Math.random() * (isSamsungBrowser ? 8 : 10))) * particleCountFactor);
-                    effect.duration = (isSamsungBrowser ? 650 : 700) * durationFactor;
+                    particleCount = 25 + Math.floor(Math.random() * 10);
+                    duration = 700;
                     colors = ['#DA70D6', '#BA55D3', '#9370DB', '#8A2BE2'];
                     for (let i = 0; i < particleCount; i++) {
-                        const p = getParticleFromPool();
-                        if (!p) continue;
                         const angle = Math.random() * Math.PI * 2;
-                        const orbitRadius = (Math.random() * (isSamsungBrowser ? 18 : 20) + (isSamsungBrowser ? 8 : 10)) * radiusFactor;
-                        p.angle = angle;
-                        p.orbitSpeed = ((Math.random() - 0.5) * (isSamsungBrowser ? 0.08 : 0.1) + (isSamsungBrowser ? 0.04 : 0.05)) * speedFactor;
-                        p.orbitRadius = orbitRadius;
-                        p.initialOrbitRadius = orbitRadius;
-                        p.x = Math.cos(angle) * orbitRadius; 
-                        p.y = Math.sin(angle) * orbitRadius;
-                        p.radius = (Math.random() * (isSamsungBrowser ? 2.0 : 2.5) + (isSamsungBrowser ? 0.8 : 1.0)) * radiusFactor;
-                        p.color = colors[Math.floor(Math.random() * colors.length)];
-                        p.alpha = 1;
-                        p.life = effect.duration * (0.7 + Math.random() * 0.3);
-                        effect.particles.push(p);
+                        const orbitRadius = Math.random() * 20 + 10;
+                        effect.particles.push({
+                            angle: angle,
+                            orbitSpeed: (Math.random() - 0.5) * 0.1 + 0.05,
+                            orbitRadius: orbitRadius,
+                            initialOrbitRadius: orbitRadius,
+                            x: Math.cos(angle) * orbitRadius, 
+                            y: Math.sin(angle) * orbitRadius,
+                            radius: Math.random() * 2.5 + 1,
+                            color: colors[Math.floor(Math.random() * colors.length)],
+                            alpha: 1
+                        });
                     }
                     break;
             }
+            effect.duration = duration;
             activeEffects.push(effect);
         }
 
@@ -1565,83 +1486,89 @@
             const now = performance.now();
             for (let i = activeEffects.length - 1; i >= 0; i--) {
                 const effect = activeEffects[i];
-                if (!effect) { activeEffects.splice(i, 1); continue; }
+                const elapsedTime = now - effect.startTime;
+                let effectProgress = elapsedTime / effect.duration;
 
-                const elapsedTimeOverall = now - effect.startTime;
-
-                if (elapsedTimeOverall >= effect.duration) {
-                    effect.particles.forEach(p => returnParticleToPool(p));
+                if (elapsedTime >= effect.duration) {
                     activeEffects.splice(i, 1);
                     continue;
                 }
 
                 ctx.save();
-                ctx.translate(Math.round(effect.x), Math.round(effect.y));
+                ctx.translate(effect.x, effect.y);
 
-                if (effect.type === 'bomb' && effect.flash && elapsedTimeOverall < effect.flash.duration) {
-                    const flashProgress = elapsedTimeOverall / effect.flash.duration;
-                    const easedFlashProgress = 1 - Math.pow(1 - flashProgress, 3); 
-                    const currentAlpha = effect.flash.maxAlpha * (1 - easedFlashProgress);
-                    const currentRadius = effect.flash.radius * (0.3 + flashProgress * 0.7); 
-                    const gradient = ctx.createRadialGradient(0, 0, currentRadius * 0.1, 0, 0, currentRadius);
-                    gradient.addColorStop(0, `rgba(255, 230, 200, ${currentAlpha})`);
-                    gradient.addColorStop(0.4, `rgba(255, 150, 50, ${currentAlpha * 0.8})`);
-                    gradient.addColorStop(0.8, `rgba(255, 60, 0, ${currentAlpha * 0.5})`);
-                    gradient.addColorStop(1, `rgba(200, 0, 0, ${currentAlpha * 0.2})`);
-                    ctx.fillStyle = gradient;
-                    ctx.beginPath();
-                    ctx.arc(0, 0, Math.round(currentRadius), 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                
-                const particleStartTimeOffset = (effect.type === 'bomb' && effect.flash) ? effect.flash.duration * 0.1 : 0;
-
-                for (let pIdx = effect.particles.length - 1; pIdx >= 0; pIdx--) {
-                    const p = effect.particles[pIdx];
-                    if (!p || !p.active) { 
-                        if(p) returnParticleToPool(p);
-                        effect.particles.splice(pIdx, 1);
-                        continue;
-                    }
-
-                    const particleElapsedTime = now - (p.creationTime + particleStartTimeOffset); 
-
-                    if (particleElapsedTime < 0 || particleElapsedTime > p.life) {
-                        returnParticleToPool(p);
-                        effect.particles.splice(pIdx, 1);
-                        continue;
-                    }
-                    
-                    const particleProgress = particleElapsedTime / p.life;
-                    const particleAlpha = p.alpha * (1 - particleProgress);
-                    if (particleAlpha <= 0) {
-                        returnParticleToPool(p);
-                        effect.particles.splice(pIdx, 1);
-                        continue;
-                    }
-
-                    ctx.beginPath();
-                    ctx.globalAlpha = particleAlpha;
-                    ctx.fillStyle = p.color;
-                    const dtFrames = deltaTime * TARGET_FPS_FOR_CONVERSION; 
-
-                    if (effect.type === 'mystery') {
-                        p.angle += p.orbitSpeed * dtFrames * 0.2; 
-                        p.orbitRadius = p.initialOrbitRadius * (1 + particleProgress * 0.5); 
-                        p.x = Math.cos(p.angle) * p.orbitRadius;
-                        p.y = Math.sin(p.angle) * p.orbitRadius;
-                    } else {
-                        p.x += p.vx * dtFrames * (effect.type === 'bomb' ? (1 - particleProgress * 0.5) : 1); 
-                        p.y += p.vy * dtFrames * (effect.type === 'bomb' ? (1 - particleProgress * 0.5) : 1); 
-                        if (effect.type === 'bomb') p.vy += 0.12 * dtFrames; 
-                        else if (effect.type === 'booster') p.vy += 0.03 * dtFrames;
-                    }
-                    
-                    const currentParticleRadius = p.radius * Math.max(0, (1 - particleProgress * (effect.type === 'bomb' ? 0.8 : 0.5)));
-                    if(currentParticleRadius > 0.1) { 
-                        ctx.arc(Math.round(p.x), Math.round(p.y), Math.round(currentParticleRadius), 0, Math.PI * 2);
+                if (effect.type === 'bomb') {
+                    if (effect.flash && elapsedTime < effect.flash.duration) {
+                        const flashProgress = elapsedTime / effect.flash.duration;
+                        const easedFlashProgress = 1 - Math.pow(1 - flashProgress, 3); 
+                        const currentAlpha = effect.flash.maxAlpha * (1 - easedFlashProgress);
+                        const currentRadius = effect.flash.radius * (0.3 + flashProgress * 0.7); 
+                        const gradient = ctx.createRadialGradient(0, 0, currentRadius * 0.1, 0, 0, currentRadius);
+                        gradient.addColorStop(0, `rgba(255, 230, 200, ${currentAlpha})`);
+                        gradient.addColorStop(0.4, `rgba(255, 150, 50, ${currentAlpha * 0.8})`);
+                        gradient.addColorStop(0.8, `rgba(255, 60, 0, ${currentAlpha * 0.5})`);
+                        gradient.addColorStop(1, `rgba(200, 0, 0, ${currentAlpha * 0.2})`);
+                        ctx.fillStyle = gradient;
+                        ctx.beginPath();
+                        ctx.arc(0, 0, currentRadius, 0, Math.PI * 2);
                         ctx.fill();
                     }
+                    const particleStartTimeOffset = effect.flash ? effect.flash.duration * 0.1 : 0;
+                    effect.particles.forEach(p => {
+                        const particleElapsedTime = now - (effect.startTime + particleStartTimeOffset);
+                        if (particleElapsedTime < 0 || particleElapsedTime > p.life) return;
+                        const particleProgress = particleElapsedTime / p.life;
+                        const particleAlpha = p.alpha * (1 - particleProgress);
+                        if (particleAlpha <= 0) return;
+                        ctx.beginPath();
+                        ctx.globalAlpha = particleAlpha;
+                        ctx.fillStyle = p.color;
+                        const dtFrames = deltaTime * TARGET_FPS_FOR_CONVERSION; 
+                        p.x += p.vx * dtFrames * (1 - particleProgress * 0.5); 
+                        p.y += p.vy * dtFrames * (1 - particleProgress * 0.5); 
+                        p.vy += 0.12 * dtFrames; 
+                        const currentParticleRadius = p.radius * Math.max(0, (1 - particleProgress * 0.8));
+                        if(currentParticleRadius > 0) {
+                           ctx.arc(p.x, p.y, currentParticleRadius, 0, Math.PI * 2);
+                           ctx.fill();
+                        }
+                    });
+                } else if (effect.type === 'mystery') {
+                    effect.particles.forEach(p => {
+                        const particleAlpha = p.alpha * (1 - effectProgress);
+                        if (particleAlpha <= 0) return;
+                        ctx.beginPath();
+                        ctx.globalAlpha = particleAlpha;
+                        ctx.fillStyle = p.color;
+                        const dtFrames = deltaTime * TARGET_FPS_FOR_CONVERSION;
+                        p.angle += p.orbitSpeed * dtFrames * 0.2; 
+                        p.orbitRadius = p.initialOrbitRadius * (1 + effectProgress * 0.5);
+                        p.x = Math.cos(p.angle) * p.orbitRadius;
+                        p.y = Math.sin(p.angle) * p.orbitRadius;
+                        const currentParticleRadius = p.radius * (1 - effectProgress * 0.5);
+                        if(currentParticleRadius > 0) {
+                            ctx.arc(p.x, p.y, currentParticleRadius, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    });
+                } else { 
+                     effect.particles.forEach(p => {
+                        const particleAlpha = p.alpha * (1 - effectProgress);
+                        if (particleAlpha <= 0) return;
+                        ctx.beginPath();
+                        ctx.globalAlpha = particleAlpha;
+                        ctx.fillStyle = p.color;
+                        const dtFrames = deltaTime * TARGET_FPS_FOR_CONVERSION;
+                        p.x += p.vx * dtFrames;
+                        p.y += p.vy * dtFrames;
+                        if (effect.type === 'booster') { 
+                            p.vy += 0.03 * dtFrames;
+                        }
+                        if(p.radius > 0){
+                           ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                           ctx.fill();
+                        }
+                    });
                 }
                 ctx.restore();
             }
@@ -1667,12 +1594,11 @@
                     updatePlayerPosition();
                     updateFallingObjects(clampedDeltaTime); 
                 }
-                if (isGameRunning || activeFallingObjects.length > 0) { 
+                if (isGameRunning) { // Draw only if game is running
                     drawPlayer();
                     drawFallingObjects();
                 }
-                
-                if (activeEffects.length > 0) {
+                if (activeEffects.length > 0) { // Always draw effects if any exist
                     drawVisualEffects(clampedDeltaTime); 
                 }
             } catch (error) {
@@ -1683,11 +1609,7 @@
                     console.error("Error stack:", error.stack);
                 }
                 isGameRunning = false; 
-                activeEffects.forEach(effect => effect.particles.forEach(p => returnParticleToPool(p))); 
                 activeEffects = []; 
-                activeFallingObjects.forEach(obj => obj.active = false); 
-                activeFallingObjects = [];
-
                 if (animationFrameId) cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
                 if (idleAnimationFrameId) cancelAnimationFrame(idleAnimationFrameId);
@@ -1695,11 +1617,11 @@
                 idleAnimationFrameId = null;
 
                 statusMessage.innerHTML = "<p class='text-red-600 font-bold'>遊戲發生嚴重錯誤，請檢查網路連線或重新整理頁面。</p>";
-                updateAllButtonStates(); 
+                updateAllButtonStates(); // Update button states on error
                 return; 
             }
 
-            if (isGameRunning || activeEffects.length > 0) { 
+            if (isGameRunning || activeEffects.length > 0) { // Continue loop if game is running OR effects are still active
                 animationFrameId = requestAnimationFrame(gameLoop);
             } else {
                 animationFrameId = null; 
@@ -1751,13 +1673,15 @@
             }
         }
 
-        let isStartButtonIntersecting = false; 
-        let intersectionObserver; 
+        // --- Centralized Button State and Visibility Management ---
+        let isStartButtonIntersecting = false; // Flag to track main start button visibility
+        let intersectionObserver; // Declare observer globally
 
         function updateAllButtonStates() {
             const imageReady = player.imageLoaded && player.image.complete && player.image.naturalWidth > 0 && player.image.naturalHeight > 0;
             const canGameBeStarted = !isGameRunning && imageReady;
 
+            // Main Start Button
             if (startButton) {
                 startButton.disabled = !canGameBeStarted;
                 if (isGameRunning) {
@@ -1765,12 +1689,13 @@
                 } else if (canGameBeStarted && startButton.textContent === "遊戲進行中") { 
                     startButton.textContent = "開始遊戲"; 
                 } else if (canGameBeStarted && (startButton.textContent === "再試一次" || startButton.textContent === "再玩一局" || startButton.textContent === "重新開始")) {
-                    // Keep text
+                    // Keep the "再試一次" or "再玩一局" text if game ended and is ready to restart
                 } else if (canGameBeStarted) {
                     startButton.textContent = "開始遊戲";
                 }
             }
 
+            // Quick Start Button Container and Button
             if (quickStartButtonContainer && quickStartButton) {
                 if (isGameRunning || (startButton && isStartButtonIntersecting)) { 
                     quickStartButtonContainer.style.display = 'none';
@@ -1805,10 +1730,7 @@
             isGameRunning = true;
             accumulatedWeight = 0; 
             currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
-            
-            activeFallingObjects.forEach(obj => obj.active = false);
-            activeFallingObjects = [];
-            activeEffects.forEach(effect => effect.particles.forEach(p => returnParticleToPool(p)));
+            fallingObjects = [];
             activeEffects = []; 
 
             if (player.width > 0 && player.height > 0) {
@@ -1840,8 +1762,10 @@
             }
         }
 
-        function stopGame() { 
+        function stopGame() {
             isGameRunning = false;
+            updateAllButtonStates(); 
+
             if (touchControlsUI) {
                 touchControlsUI.style.display = 'none';
             }
@@ -1870,20 +1794,9 @@
             if (startButton) {
                 startButton.textContent = "再試一次";
             }
-            updateAllButtonStates(); 
-            if (toneJsInitialized && loseSound) {
-                if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
-                    Tone.start().then(() => {
-                        if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
-                           loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05);
-                        }
-                    }).catch(err => console.error("Tone.start 在 gameOver 中發生錯誤:", err));
-                } else if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
-                     if (loseSound && typeof loseSound.triggerAttackRelease === 'function') {
-                         loseSound.triggerAttackRelease("A2", "4n", Tone.now() + 0.05);
-                     }
-                }
-            }
+            updateAllButtonStates(); // Ensure button states are correct after text change
+            playToneSound(loseSound, "A2", "4n", Tone.now() + 0.05, "Lose");
+
             const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
             if (statusMessage) {
                 statusMessage.innerHTML = `<p class='text-center font-bold'>${message} <br>最終成績：${accumulatedWeight.toFixed(1)} g / ${elapsedTime} s</p>`;
@@ -1896,20 +1809,9 @@
             if (startButton) {
                 startButton.textContent = "再玩一局";
             }
-            updateAllButtonStates(); 
-            if (toneJsInitialized && winSound) {
-                 if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
-                    Tone.start().then(() => {
-                         if (winSound && typeof winSound.triggerAttackRelease === 'function') {
-                             winSound.triggerAttackRelease("C5", "2n", Tone.now());
-                         }
-                    }).catch(err => console.error("Tone.start 在 gameWin 中發生錯誤:", err));
-                } else if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
-                     if (winSound && typeof winSound.triggerAttackRelease === 'function') {
-                        winSound.triggerAttackRelease("C5", "2n", Tone.now());
-                     }
-                }
-            }
+            updateAllButtonStates(); // Ensure button states are correct after text change
+            playToneSound(winSound, "C5", "2n", Tone.now(), "Win");
+
             const elapsedTime = gameStartTime > 0 ? ((performance.now() - gameStartTime) / 1000).toFixed(2) : "0.00";
             const finalDisplayTime = Math.max(0, parseFloat(elapsedTime)).toFixed(2);
 
@@ -1981,7 +1883,7 @@
                     name: playerName,
                     phone: playerPhone,
                     time: finalTime,
-                    weight: accumulatedWeight.toFixed(1), 
+                    weight: accumulatedWeight.toFixed(1),
                     eventType: "scoreSubmit"
                 };
 
@@ -2047,7 +1949,7 @@
             particlesContainer.innerHTML = ''; 
 
             overlay.style.display = 'flex';
-            stopGame(); 
+            stopGame(); // This will call updateAllButtonStates
 
             if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>✨ 恭喜！你發現了隱藏彩蛋！ ✨</p>";
             if (startButton) { 
@@ -2067,7 +1969,7 @@
                 const numParticles = 30;
                 for (let i = 0; i < numParticles; i++) {
                     const particle = document.createElement('div');
-                    particle.classList.add('particle'); 
+                    particle.classList.add('particle');
                     const colors = ['#facc15', '#60a5fa', '#f87171', '#34d399', '#a78bfa'];
                     particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                     const size = Math.random() * 8 + 4;
@@ -2230,6 +2132,8 @@
                 const imageActuallyReadyForDrawing = player.image.complete && player.image.naturalWidth > 0 && player.image.naturalHeight > 0;
                 if (!isGameRunning && canvas.width > 0 && player.imageLoaded && imageActuallyReadyForDrawing) {
                     if (activeEffects.length === 0 && !isIdleAnimating) {
+                        clearCanvas(); 
+                        drawPlayer();
                         startIdleAnimation();
                     }
                 }
@@ -2327,7 +2231,7 @@
 
             try {
                 const data = await fetchWithRetry(GOOGLE_APPS_SCRIPT_URL + '?action=getLeaderboard');
-                const leaderboard = data.leaderboard || data; 
+                const leaderboard = data.leaderboard || data;
                 if (!Array.isArray(leaderboard)) { 
                     console.error("排行榜數據不是一個有效的陣列:", leaderboard);
                     throw new Error("收到的排行榜數據格式無效。");
@@ -2374,9 +2278,9 @@
 
                 listItem.innerHTML = `<span class="rank">${rankDisplay}</span> <span class="${nameClass}">${escapeHTML(score.name || '匿名')}</span> <span class="${timeClass}">${typeof score.time === 'number' ? score.time.toFixed(2) : '-'} s</span>`;
                 
-                if (!highlightAppliedThisCall && nameToHighlightNext && typeof timeToHighlightNext === 'number' &&
+                if (!highlightAppliedThisCall && nameToHighlightNext && timeToHighlightNext &&
                     score.name === nameToHighlightNext && 
-                    Math.abs(parseFloat(score.time) - timeToHighlightNext) < 0.01) { 
+                    Math.abs(parseFloat(score.time) - timeToHighlightNext) < 0.01) {
                     listItem.classList.add('currentUserScoreHighlight');
                     highlightAppliedThisCall = true;
                 }
@@ -2413,16 +2317,6 @@
             }
         }
         
-        function detectSamsungBrowser() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            isSamsungBrowser = /SamsungBrowser/i.test(userAgent);
-            if (isSamsungBrowser) {
-                console.log("三星瀏覽器已偵測。將使用優化版視覺效果。");
-            } else {
-                console.log("非三星瀏覽器。將使用原始視覺效果。");
-            }
-        }
-
         function handleResize() {
             try {
                 if(isIdleAnimating) stopIdleAnimation(); 
@@ -2430,7 +2324,7 @@
                 const gameArea = document.getElementById('gameContainer');
                 const gameAreaPaddingLeft = gameArea ? parseFloat(getComputedStyle(gameArea).paddingLeft) || 0 : 0;
                 const gameAreaPaddingRight = gameArea ? parseFloat(getComputedStyle(gameArea).paddingRight) || 0 : 0;
-                const bodyPaddingHorizontal = (parseFloat(getComputedStyle(document.body).paddingLeft) || 0) * 2; 
+                const bodyPaddingHorizontal = (parseFloat(getComputedStyle(document.body).paddingLeft) || 0) * 2;
                 
                 const availableWidthInGameArea = gameArea ? gameArea.clientWidth - (gameAreaPaddingLeft + gameAreaPaddingRight) : window.innerWidth * 0.9;
                 const availableWidthInWindow = window.innerWidth - bodyPaddingHorizontal;
@@ -2451,7 +2345,7 @@
                 player.width = canvasWidth * 0.12;
                 player.height = player.width / phoneImageAspectRatio;
                 canvasHeight = canvasWidth / aspectRatio;
-                const maxHeight = window.innerHeight * 0.48; 
+                const maxHeight = window.innerHeight * 0.48;
                 if (canvasHeight > maxHeight) {
                     canvasHeight = maxHeight;
                     canvasWidth = canvasHeight * aspectRatio;
@@ -2475,15 +2369,15 @@
                     player.width = player.height * (phoneImageAspectRatio || 0.5);
                 }
                 player.width = Math.max(15, Math.min(player.width, canvas.width * 0.3));
-                player.height = player.width / (phoneImageAspectRatio || 0.5); 
-                 if (!isFinite(player.height)) player.height = Math.max(30, player.width * 2); 
+                player.height = player.width / (phoneImageAspectRatio || 0.5);
+                if (!isFinite(player.height)) player.height = Math.max(30, player.width * 2);
 
 
                 const infoBarElements = document.querySelectorAll('.info-bar div, #gameStatsDisplay div div'); 
                 infoBarElements.forEach(el => { if (el) el.style.maxWidth = `${canvas.width}px`; });
 
                 player.x = canvas.width / 2 - player.width / 2;
-                player.y = canvas.height - player.height - (canvas.height * 0.03); 
+                player.y = canvas.height - player.height - (canvas.height * 0.03);
                 if (isTouchDevice()) player.speed = canvas.width * 0.018; else player.speed = canvas.width * 0.024;
 
                 itemTypes.forEach(it => {
@@ -2503,16 +2397,16 @@
                     player.y = ( (canvas ? canvas.height : 450) ) - player.height - 10;
                 }
             } finally {
-                updateAllButtonStates(); 
+                updateAllButtonStates(); // Update button states after resize adjustments
 
                 const imageActuallyReadyForDrawing = player.image.complete && player.image.naturalWidth > 0 && player.image.naturalHeight > 0;
-                if (!isGameRunning && activeEffects.length === 0) { 
+                if (!isGameRunning && activeEffects.length === 0) {
                     clearCanvas();
                     if (player.imageLoaded && imageActuallyReadyForDrawing && player.width > 0 && player.height > 0) {
                         drawPlayer();
                     } else if (canvas.width > 0 && player.width > 0 && player.height > 0) { 
                         ctx.fillStyle = '#a5b4fc'; 
-                        ctx.fillRect(Math.round(player.x), Math.round(player.y), Math.round(player.width), Math.round(player.height));
+                        ctx.fillRect(player.x, player.y, player.width, player.height);
                     }
                     startIdleAnimation(); 
                 } else if (isGameRunning || activeEffects.length > 0) { 
@@ -2528,16 +2422,16 @@
 
         window.addEventListener('load', async () => {
             pageLoadStartTime = performance.now();
-            detectSamsungBrowser(); // 新增：偵測瀏覽器
-            initializeFallingObjectPool(); 
-            initializeVisualEffectParticlePool(); 
             handleResize(); 
             displayGameInstructions();
             
-            if (browserRecommendationDiv) { // browserRecommendationDiv 的顯示邏輯保持不變
+            // Browser recommendation logic
+            if (browserRecommendationDiv) {
                 const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-                const isProblematicSamsungBrowser = /SamsungBrowser/i.test(userAgent); // 這裡可以保持原樣，或根據 isSamsungBrowser 變數調整
-                if (isProblematicSamsungBrowser) { 
+                const isSamsungBrowser = /SamsungBrowser/i.test(userAgent);
+                // Also check for other potentially problematic mobile browsers if needed in the future
+                // const isProblematicBrowser = isSamsungBrowser || /AnotherBrowser/i.test(userAgent);
+                if (isSamsungBrowser) { // Show only for Samsung Browser for now
                     browserRecommendationDiv.style.display = 'block';
                 }
             }
@@ -2546,14 +2440,15 @@
 
             if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲資源載入中...</p>";
 
+            // Setup IntersectionObserver
             const observerOptions = {
-                root: null, 
+                root: null, // viewport
                 rootMargin: '0px',
-                threshold: 0.1 
+                threshold: 0.1 // 10% of startButton visible
             };
             const observerCallback = (entries) => {
                 entries.forEach(entry => {
-                    if (entry.target === startButton) { 
+                    if (entry.target === startButton) { // Ensure we are reacting to the correct element
                         isStartButtonIntersecting = entry.isIntersecting;
                         updateAllButtonStates();
                     }
@@ -2577,9 +2472,9 @@
 
                     if (statusMessage && !isGameRunning) { 
                          if (startButton && !startButton.disabled) {
-                             statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」挑戰！</p>";
+                            statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」挑戰！</p>";
                          } else if (quickStartButton && !quickStartButton.disabled) {
-                             statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「快速開始遊戲」挑戰！</p>";
+                            statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「快速開始遊戲」挑戰！</p>";
                          }
                     }
                     if (!isGameRunning && activeEffects.length === 0) startIdleAnimation();
@@ -2594,7 +2489,7 @@
                         statusMessage.innerHTML = "<p class='text-center font-bold text-orange-600'>圖片載入可能較慢。若按鈕未啟用，請稍候或嘗試重整。</p>";
                     }
                     if (canvas.width > 0) handleResize(); 
-                    if (!isGameRunning && activeEffects.length === 0) startIdleAnimation(); 
+                    if (!isGameRunning && activeEffects.length === 0) startIdleAnimation();
                 }
             }, 100);
 
@@ -2604,10 +2499,11 @@
                 initializeSounds(); 
             }
             
+            // Stagger initial backend calls
             await recordPageLoad();
-            await new Promise(resolve => setTimeout(resolve, 200)); 
+            await new Promise(resolve => setTimeout(resolve, 200)); // 200ms delay
             await fetchLeaderboardData();
-            await new Promise(resolve => setTimeout(resolve, 200)); 
+            await new Promise(resolve => setTimeout(resolve, 200)); // 200ms delay
             await fetchGameStats();
 
             leaderboardPollIntervalId = setInterval(async () => {
