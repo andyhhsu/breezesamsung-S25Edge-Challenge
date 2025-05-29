@@ -886,8 +886,8 @@
 
         const newEasterEggOverlay = document.getElementById('newEasterEggOverlay');
 
-        // *** 更新 Google Apps Script URL ***
-        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-QJLyEJdurI8vaaOAosjUaeIOqraNDgqyV59Fnc9_8eCJMmW0dqpyePoOA-nlGa_-/exec';
+        // *** Google Apps Script URL ***
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzJi3oCz4ZWz0AzeY91PBbyJJU5DbwIT_nkrr4ZBmaSPq7iaxkTuMICRIwAQC1lETE6/exec';
 
         const TARGET_WEIGHT = 163;
         let accumulatedWeight = 0;
@@ -953,7 +953,7 @@
             { name: 'Galaxy Buds3 (單耳)', emoji: '🎧', weight: 5, type: 'item', base_ch_per_sec: 0.0030 * TARGET_FPS_FOR_CONVERSION, spawnChance: 23 },
             { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 16 },
             { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: (0.0058 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
-            { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 },
+            { name: '增重火箭', emoji: '�', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 },
             { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
             {
                 name: '神秘配件',
@@ -1039,25 +1039,23 @@
                     if (!response.ok) {
                         let errorMsg = `HTTP 錯誤! 狀態碼: ${response.status}.`;
                         try {
-                            // Try to get more info if it's not a no-cors opaque response
                             if (response.type !== 'opaque') {
                                 const errorData = await response.json();
                                 if (errorData && errorData.message) errorMsg += ` 訊息: ${errorData.message}`;
                             }
                         } catch (jsonError) {
-                            // Ignore if response body can't be parsed (e.g. not JSON or opaque)
+                            // Ignore
                         }
                         throw new Error(errorMsg);
                     }
-                    // For 'no-cors', we can't read the body, so assume success if no error thrown
                     if (options.mode === 'no-cors') {
-                        return response; // Or just return true, as body is unusable
+                        return response; 
                     }
-                    return await response.json(); // Attempt to parse JSON for standard requests
+                    return await response.json(); 
                 } catch (error) {
                     console.warn(`Fetch 請求失敗 (第 ${i + 1} 次嘗試): ${error.message} (URL: ${url.substring(0,100)})`);
-                    if (i === retries - 1) throw error; // Throw error after last retry
-                    await new Promise(resolve => setTimeout(resolve, (i + 1) * 1000 + Math.random() * 500)); // Exponential backoff with jitter
+                    if (i === retries - 1) throw error; 
+                    await new Promise(resolve => setTimeout(resolve, (i + 1) * 1000 + Math.random() * 500)); 
                 }
             }
         }
@@ -1207,6 +1205,7 @@
                     obj.y + obj.height > player.y) {
 
                     obj.markedForRemoval = true;
+                    // console.log('Caught item:', JSON.stringify(obj), 'Current accWeight B4:', accumulatedWeight); // DEBUG
 
                     if (obj.type === 'bomb') {
                         if (toneJsInitialized && hazardHitSound && Tone.context.state === 'running') {
@@ -1226,48 +1225,62 @@
                         if (obj.type === 'mystery') {
                             if (toneJsInitialized && mysteryRevealSound && Tone.context.state === 'running') mysteryRevealSound.triggerAttackRelease("8n", Tone.now());
                             triggerVisualEffect('mystery', player.x + player.width / 2, player.y + player.height / 2);
-
-                            if (mysteryTransformableItemKeys.length > 0) {
-                                const randomKeyIndex = Math.floor(Math.random() * mysteryTransformableItemKeys.length);
-                                const revealedItemKey = mysteryTransformableItemKeys[randomKeyIndex];
-                                const actualItem = { ...mysteryTransformableItemsMap[revealedItemKey] };
-
-                                let revealedMsg = `<p class='text-center font-bold text-blue-600'>哇！神秘配件變身！是 <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
-                                if (actualItem.type === 'item') {
-                                    revealedMsg += `，重量 ${actualItem.weight} g！</p>`;
-                                    accumulatedWeight += actualItem.weight;
-                                    if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
-                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT} g 了！`;
-                                } else if (actualItem.type === 'weight_booster') {
-                                    revealedMsg += `，重量翻倍！</p>`;
-                                    accumulatedWeight *= 2;
-                                    if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
-                                    triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
-                                    customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT} g 了！`;
-                                } else if (actualItem.type === 'time_bonus') {
-                                    revealedMsg += `，時間 ${actualItem.timeEffect} s！</p>`;
-                                    gameStartTime -= actualItem.timeEffect * 1000;
-                                    if (gameStartTime > performance.now()) gameStartTime = performance.now(); 
-                                    if (toneJsInitialized && timeBonusSound && Tone.context.state === 'running') timeBonusSound.triggerAttackRelease("E5", "8n", Tone.now());
-                                }
-                                statusMessage.innerHTML = revealedMsg;
-                                setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 2500);
+                            
+                            let actualItemDefinition = mysteryTransformableItemsMap[mysteryTransformableItemKeys[Math.floor(Math.random() * mysteryTransformableItemKeys.length)]];
+                            if (!actualItemDefinition) {
+                                console.error(`神秘道具揭示了一個未定義的道具。將使用安全的備用道具。`);
+                                actualItemDefinition = { name: '安全備用道具', emoji: '🛡️', weight: 1, type: 'item' };
                             }
+                            const actualItem = { ...actualItemDefinition };
+
+
+                            let revealedMsg = `<p class='text-center font-bold text-blue-600'>哇！神秘配件變身！是 <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
+                            if (actualItem.type === 'item') {
+                                revealedMsg += `，重量 ${actualItem.weight} g！</p>`;
+                                let revealedItemWeight = Number(actualItem.weight) || 0;
+                                accumulatedWeight = (Number(accumulatedWeight) || 0) + revealedItemWeight;
+                                if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
+                                customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT} g 了！`;
+                            } else if (actualItem.type === 'weight_booster') {
+                                revealedMsg += `，重量翻倍！</p>`;
+                                let currentAccNum = Number(accumulatedWeight) || 0;
+                                accumulatedWeight = currentAccNum * 2;
+                                if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
+                                triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
+                                customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT} g 了！`;
+                            } else if (actualItem.type === 'time_bonus') {
+                                revealedMsg += `，時間 ${actualItem.timeEffect} s！</p>`;
+                                gameStartTime -= (Number(actualItem.timeEffect) || 0) * 1000;
+                                if (gameStartTime > performance.now()) gameStartTime = performance.now(); 
+                                if (toneJsInitialized && timeBonusSound && Tone.context.state === 'running') timeBonusSound.triggerAttackRelease("E5", "8n", Tone.now());
+                            }
+                            statusMessage.innerHTML = revealedMsg;
+                            setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 2500);
                         } else if (obj.type === 'weight_booster') {
                             if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
                             triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
-                            accumulatedWeight *= 2;
+                            let currentAccNum = Number(accumulatedWeight) || 0;
+                            accumulatedWeight = currentAccNum * 2;
                             statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 AI 加速！重量翻倍！</p>";
                             setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 1500);
                             customGameOverMessageOnOverweight = `噢不！重量翻倍後超過目標 ${TARGET_WEIGHT} g 了！`;
                         } else if (obj.type === 'item') {
                             if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
-                            accumulatedWeight += obj.weight;
+                            let itemWeight = Number(obj.weight) || 0;
+                            accumulatedWeight = (Number(accumulatedWeight) || 0) + itemWeight;
                             customGameOverMessageOnOverweight = `噢不！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT} g 了！`;
                         }
-
+                        // console.log('After weight mod. accWeight:', accumulatedWeight, 'obj.type:', obj.type); // DEBUG
+                        
+                        // Ensure accumulatedWeight is a number before toFixed
+                        if (typeof accumulatedWeight !== 'number' || isNaN(accumulatedWeight)) {
+                            console.warn("accumulatedWeight is NaN before toFixed, resetting to 0. Original value:", accumulatedWeight);
+                            accumulatedWeight = 0;
+                        }
                         accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
                         currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
+                        // console.log('After toFixed/parseFloat. accWeight:', accumulatedWeight, 'Display:', currentWeightDisplay.textContent); // DEBUG
+
 
                         if (!gameEndedThisFrame && isGameRunning) { 
                             if (Math.abs(accumulatedWeight - TARGET_WEIGHT) < 0.01) {
@@ -1635,7 +1648,7 @@
             }
 
             isGameRunning = true;
-            accumulatedWeight = 0;
+            accumulatedWeight = 0; // Reset accumulated weight
             currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
             fallingObjects = [];
             activeEffects = []; 
@@ -1687,8 +1700,6 @@
             const eventType = isSuccess ? "gameWinEvent" : "gameLossEvent";
             console.log("記錄遊戲結果:", eventType);
             try {
-                // Using fetchWithRetry for POST might be problematic with no-cors
-                // as we can't confirm success. Keeping original fetch for fire-and-forget.
                 await fetch(GOOGLE_APPS_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors', 
@@ -1825,7 +1836,6 @@
                 submitStatus.innerHTML = '<span class="text-blue-600 font-medium">⏳ 提交中...</span>';
 
                 try {
-                    // Using original fetch for POST with no-cors as success confirmation is not possible client-side
                     await fetch(GOOGLE_APPS_SCRIPT_URL, {
                         method: 'POST', mode: 'no-cors', cache: 'no-cache',
                         headers: { 'Content-Type': 'application/json' },
@@ -2240,8 +2250,6 @@
             }
             console.log("記錄頁面載入事件...");
             try {
-                // POST with no-cors is fire-and-forget, retries might lead to multiple records
-                // Keeping original fetch here.
                 await fetch(GOOGLE_APPS_SCRIPT_URL, {
                     method: 'POST', mode: 'no-cors', cache: 'no-cache',
                     headers: { 'Content-Type': 'application/json' },
