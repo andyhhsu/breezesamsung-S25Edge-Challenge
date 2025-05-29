@@ -953,7 +953,7 @@
             { name: 'Galaxy Buds3 (單耳)', emoji: '🎧', weight: 5, type: 'item', base_ch_per_sec: 0.0030 * TARGET_FPS_FOR_CONVERSION, spawnChance: 23 },
             { name: '手機SIM卡托', emoji: '📲', weight: 1, type: 'item', base_ch_per_sec: 0.0022 * TARGET_FPS_FOR_CONVERSION, spawnChance: 16 },
             { name: 'Galaxy SmartTag2', emoji: '🏷️', weight: 13.5, type: 'item', base_ch_per_sec: (0.0058 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
-            { name: '增重火箭', emoji: '�', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 },
+            { name: '增重火箭', emoji: '🚀', weight: 0, type: 'weight_booster', base_ch_per_sec: 0.0070 * TARGET_FPS_FOR_CONVERSION, spawnChance: 5 },
             { name: '炸彈', emoji: '💣', weight: 0, type: 'bomb', base_ch_per_sec: (0.0065 * TARGET_FPS_FOR_CONVERSION) * 0.9, spawnChance: 10 },
             {
                 name: '神秘配件',
@@ -1039,23 +1039,24 @@
                     if (!response.ok) {
                         let errorMsg = `HTTP 錯誤! 狀態碼: ${response.status}.`;
                         try {
-                            if (response.type !== 'opaque') {
+                            if (response.type !== 'opaque') { // 'opaque' for no-cors
                                 const errorData = await response.json();
                                 if (errorData && errorData.message) errorMsg += ` 訊息: ${errorData.message}`;
                             }
                         } catch (jsonError) {
-                            // Ignore
+                            // If parsing errorData fails or it's opaque, the initial errorMsg is used.
                         }
                         throw new Error(errorMsg);
                     }
+                    // For 'no-cors', we can't read the body, so assume success if no error thrown
                     if (options.mode === 'no-cors') {
-                        return response; 
+                        return response; // Or just return true, as body is unusable
                     }
-                    return await response.json(); 
+                    return await response.json(); // Attempt to parse JSON for standard requests
                 } catch (error) {
                     console.warn(`Fetch 請求失敗 (第 ${i + 1} 次嘗試): ${error.message} (URL: ${url.substring(0,100)})`);
-                    if (i === retries - 1) throw error; 
-                    await new Promise(resolve => setTimeout(resolve, (i + 1) * 1000 + Math.random() * 500)); 
+                    if (i === retries - 1) throw error; // Throw error after last retry
+                    await new Promise(resolve => setTimeout(resolve, (i + 1) * 1000 + Math.random() * 500)); // Exponential backoff with jitter
                 }
             }
         }
@@ -1143,6 +1144,9 @@
             fallingObjects.forEach(obj => {
                 const objFontSize = canvas.width * 0.095;
                 const weightFontSize = canvas.width * 0.06;
+                // Set font for emojis on canvas, attempting to use Noto Sans TC first
+                ctx.font = `${objFontSize}px "Noto Sans TC", Arial`;
+
 
                 if (obj.type === 'easter_egg' && obj.imageLoaded && obj.imageObj && obj.imageObj.complete && obj.imageObj.naturalHeight !== 0 && obj.imageObj.naturalWidth !== 0) {
                     const aspectRatioItem = obj.imageObj.naturalWidth / obj.imageObj.naturalHeight;
@@ -1155,22 +1159,20 @@
                     if (imgWidth > minDim && imgHeight > minDim && isFinite(imgWidth) && isFinite(imgHeight)) {
                         ctx.drawImage(obj.imageObj, obj.x + (obj.width - imgWidth) / 2, obj.y + (obj.height - imgHeight) / 2, imgWidth, imgHeight);
                     } else {
-                        ctx.font = `${objFontSize}px Arial`;
+                        // Fallback to emoji if image drawing params are invalid
                         ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
                         ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height);
                     }
-                } else if (obj.type === 'easter_egg') {
-                    ctx.font = `${objFontSize}px Arial`;
+                } else if (obj.type === 'easter_egg') { // Easter egg but image not loaded/ready
                     ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
                     ctx.fillText(obj.emoji || '✨', obj.x + obj.width / 2, obj.y + obj.height);
-                } else {
-                    ctx.font = `${objFontSize}px Arial`;
+                } else { // All other items (including rocket)
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
                     ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height);
 
                     if (obj.type === 'item' && typeof obj.weight === 'number' && obj.weight > 0) {
-                        ctx.font = `bold ${weightFontSize}px Arial`;
+                        ctx.font = `bold ${weightFontSize}px "Noto Sans TC", Arial`; // Also apply font here
                         ctx.fillStyle = '#FF0000';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'top';
@@ -1205,7 +1207,6 @@
                     obj.y + obj.height > player.y) {
 
                     obj.markedForRemoval = true;
-                    // console.log('Caught item:', JSON.stringify(obj), 'Current accWeight B4:', accumulatedWeight); // DEBUG
 
                     if (obj.type === 'bomb') {
                         if (toneJsInitialized && hazardHitSound && Tone.context.state === 'running') {
@@ -1221,15 +1222,18 @@
                         gameEndedThisFrame = true;
                     } else {
                         let customGameOverMessageOnOverweight = null;
+                        let itemWeightEffect = 0;
+                        let isBooster = false;
+                        let currentAccumulatedWeightNum = Number(accumulatedWeight) || 0; // Ensure current is a number
 
                         if (obj.type === 'mystery') {
                             if (toneJsInitialized && mysteryRevealSound && Tone.context.state === 'running') mysteryRevealSound.triggerAttackRelease("8n", Tone.now());
                             triggerVisualEffect('mystery', player.x + player.width / 2, player.y + player.height / 2);
                             
                             let actualItemDefinition = mysteryTransformableItemsMap[mysteryTransformableItemKeys[Math.floor(Math.random() * mysteryTransformableItemKeys.length)]];
-                            if (!actualItemDefinition) {
+                            if (!actualItemDefinition) { // Fallback if definition is missing
                                 console.error(`神秘道具揭示了一個未定義的道具。將使用安全的備用道具。`);
-                                actualItemDefinition = { name: '安全備用道具', emoji: '🛡️', weight: 1, type: 'item' };
+                                actualItemDefinition = { name: '安全備用道具', emoji: '🛡️', weight: 1, type: 'item' }; // Safe fallback
                             }
                             const actualItem = { ...actualItemDefinition };
 
@@ -1237,14 +1241,13 @@
                             let revealedMsg = `<p class='text-center font-bold text-blue-600'>哇！神秘配件變身！是 <strong>${actualItem.emoji} ${actualItem.name}</strong>`;
                             if (actualItem.type === 'item') {
                                 revealedMsg += `，重量 ${actualItem.weight} g！</p>`;
-                                let revealedItemWeight = Number(actualItem.weight) || 0;
-                                accumulatedWeight = (Number(accumulatedWeight) || 0) + revealedItemWeight;
+                                itemWeightEffect = Number(actualItem.weight) || 0;
+                                currentAccumulatedWeightNum += itemWeightEffect;
                                 if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
                                 customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} 後，超過目標 ${TARGET_WEIGHT} g 了！`;
                             } else if (actualItem.type === 'weight_booster') {
                                 revealedMsg += `，重量翻倍！</p>`;
-                                let currentAccNum = Number(accumulatedWeight) || 0;
-                                accumulatedWeight = currentAccNum * 2;
+                                isBooster = true; // Mark as booster, apply multiplication later
                                 if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
                                 triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
                                 customGameOverMessageOnOverweight = `噢不！神秘配件變成 ${actualItem.name} (重量x2) 後，超過目標 ${TARGET_WEIGHT} g 了！`;
@@ -1259,27 +1262,28 @@
                         } else if (obj.type === 'weight_booster') {
                             if (toneJsInitialized && boosterSound && Tone.context.state === 'running') boosterSound.triggerAttackRelease("G4", "8n", Tone.now());
                             triggerVisualEffect('booster', player.x + player.width / 2, player.y + player.height / 2);
-                            let currentAccNum = Number(accumulatedWeight) || 0;
-                            accumulatedWeight = currentAccNum * 2;
+                            isBooster = true; // Mark as booster
                             statusMessage.innerHTML = "<p class='text-center font-bold text-purple-600'>🚀 AI 加速！重量翻倍！</p>";
                             setTimeout(() => { if (isGameRunning) statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>"; }, 1500);
                             customGameOverMessageOnOverweight = `噢不！重量翻倍後超過目標 ${TARGET_WEIGHT} g 了！`;
                         } else if (obj.type === 'item') {
                             if (toneJsInitialized && catchSound && Tone.context.state === 'running') catchSound.triggerAttackRelease("C4", "16n", Tone.now());
-                            let itemWeight = Number(obj.weight) || 0;
-                            accumulatedWeight = (Number(accumulatedWeight) || 0) + itemWeight;
+                            itemWeightEffect = Number(obj.weight) || 0;
+                            currentAccumulatedWeightNum += itemWeightEffect;
                             customGameOverMessageOnOverweight = `噢不！接到 ${obj.name} 後超過目標 ${TARGET_WEIGHT} g 了！`;
                         }
-                        // console.log('After weight mod. accWeight:', accumulatedWeight, 'obj.type:', obj.type); // DEBUG
                         
-                        // Ensure accumulatedWeight is a number before toFixed
-                        if (typeof accumulatedWeight !== 'number' || isNaN(accumulatedWeight)) {
-                            console.warn("accumulatedWeight is NaN before toFixed, resetting to 0. Original value:", accumulatedWeight);
-                            accumulatedWeight = 0;
+                        if (isBooster) {
+                            currentAccumulatedWeightNum *= 2;
                         }
-                        accumulatedWeight = parseFloat(accumulatedWeight.toFixed(1));
+                        
+                        accumulatedWeight = parseFloat(currentAccumulatedWeightNum.toFixed(1)); 
+
+                        if (isNaN(accumulatedWeight)) {
+                            console.error("CRITICAL: accumulatedWeight became NaN after update. Resetting to 0. Object causing issue:", JSON.stringify(obj), "Value before toFixed:", currentAccumulatedWeightNum);
+                            accumulatedWeight = 0; 
+                        }
                         currentWeightDisplay.textContent = accumulatedWeight.toFixed(1);
-                        // console.log('After toFixed/parseFloat. accWeight:', accumulatedWeight, 'Display:', currentWeightDisplay.textContent); // DEBUG
 
 
                         if (!gameEndedThisFrame && isGameRunning) { 
@@ -1786,7 +1790,7 @@
             scoreFormContainer.style.display = 'block';
             scoreFormContainer.innerHTML = `
                 <div id="scoreForm">
-                    <h3 class="text-lg font-semibold text-center mb-3 text-sky-700">🎉 S25 Edge 配重達人留名 🎉</h3>
+                    <h3 class="text-lg font-semibold text-center mb-3 text-sky-700">� S25 Edge 配重達人留名 🎉</h3>
                     <div>
                         <label for="playerName">取個響亮的達人稱號吧！ (將顯示於排行榜)：</label>
                         <input type="text" id="playerName" name="playerName" maxlength="50" required placeholder="例如：輕巧神手小明">
