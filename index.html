@@ -374,7 +374,7 @@
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             z-index: 150;
-            display: flex;
+            display: flex; /* Default is flex, will be managed by JS */
             justify-content: center;
             align-items: center;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
@@ -1575,7 +1575,8 @@
                 if (startButton) { startButton.textContent = "糟糕，出錯了！點我重整"; startButton.disabled = false; }
                 if (quickStartButton) { quickStartButton.textContent = "出錯！重整"; quickStartButton.disabled = false; }
                 statusMessage.innerHTML = "<p class='text-red-600 font-bold'>遊戲發生嚴重錯誤，請檢查網路連線或重新整理頁面。</p>";
-                if (quickStartButtonContainer) quickStartButtonContainer.style.display = 'flex'; 
+                if (quickStartButtonContainer && !startButton) quickStartButtonContainer.style.display = 'flex'; // Only show if startButton is truly gone
+                else if (quickStartButtonContainer) quickStartButtonContainer.style.display = 'none';
                 return; 
             }
 
@@ -1634,9 +1635,15 @@
         function startGame() {
             if (isGameRunning) return;
 
+            // --- Button Visibility Management ---
             if (quickStartButtonContainer) {
                 quickStartButtonContainer.style.display = 'none';
             }
+            if (startButton) {
+                startButton.style.display = 'block'; // Ensure main start button is visible
+            }
+            // --- End Button Visibility Management ---
+
 
             if(isIdleAnimating) { 
                 stopIdleAnimation();
@@ -1675,7 +1682,7 @@
             statusMessage.innerHTML = "<p class='text-center font-bold'>挑戰中！加油！</p>";
             startButton.textContent = "遊戲進行中";
             startButton.disabled = true;
-            if (quickStartButton) quickStartButton.disabled = true;
+            if (quickStartButton) quickStartButton.disabled = true; // Also disable quick start
 
             scoreFormContainer.style.display = 'none';
             scoreFormContainer.innerHTML = ''; 
@@ -1699,7 +1706,17 @@
             isGameRunning = false;
             if (startButton) {
                 startButton.disabled = false; 
+                startButton.style.display = 'block'; // Ensure main start button is visible
             }
+            // --- Button Visibility Management ---
+            if (quickStartButtonContainer) { // Keep quick start hidden
+                quickStartButtonContainer.style.display = 'none';
+            }
+            if (quickStartButton) { // And disabled
+                quickStartButton.disabled = true;
+            }
+            // --- End Button Visibility Management ---
+
             if (touchControlsUI) {
                 touchControlsUI.style.display = 'none';
             }
@@ -1724,7 +1741,7 @@
         }
 
         function gameOver(message) {
-            stopGame();
+            stopGame(); // stopGame now handles button visibility
             if (startButton) {
                 startButton.textContent = "再試一次";
             }
@@ -1749,7 +1766,7 @@
         }
 
         async function gameWin() {
-            stopGame();
+            stopGame(); // stopGame now handles button visibility
             if (startButton) {
                 startButton.textContent = "再玩一局";
             }
@@ -1904,13 +1921,12 @@
 
             overlay.style.display = 'flex';
 
+            // stopGame() is called when an easter egg is caught, which handles button visibility.
+            // The following lines in the original showNewEasterEgg related to startButton and quickStartButtonContainer
+            // are now handled by stopGame() and the subsequent text update.
             if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>✨ 恭喜！你發現了隱藏彩蛋！ ✨</p>";
-            if (startButton) {
+            if (startButton) { // Text update for startButton after stopGame()
                 startButton.textContent = "重新開始";
-                startButton.disabled = false;
-            }
-            if (quickStartButtonContainer) { 
-                quickStartButtonContainer.style.display = 'none';
             }
 
 
@@ -1969,11 +1985,30 @@
                 const particlesContainer = document.getElementById('particlesContainerAnimate');
                 if(particlesContainer) particlesContainer.innerHTML = '';
             }
+
+            // --- Button Visibility Management ---
+            if (startButton) {
+                 startButton.textContent = "重新開始"; // Or "開始遊戲" if more appropriate
+                 startButton.disabled = false;
+                 startButton.style.display = 'block';
+            }
+            if (quickStartButtonContainer) {
+                quickStartButtonContainer.style.display = 'none';
+            }
+            if (quickStartButton) {
+                quickStartButton.disabled = true;
+            }
+            // --- End Button Visibility Management ---
+
+
             const imageActuallyReadyForDrawing = player.image.complete && player.image.naturalWidth > 0 && player.image.naturalHeight > 0;
             if (!isGameRunning && canvas.width > 0 && player.width > 0 && player.imageLoaded && imageActuallyReadyForDrawing) {
                 if (activeEffects.length === 0 && !isIdleAnimating) {
                      startIdleAnimation();
                 }
+            }
+             if (statusMessage) {
+                statusMessage.innerHTML = "<p class='text-center font-bold'>彩蛋畫面已關閉。想再次挑戰嗎？點擊「重新開始」吧！</p>";
             }
         }
 
@@ -2092,13 +2127,7 @@
 
         if (quickStartButton) {
             quickStartButton.addEventListener('click', () => {
-                if (quickStartButtonContainer) {
-                    quickStartButtonContainer.style.display = 'none';
-                }
-                const gameContainerElement = document.getElementById('gameContainer');
-                if (gameContainerElement) {
-                    gameContainerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                // startGame will handle hiding quickStartButtonContainer
                 startGame();
             });
         }
@@ -2136,7 +2165,7 @@
                 else { 
                      const imageActuallyReadyForDrawing = player.image.complete && player.image.naturalWidth > 0 && player.image.naturalHeight > 0;
                      if (!startButton.disabled && player.imageLoaded && imageActuallyReadyForDrawing && activeEffects.length === 0) {
-                        player.dx = player.speed; updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0;
+                         player.dx = player.speed; updatePlayerPosition(); clearCanvas(); drawPlayer(); player.dx = 0;
                      }
                 }
             });
@@ -2353,8 +2382,16 @@
                 const imageActuallyReadyForDrawing = player.image.complete && player.image.naturalWidth > 0 && player.image.naturalHeight > 0;
                 const enableButtons = !isGameRunning && player.imageLoaded && imageActuallyReadyForDrawing;
                 
-                if(startButton) startButton.disabled = !enableButtons;
-                if(quickStartButton) quickStartButton.disabled = !enableButtons;
+                if(startButton) {
+                    startButton.disabled = !enableButtons;
+                     // Visibility is handled by onload and stopGame/startGame
+                }
+                if(quickStartButton) {
+                    // quickStartButtonContainer's visibility determines if this matters.
+                    // It should be hidden if startButton is primary.
+                     quickStartButton.disabled = !enableButtons;
+                }
+
 
                 if (!isGameRunning && activeEffects.length === 0) {
                     clearCanvas();
@@ -2380,8 +2417,24 @@
             pageLoadStartTime = performance.now();
             handleResize(); 
             displayGameInstructions();
+
+            // --- MODIFICATION: Prioritize startButton, hide quickStartButtonContainer if startButton exists ---
+            if (startButton) {
+                startButton.style.display = 'block'; // Ensure it's visible by default if CSS doesn't hide it
+                if (quickStartButtonContainer) {
+                    quickStartButtonContainer.style.display = 'none';
+                }
+            } else if (quickStartButtonContainer) {
+                // Fallback: if startButton is not in DOM for some reason, show quickStartButtonContainer
+                quickStartButtonContainer.style.display = 'flex';
+            }
+            // --- END MODIFICATION ---
+
+
             if (startButton) startButton.disabled = true; 
-            if (quickStartButton) quickStartButton.disabled = true;
+            // If quickStartButtonContainer is hidden, its button's disabled state is less critical, but keep it consistent
+            if (quickStartButton) quickStartButton.disabled = true; 
+
             if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>遊戲資源載入中...</p>";
 
             const checkPlayerImage = setInterval(() => {
@@ -2392,20 +2445,35 @@
                     console.log("Player image (main or fallback) confirmed loaded and ready. Enabling game.");
                     if (canvas.width > 0) handleResize(); 
                     
-                    const enableButtonsNow = !isGameRunning;
-                    if (startButton) startButton.disabled = !enableButtonsNow;
-                    if (quickStartButton) quickStartButton.disabled = !enableButtonsNow;
+                    const enableButtonsNow = !isGameRunning; // Should be true at this point
+                    if (startButton) {
+                        startButton.disabled = !enableButtonsNow;
+                        // startButton.style.display = 'block'; // Already handled by initial load logic
+                        if (enableButtonsNow) startButton.textContent = "開始遊戲";
+                    }
+                    
+                    // quickStartButtonContainer should remain hidden if startButton is primary
+                    // if (quickStartButtonContainer) quickStartButtonContainer.style.display = 'none';
+                    if (quickStartButton) quickStartButton.disabled = true; // Keep it disabled
 
-                    if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」或「快速開始遊戲」挑戰！</p>";
+                    if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold'>點擊「開始遊戲」挑戰！</p>";
                     if (!isGameRunning && activeEffects.length === 0) startIdleAnimation();
 
                 } else if (performance.now() - pageLoadStartTime > 10000 && !player.imageLoaded) { 
                     clearInterval(checkPlayerImage);
                     console.warn("Player image loading timed out after 10 seconds. Buttons might remain disabled or rely on drawing fallback.");
                     const enableButtonsNow = !isGameRunning;
-                    if (startButton) startButton.disabled = !enableButtonsNow;
-                    if (quickStartButton) quickStartButton.disabled = !enableButtonsNow;
-                    if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold text-orange-600'>圖片載入可能較慢。若按鈕未啟用，請稍候或嘗試重整。</p>";
+
+                    if (startButton) {
+                        startButton.disabled = !enableButtonsNow;
+                        // startButton.style.display = 'block'; // Handled by initial
+                        if (statusMessage && enableButtonsNow) statusMessage.innerHTML = "<p class='text-center font-bold text-orange-600'>圖片載入可能較慢。請點擊「開始遊戲」</p>";
+                         else if (statusMessage) statusMessage.innerHTML = "<p class='text-center font-bold text-orange-600'>圖片載入可能較慢。若按鈕未啟用，請稍候或嘗試重整。</p>";
+                    }
+                    // quickStartButtonContainer remains hidden if startButton is primary
+                    // if (quickStartButton) quickStartButton.disabled = !enableButtonsNow;
+
+
                     if (canvas.width > 0) handleResize(); 
                     if (!isGameRunning && activeEffects.length === 0) startIdleAnimation();
                 }
@@ -2433,13 +2501,7 @@
             if (closeNewEasterEggButton) {
                 closeNewEasterEggButton.addEventListener('click', () => {
                     hideNewEasterEgg();
-                    if (statusMessage) {
-                        statusMessage.innerHTML = "<p class='text-center font-bold'>彩蛋畫面已關閉。想再次挑戰嗎？點擊「重新開始」吧！</p>";
-                    }
-                     if (startButton) {
-                        startButton.textContent = "重新開始";
-                        startButton.disabled = false; 
-                    }
+                    // hideNewEasterEgg now handles button states and visibility
                 });
             }
         });
